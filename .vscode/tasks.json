@@ -1,0 +1,1082 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Flip：主控操作台",
+      "type": "process",
+      "command": "python",
+      "args": [
+        "-u",
+        "${workspaceFolder}/tools/dev.py",
+        "menu"
+      ],
+      "options": {
+        "cwd": "${workspaceFolder}",
+        "env": {
+          "PYTHONUTF8": "1",
+          "PYTHONUNBUFFERED": "1"
+        }
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "clear": false,
+        "focus": true
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "Flip：檢查環境",
+      "type": "process",
+      "command": "python",
+      "args": [
+        "-u",
+        "${workspaceFolder}/tools/dev.py",
+        "doctor"
+      ],
+      "options": {
+        "cwd": "${workspaceFolder}",
+        "env": {
+          "PYTHONUTF8": "1",
+          "PYTHONUNBUFFERED": "1"
+        }
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "clear": false,
+        "focus": true
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "Flip：準備桌面操作工具",
+      "type": "process",
+      "command": "python",
+      "args": [
+        "-u",
+        "${workspaceFolder}/tools/dev.py",
+        "desktop-setup"
+      ],
+      "options": {
+        "cwd": "${workspaceFolder}",
+        "env": {
+          "PYTHONUTF8": "1",
+          "PYTHONUNBUFFERED": "1"
+        }
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "clear": false,
+        "focus": true
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "Flip：安裝編譯環境",
+      "type": "process",
+      "command": "python",
+      "args": [
+        "-u",
+        "${workspaceFolder}/tools/build.py",
+        "setup"
+      ],
+      "options": {
+        "cwd": "${workspaceFolder}",
+        "env": {
+          "PYTHONUTF8": "1",
+          "PYTHONUNBUFFERED": "1"
+        }
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "clear": false,
+        "focus": true
+      },
+      "problemMatcher": [
+        "$gcc"
+      ]
+    },
+    {
+      "label": "Flip：列出連接埠",
+      "type": "process",
+      "command": "python",
+      "args": [
+        "-u",
+        "${workspaceFolder}/tools/dev.py",
+        "ports"
+      ],
+      "options": {
+        "cwd": "${workspaceFolder}",
+        "env": {
+          "PYTHONUTF8": "1",
+          "PYTHONUNBUFFERED": "1"
+        }
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "clear": false,
+        "focus": true
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "Flip：建置 Uno",
+      "type": "process",
+      "command": "python",
+      "args": [
+        "-u",
+        "${workspaceFolder}/tools/build.py",
+        "build",
+        "--board",
+        "uno_motor"
+      ],
+      "options": {
+        "cwd": "${workspaceFolder}",
+        "env": {
+          "PYTHONUTF8": "1",
+          "PYTHONUNBUFFERED": "1"
+        }
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "clear": false,
+        "focus": true
+      },
+      "problemMatcher": [
+        "$gcc"
+      ]
+    },
+    {
+      "label": "Flip：建置 ESP32-CAM",
+      "type": "process",
+      "command": "python",
+      "args": [
+        "-u",
+        "${workspaceFolder}/tools/build.py",
+        "build",
+        "--board",
+        "esp32_clock"
+      ],
+      "options": {
+        "cwd": "${workspaceFolder}",
+        "env": {
+          "PYTHONUTF8": "1",
+          "PYTHONUNBUFFERED": "1"
+        }
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "clear": false,
+        "focus": true
+      },
+      "problemMatcher": [
+        "$gcc"
+      ]
+    },
+    {
+      "label": "Flip：建置兩板",
+      "type": "process",
+      "command": "python",
+      "args": [
+        "-u",
+        "${workspaceFolder}/tools/build.py",
+        "build"
+      ],
+      "options": {
+        "cwd": "${workspaceFolder}",
+        "env": {
+          "PYTHONUTF8": "1",
+          "PYTHONUNBUFFERED": "1"
+        }
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "clear": false,
+        "focus": true
+      },
+      "problemMatcher": [
+        "$gcc"
+      ],
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      }
+    },
+    {
+      "label": "Flip：執行全部軟體測試",
+      "type": "process",
+      "command": "python",
+      "args": [
+        "-u",
+        "${workspaceFolder}/tools/build.py",
+        "test"
+      ],
+      "options": {
+        "cwd": "${workspaceFolder}",
+        "env": {
+          "PYTHONUTF8": "1",
+          "PYTHONUNBUFFERED": "1"
+        }
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "clear": false,
+        "focus": true
+      },
+      "problemMatcher": [
+        "$gcc"
+      ],
+      "group": {
+        "kind": "test",
+        "isDefault": true
+      }
+    },
+    {
+      "label": "Uno：燒錄並驗證（單板 USB）",
+      "type": "process",
+      "command": "python",
+      "args": [
+        "-u",
+        "${workspaceFolder}/tools/dev.py",
+        "upload",
+        "--board",
+        "uno_motor"
+      ],
+      "options": {
+        "cwd": "${workspaceFolder}",
+        "env": {
+          "PYTHONUTF8": "1",
+          "PYTHONUNBUFFERED": "1"
+        }
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "clear": false,
+        "focus": true
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "Uno：讀取安全待機狀態",
+      "type": "process",
+      "command": "python",
+      "args": [
+        "-u",
+        "${workspaceFolder}/tools/dev.py",
+        "uno-status"
+      ],
+      "options": {
+        "cwd": "${workspaceFolder}",
+        "env": {
+          "PYTHONUTF8": "1",
+          "PYTHONUNBUFFERED": "1"
+        }
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "clear": false,
+        "focus": true
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "Uno：單顆空載試轉 16 半步（需先接線）",
+      "type": "process",
+      "command": "python",
+      "args": [
+        "-u",
+        "${workspaceFolder}/tools/dev.py",
+        "bench",
+        "--steps",
+        "16",
+        "--rate",
+        "30"
+      ],
+      "options": {
+        "cwd": "${workspaceFolder}",
+        "env": {
+          "PYTHONUTF8": "1",
+          "PYTHONUNBUFFERED": "1"
+        }
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "clear": false,
+        "focus": true
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "Uno：序列維修台",
+      "type": "process",
+      "command": "python",
+      "args": [
+        "-u",
+        "${workspaceFolder}/tools/dev.py",
+        "monitor",
+        "--board",
+        "uno_motor"
+      ],
+      "options": {
+        "cwd": "${workspaceFolder}",
+        "env": {
+          "PYTHONUTF8": "1",
+          "PYTHONUNBUFFERED": "1"
+        }
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "clear": false,
+        "focus": true
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "Uno：堆疊分析",
+      "type": "process",
+      "command": "python",
+      "args": [
+        "-u",
+        "${workspaceFolder}/tools/analyze_uno_stack.py"
+      ],
+      "options": {
+        "cwd": "${workspaceFolder}",
+        "env": {
+          "PYTHONUTF8": "1",
+          "PYTHONUNBUFFERED": "1"
+        }
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "clear": false,
+        "focus": true
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "ESP：燒錄並驗證（Uno UART 模式）",
+      "type": "process",
+      "command": "python",
+      "args": [
+        "-u",
+        "${workspaceFolder}/tools/dev.py",
+        "upload",
+        "--board",
+        "esp32_clock"
+      ],
+      "options": {
+        "cwd": "${workspaceFolder}",
+        "env": {
+          "PYTHONUTF8": "1",
+          "PYTHONUNBUFFERED": "1"
+        }
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "clear": false,
+        "focus": true
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "ESP：序列維修台",
+      "type": "process",
+      "command": "python",
+      "args": [
+        "-u",
+        "${workspaceFolder}/tools/dev.py",
+        "monitor",
+        "--board",
+        "esp32_clock"
+      ],
+      "options": {
+        "cwd": "${workspaceFolder}",
+        "env": {
+          "PYTHONUTF8": "1",
+          "PYTHONUNBUFFERED": "1"
+        }
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "clear": false,
+        "focus": true
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "ESP：開啟 BLE 配對窗口",
+      "type": "process",
+      "command": "python",
+      "args": [
+        "-u",
+        "${workspaceFolder}/tools/dev.py",
+        "pair"
+      ],
+      "options": {
+        "cwd": "${workspaceFolder}",
+        "env": {
+          "PYTHONUTF8": "1",
+          "PYTHONUNBUFFERED": "1"
+        }
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "clear": false,
+        "focus": true
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "ESP：設定 Wi-Fi（密碼不顯示）",
+      "type": "process",
+      "command": "python",
+      "args": [
+        "-u",
+        "${workspaceFolder}/tools/dev.py",
+        "wifi"
+      ],
+      "options": {
+        "cwd": "${workspaceFolder}",
+        "env": {
+          "PYTHONUTF8": "1",
+          "PYTHONUNBUFFERED": "1"
+        }
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "clear": false,
+        "focus": true
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "ESP：設定 NTP 伺服器",
+      "type": "process",
+      "command": "python",
+      "args": [
+        "-u",
+        "${workspaceFolder}/tools/dev.py",
+        "monitor",
+        "--board",
+        "esp32_clock",
+        "--initial",
+        "ntp ${input:ntpServers}"
+      ],
+      "options": {
+        "cwd": "${workspaceFolder}",
+        "env": {
+          "PYTHONUTF8": "1",
+          "PYTHONUNBUFFERED": "1"
+        }
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "clear": false,
+        "focus": true
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "ESP：清除 BLE bond（本地維修）",
+      "type": "process",
+      "command": "python",
+      "args": [
+        "-u",
+        "${workspaceFolder}/tools/dev.py",
+        "monitor",
+        "--board",
+        "esp32_clock",
+        "--initial",
+        "clear_bonds CONFIRM"
+      ],
+      "options": {
+        "cwd": "${workspaceFolder}",
+        "env": {
+          "PYTHONUTF8": "1",
+          "PYTHONUNBUFFERED": "1"
+        }
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "clear": false,
+        "focus": true
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "ESP：清除已保存設定（本地維修，RTC 保留）",
+      "type": "process",
+      "command": "python",
+      "args": [
+        "-u",
+        "${workspaceFolder}/tools/dev.py",
+        "monitor",
+        "--board",
+        "esp32_clock",
+        "--initial",
+        "reset_config CONFIRM"
+      ],
+      "options": {
+        "cwd": "${workspaceFolder}",
+        "env": {
+          "PYTHONUTF8": "1",
+          "PYTHONUNBUFFERED": "1"
+        }
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "clear": false,
+        "focus": true
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "BLE：掃描裝置",
+      "type": "process",
+      "command": "python",
+      "args": [
+        "-u",
+        "${workspaceFolder}/tools/dev.py",
+        "ble-scan"
+      ],
+      "options": {
+        "cwd": "${workspaceFolder}",
+        "env": {
+          "PYTHONUTF8": "1",
+          "PYTHONUNBUFFERED": "1"
+        }
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "clear": false,
+        "focus": true
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "BLE：互動主控台",
+      "type": "process",
+      "command": "python",
+      "args": [
+        "-u",
+        "${workspaceFolder}/tools/dev.py",
+        "ble"
+      ],
+      "options": {
+        "cwd": "${workspaceFolder}",
+        "env": {
+          "PYTHONUTF8": "1",
+          "PYTHONUNBUFFERED": "1"
+        }
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "clear": false,
+        "focus": true
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "BLE：讀取狀態",
+      "type": "process",
+      "command": "python",
+      "args": [
+        "-u",
+        "${workspaceFolder}/tools/dev.py",
+        "ble-op",
+        "--op",
+        "get_status"
+      ],
+      "options": {
+        "cwd": "${workspaceFolder}",
+        "env": {
+          "PYTHONUTF8": "1",
+          "PYTHONUNBUFFERED": "1"
+        }
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "clear": false,
+        "focus": true
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "BLE：讀取設定",
+      "type": "process",
+      "command": "python",
+      "args": [
+        "-u",
+        "${workspaceFolder}/tools/dev.py",
+        "ble-op",
+        "--op",
+        "get_config"
+      ],
+      "options": {
+        "cwd": "${workspaceFolder}",
+        "env": {
+          "PYTHONUTF8": "1",
+          "PYTHONUNBUFFERED": "1"
+        }
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "clear": false,
+        "focus": true
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "BLE：以電腦現在時間校時",
+      "type": "process",
+      "command": "python",
+      "args": [
+        "-u",
+        "${workspaceFolder}/tools/dev.py",
+        "ble-time"
+      ],
+      "options": {
+        "cwd": "${workspaceFolder}",
+        "env": {
+          "PYTHONUTF8": "1",
+          "PYTHONUNBUFFERED": "1"
+        }
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "clear": false,
+        "focus": true
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "BLE：設定實際顯示（確認完整落頁）",
+      "type": "process",
+      "command": "python",
+      "args": [
+        "-u",
+        "${workspaceFolder}/tools/dev.py",
+        "ble-op",
+        "--op",
+        "set_display",
+        "--values",
+        "{\"hour\":${input:hour},\"minute\":${input:minute},\"aligned\":true}"
+      ],
+      "options": {
+        "cwd": "${workspaceFolder}",
+        "env": {
+          "PYTHONUTF8": "1",
+          "PYTHONUNBUFFERED": "1"
+        }
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "clear": false,
+        "focus": true
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "BLE：微調半步",
+      "type": "process",
+      "command": "python",
+      "args": [
+        "-u",
+        "${workspaceFolder}/tools/dev.py",
+        "ble-op",
+        "--op",
+        "jog_steps",
+        "--values",
+        "{\"steps\":${input:steps}}"
+      ],
+      "options": {
+        "cwd": "${workspaceFolder}",
+        "env": {
+          "PYTHONUTF8": "1",
+          "PYTHONUNBUFFERED": "1"
+        }
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "clear": false,
+        "focus": true
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "BLE：前進整頁",
+      "type": "process",
+      "command": "python",
+      "args": [
+        "-u",
+        "${workspaceFolder}/tools/dev.py",
+        "ble-op",
+        "--op",
+        "advance_pages",
+        "--values",
+        "{\"pages\":${input:pages}}"
+      ],
+      "options": {
+        "cwd": "${workspaceFolder}",
+        "env": {
+          "PYTHONUTF8": "1",
+          "PYTHONUNBUFFERED": "1"
+        }
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "clear": false,
+        "focus": true
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "BLE：修改 RAM 設定",
+      "type": "process",
+      "command": "python",
+      "args": [
+        "-u",
+        "${workspaceFolder}/tools/dev.py",
+        "ble-op",
+        "--op",
+        "set_config",
+        "--values",
+        "{\"values\":${input:configValues}}"
+      ],
+      "options": {
+        "cwd": "${workspaceFolder}",
+        "env": {
+          "PYTHONUTF8": "1",
+          "PYTHONUNBUFFERED": "1"
+        }
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "clear": false,
+        "focus": true
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "BLE：保存設定",
+      "type": "process",
+      "command": "python",
+      "args": [
+        "-u",
+        "${workspaceFolder}/tools/dev.py",
+        "ble-op",
+        "--op",
+        "save_config"
+      ],
+      "options": {
+        "cwd": "${workspaceFolder}",
+        "env": {
+          "PYTHONUTF8": "1",
+          "PYTHONUNBUFFERED": "1"
+        }
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "clear": false,
+        "focus": true
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "BLE：追趕預覽",
+      "type": "process",
+      "command": "python",
+      "args": [
+        "-u",
+        "${workspaceFolder}/tools/dev.py",
+        "ble-op",
+        "--op",
+        "preview_sync"
+      ],
+      "options": {
+        "cwd": "${workspaceFolder}",
+        "env": {
+          "PYTHONUTF8": "1",
+          "PYTHONUNBUFFERED": "1"
+        }
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "clear": false,
+        "focus": true
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "BLE：依 plan_id 恢復走時",
+      "type": "process",
+      "command": "python",
+      "args": [
+        "-u",
+        "${workspaceFolder}/tools/dev.py",
+        "ble-op",
+        "--op",
+        "resume",
+        "--values",
+        "{\"plan_id\":${input:planId},\"confirm_large\":${input:confirmLarge}}"
+      ],
+      "options": {
+        "cwd": "${workspaceFolder}",
+        "env": {
+          "PYTHONUTF8": "1",
+          "PYTHONUNBUFFERED": "1"
+        }
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "clear": false,
+        "focus": true
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "BLE：暫停（完成當頁）",
+      "type": "process",
+      "command": "python",
+      "args": [
+        "-u",
+        "${workspaceFolder}/tools/dev.py",
+        "ble-op",
+        "--op",
+        "pause"
+      ],
+      "options": {
+        "cwd": "${workspaceFolder}",
+        "env": {
+          "PYTHONUTF8": "1",
+          "PYTHONUNBUFFERED": "1"
+        }
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "clear": false,
+        "focus": true
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "BLE：立即停止（位置需重新確認）",
+      "type": "process",
+      "command": "python",
+      "args": [
+        "-u",
+        "${workspaceFolder}/tools/dev.py",
+        "ble-op",
+        "--op",
+        "stop"
+      ],
+      "options": {
+        "cwd": "${workspaceFolder}",
+        "env": {
+          "PYTHONUTF8": "1",
+          "PYTHONUNBUFFERED": "1"
+        }
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "clear": false,
+        "focus": true
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "BLE：清除故障",
+      "type": "process",
+      "command": "python",
+      "args": [
+        "-u",
+        "${workspaceFolder}/tools/dev.py",
+        "ble-op",
+        "--op",
+        "clear_fault"
+      ],
+      "options": {
+        "cwd": "${workspaceFolder}",
+        "env": {
+          "PYTHONUTF8": "1",
+          "PYTHONUNBUFFERED": "1"
+        }
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "clear": false,
+        "focus": true
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "BLE：確認大幅網路校時",
+      "type": "process",
+      "command": "python",
+      "args": [
+        "-u",
+        "${workspaceFolder}/tools/dev.py",
+        "ble-op",
+        "--op",
+        "confirm_time",
+        "--values",
+        "{\"utc_s\":${input:pendingSync}}"
+      ],
+      "options": {
+        "cwd": "${workspaceFolder}",
+        "env": {
+          "PYTHONUTF8": "1",
+          "PYTHONUNBUFFERED": "1"
+        }
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "clear": false,
+        "focus": true
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "Flip：重新產生 VS Code 設定",
+      "type": "process",
+      "command": "python",
+      "args": [
+        "-u",
+        "${workspaceFolder}/tools/configure_vscode.py"
+      ],
+      "options": {
+        "cwd": "${workspaceFolder}",
+        "env": {
+          "PYTHONUTF8": "1",
+          "PYTHONUNBUFFERED": "1"
+        }
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "clear": false,
+        "focus": true
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "Flip：打包工程",
+      "type": "process",
+      "command": "python",
+      "args": [
+        "-u",
+        "${workspaceFolder}/tools/package.py"
+      ],
+      "options": {
+        "cwd": "${workspaceFolder}",
+        "env": {
+          "PYTHONUTF8": "1",
+          "PYTHONUNBUFFERED": "1"
+        }
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "clear": false,
+        "focus": true
+      },
+      "problemMatcher": []
+    }
+  ],
+  "inputs": [
+    {
+      "id": "hour",
+      "type": "promptString",
+      "description": "實物目前顯示小時 0–23；僅完整落頁後確認",
+      "default": "10"
+    },
+    {
+      "id": "minute",
+      "type": "promptString",
+      "description": "實物目前顯示分鐘 0–59",
+      "default": "30"
+    },
+    {
+      "id": "steps",
+      "type": "promptString",
+      "description": "微調半步數（正式版僅正向 1–256）",
+      "default": "4"
+    },
+    {
+      "id": "pages",
+      "type": "promptString",
+      "description": "前進頁數 1–60",
+      "default": "1"
+    },
+    {
+      "id": "configValues",
+      "type": "promptString",
+      "description": "設定物件 JSON；先修改 RAM，再另行保存",
+      "default": "{\"mechanics_confirmed\":true,\"cycle_minutes\":720}"
+    },
+    {
+      "id": "planId",
+      "type": "promptString",
+      "description": "最新追趕預覽中的 plan_id，須在 30 秒內使用",
+      "default": ""
+    },
+    {
+      "id": "pendingSync",
+      "type": "promptString",
+      "description": "狀態中 pending_sync_utc 的實際整數值",
+      "default": ""
+    },
+    {
+      "id": "ntpServers",
+      "type": "promptString",
+      "description": "NTP 設定 JSON",
+      "default": "{\"servers\":[\"pool.ntp.org\",\"time.cloudflare.com\",\"time.google.com\"]}"
+    },
+    {
+      "id": "confirmLarge",
+      "type": "pickString",
+      "description": "是否明確允許超限的向前追趕？",
+      "options": [
+        "false",
+        "true"
+      ],
+      "default": "false"
+    }
+  ]
+}

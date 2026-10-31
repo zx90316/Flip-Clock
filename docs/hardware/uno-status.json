@@ -1,0 +1,19 @@
+{
+  "port": "COM3",
+  "observed_at": "2026-11-01T01:08:45.057504+08:00",
+  "status": {
+    "board": "UNO",
+    "firmware": "0.2.0",
+    "protocol": 1,
+    "state": 3,
+    "armed": false,
+    "coil_mask": 0,
+    "session": 2548079760,
+    "executed": 16,
+    "remaining": 0,
+    "reset_cause": 0
+  },
+  "lines": [
+    "{\"board\":\"UNO\",\"firmware\":\"0.2.0\",\"protocol\":1,\"state\":3,\"armed\":false,\"coil_mask\":0,\"session\":2548079760,\"executed\":16,\"remaining\":0,\"reset_cause\":0}"
+  ]
+}

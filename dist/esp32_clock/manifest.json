@@ -1,0 +1,12 @@
+{
+  "firmware": "0.2.0",
+  "protocol": 1,
+  "fqbn": "esp32:esp32:esp32cam:PartitionScheme=huge_app,FlashFreq=40",
+  "sha256": {
+    "esp32_clock.ino.bin": "70b7c645e0a289aaadbc348d84553fd86670ed318be88ed36b2280302a756ad7",
+    "esp32_clock.ino.bootloader.bin": "2da374cc3a53e0a629e5880660a6b1e9e98ed1bb0f560ea75a5bd2a3276a1b8d",
+    "esp32_clock.ino.elf": "673b8ec41bd6b9bd98b360b93e2774d9cec019d02a80fa784aa560328d39ae18",
+    "esp32_clock.ino.merged.bin": "6be1deda7be1090e28e404b580cab7d57a5bfb6491b9be7bf32279441dfd85db",
+    "esp32_clock.ino.partitions.bin": "aaae2888c5a6a348004b5b436f47abb25ae32e72d9003902955a998eda723edd"
+  }
+}

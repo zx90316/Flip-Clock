@@ -1,0 +1,21 @@
+{
+  "python.defaultInterpreterPath": "python",
+  "python.terminal.activateEnvironment": false,
+  "files.associations": {
+    "*.ino": "cpp"
+  },
+  "files.encoding": "utf8",
+  "terminal.integrated.defaultProfile.windows": "PowerShell",
+  "files.exclude": {
+    "**/.tools": true,
+    "**/.build": true,
+    "**/.local": true,
+    "**/__pycache__": true
+  },
+  "search.exclude": {
+    "**/.tools": true,
+    "**/.build": true,
+    "**/dist": true
+  },
+  "C_Cpp.default.compileCommands": "${workspaceFolder}/.build/esp32_clock/compile_commands.json"
+}
