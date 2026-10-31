@@ -17,7 +17,7 @@ TOOLS = ROOT / '.tools'
 CLI_VERSION = '1.5.1'
 INDEX = 'https://espressif.github.io/arduino-esp32/package_esp32_index.json'
 BOARDS = {'uno_motor': 'arduino:avr:uno',
-          'esp32_clock': 'esp32:esp32:esp32cam:PartitionScheme=huge_app,FlashFreq=40'}
+          'esp32_clock': 'esp32:esp32:esp32cam:PartitionScheme=min_spiffs,FlashFreq=40'}
 SHORT_ROOT = ROOT
 
 def shorten_windows_paths():

@@ -19,7 +19,7 @@ inline void delay(uint32_t ms) { for(uint32_t i=0;i<ms;++i) { ++fakeMs; fakeUno.
 inline uint32_t esp_random() { static uint32_t value=123456; value=value*1664525UL+1013904223UL; return value; }
 inline int esp_reset_reason() { return 1; }
 inline size_t strlcpy(char* out,const char* in,size_t n) { size_t len=strlen(in); if(n) { size_t k=len<n-1?len:n-1; memcpy(out,in,k); out[k]=0; } return len; }
-struct FakeESP { uint64_t getEfuseMac() { return 0x123456789abcULL; } }; inline FakeESP ESP;
+struct FakeESP { bool restarted=false; uint64_t getEfuseMac() { return 0x123456789abcULL; } void restart() { restarted=true; } }; inline FakeESP ESP;
 struct FakeSerial {
   std::string output,input;
   void begin(int) {} int available() { return int(input.size()); }

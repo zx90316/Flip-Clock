@@ -3,6 +3,7 @@
 #include "services.h"
 #include <WiFi.h>
 #include <WebServer.h>
+#include <Update.h>
 #include <NimBLEDevice.h>
 #include <esp_sntp.h>
 #include <esp_system.h>
@@ -328,8 +329,49 @@ void loadWebPassword() {
   if(open) { p.putBytes("pw",webPassword,sizeof(webPassword)); p.end(); } // Random per boot if NVS is unavailable; never an open AP.
 }
 bool webAuth() { if(web.authenticate("admin",webPassword)) return true; web.requestAuthentication(); return false; }
+
+// OTA: only while the motor is idle and disarmed. The Update library validates the image on end();
+// a failed or interrupted upload leaves the running partition untouched.
+bool otaActive=false,otaDenied=false,otaOk=false; size_t otaBytes=0; char otaError[24]="";
+void otaFail(const char* code) { strlcpy(otaError,code,sizeof(otaError)); if(otaActive) { Update.abort(); otaActive=false; } }
+void otaStart() {
+  otaError[0]=0; otaBytes=0; otaOk=false; otaDenied=false; otaActive=false;
+  if(!web.authenticate("admin",webPassword)) { otaDenied=true; strlcpy(otaError,"E_AUTH",sizeof(otaError)); return; }
+  if(!safeIdle() || link.armed() || jobSeq) { strlcpy(otaError,"E_BUSY",sizeof(otaError)); return; }
+  planner.paused=true; restoreActive=false;
+  if(!Update.begin(UPDATE_SIZE_UNKNOWN)) { strlcpy(otaError,"E_OTA_NO_PARTITION",sizeof(otaError)); return; }
+  otaActive=true;
+}
+void otaWrite(uint8_t* data,size_t length) {
+  if(!otaActive || !length) return;
+  if(!otaBytes && data[0]!=0xE9) { otaFail("E_OTA_IMAGE"); return; }
+  if(Update.write(data,length)!=length) { otaFail("E_OTA_WRITE"); return; }
+  otaBytes+=length;
+}
+void otaEnd() {
+  if(!otaActive) return;
+  otaActive=false;
+  if(otaBytes<65536 || !Update.end(true)) { Update.abort(); strlcpy(otaError,"E_OTA_END",sizeof(otaError)); return; }
+  otaOk=true;
+}
+void otaFinish() {
+  if(!webAuth()) return;
+  char body[80]; snprintf(body,sizeof(body),"{\"ok\":%s,\"error\":\"%s\",\"bytes\":%lu}",otaOk?"true":"false",otaError,(unsigned long)otaBytes);
+  web.sendHeader("Cache-Control","no-store"); web.send(otaOk?200:409,"application/json",body);
+  if(otaOk) { delay(500); ESP.restart(); }
+  // The loop was blocked while receiving; do not let the stale heartbeat age raise a link fault.
+  link.retry(); lastLinkReady=false;
+}
+void otaUpload() {
+  HTTPUpload& up=web.upload();
+  if(up.status==UPLOAD_FILE_START) otaStart();
+  else if(up.status==UPLOAD_FILE_WRITE) otaWrite(up.buf,up.currentSize);
+  else if(up.status==UPLOAD_FILE_END) otaEnd();
+  else if(up.status==UPLOAD_FILE_ABORTED) otaFail("E_OTA_ABORTED");
+}
 void webSetup() {
   loadWebPassword(); WiFi.softAP(apName,webPassword);
+  web.on("/api/ota",HTTP_POST,otaFinish,otaUpload);
   web.on("/",HTTP_GET,[]() { if(webAuth()) web.send_P(200,"text/html; charset=utf-8",WEB_PAGE); });
   web.on("/api/state",HTTP_GET,[]() {
     if(!webAuth()) return; std::string s; buildState(s); web.sendHeader("Cache-Control","no-store"); web.send(200,"application/json",s.c_str());

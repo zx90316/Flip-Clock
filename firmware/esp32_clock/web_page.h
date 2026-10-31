@@ -46,12 +46,16 @@ dl{display:grid;grid-template-columns:auto 1fr;gap:2px 12px;margin:6px 0;font-si
 
 <section><h2>4. 完成歸零</h2><p>儲存位置並啟動自動走時。之後斷電重啟，會依記憶位置自動補跑到目前時間。</p>
 <div class="row"><button class="p" id="bFinish" onclick="act(finish)">完成歸零並啟動自動走時</button></div></section>
+<section><h2>韌體更新（OTA）</h2><p>選擇 <b>esp32_clock.ino.bin</b>。更新前會自動暫停走時；更新完成後裝置重新啟動，位置與設定都保留。更新期間請勿斷電。</p>
+<div class="row"><input type="file" id="fw" accept=".bin" style="width:auto"><button class="d" onclick="ota()">上傳並更新</button></div></section>
 </main><div id="msg" class="ok">連線中…</div>
 <script>
 const $=i=>document.getElementById(i),pad=n=>String(n).padStart(2,'0');
 const E={E_BUSY:'裝置忙碌，請先按「暫停走時」並等動作結束',E_TIME_INVALID:'RTC 時間無效，請先校時',E_I2C:'與 Uno 通訊失敗，請檢查 I²C 接線',
 E_NOT_CALIBRATED:'尚未歸零，請先完成步驟 2',E_RANGE:'數值超出範圍',E_FAULT:'系統故障，請先按「清除故障」',E_PLAN_STALE:'預覽已過期，請重試',
-E_REVERSE_DISABLED:'目前只支援正向轉動',E_SAVE_THROTTLED:'5 秒內不能重複儲存，請稍後再試',E_NVS:'儲存失敗'};
+E_REVERSE_DISABLED:'目前只支援正向轉動',E_SAVE_THROTTLED:'5 秒內不能重複儲存，請稍後再試',E_NVS:'儲存失敗',
+E_OTA_NO_PARTITION:'此韌體的分割表沒有 OTA 分區，需先用 UART 燒錄一次',E_OTA_IMAGE:'不是有效的 ESP32 韌體檔',E_OTA_WRITE:'寫入 Flash 失敗',
+E_OTA_END:'映像驗證失敗',E_AUTH:'未授權'};
 const ST={IDLE:'待命（自動走時中）',PAUSED:'已暫停',MOVING:'換頁中',LINK_WAIT:'等待 Uno 連線',NEEDS_TIME:'需要校時',NEEDS_CALIBRATION:'需要歸零',
 NEEDS_CATCHUP_CONFIRM:'需要確認補跑',FAULT:'故障'};
 let S={},busyUi=false,T={tests:[],i:0};
@@ -90,6 +94,14 @@ say('已用實際顯示重新對齊'+(qn?'並修正每頁步數':'')+'，請從�
 async function finish(){await run('set_config',{values:{mechanics_confirmed:true}});await run('save_config');await idle(30000);
 if(S.dirty)throw new Error('儲存失敗，請稍候 5 秒再試');const p=await run('preview_sync');await run('resume',{plan_id:p.plan_id,confirm_large:true});
 say('歸零完成並已儲存，正在補跑到目前時間，之後自動走時')}
+let otaBusy=false;
+function ota(){const f=$('fw').files[0];if(!f)return say('請先選擇 .bin 檔',1);
+if(!confirm('更新韌體 '+f.name+'（'+(f.size/1024|0)+' KB）？更新期間請勿斷電。'))return;
+const x=new XMLHttpRequest(),fd=new FormData();fd.append('fw',f,'fw.bin');otaBusy=true;
+x.open('POST','/api/ota');x.upload.onprogress=e=>say('上傳中 '+(e.loaded/e.total*100|0)+'%');
+x.onload=()=>{let j={};try{j=JSON.parse(x.responseText)}catch(e){}otaBusy=!!j.ok;
+say(j.ok?'更新完成，裝置重新啟動中，約 20 秒後會自動重新連線':'更新失敗：'+(E[j.error]||j.error||x.status)+'，目前韌體未變更',!j.ok)};
+x.onerror=()=>{otaBusy=false;say('連線中斷；若已傳完，裝置可能正在重新啟動，請稍後重新整理',1)};x.send(fd)}
 function render(){const d=S.state?1:0;if(!d)return;$('badge').textContent=S.fw?'v'+S.fw:'';
 $('disp').textContent=S.pos?fmt(S.display):'位置未知';$('st').textContent=(ST[S.state]||S.state)+(S.err?'　'+S.err:'');
 $('lk').textContent=S.link?'已連線':'未連線';
@@ -110,5 +122,5 @@ if(t.st=='ask')h+='<p>預期顯示 <b>'+fmt(t.target)+'</b>，實際是嗎？</p
 if(t.st=='fail')h+='<p>輸入實際顯示的時間：</p><div class="row"><input id="oh" type="number" min="1" max="12" value="12"> : <input id="om" type="number" min="0" max="59" value="0"><button class="p" onclick="act(fixTest)">修正並重來</button></div>';
 h+='</div>'}else h+='<div class="t">'+lab+'</div>'});
 h=h||'<p>先完成步驟 2。</p>';if(h!==T.h){$('tests').innerHTML=h;T.h=h}}
-(async()=>{for(;;){try{await refresh()}catch(e){say('與時鐘連線中斷，重試中…',1)}await new Promise(r=>setTimeout(r,1000))}})();
+(async()=>{for(;;){try{await refresh()}catch(e){if(!otaBusy)say('與時鐘連線中斷，重試中…',1)}await new Promise(r=>setTimeout(r,1000))}})();
 </script></body></html>)HTML";

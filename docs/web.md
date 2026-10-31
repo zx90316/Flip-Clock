@@ -24,3 +24,13 @@ ESP32-CAM 開機後建立 Wi-Fi 熱點 `FlipClock-xxxx`（xxxx 為裝置序號�
 - `/api/cmd` 使用與 BLE 相同的指令（`v`／`id`／`boot_id` 由韌體補上），沒有新增控制路徑。
 - 網頁指令不經 BLE 的請求去重表，因此 BLE 的 id 單調性不受影響。
 - HTTP 為明文 Basic 認證；請勿把熱點橋接到公網。
+
+## OTA 韌體更新
+
+首次必須用 UART 燒錄含雙 OTA 分區（min_spiffs）的韌體，之後在網頁最下方選 dist/esp32_clock/esp32_clock.ino.bin（不是 merged、bootloader 或 partitions 檔）上傳即可。
+
+- 只在馬達閒置且已斷開時接受；上傳開始時自動暫停走時。
+- 映像開頭與長度先檢查，Update 程式庫在結束時驗證映像；失敗或中斷不會切換分區，原韌體照常運作。
+- 成功後 ESP 約 20 秒內重新啟動，NVS 內的位置、設定與網頁密碼保留，並依位置自動恢復。
+- 若 ESP 因韌體問題連網頁都開不了，仍需回到 UART 燒錄救援。
+- Uno 韌體不在此範圍，仍需 USB 更新。

@@ -98,6 +98,25 @@ int main() {
   planner=Planner(); planner.config=persisted; Saved untrusted=store.saved; untrusted.config.mechanics=false;
   Saved keep=store.saved; store.saved=untrusted; CHECK(!restoreSnapshot() && !planner.position); store.saved=keep;
   planner.config=persisted; CHECK(restoreSnapshot() && restoreActive); commandLine("pause"); CHECK(!restoreActive);
+  // ---- OTA over HTTP: idle-only, validated, never half-applied ----
+  auto upload=[](HTTPUploadStatus status,std::string& bytes) {
+    web.current.status=status; web.current.buf=reinterpret_cast<uint8_t*>(&bytes[0]); web.current.currentSize=bytes.size(); web.uploader["/api/ota"]();
+  };
+  std::string image(70000,'x'); image[0]=char(0xE9); std::string none;
+  auto sendImage=[&](std::string& bytes) {
+    upload(UPLOAD_FILE_START,none); upload(UPLOAD_FILE_WRITE,bytes); upload(UPLOAD_FILE_END,none); web.post["/api/ota"]();
+  };
+  ESP.restarted=false; Update=FakeUpdate();
+  web.authOk=false; sendImage(image); CHECK(web.lastCode==401 && !Update.began && Update.data.empty() && !ESP.restarted); web.authOk=true;
+  queuedJog_=4; sendImage(image); CHECK(web.lastCode==409 && has(web.lastBody,"E_BUSY") && !Update.began && !ESP.restarted); queuedJog_=0;
+  link.retry(); spin(1500); CHECK(link.ready && !systemFault);
+  std::string bad(70000,'x'); sendImage(bad); CHECK(web.lastCode==409 && has(web.lastBody,"E_OTA_IMAGE") && Update.aborted && Update.data.empty() && !ESP.restarted);
+  Update=FakeUpdate(); Update.failBegin=true; sendImage(image); CHECK(web.lastCode==409 && has(web.lastBody,"E_OTA_NO_PARTITION") && !ESP.restarted);
+  Update=FakeUpdate(); std::string tiny(100,'x'); tiny[0]=char(0xE9); sendImage(tiny); CHECK(web.lastCode==409 && has(web.lastBody,"E_OTA_END") && Update.aborted && !ESP.restarted);
+  Update=FakeUpdate(); Update.failEnd=true; sendImage(image); CHECK(web.lastCode==409 && has(web.lastBody,"E_OTA_END") && Update.aborted && !ESP.restarted);
+  spin(1500); CHECK(link.ready && !systemFault); // a failed upload must not leave a spurious link fault behind
+  Update=FakeUpdate(); planner.paused=false; sendImage(image);
+  CHECK(web.lastCode==200 && has(web.lastBody,"\"ok\":true") && Update.ended && Update.data==image && ESP.restarted && planner.paused);
   uint32_t generationBefore=store.saved.generation; planner.invalidate(); restoreActive=false; planner.config.offset=300;
   nvsWriteFailure=true; commandLine("save_config"); spin(1000); CHECK(contains("E_NVS") && systemFault);
   CHECK(store.saved.generation==generationBefore); nvsWriteFailure=false;

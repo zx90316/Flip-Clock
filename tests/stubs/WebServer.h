@@ -2,12 +2,16 @@
 #include "Arduino.h"
 #include <functional>
 enum HTTPMethod { HTTP_GET, HTTP_POST };
+enum HTTPUploadStatus { UPLOAD_FILE_START, UPLOAD_FILE_WRITE, UPLOAD_FILE_END, UPLOAD_FILE_ABORTED };
+struct HTTPUpload { HTTPUploadStatus status=UPLOAD_FILE_START; uint8_t* buf=nullptr; size_t currentSize=0; };
 // Test adapter: routes are invoked directly; the production class is the board core's WebServer.
 struct WebServer {
   explicit WebServer(int) {}
-  std::map<std::string,std::function<void()>> get,post;
-  std::string body,lastType,lastBody; int lastCode=0; bool authOk=true,begun=false;
+  std::map<std::string,std::function<void()>> get,post,uploader;
+  std::string body,lastType,lastBody; int lastCode=0; bool authOk=true,begun=false; HTTPUpload current;
   void on(const char* path,HTTPMethod method,std::function<void()> handler) { (method==HTTP_GET?get:post)[path]=handler; }
+  void on(const char* path,HTTPMethod method,std::function<void()> handler,std::function<void()> upload) { on(path,method,handler); uploader[path]=upload; }
+  HTTPUpload& upload() { return current; }
   void begin() { begun=true; }
   void handleClient() {}
   bool authenticate(const char*,const char*) { return authOk; }

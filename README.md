@@ -57,7 +57,7 @@ python tools/build.py upload --board uno_motor --port <實際COM>
 python tools/build.py upload --board esp32_clock --port <實際COM>
 ```
 
-兩條 upload 命令是**不同接線模式下分別操作**，不能接著執行而不切換接線。ESP32 FQBN 為 `esp32:esp32:esp32cam:PartitionScheme=huge_app,FlashFreq=40`；目前映像以 4 MB Flash、40 MHz、無 OTA 分區為目標，施工前確認實際 Flash 容量。ESP 首次／救援燒錄由 Uno 板載 USB UART 傳送，不是 Uno 執行 ArduinoISP。腳本會重新編譯、上傳並要求驗證，不開啟馬達。
+兩條 upload 命令是**不同接線模式下分別操作**，不能接著執行而不切換接線。ESP32 FQBN 為 `esp32:esp32:esp32cam:PartitionScheme=min_spiffs,FlashFreq=40`；目前映像以 4 MB Flash、40 MHz、雙 OTA 分區（各 1.9 MB）為目標；之後可從網頁 OTA 更新 ESP，不必再接 UART，施工前確認實際 Flash 容量。ESP 首次／救援燒錄由 Uno 板載 USB UART 傳送，不是 Uno 執行 ArduinoISP。腳本會重新編譯、上傳並要求驗證，不開啟馬達。
 
 ## BLE 桌面工具
 

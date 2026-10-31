@@ -7,7 +7,7 @@
 | 目標 | 核心／板型 | Flash 程式用量 | 靜態 RAM |
 |---|---|---:|---:|
 | Uno R3 | Arduino AVR 1.8.8，arduino:avr:uno | 9,026／32,256 bytes | 869／2,048 bytes |
-| AI-Thinker ESP32-CAM | Arduino-ESP32 3.3.12，huge_app、40 MHz | 1,219,546／3,145,728 bytes | 95,192／327,680 bytes |
+| AI-Thinker ESP32-CAM | Arduino-ESP32 3.3.12，min_spiffs（雙 OTA）、40 MHz | 1,301,314／1,966,080 bytes | 96,024／327,680 bytes |
 
 ESP 靜態 RAM 數字不包含所有執行時 Wi-Fi／BLE heap 配置，不是最低 free heap 的實測。目標 Flash 為 4 MB，容量及 PSRAM 實物狀態待確認。
 
