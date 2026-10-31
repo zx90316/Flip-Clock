@@ -116,6 +116,7 @@ def main():
     parser.add_argument('action', choices=['setup', 'build', 'test', 'ports', 'upload', 'monitor'])
     parser.add_argument('--board', choices=list(BOARDS))
     parser.add_argument('--port')
+    parser.add_argument('--skip-build', action='store_true', help='upload the existing dist output')
     args = parser.parse_args()
     shorten_windows_paths()
     if args.action == 'setup':
@@ -131,7 +132,8 @@ def main():
         if not args.board or not args.port:
             parser.error('--board and --port are required')
         if args.action == 'upload':
-            build(args.board)
+            if not args.skip_build:
+                build(args.board)
             print('Motor power OFF. Check docs/wiring.md mode table before upload.', flush=True)
             run([cli(), 'upload', '--fqbn', BOARDS[args.board], '--port', args.port,
                  '--input-dir', ROOT / 'dist' / args.board, '--verify',

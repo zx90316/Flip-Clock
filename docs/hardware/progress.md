@@ -11,3 +11,5 @@
 
 下一步：依 bringup.md 第 2 段，USB 拔除時接好 Uno／ULN2003／單顆 5V 馬達，再回報接線狀態。
 
+- 2026-11-01：ESP32-CAM（ESP32-D0WD-V3）經 Uno CH340 UART＋BSS138 燒錄成功，四個映像均校驗通過。排錯重點：ESP32-CAM 排針上有一個標 GND 的腳實測不是 GND，導致 IO0 無法進下載模式；換接正確的 GND 後才進入 boot:0x3。UART 診斷指令為小寫 `status`。新韌體讀回 LINK_WAIT，i2c_error_count 偏高屬預期（I2C／RTC／Uno 尚未連接）。
+- 下一步：拆除燒錄接線、恢復雙主控 I2C 接線（見 bringup.md 第 4 段）。
