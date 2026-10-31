@@ -10,6 +10,7 @@
 #include <deque>
 #include <map>
 #include <FlipCalendar.h>
+#define PROGMEM
 inline uint32_t fakeMs=0;
 inline flip::Endpoint fakeUno;
 inline uint32_t millis() { return fakeMs; }

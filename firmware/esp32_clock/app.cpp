@@ -2,12 +2,15 @@
 #include "app.h"
 #include "services.h"
 #include <WiFi.h>
+#include <WebServer.h>
 #include <NimBLEDevice.h>
 #include <esp_sntp.h>
 #include <esp_system.h>
 #include <cJSON.h>
 #include <FlipStream.h>
+#include "web_page.h"
 #include <atomic>
+#include <string>
 #include <math.h>
 
 namespace clockapp {
@@ -44,6 +47,11 @@ uint32_t stopRequest_=0,pauseRequest_=0,clearRequest_=0,queuedJogRequest_=0,clea
 bool stopBle_=false,pauseBle_=false,clearBle_=false,queuedJogBle_=false,largeConfirmed_=false,pendingSyncConfirm_=false;
 int32_t queuedJog_=0;
 std::atomic<bool> rxOverflow_{false};
+// Web console: replies of one command are captured; late completions still go to UART.
+WebServer web(80); std::string* webOut=nullptr; uint32_t webSeq=0;
+char webPassword[13]="",apName[24]="";
+// Boot restore: the committed snapshot is trusted only after the commissioning wizard saved it.
+bool restoreActive=false,restoredFromSnapshot=false; int32_t savedDisplay=-1; uint32_t savedRemainder=0;
 
 bool pairOpen() { uint32_t end=pairUntil.load(); return end && int32_t(end-millis())>0; }
 void errorState(const char* code,bool position=true) {
@@ -51,7 +59,7 @@ void errorState(const char* code,bool position=true) {
   if(position) planner.invalidate();
 }
 void output(const char* text,bool ble) {
-  if(!ble) { Serial.print(text); return; }
+  if(!ble) { if(webOut) webOut->append(text); else Serial.print(text); return; }
   if(!authenticated.load() || !subscribed.load()) return;
   Reply reply; reply.epoch=connectionEpoch.load(); strlcpy(reply.text,text,sizeof(reply.text));
   if(xQueueSend(txQueue,&reply,0)!=pdTRUE) {
@@ -80,10 +88,13 @@ bool boolean(cJSON* root,const char* key,bool& value) {
   cJSON* p=cJSON_GetObjectItemCaseSensitive(root,key); if(!cJSON_IsBool(p)) return false;
   value=cJSON_IsTrue(p); return true;
 }
-void status(uint32_t id,bool ble) {
-  const char* state=systemFault?"FAULT":!link.ready?"LINK_WAIT":!rtc.valid?"NEEDS_TIME":
+const char* stateName() {
+  return systemFault?"FAULT":!link.ready?"LINK_WAIT":!rtc.valid?"NEEDS_TIME":
     !planner.config.mechanics || !planner.position?"NEEDS_CALIBRATION":jobSeq?"MOVING":
     largeRequired?"NEEDS_CATCHUP_CONFIRM":planner.paused?"PAUSED":"IDLE";
+}
+void status(uint32_t id,bool ble) {
+  const char* state=stateName();
   char all[1537],one[513],two[513],three[513];
   snprintf(one,sizeof(one),"{\"v\":1,\"id\":%lu,\"part\":1,\"parts\":3,\"phase\":\"completed\",\"state\":\"%s\",\"boot_id\":\"%s\",\"rtc_utc_s\":%lld,\"time_valid\":%s,\"utc_offset_min\":%d,\"display_index\":%u,\"position_confidence\":\"%s\",\"fractional_remainder\":%lu,\"moving\":%s,\"job_id\":%lu,\"remaining_steps\":%lu}\n",
     (unsigned long)id,state,bootId,(long long)rtc.utc,rtc.valid?"true":"false",planner.config.offset,
@@ -94,7 +105,7 @@ void status(uint32_t id,bool ble) {
     link.coilZero()?"true":"false",(unsigned long)(link.errors+rtc.errors),rtc.valid?source:"invalid",(long long)lastSync,
     (long long)lastOffset,WiFi.status()==WL_CONNECTED?"connected":"offline",planner.config.autoTime?"true":"false",
     (long long)pendingSync,(unsigned long)store.writes);
-  snprintf(three,sizeof(three),"{\"v\":1,\"id\":%lu,\"part\":3,\"parts\":3,\"phase\":\"completed\",\"snapshot_valid\":%s,\"snapshot_utc\":%lld,\"snapshot_display_index\":%u,\"snapshot_remainder\":%lu,\"snapshot_phase\":%u,\"snapshot_generation\":%lu,\"mechanics_confirmed\":%s,\"uno_session\":%lu,\"uno_state\":%u,\"uno_error\":%u,\"firmware\":\"0.2.0\",\"protocol\":1}\n",
+  snprintf(three,sizeof(three),"{\"v\":1,\"id\":%lu,\"part\":3,\"parts\":3,\"phase\":\"completed\",\"snapshot_valid\":%s,\"snapshot_utc\":%lld,\"snapshot_display_index\":%u,\"snapshot_remainder\":%lu,\"snapshot_phase\":%u,\"snapshot_generation\":%lu,\"mechanics_confirmed\":%s,\"uno_session\":%lu,\"uno_state\":%u,\"uno_error\":%u,\"firmware\":\"0.3.0\",\"protocol\":1}\n",
     (unsigned long)id,store.saved.hasSnapshot?"true":"false",(long long)store.saved.utc,store.saved.display,
     (unsigned long)store.saved.r,store.saved.phase,(unsigned long)store.saved.snapshotGeneration,planner.config.mechanics?"true":"false",
     (unsigned long)link.status.session(),link.status.op(),unsigned(get16(link.status.bytes+28)&255));
@@ -154,7 +165,7 @@ void cancelJob(const char* code) {
   if(manualRequest && manualRequest!=jobRequest) reject(manualRequest,code,manualBle);
   jobSeq=jobRequest=manualRequest=0; manualPages=0; planner.invalidate();
 }
-void process(const char* line,bool ble) {
+void process(const char* line,bool ble,bool dedupe=true) {
   cJSON* root=cJSON_ParseWithOpts(line,nullptr,true);
   if(!root || !cJSON_IsObject(root)) { cJSON_Delete(root); reject(0,"E_JSON",ble); return; }
   int64_t version=0,request=0; cJSON* boot=cJSON_GetObjectItemCaseSensitive(root,"boot_id");
@@ -164,7 +175,7 @@ void process(const char* line,bool ble) {
   }
   uint32_t id=uint32_t(request);
   if(!cJSON_IsString(boot) || strcmp(boot->valuestring,bootId)) { cJSON_Delete(root); reject(id,"E_BOOT_CHANGED",ble); return; }
-  Requests::Entry* entry=nullptr; Requests::Result result=requests.check(id,line,entry);
+  Requests::Entry* entry=nullptr; Requests::Result result=dedupe?requests.check(id,line,entry):Requests::NEW;
   if(result!=Requests::NEW) {
     if(result==Requests::REPLAY) output(entry->response,ble);
     else {
@@ -175,6 +186,8 @@ void process(const char* line,bool ble) {
     cJSON_Delete(root); return;
   }
   const char* op=operation->valuestring;
+  // Any deliberate operator action replaces the pending automatic restore.
+  if(strcmp(op,"get_status") && strcmp(op,"get_config") && strcmp(op,"set_time") && strcmp(op,"confirm_time") && strcmp(op,"save_config")) restoreActive=false;
   if(!strcmp(op,"get_status")) status(id,ble);
   else if(!strcmp(op,"get_config")) configReply(id,ble);
   else if(!strcmp(op,"stop")) {
@@ -271,6 +284,60 @@ void process(const char* line,bool ble) {
   }
   else reject(id,"E_OP",ble);
   cJSON_Delete(root);
+}
+
+// Position is restored only from a snapshot saved after the commissioning wizard confirmed the mechanics.
+bool restoreSnapshot() {
+  const Saved& s=store.saved;
+  if(store.fault || !s.hasSnapshot || !s.config.mechanics || !planner.config.mechanics || s.snapshotCycle!=planner.config.cycle) return false;
+  planner.setDisplay(s.display); planner.remainder=s.r; savedDisplay=s.display; savedRemainder=s.r;
+  restoreActive=true; restoredFromSnapshot=true; return true;
+}
+const char* tf(bool v) { return v?"true":"false"; }
+void buildState(std::string& out) {
+  char b[900]; const Saved& s=store.saved;
+  snprintf(b,sizeof(b),"{\"fw\":\"0.3.0\",\"state\":\"%s\",\"link\":%s,\"rtc\":%s,\"utc\":%lld,\"off\":%d,\"display\":%u,\"cycle\":%u,\"pos\":%s,\"mech\":%s,\"q\":%llu,\"paused\":%s,\"busy\":%s,\"fault\":%s,\"err\":\"%s\",\"snap\":%s,\"snapDisplay\":%u,\"gen\":%lu,\"dirty\":%s,\"restoring\":%s,\"restored\":%s,\"left\":%lu}",
+    stateName(),tf(link.ready),tf(rtc.valid),(long long)rtc.utc,planner.config.offset,planner.display,planner.config.cycle,
+    tf(planner.position),tf(planner.config.mechanics),(unsigned long long)planner.config.q,tf(planner.paused),
+    tf(!safeIdle() || link.armed() || jobSeq),tf(systemFault),lastError,tf(s.hasSnapshot),s.display,(unsigned long)s.generation,
+    tf(store.dirty),tf(restoreActive),tf(restoredFromSnapshot),(unsigned long)link.status.arg(1));
+  out=b;
+}
+// Wraps a browser request in the same protocol frame BLE uses; replies produced synchronously are returned.
+bool webCommand(const char* body,std::string& out) {
+  out.clear(); cJSON* in=cJSON_Parse(body);
+  if(!in || !cJSON_IsObject(in) || !cJSON_IsString(cJSON_GetObjectItemCaseSensitive(in,"op"))) {
+    cJSON_Delete(in); out="{\"phase\":\"error\",\"code\":\"E_JSON\"}\n"; return false;
+  }
+  for(const char* key:{"v","id","boot_id"}) cJSON_DeleteItemFromObjectCaseSensitive(in,key);
+  cJSON_AddNumberToObject(in,"v",1); cJSON_AddNumberToObject(in,"id",double(0xF0000000UL+(++webSeq)));
+  cJSON_AddStringToObject(in,"boot_id",bootId);
+  char* line=cJSON_PrintUnformatted(in); cJSON_Delete(in);
+  if(!line) { out="{\"phase\":\"error\",\"code\":\"E_JSON\"}\n"; return false; }
+  webOut=&out; process(line,false,false); webOut=nullptr; cJSON_free(line);
+  if(out.empty()) out="{\"phase\":\"error\",\"code\":\"E_NO_REPLY\"}\n";
+  return true;
+}
+void loadWebPassword() {
+  static const char alphabet[]="abcdefghjkmnpqrstuvwxyz23456789";
+  Preferences p; bool open=p.begin("flip-web",false);
+  if(open && p.getBytesLength("pw")==sizeof(webPassword) && p.getBytes("pw",webPassword,sizeof(webPassword))==sizeof(webPassword) &&
+     webPassword[12]==0 && strlen(webPassword)==12) { p.end(); return; }
+  for(int i=0;i<12;++i) webPassword[i]=alphabet[esp_random()%(sizeof(alphabet)-1)];
+  webPassword[12]=0;
+  if(open) { p.putBytes("pw",webPassword,sizeof(webPassword)); p.end(); } // Random per boot if NVS is unavailable; never an open AP.
+}
+bool webAuth() { if(web.authenticate("admin",webPassword)) return true; web.requestAuthentication(); return false; }
+void webSetup() {
+  loadWebPassword(); WiFi.softAP(apName,webPassword);
+  web.on("/",HTTP_GET,[]() { if(webAuth()) web.send_P(200,"text/html; charset=utf-8",WEB_PAGE); });
+  web.on("/api/state",HTTP_GET,[]() {
+    if(!webAuth()) return; std::string s; buildState(s); web.sendHeader("Cache-Control","no-store"); web.send(200,"application/json",s.c_str());
+  });
+  web.on("/api/cmd",HTTP_POST,[]() {
+    if(!webAuth()) return; std::string out; webCommand(web.arg("plain").c_str(),out); web.sendHeader("Cache-Control","no-store"); web.send(200,"application/json",out.c_str());
+  });
+  web.begin();
 }
 
 class ServerCallbacks : public NimBLEServerCallbacks {
@@ -376,6 +443,7 @@ void networkTick(uint32_t now) {
 void localLine(const char* line) {
   if(line[0]=='{') { process(line,false); return; }
   if(!strcmp(line,"status")) { status(0,false); return; }
+  if(!strcmp(line,"access")) { Serial.printf("WEB wifi=%s password=%s user=admin url=http://192.168.4.1/\n",apName,webPassword); return; }
   if(!strcmp(line,"pause")) { planner.paused=true; manualPages=0; return; }
   if(!strcmp(line,"stop")) { cancelJob("E_STOPPED"); queuedJog_=0; link.stop(); return; }
   if(!planner.paused || !safeIdle() || link.armed()) { Serial.println("E_BUSY: pause and wait for disarm"); return; }
@@ -409,7 +477,7 @@ void localLine(const char* line) {
     if(ok) { network=next; ok=saveNetwork(); if(sntpStarted) { esp_sntp_stop(); sntpStarted=false; } }
     cJSON_Delete(obj); Serial.println(ok?"NTP_SAVED":"E_NTP_CONFIG"); return;
   }
-  Serial.println("status | pause | stop | pair | wifi JSON | ntp JSON | clear_bonds CONFIRM | reset_config CONFIRM | JSONL");
+  Serial.println("status | access | pause | stop | pair | wifi JSON | ntp JSON | clear_bonds CONFIRM | reset_config CONFIRM | JSONL");
 }
 
 // Pending operations belong to the loop, never to callbacks.
@@ -424,6 +492,13 @@ void supervisor(uint32_t now) {
   if(link.ready && link.status.op()==FAULT && !clearRequest_) {
     if(!systemFault) { cancelJob("E_UNO_FAULT"); errorState("E_UNO_FAULT"); }
     return;
+  }
+  // Automatic restore after power loss: resume once, then catch up to the current RTC time.
+  if(restoreActive) {
+    if(systemFault || !planner.position) restoreActive=false;
+    else if(rtc.valid && link.ready && safeIdle() && planner.paused && !pendingSync && !link.armed()) {
+      restoreActive=false; planner.paused=false; largeConfirmed_=true;
+    }
   }
   if(stopRequest_ && !link.pending && link.coilZero() && !link.armed()) {
     respond(stopRequest_,"completed",",\"coil_outputs_zero\":true",stopBle_); stopRequest_=0;
@@ -476,6 +551,7 @@ void supervisor(uint32_t now) {
         if(ok) respond(saveRequest,"completed",",\"persisted\":true",saveBle); else reject(saveRequest,store.throttled?"E_SAVE_THROTTLED":"E_NVS",saveBle);
       }
       if(!ok && !store.throttled) errorState("E_NVS",false);
+      if(ok && planner.position) { savedDisplay=planner.display; savedRemainder=planner.remainder; }
       planner.paused=saveWasPaused; savePending=false; saveRequest=0; lastCheckpoint=now;
     }
     return;
@@ -485,7 +561,16 @@ void supervisor(uint32_t now) {
     savePending=true; saveRequest=0; saveWasPaused=planner.paused; planner.paused=true; return;
   }
   uint16_t pages=manualPages?manualPages:modPos(int64_t(target(rtc.utc,planner.config))-planner.display,planner.config.cycle);
-  if(!pages) { largeConfirmed_=false; if(link.armed()) link.send(DISARM); return; }
+  if(!pages) {
+    largeConfirmed_=false;
+    if(link.armed()) { link.send(DISARM); return; }
+    // Caught up: persist the position so a power loss restores to this page, not an older one.
+    if(planner.position && rtc.valid && planner.config.mechanics && !jobSeq &&
+       (int32_t(planner.display)!=savedDisplay || planner.remainder!=savedRemainder)) {
+      savePending=true; saveRequest=0; saveWasPaused=planner.paused; planner.paused=true;
+    }
+    return;
+  }
   uint32_t steps=0;
   if(!pageSteps(planner.config.q,planner.remainder,1,steps,nextR)) { errorState("E_PLAN"); return; }
   uint64_t estimate=uint64_t(estimateMs(steps,planner.config))*pages;
@@ -511,9 +596,10 @@ void setupApp() {
   Wire.begin(13,14,100000); Wire.setTimeOut(20);
   if(!store.begin(planner.config)) errorState("E_NVS",false);
   rtc.read(millis()); if(rtc.valid) strlcpy(source,"rtc",sizeof(source));
-  link.begin(); loadNetwork();
-  WiFi.persistent(false); WiFi.mode(WIFI_STA); lastWifi=millis()-300000;
-  char name[24]; snprintf(name,sizeof(name),"FlipClock-%04x",unsigned(ESP.getEfuseMac()&0xffff));
+  link.begin(); loadNetwork(); restoreSnapshot();
+  snprintf(apName,sizeof(apName),"FlipClock-%04x",unsigned(ESP.getEfuseMac()&0xffff));
+  WiFi.persistent(false); WiFi.mode(WIFI_AP_STA); lastWifi=millis()-300000; webSetup();
+  char name[24]; strlcpy(name,apName,sizeof(name));
   NimBLEDevice::init(name); NimBLEDevice::setSecurityAuth(true,true,true);
   NimBLEDevice::setSecurityIOCap(BLE_HS_IO_DISPLAY_ONLY);
   passkey=100000+esp_random()%900000; NimBLEDevice::setSecurityPasskey(passkey.load());
@@ -524,10 +610,11 @@ void setupApp() {
   eventTx=service->createCharacteristic(TX,NIMBLE_PROPERTY::INDICATE|NIMBLE_PROPERTY::READ_ENC|NIMBLE_PROPERTY::READ_AUTHEN,512);
   eventTx->setCallbacks(&txCallbacks);
   auto* info=service->createCharacteristic(INFO,NIMBLE_PROPERTY::READ,20);
-  char shortInfo[21]; snprintf(shortInfo,sizeof(shortInfo),"1|0.2.0|%s",bootId); info->setValue(shortInfo);
+  char shortInfo[21]; snprintf(shortInfo,sizeof(shortInfo),"1|0.3.0|%s",bootId); info->setValue(shortInfo);
   server->start(); auto* adv=NimBLEDevice::getAdvertising(); adv->addServiceUUID(SERVICE); adv->setName(name); adv->enableScanResponse(true); adv->start();
-  Serial.printf("FlipClock 0.2.0 protocol=1 board=AI_THINKER_ESP32_CAM_DUAL_UNO boot_id=%s reset=%d BOOT_SAFE\n",bootId,int(esp_reset_reason()));
-  Serial.println("No camera/SD/OTA. UART: status / pair / wifi JSON / JSONL. SAFE_RECONFIRM.");
+  Serial.printf("FlipClock 0.3.0 protocol=1 board=AI_THINKER_ESP32_CAM_DUAL_UNO boot_id=%s reset=%d %s\n",bootId,int(esp_reset_reason()),
+    restoreActive?"RESTORE_PENDING":"BOOT_SAFE");
+  Serial.println("No camera/SD/OTA. UART: status / access / pair / wifi JSON / JSONL. Web: http://192.168.4.1/");
   lastCheckpoint=millis();
 }
 void loopApp() {
@@ -568,7 +655,7 @@ void loopApp() {
     }
     if(!rtc.valid && !planner.paused) { planner.paused=true; manualPages=0; strlcpy(lastError,"E_TIME_INVALID",sizeof(lastError)); }
   }
-  networkTick(now); supervisor(now); txTick(now); delay(1);
+  web.handleClient(); networkTick(now); supervisor(now); txTick(now); delay(1);
 }
 } // namespace clockapp
 void clockSetup() { clockapp::setupApp(); }
