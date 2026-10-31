@@ -98,6 +98,17 @@ int main() {
   planner=Planner(); planner.config=persisted; Saved untrusted=store.saved; untrusted.config.mechanics=false;
   Saved keep=store.saved; store.saved=untrusted; CHECK(!restoreSnapshot() && !planner.position); store.saved=keep;
   planner.config=persisted; CHECK(restoreSnapshot() && restoreActive); commandLine("pause"); CHECK(!restoreActive);
+  // ---- PCF8563 module (HW-689): found at 0x51, same time semantics as the DS3231 path ----
+  {
+    int64_t savedBase=Wire.rtcBase; uint32_t savedAt=Wire.rtcAt; Wire.pcf=true; Rtc chip;
+    CHECK(chip.read(fakeMs) && chip.valid && chip.pcf8563() && chip.utc>=savedBase);
+    for(int64_t want:{calendarUtc(2028,2,29,23,59,30),calendarUtc(2031,12,31,23,59,58),1800000000LL}) {
+      CHECK(chip.write(want,fakeMs) && chip.valid && chip.utc>=want && chip.utc<=want+2);
+    }
+    Wire.rtcMissing=true; CHECK(!chip.read(fakeMs) && chip.errors>0); Wire.rtcMissing=false;
+    CHECK(chip.read(fakeMs) && chip.valid); // re-detected after the device returns
+    Wire.pcf=false; Wire.rtcBase=savedBase; Wire.rtcAt=savedAt; Rtc ds; CHECK(ds.read(fakeMs) && !ds.pcf8563());
+  }
   // ---- OTA over HTTP: idle-only, validated, never half-applied ----
   auto upload=[](HTTPUploadStatus status,std::string& bytes) {
     web.current.status=status; web.current.buf=reinterpret_cast<uint8_t*>(&bytes[0]); web.current.currentSize=bytes.size(); web.uploader["/api/ota"]();

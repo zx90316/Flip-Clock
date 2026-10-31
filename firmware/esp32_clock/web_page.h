@@ -51,7 +51,7 @@ dl{display:grid;grid-template-columns:auto 1fr;gap:2px 12px;margin:6px 0;font-si
 </main><div id="msg" class="ok">連線中…</div>
 <script>
 const $=i=>document.getElementById(i),pad=n=>String(n).padStart(2,'0');
-const E={E_BUSY:'裝置忙碌，請先按「暫停走時」並等動作結束',E_TIME_INVALID:'RTC 時間無效，請先校時',E_I2C:'與 Uno 通訊失敗，請檢查 I²C 接線',
+const E={E_BUSY:'裝置忙碌，請先按「暫停走時」並等動作結束',E_TIME_INVALID:'RTC 時間無效，請先校時',E_I2C:'I²C 失敗：可能是 Uno 連線異常，或校時時讀寫不到 RTC，請檢查接線與 RTC 模組',
 E_NOT_CALIBRATED:'尚未歸零，請先完成步驟 2',E_RANGE:'數值超出範圍',E_FAULT:'系統故障，請先按「清除故障」',E_PLAN_STALE:'預覽已過期，請重試',
 E_REVERSE_DISABLED:'目前只支援正向轉動',E_SAVE_THROTTLED:'5 秒內不能重複儲存，請稍後再試',E_NVS:'儲存失敗',
 E_OTA_NO_PARTITION:'此韌體的分割表沒有 OTA 分區，需先用 UART 燒錄一次',E_OTA_IMAGE:'不是有效的 ESP32 韌體檔',E_OTA_WRITE:'寫入 Flash 失敗',
