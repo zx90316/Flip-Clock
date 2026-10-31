@@ -1,1 +1,1 @@
-New upload port: COM3 (serial)
+新上傳連接埠: COM3 (serial)

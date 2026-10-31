@@ -7,7 +7,7 @@ ROOT = Path(__file__).resolve().parents[1]
 def sha(path):
     return hashlib.sha256(path.read_bytes()).hexdigest()
 data = {
-    'project': 'ESP32-CAM + Uno single-motor split-flap clock', 'version': '0.2.0', 'protocol': 1,
+    'project': 'ESP32-CAM + Uno single-motor split-flap clock', 'version': '0.3.0', 'protocol': 1,
     'license': 'GPL-3.0-only', 'hardware_validation': 'Uno flash verification and UART standby checked on COM3; motor/ESP/RTC pending',
     'upstream': {'url': 'https://github.com/zx90316/split-flap', 'ref': 'esp32-purchased-bom',
                  'commit': 'f4216b735131ca2adf7772f3dbfca01d22112111'},

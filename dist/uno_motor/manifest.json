@@ -1,11 +1,11 @@
 {
-  "firmware": "0.2.0",
+  "firmware": "0.3.0",
   "protocol": 1,
   "fqbn": "arduino:avr:uno",
   "sha256": {
-    "uno_motor.ino.elf": "27bf6d39c683c951cf4513d5dab519a771287f3e15b8f65dc461dd49d2813a4f",
-    "uno_motor.ino.hex": "4ba3157d9e642d509b905b9eb9393379391bcce46f0a4db8849f984a6a1750de",
-    "uno_motor.ino.with_bootloader.bin": "731de04b1236a43218a54769576d4f584a3eeb8616bbc3ad510da54ee4adaa54",
-    "uno_motor.ino.with_bootloader.hex": "65b6b73b7a4e0de1112f1a0b801ae9b63c2117900153493caf1d3177044b6ef5"
+    "uno_motor.ino.elf": "4db9c19b31823b86817ea54117d9abf9df42d33c1015adc5f3b98a6deff7a257",
+    "uno_motor.ino.hex": "908b46661d7bb3709a181dd1386a9bd131a59bc452a13b7f177db8a38fcea44e",
+    "uno_motor.ino.with_bootloader.bin": "8b9a9f94d1de25efb0ebf8163f2a403ba5abbdd6acc6d18bb01347a2c56f0ca1",
+    "uno_motor.ino.with_bootloader.hex": "1ee641d9c1b54d02a8d2d2f9d855bef5957a6d456963e1683ec7e2fd331171a6"
   }
 }

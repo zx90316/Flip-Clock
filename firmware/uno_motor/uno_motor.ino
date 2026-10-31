@@ -29,7 +29,7 @@ void printStatus() {
     if(Serial.availableForWrite()>=8) Serial.println(F("BUSY"));
     return;
   }
-  Serial.print(F("{\"board\":\"UNO\",\"firmware\":\"0.2.0\",\"protocol\":1,\"state\":"));
+  Serial.print(F("{\"board\":\"UNO\",\"firmware\":\"0.3.0\",\"protocol\":1,\"state\":"));
   Serial.print(uint8_t(endpoint.state)); Serial.print(F(",\"armed\":false,\"coil_mask\":")); Serial.print(endpoint.mask);
   Serial.print(F(",\"session\":")); Serial.print(endpoint.session);
   Serial.print(F(",\"executed\":")); Serial.print(endpoint.executed);
@@ -96,7 +96,7 @@ void publish() {
 void setup() {
   PORTB &= 0xf0; DDRB |= 0x0f;
   Serial.begin(115200);
-  Serial.println(F("FlipClock UNO 0.2.0 protocol=1 BOOT_UNARMED; STATUS / STOP"));
+  Serial.println(F("FlipClock UNO 0.3.0 protocol=1 BOOT_UNARMED; STATUS / STOP"));
   publish(); memcpy(snapshots[activeSnapshot^1],snapshots[activeSnapshot],32);
   Wire.begin(0x12); Wire.onReceive(receiveFrame); Wire.onRequest(requestFrame);
   wdt_enable(WDTO_2S);

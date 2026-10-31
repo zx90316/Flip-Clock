@@ -2,7 +2,7 @@
 
 這是依使用者提供的 **v2.0 繁體中文工程規格**建立的獨立版本。ESP32-CAM 管理時間、BLE、Wi-Fi、RTC 與設定；Uno R3 控制一顆 28BYJ-48。參考分支的 Mega2560／ESP32-S 多字元功能未移入這個獨立 Repo；其腳位、12 V 馬達、45 字元及 4096 步設定不適用本版本。
 
-**目前狀態：兩板已編譯，Uno 0.2.0 已在 COM3 燒錄／校驗並讀回安全待機；ESP 與馬達接線／實測尚未完成。** 出廠設定 `mechanics_confirmed=false`、位置 unknown、暫停、反轉停用。200 half-steps/s 是軟體起測上限，尚非實機合格速率。沒有原點感測器，每次重啟仍須目視確認實際頁面。
+**目前狀態：兩板已編譯，Uno 0.2.0 已在 COM3 燒錄／校驗並讀回安全待機；ESP 與馬達接線／實測尚未完成。** 出廠設定 `mechanics_confirmed=false`、位置 unknown、暫停、反轉停用。速度上限 1000 half-steps/s、歸零預設 700，都尚未在實機驗證，不是合格速率。沒有原點感測器，每次重啟仍須目視確認實際頁面。
 
 本地基底：[zx90316/split-flap 的 esp32-purchased-bom](https://github.com/zx90316/split-flap/tree/esp32-purchased-bom)，提交 `f4216b735131ca2adf7772f3dbfca01d22112111`。本專案公開 Repo：[zx90316/Flip-Clock](https://github.com/zx90316/Flip-Clock)，分支 `main`。
 

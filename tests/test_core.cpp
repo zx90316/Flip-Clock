@@ -63,6 +63,30 @@ int main() {
   invalid.handle(make(MOVE,3,uint32_t(-1),100,100,1000),0); CHECK(invalid.error==REVERSE_DISABLED);
   invalid.handle(make(MOVE,4,1,201,100,1000),0); CHECK(invalid.error==RANGE);
   invalid.handle(make(MOVE,5,0x80000000UL,100,100,1000),0); CHECK(invalid.error==RANGE);
+  // High-speed profile: new limits, and the motor must ramp up from rest and ramp down before arrival.
+  {
+    Endpoint fast; fast.handle(make(OPEN),0); fast.handle(make(HEARTBEAT),0);
+    fast.handle(make(ARM,1,1001,120000),0); CHECK(fast.error==RANGE && !fast.armed);
+    fast.handle(make(ARM,2,1000,120000),0); CHECK(fast.armed);
+    fast.handle(make(MOVE,3,1000,1001,100,60000),0); CHECK(fast.error==RANGE && fast.state!=RUNNING);
+    fast.handle(make(MOVE,4,1000,800,4001,60000),0); CHECK(fast.error==RANGE && fast.state!=RUNNING);
+    fast.handle(make(MOVE,5,10001,800,2000,60000),0); CHECK(fast.error==RANGE);
+    fast.handle(make(MOVE,6,3000,800,2000,60000),0); CHECK(fast.state==RUNNING);
+    uint32_t last=0,first=0,minGap=0xffffffffUL,lastGap=0,steps=0,done=0;
+    for(uint32_t us=0;us<60000000UL && fast.state==RUNNING;us+=100) {
+      if(us%250000==0) fast.handle(make(HEARTBEAT),us/1000);
+      int32_t before=fast.executed; fast.tick(us/1000,us);
+      if(fast.executed!=before) {
+        if(steps==1) first=us-last; // gap between step 1 and step 2: start of the ramp
+        if(steps>1 && us-last<minGap) minGap=us-last;
+        lastGap=us-last; last=us; ++steps; done=us;
+      }
+    }
+    CHECK(fast.state==DONE && fast.executed==3000 && !fast.mask);
+    CHECK(first>8000 && lastGap>4000);          // slow at the start and just before stopping (>= 4 ms/step = <250 steps/s)
+    CHECK(minGap<=1300 && minGap>=1000);        // cruise reaches the 800..1000 steps/s window (loop granularity 0.1 ms)
+    CHECK(done<5500000UL);                      // far faster than 3000 steps at the old 200 steps/s limit (15 s)
+  }
   Endpoint stop; openArm(stop); stop.handle(make(MOVE,2,1000,200,100,20000),0);
   for(uint32_t us=0;us<=200000;us+=1000) stop.tick(us/1000,us);
   CHECK(stop.executed>0 && stop.executed<1000); int32_t partial=stop.executed;

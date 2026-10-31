@@ -36,9 +36,12 @@ dl{display:grid;grid-template-columns:auto 1fr;gap:2px 12px;margin:6px 0;font-si
 <section><h2>2. 手動歸零</h2>
 <p>只能正向轉動。按下面的按鈕讓機構轉到「某個你看得出的時間」，再輸入實際顯示的時間。</p>
 <div class="row"><button onclick="act(()=>jog(1))">+1 步</button><button onclick="act(()=>jog(8))">+8 步</button>
-<button onclick="act(()=>jog(32))">+32 步</button><button onclick="act(()=>jog(136))">+136 步</button></div>
+<button onclick="act(()=>jog(32))">+32 步</button><button onclick="act(()=>jog(136))">+136 步</button>
+<button onclick="act(()=>jog(680))">+680 步</button><button onclick="act(()=>jog(2720))">+2720 步</button></div>
 <div class="row">實際顯示 <input id="ah" type="number" min="1" max="12" value="12"> : <input id="am" type="number" min="0" max="59" value="0">
 每頁步數 <input id="q" type="number" step="0.001" value="136"></div>
+<div class="row">速度 <input id="rate" type="number" min="10" max="1000" value="700"> 步/秒　加速度 <input id="accel" type="number" min="1" max="4000" value="2000"></div>
+<p>每次轉動都會從慢速起步、加速、接近終點前減速。速度上限 1000；馬達只嗡嗡響、抖動或漏步時，請調低速度或加速度。</p>
 <div class="row"><button class="p" id="bAlign" onclick="act(align)">記住為歸零位置</button></div></section>
 
 <section><h2>3. 試跑確認</h2><p>機構會連續換頁到差異較大的時間，請在每一步核對實際顯示。全部換頁需數分鐘。</p>
@@ -46,6 +49,15 @@ dl{display:grid;grid-template-columns:auto 1fr;gap:2px 12px;margin:6px 0;font-si
 
 <section><h2>4. 完成歸零</h2><p>儲存位置並啟動自動走時。之後斷電重啟，會依記憶位置自動補跑到目前時間。</p>
 <div class="row"><button class="p" id="bFinish" onclick="act(finish)">完成歸零並啟動自動走時</button></div></section>
+<section><h2>Wi-Fi 連線（選填）</h2><p>連上家中 Wi-Fi 後可用網路自動校時。掃描與測試連線時，這個熱點可能中斷約 10–20 秒，頁面會自動重新連線。</p>
+<dl><dt>目前</dt><dd id="wst">--</dd></dl>
+<div class="row"><button id="bScan" onclick="wifiScan()">掃描附近 Wi-Fi</button></div>
+<div id="wnets"></div>
+<div class="row"><input id="wss" placeholder="Wi-Fi 名稱" style="width:100%" autocomplete="off"></div>
+<div class="row"><input id="wpw" type="password" placeholder="密碼（開放網路留空）" style="width:100%" autocomplete="off"></div>
+<div class="row"><button class="p" id="bConn" onclick="wifiConnect()">測試連線並儲存</button><button id="bForget" onclick="wifiForget()">忘記已儲存的網路</button></div>
+<div class="row"><label><input type="checkbox" id="ntp" onchange="act(()=>setNtp($('ntp').checked))" style="width:auto"> 用網路自動校時（每 6 小時；誤差小於 5 分鐘不會中斷走時）</label></div></section>
+
 <section><h2>韌體更新（OTA）</h2><p>選擇 <b>esp32_clock.ino.bin</b>。更新前會自動暫停走時；更新完成後裝置重新啟動，位置與設定都保留。更新期間請勿斷電。</p>
 <div class="row"><input type="file" id="fw" accept=".bin" style="width:auto"><button class="d" onclick="ota()">上傳並更新</button></div></section>
 </main><div id="msg" class="ok">連線中…</div>
@@ -74,12 +86,13 @@ async function clearFault(){await run('clear_fault');await idle(15000);say('已�
 async function timeSync(){const off=-new Date().getTimezoneOffset();await run('set_config',{values:{utc_offset_min:off}});
 await run('set_time',{utc_s:Math.floor(Date.now()/1000)});say('已用手機時間校時（UTC'+(off>=0?'+':'')+off/60+'）')}
 async function jog(n){await run('jog_steps',{steps:n});await idle(60000);say('已轉動 '+n+' 步，位置需重新輸入')}
-async function align(){const h=+$('ah').value,m=+$('am').value,q=Math.round(parseFloat($('q').value)*1e6);
+async function align(){const h=+$('ah').value,m=+$('am').value,q=Math.round(parseFloat($('q').value)*1e6),r=+$('rate').value,a=+$('accel').value;
 if(!(h>=1&&h<=12&&m>=0&&m<=59&&q>0))throw new Error('時間或每頁步數不正確');
-await run('set_config',{values:{mechanics_confirmed:true,cycle_minutes:720,steps_per_page_u6:q,max_step_rate:200,acceleration:800}});
+if(!(r>=10&&r<=1000&&a>=1&&a<=4000))throw new Error('速度需為 10–1000，加速度需為 1–4000');
+await run('set_config',{values:{mechanics_confirmed:true,cycle_minutes:720,steps_per_page_u6:q,max_step_rate:r,acceleration:a}});
 await run('set_display',{hour:h%12,minute:m,aligned:true});T={tests:OFFS.map(o=>({off:o,st:'todo'})),i:0};say('已記住 '+h+':'+pad(m)+' 為目前位置')}
 async function forward(pages,label){let left=pages,done=0;const base=S.display;
-while(left>0){const n=Math.min(60,left);await run('advance_pages',{pages:n});await idle(240000);left-=n;done+=n;
+while(left>0){const n=Math.min(720,left);say(label+'：移動中（'+n+' 頁，連續轉動）…');await run('advance_pages',{pages:n});await idle(600000);left-=n;done+=n;
 if(!S.pos||S.display!=(base+done)%S.cycle)throw new Error('換頁中斷，位置未知，請重新歸零');say(label+'：已換 '+done+' / '+pages+' 頁')}}
 async function goTest(){await refresh();const t=T.tests[T.i];t.start=S.display;t.target=(S.display+t.off)%S.cycle;
 await forward(t.off,'測試 '+(T.i+1));t.st='ask'}
@@ -94,6 +107,29 @@ say('已用實際顯示重新對齊'+(qn?'並修正每頁步數':'')+'，請從�
 async function finish(){await run('set_config',{values:{mechanics_confirmed:true}});await run('save_config');await idle(30000);
 if(S.dirty)throw new Error('儲存失敗，請稍候 5 秒再試');const p=await run('preview_sync');await run('resume',{plan_id:p.plan_id,confirm_large:true});
 say('歸零完成並已儲存，正在補跑到目前時間，之後自動走時')}
+const WE={E_WIFI_AUTH:'密碼錯誤或被拒絕',E_WIFI_NOT_FOUND:'找不到這個 Wi-Fi',E_WIFI_TIMEOUT:'連線逾時',E_WIFI_SAVE:'連上了但儲存失敗',
+E_WIFI_SSID:'請輸入 Wi-Fi 名稱',E_WIFI_PASSWORD:'密碼需 8–64 個字元（開放網路請留空）',E_BUSY:'上一個操作還在進行中'};
+let W={trial:{},networks:[]},wifiBusy=false;
+async function wifiPost(o){const r=await fetch('/api/wifi',{method:'POST',body:JSON.stringify(o)});return r.json()}
+async function wifiRefresh(){W=await(await fetch('/api/wifi')).json();renderWifi()}
+function renderWifi(){const s=W.sta||{};$('wst').textContent=s.connected?('已連線 '+(W.saved||'')+'　'+(s.ip||'')+'（'+s.rssi+' dBm）'):(W.saved?('已儲存「'+W.saved+'」，目前未連線'):'未設定');
+const box=$('wnets');if(box.dataset.k===JSON.stringify(W.networks)+W.scanning)return;box.dataset.k=JSON.stringify(W.networks)+W.scanning;box.textContent='';
+if(W.scanning){const p=document.createElement('p');p.textContent='掃描中…';box.appendChild(p)}
+for(const n of W.networks){const b=document.createElement('button');b.textContent=(n.open?'🔓 ':'🔒 ')+n.ssid+'  '+n.rssi+' dBm';b.style.margin='3px 6px 3px 0';
+b.onclick=()=>{$('wss').value=n.ssid;$('wpw').value='';if(n.open)say('這是開放網路，密碼留空即可');else $('wpw').focus()};box.appendChild(b)}}
+async function wifiWait(ms,done){const t=Date.now();while(Date.now()-t<ms){await new Promise(r=>setTimeout(r,1500));try{await wifiRefresh();if(done())return true}catch(e){}}return false}
+async function wifiScan(){if(wifiBusy)return;wifiBusy=true;try{say('掃描中，熱點可能短暫中斷…');const j=await wifiPost({op:'scan'});if(!j.ok)throw new Error(WE[j.error]||j.error);
+await wifiWait(30000,()=>!W.scanning);say(W.networks.length?'找到 '+W.networks.length+' 個 Wi-Fi，點選後輸入密碼':'沒有找到 Wi-Fi，請靠近分享器再掃一次',!W.networks.length)}
+catch(e){say(e.message,1)}wifiBusy=false}
+async function wifiConnect(){if(wifiBusy)return;const ssid=$('wss').value.trim(),password=$('wpw').value;wifiBusy=true;
+try{if(!ssid)throw new Error(WE.E_WIFI_SSID);say('測試連線中，熱點可能中斷，請稍候…');const j=await wifiPost({op:'connect',ssid,password});if(!j.ok)throw new Error(WE[j.error]||j.error);
+const ok=await wifiWait(60000,()=>W.trial&&W.trial.state!='running');
+if(!ok)throw new Error('等不到結果，請重新整理頁面確認');
+if(W.trial.state=='ok'){$('wpw').value='';say('已連上「'+W.trial.ssid+'」並儲存（'+((W.sta||{}).ip||'')+'）')}else throw new Error('連線失敗：'+(WE[W.trial.reason]||W.trial.reason)+'；未儲存，已恢復原本的連線')}
+catch(e){say(e.message,1)}wifiBusy=false}
+async function wifiForget(){if(wifiBusy||!confirm('忘記已儲存的 Wi-Fi？'))return;wifiBusy=true;try{const j=await wifiPost({op:'forget'});if(!j.ok)throw new Error(WE[j.error]||j.error);await wifiRefresh();say('已忘記 Wi-Fi')}catch(e){say(e.message,1)}wifiBusy=false}
+async function setNtp(on){try{await run('set_config',{values:{auto_time:on}});say(on?'已啟用網路自動校時（需已連上 Wi-Fi）':'已停用網路自動校時')}catch(e){$('ntp').checked=!!S.ntp;throw e}}
+async function confirmSync(){await run('confirm_time',{utc_s:S.syncUtc});say('已用網路時間校時，請按「完成歸零並啟動自動走時」或預覽後恢復走時')}
 let otaBusy=false;
 function ota(){const f=$('fw').files[0];if(!f)return say('請先選擇 .bin 檔',1);
 if(!confirm('更新韌體 '+f.name+'（'+(f.size/1024|0)+' KB）？更新期間請勿斷電。'))return;
@@ -108,11 +144,13 @@ $('lk').textContent=S.link?'已連線':'未連線';
 $('rt').textContent=S.rtc?new Date((S.utc+S.off*60)*1000).toISOString().replace('T',' ').slice(0,19):'無效，請先校時';
 $('ps').textContent=S.pos?(S.mech?'已歸零':'未確認機構'):'未知';
 $('sv').textContent=S.snap?(fmt(S.snapDisplay)+'（第 '+S.gen+' 次儲存'+(S.dirty?'，有未儲存變更':'')+'）'):'尚無';
-$('banner').innerHTML=S.restoring?'<p>開機自動恢復：等待時間與 Uno 就緒後，會補跑到目前時間。</p>':'';
+$('banner').innerHTML=(S.restoring?'<p>開機自動恢復：等待時間與 Uno 就緒後，會補跑到目前時間。</p>':'')+
+(S.syncAsk?'<p>網路時間與 RTC 差異超過 5 分鐘。<button onclick="act(confirmSync)">確認用網路時間校時</button></p>':'');
+if(document.activeElement!==$('ntp'))$('ntp').checked=!!S.ntp;
 const idle_=S.paused&&!S.busy&&!busyUi;
 $('bPause').disabled=S.paused&&!S.busy;$('bClear').disabled=!S.fault;
 for(const id of['bTime','bAlign','bFinish'])$(id).disabled=!idle_;
-document.querySelectorAll('section button').forEach(b=>{if(!b.id&&!b.closest('#tests'))b.disabled=!idle_});
+document.querySelectorAll('section button').forEach(b=>{if(!b.id&&!b.closest('#tests')&&!b.closest('#wnets'))b.disabled=!idle_});
 $('bFinish').disabled=!idle_||!S.pos||!S.mech||T.i<T.tests.length||!T.tests.length&&!S.snap;
 let h='';T.tests.forEach((t,i)=>{const lab='測試 '+(i+1)+'：再前進 '+Math.floor(t.off/60)+' 小時 '+t.off%60+' 分';
 if(t.st=='pass')h+='<div class="t pass">'+lab+' ✓</div>';
@@ -122,5 +160,5 @@ if(t.st=='ask')h+='<p>預期顯示 <b>'+fmt(t.target)+'</b>，實際是嗎？</p
 if(t.st=='fail')h+='<p>輸入實際顯示的時間：</p><div class="row"><input id="oh" type="number" min="1" max="12" value="12"> : <input id="om" type="number" min="0" max="59" value="0"><button class="p" onclick="act(fixTest)">修正並重來</button></div>';
 h+='</div>'}else h+='<div class="t">'+lab+'</div>'});
 h=h||'<p>先完成步驟 2。</p>';if(h!==T.h){$('tests').innerHTML=h;T.h=h}}
-(async()=>{for(;;){try{await refresh()}catch(e){if(!otaBusy)say('與時鐘連線中斷，重試中…',1)}await new Promise(r=>setTimeout(r,1000))}})();
+(async()=>{for(let n=0;;++n){try{await refresh();if(!wifiBusy&&n%4==0)await wifiRefresh()}catch(e){if(!otaBusy&&!wifiBusy)say('與時鐘連線中斷，重試中…',1)}await new Promise(r=>setTimeout(r,1000))}})();
 </script></body></html>)HTML";

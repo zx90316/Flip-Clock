@@ -15,6 +15,7 @@
 #include <math.h>
 
 namespace clockapp {
+static const uint32_t CHUNK_STEPS=9000; // below the Uno's 10000-step move limit
 static const char* SERVICE="b50c1000-7e6b-4e67-a540-a06c4fe1b201";
 static const char* RX="b50c1001-7e6b-4e67-a540-a06c4fe1b201";
 static const char* TX="b50c1002-7e6b-4e67-a540-a06c4fe1b201";
@@ -35,8 +36,9 @@ bool autoWasEnabled=true;
 uint32_t lastRtc=0,lastRtcGoodMs=0,lastSettle=0,lastCheckpoint=0;
 uint32_t jobSeq=0,nextR=0,jobRequest=0,armSeq=0,saveRequest=0;
 bool jobBle=false,saveBle=false,jobJog=false,savePending=false,saveWasPaused=true;
+uint32_t saveRevision=0; // planner revision when a background save began; any later change keeps the clock paused
 int32_t jobSteps=0;
-uint16_t manualPages=0;
+uint16_t manualPages=0,jobPages=1; // jobPages: pages covered by the move in flight (one continuous move may span several)
 uint16_t manualRequested_=0,manualCompleted_=0;
 uint32_t manualRequest=0; bool manualBle=false;
 int64_t observedUtc=0,pendingSync=0,lastSync=0,lastOffset=0;
@@ -51,6 +53,8 @@ std::atomic<bool> rxOverflow_{false};
 // Web console: replies of one command are captured; late completions still go to UART.
 WebServer web(80); std::string* webOut=nullptr; uint32_t webSeq=0;
 char webPassword[13]="",apName[24]="";
+bool saveNetwork(); void wifiGet(); void wifiPost(); void wifiTick(uint32_t now); // defined with the other network code
+bool syncResume=false; // an NTP correction paused a running clock: resume by itself if the correction is small
 // Boot restore: the committed snapshot is trusted only after the commissioning wizard saved it.
 bool restoreActive=false,restoredFromSnapshot=false; int32_t savedDisplay=-1; uint32_t savedRemainder=0;
 
@@ -137,8 +141,8 @@ bool applyConfig(cJSON* values) {
     if(!number(values,k,-720,10000000000LL,v)) return false;
     if(!strcmp(k,"steps_per_page_u6")) { if(v<D || v>10000LL*D) return false; c.q=uint64_t(v); }
     else if(!strcmp(k,"cycle_minutes")) { if(v!=720 && v!=1440) return false; c.cycle=uint16_t(v); }
-    else if(!strcmp(k,"max_step_rate")) { if(v<10 || v>200) return false; c.rate=uint16_t(v); }
-    else if(!strcmp(k,"acceleration")) { if(v<1 || v>1000) return false; c.accel=uint16_t(v); }
+    else if(!strcmp(k,"max_step_rate")) { if(v<10 || v>MAX_RATE) return false; c.rate=uint16_t(v); }
+    else if(!strcmp(k,"acceleration")) { if(v<1 || v>MAX_ACCEL) return false; c.accel=uint16_t(v); }
     else if(!strcmp(k,"settle_ms")) { if(v<0 || v>5000) return false; c.settle=uint16_t(v); }
     else if(!strcmp(k,"utc_offset_min")) { if(v< -720 || v>840) return false; c.offset=int16_t(v); }
     else if(!strcmp(k,"max_auto_catchup_pages")) { if(v<1 || v>60) return false; c.maxPages=uint16_t(v); }
@@ -152,9 +156,11 @@ bool applyConfig(cJSON* values) {
   planner.config=c; planner.changed(geometry); store.dirty=true; largeRequired=false;
   return true;
 }
+// Motion timeout for one move: the planner's bound plus 50% and 5 s for loop jitter on the Uno at high rates.
+uint32_t moveTimeoutMs(uint32_t steps) { uint32_t e=estimateMs(steps,planner.config); return e+e/2+5000; }
 bool startJob(bool jog,int32_t steps,uint32_t request,bool ble) {
   if(!link.ready || link.fault || !link.armed() || link.pending || jobSeq) return false;
-  uint32_t timeout=estimateMs(magnitude(steps),planner.config)+5000;
+  uint32_t timeout=moveTimeoutMs(magnitude(steps));
   if(timeout>120000UL) return false;
   if(!link.send(MOVE,uint32_t(steps),planner.config.rate,planner.config.accel,timeout)) return false;
   jobSeq=link.seq; jobSteps=steps; jobJog=jog; jobRequest=request; jobBle=ble;
@@ -164,7 +170,7 @@ bool startJob(bool jog,int32_t steps,uint32_t request,bool ble) {
 void cancelJob(const char* code) {
   if(jobRequest) reject(jobRequest,code,jobBle);
   if(manualRequest && manualRequest!=jobRequest) reject(manualRequest,code,manualBle);
-  jobSeq=jobRequest=manualRequest=0; manualPages=0; planner.invalidate();
+  jobSeq=jobRequest=manualRequest=0; manualPages=0; jobPages=1; planner.invalidate();
 }
 void process(const char* line,bool ble,bool dedupe=true) {
   cJSON* root=cJSON_ParseWithOpts(line,nullptr,true);
@@ -192,14 +198,14 @@ void process(const char* line,bool ble,bool dedupe=true) {
   if(!strcmp(op,"get_status")) status(id,ble);
   else if(!strcmp(op,"get_config")) configReply(id,ble);
   else if(!strcmp(op,"stop")) {
-    cancelJob("E_STOPPED"); planner.paused=true; armSeq=0;
+    cancelJob("E_STOPPED"); planner.paused=true; saveWasPaused=true; armSeq=0;
     if(queuedJog_) { reject(queuedJogRequest_,"E_STOPPED",queuedJogBle_); queuedJog_=0; }
     if(savePending) { if(saveRequest) reject(saveRequest,"E_STOPPED",saveBle); savePending=false; }
     if(!link.stop()) reject(id,"E_I2C",ble);
     else { respond(id,"accepted",nullptr,ble); stopRequest_=id; stopBle_=ble; }
   }
   else if(!strcmp(op,"pause")) {
-    planner.paused=true; manualPages=0;
+    planner.paused=true; saveWasPaused=true; manualPages=0;
     if(queuedJog_) { reject(queuedJogRequest_,"E_STOPPED",queuedJogBle_); queuedJog_=0; }
     if(manualRequest && !jobSeq) { respond(manualRequest,"completed",",\"paused\":true",manualBle); manualRequest=0; }
     respond(id,"accepted",nullptr,ble);
@@ -260,14 +266,14 @@ void process(const char* line,bool ble,bool dedupe=true) {
   }
   else if(!strcmp(op,"jog_steps")) {
     int64_t steps;
-    if(!number(root,"steps",-256,256,steps) || !steps) reject(id,"E_RANGE",ble);
+    if(!number(root,"steps",-8000,8000,steps) || !steps) reject(id,"E_RANGE",ble);
     else if(steps<0) reject(id,"E_REVERSE_DISABLED",ble);
     else if(!link.ready) reject(id,"E_I2C",ble);
     else { queuedJog_=int32_t(steps); queuedJogRequest_=id; queuedJogBle_=ble; respond(id,"accepted",nullptr,ble); }
   }
   else if(!strcmp(op,"advance_pages")) {
     int64_t pages;
-    if(!number(root,"pages",1,60,pages)) reject(id,"E_RANGE",ble);
+    if(!number(root,"pages",1,720,pages)) reject(id,"E_RANGE",ble);
     else if(!planner.position || !planner.config.mechanics) reject(id,"E_NOT_CALIBRATED",ble);
     else if(!link.ready) reject(id,"E_I2C",ble);
     else { manualPages=uint16_t(pages); manualRequested_=manualPages; manualCompleted_=0; manualRequest=id; manualBle=ble; respond(id,"accepted",nullptr,ble); }
@@ -297,11 +303,12 @@ bool restoreSnapshot() {
 const char* tf(bool v) { return v?"true":"false"; }
 void buildState(std::string& out) {
   char b[900]; const Saved& s=store.saved;
-  snprintf(b,sizeof(b),"{\"fw\":\"0.3.0\",\"state\":\"%s\",\"link\":%s,\"rtc\":%s,\"utc\":%lld,\"off\":%d,\"display\":%u,\"cycle\":%u,\"pos\":%s,\"mech\":%s,\"q\":%llu,\"paused\":%s,\"busy\":%s,\"fault\":%s,\"err\":\"%s\",\"snap\":%s,\"snapDisplay\":%u,\"gen\":%lu,\"dirty\":%s,\"restoring\":%s,\"restored\":%s,\"left\":%lu}",
+  snprintf(b,sizeof(b),"{\"fw\":\"0.3.0\",\"state\":\"%s\",\"link\":%s,\"rtc\":%s,\"utc\":%lld,\"off\":%d,\"display\":%u,\"cycle\":%u,\"pos\":%s,\"mech\":%s,\"q\":%llu,\"paused\":%s,\"busy\":%s,\"fault\":%s,\"err\":\"%s\",\"snap\":%s,\"snapDisplay\":%u,\"gen\":%lu,\"dirty\":%s,\"restoring\":%s,\"restored\":%s,\"left\":%lu,\"syncAsk\":%s,\"syncUtc\":%lld,\"rate\":%u,\"accel\":%u,\"ntp\":%s}",
     stateName(),tf(link.ready),tf(rtc.valid),(long long)rtc.utc,planner.config.offset,planner.display,planner.config.cycle,
     tf(planner.position),tf(planner.config.mechanics),(unsigned long long)planner.config.q,tf(planner.paused),
     tf(!safeIdle() || link.armed() || jobSeq),tf(systemFault),lastError,tf(s.hasSnapshot),s.display,(unsigned long)s.generation,
-    tf(store.dirty),tf(restoreActive),tf(restoredFromSnapshot),(unsigned long)link.status.arg(1));
+    tf(store.dirty),tf(restoreActive),tf(restoredFromSnapshot),(unsigned long)link.status.arg(1),
+    tf(pendingSync && pendingSyncConfirm_),(long long)pendingSync,planner.config.rate,planner.config.accel,tf(planner.config.autoTime));
   out=b;
 }
 // Wraps a browser request in the same protocol frame BLE uses; replies produced synchronously are returned.
@@ -372,6 +379,7 @@ void otaUpload() {
 void webSetup() {
   loadWebPassword(); WiFi.softAP(apName,webPassword);
   web.on("/api/ota",HTTP_POST,otaFinish,otaUpload);
+  web.on("/api/wifi",HTTP_GET,wifiGet); web.on("/api/wifi",HTTP_POST,wifiPost);
   web.on("/",HTTP_GET,[]() { if(webAuth()) web.send_P(200,"text/html; charset=utf-8",WEB_PAGE); });
   web.on("/api/state",HTTP_GET,[]() {
     if(!webAuth()) return; std::string s; buildState(s); web.sendHeader("Cache-Control","no-store"); web.send(200,"application/json",s.c_str());
@@ -454,8 +462,93 @@ bool saveNetwork() {
   bool ok=p.putBytes("config",data,sizeof(data))==sizeof(data) && p.getBytes("config",check,sizeof(check))==sizeof(check) && !memcmp(data,check,sizeof(data));
   p.end(); return ok;
 }
+// ---- Wi-Fi provisioning: scan, trial-connect, and save only after a verified connection ----
+struct ScanEntry { char ssid[33]; int rssi; bool open; };
+ScanEntry scanList[48]; uint8_t scanCount=0; bool scanRunning=false,scanDone=false;
+enum class Trial : uint8_t { IDLE, RUNNING, OK, FAIL };
+Trial trial=Trial::IDLE; char trialSsid[33]="",trialPassword[65]="",trialReason[20]=""; uint32_t trialStarted=0;
+void trialEnd(Trial result,const char* reason,uint32_t now) {
+  trial=result; strlcpy(trialReason,reason,sizeof(trialReason)); memset(trialPassword,0,sizeof(trialPassword)); lastWifi=now;
+  if(result==Trial::FAIL) { if(network.ssid[0]) WiFi.begin(network.ssid,network.password); else WiFi.disconnect(false,false); } // back to the last good network
+}
+void wifiTick(uint32_t now) {
+  if(scanRunning) {
+    int n=WiFi.scanComplete();
+    if(n==WIFI_SCAN_FAILED) { scanRunning=false; scanDone=true; scanCount=0; }
+    else if(n>=0) {
+      scanCount=0;
+      for(int i=0;i<n;++i) {
+        auto name=WiFi.SSID(i); if(name.length()==0 || name.length()>32) continue; // hidden or malformed
+        int rssi=WiFi.RSSI(i); bool open=WiFi.encryptionType(i)==WIFI_AUTH_OPEN,found=false;
+        for(uint8_t k=0;k<scanCount;++k) if(!strcmp(scanList[k].ssid,name.c_str())) {
+          found=true; if(rssi>scanList[k].rssi) { scanList[k].rssi=rssi; scanList[k].open=open; } break;
+        }
+        if(found || scanCount>=sizeof(scanList)/sizeof(scanList[0])) continue;
+        strlcpy(scanList[scanCount].ssid,name.c_str(),sizeof(scanList[0].ssid)); scanList[scanCount].rssi=rssi; scanList[scanCount].open=open; ++scanCount;
+      }
+      for(uint8_t a=1;a<scanCount;++a) { ScanEntry v=scanList[a]; int b=a-1; while(b>=0 && scanList[b].rssi<v.rssi) { scanList[b+1]=scanList[b]; --b; } scanList[b+1]=v; }
+      if(scanCount>20) scanCount=20;
+      WiFi.scanDelete(); scanRunning=false; scanDone=true;
+    }
+  }
+  if(trial==Trial::RUNNING) {
+    int st=WiFi.status(); uint32_t elapsed=now-trialStarted;
+    if(st==WL_CONNECTED) {
+      Network keep=network;
+      strlcpy(network.ssid,trialSsid,sizeof(network.ssid)); strlcpy(network.password,trialPassword,sizeof(network.password));
+      if(saveNetwork()) { wifiBackoff=30000; trialEnd(Trial::OK,"",now); }
+      else { network=keep; trialEnd(Trial::FAIL,"E_WIFI_SAVE",now); }
+    } else if(elapsed>3000 && (st==WL_CONNECT_FAILED || st==WL_NO_SSID_AVAIL)) trialEnd(Trial::FAIL,st==WL_NO_SSID_AVAIL?"E_WIFI_NOT_FOUND":"E_WIFI_AUTH",now);
+    else if(elapsed>20000) trialEnd(Trial::FAIL,"E_WIFI_TIMEOUT",now);
+  }
+}
+void wifiGet() {
+  if(!webAuth()) return;
+  static const char* const names[]={"idle","running","ok","fail"};
+  cJSON* root=cJSON_CreateObject(); bool connected=WiFi.status()==WL_CONNECTED;
+  cJSON* sta=cJSON_AddObjectToObject(root,"sta"); cJSON_AddBoolToObject(sta,"connected",connected);
+  if(connected) { cJSON_AddStringToObject(sta,"ip",WiFi.localIP().toString().c_str()); cJSON_AddNumberToObject(sta,"rssi",WiFi.RSSI()); }
+  cJSON_AddStringToObject(root,"saved",network.ssid);
+  cJSON* t=cJSON_AddObjectToObject(root,"trial"); cJSON_AddStringToObject(t,"state",names[uint8_t(trial)]);
+  cJSON_AddStringToObject(t,"ssid",trialSsid); cJSON_AddStringToObject(t,"reason",trialReason);
+  cJSON_AddBoolToObject(root,"scanning",scanRunning); cJSON_AddBoolToObject(root,"scanned",scanDone);
+  cJSON* list=cJSON_AddArrayToObject(root,"networks");
+  for(uint8_t i=0;i<scanCount;++i) {
+    cJSON* n=cJSON_CreateObject(); cJSON_AddStringToObject(n,"ssid",scanList[i].ssid);
+    cJSON_AddNumberToObject(n,"rssi",scanList[i].rssi); cJSON_AddBoolToObject(n,"open",scanList[i].open); cJSON_AddItemToArray(list,n);
+  }
+  char* text=cJSON_PrintUnformatted(root); cJSON_Delete(root);
+  web.sendHeader("Cache-Control","no-store"); web.send(200,"application/json",text?text:"{}"); if(text) cJSON_free(text);
+}
+void wifiPost() {
+  if(!webAuth()) return;
+  std::string body(web.arg("plain").c_str()); cJSON* in=cJSON_Parse(body.c_str());
+  cJSON* op=in?cJSON_GetObjectItemCaseSensitive(in,"op"):nullptr; const char* error=nullptr;
+  if(!cJSON_IsString(op)) error="E_JSON";
+  else if(trial==Trial::RUNNING) error="E_BUSY";
+  else if(!strcmp(op->valuestring,"scan")) {
+    WiFi.scanDelete(); WiFi.scanNetworks(true,false); scanRunning=true; scanDone=false; scanCount=0;
+  } else if(!strcmp(op->valuestring,"connect")) {
+    cJSON* ssid=cJSON_GetObjectItemCaseSensitive(in,"ssid"); cJSON* pass=cJSON_GetObjectItemCaseSensitive(in,"password");
+    if(!cJSON_IsString(ssid) || !strlen(ssid->valuestring) || strlen(ssid->valuestring)>32) error="E_WIFI_SSID";
+    else if(!cJSON_IsString(pass) || (strlen(pass->valuestring) && (strlen(pass->valuestring)<8 || strlen(pass->valuestring)>64))) error="E_WIFI_PASSWORD";
+    else {
+      strlcpy(trialSsid,ssid->valuestring,sizeof(trialSsid)); strlcpy(trialPassword,pass->valuestring,sizeof(trialPassword));
+      trial=Trial::RUNNING; trialStarted=millis(); trialReason[0]=0;
+      WiFi.disconnect(false,false); WiFi.begin(trialSsid,trialPassword);
+    }
+  } else if(!strcmp(op->valuestring,"forget")) {
+    Network keep=network; network.ssid[0]=0; network.password[0]=0;
+    if(saveNetwork()) WiFi.disconnect(false,false); else { network=keep; error="E_WIFI_SAVE"; }
+  } else error="E_OP";
+  cJSON_Delete(in);
+  char reply[64]; snprintf(reply,sizeof(reply),"{\"ok\":%s,\"error\":\"%s\"}",error?"false":"true",error?error:"");
+  web.sendHeader("Cache-Control","no-store"); web.send(error?409:200,"application/json",reply);
+}
+
 void networkTick(uint32_t now) {
-  if(network.ssid[0] && WiFi.status()!=WL_CONNECTED && uint32_t(now-lastWifi)>=wifiBackoff) {
+  wifiTick(now);
+  if(network.ssid[0] && WiFi.status()!=WL_CONNECTED && trial!=Trial::RUNNING && uint32_t(now-lastWifi)>=wifiBackoff) {
     lastWifi=now; WiFi.begin(network.ssid,network.password); if(wifiBackoff<300000) wifiBackoff*=2;
   }
   if(!planner.config.autoTime) {
@@ -468,17 +561,21 @@ void networkTick(uint32_t now) {
   int64_t value;
   if(xQueueReceive(syncQueue,&value,0)==pdTRUE && planner.config.autoTime && validUtc(value)) {
     // Every adjustment first pauses; active page is allowed to finish, never interrupted by time update.
+    bool wasRunning=!planner.paused;
     pendingSync=value; pendingSyncMs=now; planner.changed(false); largeRequired=false;
     pendingSyncConfirm_=rtc.valid && llabs(value-rtc.utc)>300;
+    syncResume=wasRunning && !pendingSyncConfirm_; // only small corrections resume by themselves
     if(pendingSyncConfirm_) strlcpy(lastError,"E_TIME_CONFIRM",sizeof(lastError));
   }
   if(pendingSync && !pendingSyncConfirm_ && !jobSeq && !link.pending && !link.armed() && !systemFault) {
-    if(uint32_t(now-pendingSyncMs)>120000) { pendingSync=0; return; }
+    if(uint32_t(now-pendingSyncMs)>120000) { pendingSync=0; if(syncResume && !systemFault) planner.paused=false; syncResume=false; return; }
     int64_t corrected=pendingSync+uint32_t(now-pendingSyncMs)/1000;
     lastOffset=rtc.valid?corrected-rtc.utc:0;
     if(!rtc.write(corrected,now)) { errorState("E_RTC_WRITE",false); return; }
     lastSync=rtc.utc; pendingSync=0; observedUtc=rtc.utc; observedMs=now; strlcpy(source,"sntp",sizeof(source));
-    // Remain paused until a new preview has been reviewed and resumed.
+    // A running clock stays running after a small correction; a large one waits for confirm_time and a new preview.
+    if(syncResume && !systemFault) planner.paused=false;
+    syncResume=false;
   }
 }
 
@@ -486,7 +583,7 @@ void localLine(const char* line) {
   if(line[0]=='{') { process(line,false); return; }
   if(!strcmp(line,"status")) { status(0,false); return; }
   if(!strcmp(line,"access")) { Serial.printf("WEB wifi=%s password=%s user=admin url=http://192.168.4.1/\n",apName,webPassword); return; }
-  if(!strcmp(line,"pause")) { planner.paused=true; manualPages=0; return; }
+  if(!strcmp(line,"pause")) { planner.paused=true; saveWasPaused=true; manualPages=0; return; }
   if(!strcmp(line,"stop")) { cancelJob("E_STOPPED"); queuedJog_=0; link.stop(); return; }
   if(!planner.paused || !safeIdle() || link.armed()) { Serial.println("E_BUSY: pause and wait for disarm"); return; }
   if(!strcmp(line,"pair")) {
@@ -562,14 +659,14 @@ void supervisor(uint32_t now) {
     if(link.status.steps()!=jobSteps || link.status.arg(1)!=0 || !link.coilZero() || uint8_t(get16(link.status.bytes+28))!=flip::OK) {
       cancelJob("E_BAD_DONE"); errorState("E_BAD_DONE"); return;
     }
-    if(!jobJog && !planner.commit(jobSeq,nextR)) { cancelJob("E_COMMIT"); errorState("E_COMMIT"); return; }
+    if(!jobJog && !planner.commit(jobSeq,nextR,jobPages)) { cancelJob("E_COMMIT"); errorState("E_COMMIT"); return; }
     if(jobJog) {
       char extra[120]; snprintf(extra,sizeof(extra),",\"job_id\":%lu,\"steps_sent\":%ld,\"position_confidence\":\"unknown\"",(unsigned long)jobSeq,(long)jobSteps);
       respond(jobRequest,"completed",extra,jobBle);
     }
-    if(manualRequest) ++manualCompleted_;
-    if(manualPages) --manualPages;
-    jobSeq=jobRequest=0; lastSettle=now;
+    if(manualRequest) manualCompleted_=uint16_t(manualCompleted_+jobPages);
+    if(manualPages) manualPages=manualPages>jobPages?uint16_t(manualPages-jobPages):0;
+    jobSeq=jobRequest=0; jobPages=1; lastSettle=now;
     if(manualRequest && (!manualPages || planner.manualPause)) {
       char extra[120]; snprintf(extra,sizeof(extra),",\"pages_completed\":%u,\"requested_pages\":%u,\"paused\":%s",
         manualCompleted_,manualRequested_,manualCompleted_<manualRequested_?"true":"false");
@@ -594,13 +691,14 @@ void supervisor(uint32_t now) {
       }
       if(!ok && !store.throttled) errorState("E_NVS",false);
       if(ok && planner.position) { savedDisplay=planner.display; savedRemainder=planner.remainder; }
-      planner.paused=saveWasPaused; savePending=false; saveRequest=0; lastCheckpoint=now;
+      // Resume only if nothing (pause, stop, config, time or position change) happened while the save was in flight.
+      planner.paused=saveWasPaused || planner.revision!=saveRevision; savePending=false; saveRequest=0; lastCheckpoint=now;
     }
     return;
   }
   if(uint32_t(now-lastSettle)<planner.config.settle || !link.ready) return;
   if(planner.config.checkpoint && uint32_t(now-lastCheckpoint)>=uint32_t(planner.config.checkpoint)*60000UL) {
-    savePending=true; saveRequest=0; saveWasPaused=planner.paused; planner.paused=true; return;
+    savePending=true; saveRequest=0; saveWasPaused=planner.paused; saveRevision=planner.revision; planner.paused=true; return;
   }
   uint16_t pages=manualPages?manualPages:modPos(int64_t(target(rtc.utc,planner.config))-planner.display,planner.config.cycle);
   if(!pages) {
@@ -609,17 +707,27 @@ void supervisor(uint32_t now) {
     // Caught up: persist the position so a power loss restores to this page, not an older one.
     if(planner.position && rtc.valid && planner.config.mechanics && !jobSeq &&
        (int32_t(planner.display)!=savedDisplay || planner.remainder!=savedRemainder)) {
-      savePending=true; saveRequest=0; saveWasPaused=planner.paused; planner.paused=true;
+      savePending=true; saveRequest=0; saveWasPaused=planner.paused; saveRevision=planner.revision; planner.paused=true;
     }
     return;
   }
   uint32_t steps=0;
   if(!pageSteps(planner.config.q,planner.remainder,1,steps,nextR)) { errorState("E_PLAN"); return; }
   uint64_t estimate=uint64_t(estimateMs(steps,planner.config))*pages;
+  // Several pages are driven as ONE move so the motor can reach cruise speed between the start ramp and the
+  // arrival ramp. Bounded by the Uno's per-move step limit and by the 120 s move timeout.
+  uint16_t chunk=1; uint32_t chunkSteps=steps,chunkNext=nextR;
+  if(pages>1) {
+    uint64_t byLimit=(uint64_t(CHUNK_STEPS)*D)/planner.config.q; if(byLimit<1) byLimit=1;
+    chunk=uint16_t(pages<byLimit?pages:byLimit);
+    while(chunk>1 && (!pageSteps(planner.config.q,planner.remainder,chunk,chunkSteps,chunkNext) ||
+          chunkSteps>CHUNK_STEPS || moveTimeoutMs(chunkSteps)>120000UL)) chunk=uint16_t(chunk/2);
+    if(!pageSteps(planner.config.q,planner.remainder,chunk,chunkSteps,chunkNext)) { errorState("E_PLAN"); return; }
+  }
   if(!manualPages && !largeConfirmed_ && (pages>planner.config.maxPages || estimate>uint32_t(planner.config.maxSeconds)*1000)) {
     planner.paused=true; largeRequired=true; return;
   }
-  if(estimateMs(steps,planner.config)+5000>120000UL) {
+  if(moveTimeoutMs(steps)>120000UL) {
     planner.paused=true; strlcpy(lastError,"E_PAGE_TIMEOUT_RANGE",sizeof(lastError));
     if(manualRequest) { reject(manualRequest,"E_RANGE",manualBle); manualRequest=0; manualPages=0; }
     return;
@@ -629,7 +737,9 @@ void supervisor(uint32_t now) {
     if(link.send(ARM,planner.config.rate,120000)) armSeq=link.seq;
     return;
   }
-  if(!startJob(false,int32_t(steps)*planner.config.direction,0,false)) errorState("E_START");
+  nextR=chunkNext;
+  if(!startJob(false,int32_t(chunkSteps)*planner.config.direction,0,false)) errorState("E_START");
+  else jobPages=chunk;
 }
 void setupApp() {
   Serial.begin(115200); snprintf(bootId,sizeof(bootId),"%08lx",(unsigned long)esp_random());

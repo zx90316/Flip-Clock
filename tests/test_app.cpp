@@ -19,7 +19,8 @@ int main() {
   commandLine("jog_steps",",\"steps\":-1"); CHECK(contains("E_REVERSE_DISABLED"));
   commandLine("set_config",",\"values\":{\"mechanics_confirmed\":true,\"steps_per_page_u6\":136533333,\"cycle_minutes\":720}");
   CHECK(contains("completed") && planner.config.mechanics && store.dirty);
-  commandLine("set_config",",\"values\":{\"max_step_rate\":201}"); CHECK(contains("E_RANGE") && planner.config.rate==200);
+  commandLine("set_config",",\"values\":{\"max_step_rate\":1001}"); CHECK(contains("E_RANGE") && planner.config.rate==200);
+  commandLine("set_config",",\"values\":{\"acceleration\":4001}"); CHECK(contains("E_RANGE") && planner.config.accel==100);
   commandLine("set_display",",\"hour\":8,\"minute\":0,\"aligned\":true"); CHECK(planner.position && planner.display==480);
   std::string jog=request("jog_steps",",\"steps\":4"); Serial.output.clear(); process(jog.c_str(),false); spin(2500);
   CHECK(contains("steps_sent\":4") && !planner.position && fakeUno.executed==4 && !fakeUno.mask);
@@ -48,7 +49,7 @@ int main() {
   CHECK(pendingSync==proposed && pendingSyncConfirm_ && planner.paused);
   commandLine("confirm_time",",\"utc_s\":1793466000"); CHECK(!pendingSync && !strcmp(source,"sntp"));
   commandLine("advance_pages",",\"pages\":5"); spin(200);
-  commandLine("pause"); spin(5000); CHECK(!jobSeq && !manualPages && planner.position && !fakeUno.armed);
+  commandLine("pause"); spin(9000); CHECK(!jobSeq && !manualPages && planner.position && !fakeUno.armed); // pause lets the whole continuous move finish
   commandLine("advance_pages",",\"pages\":1"); spin(350); CHECK(jobSeq);
   commandLine("stop"); spin(500); CHECK(!planner.position && !fakeUno.armed && !fakeUno.mask && contains("coil_outputs_zero\":true"));
   commandLine("set_display",",\"hour\":9,\"minute\":0,\"aligned\":true");
@@ -98,6 +99,73 @@ int main() {
   planner=Planner(); planner.config=persisted; Saved untrusted=store.saved; untrusted.config.mechanics=false;
   Saved keep=store.saved; store.saved=untrusted; CHECK(!restoreSnapshot() && !planner.position); store.saved=keep;
   planner.config=persisted; CHECK(restoreSnapshot() && restoreActive); commandLine("pause"); CHECK(!restoreActive);
+  // ---- Wi-Fi provisioning: scan, verified connect, save only after a real connection ----
+  {
+    auto postWifi=[&](const char* body) { web.body=body; web.post["/api/wifi"](); return web.lastBody; };
+    auto getWifi=[&]() { web.get["/api/wifi"](); return web.lastBody; };
+    std::string json=getWifi(); CHECK(has(json,"\"scanning\":false") && has(json,"\"networks\":[]") && has(json,"\"state\":\"idle\""));
+    web.authOk=false; postWifi("{\"op\":\"scan\"}"); CHECK(web.lastCode==401 && WiFi.scanCalls==0); web.authOk=true;
+    WiFi.nets={{"Home",-40,WIFI_AUTH_WPA2_PSK},{"Cafe \"Free\"",-70,WIFI_AUTH_OPEN},{"Home",-80,WIFI_AUTH_WPA2_PSK},{"",-30,WIFI_AUTH_OPEN},{"Far",-90,WIFI_AUTH_WPA2_PSK}};
+    CHECK(has(postWifi("{\"op\":\"scan\"}"),"\"ok\":true") && WiFi.scanCalls==1); CHECK(has(getWifi(),"\"scanning\":true"));
+    spin(50); json=getWifi(); CHECK(has(json,"\"scanning\":false") && has(json,"\"scanned\":true"));
+    { cJSON* j=cJSON_Parse(json.c_str()); cJSON* list=cJSON_GetObjectItemCaseSensitive(j,"networks");
+      CHECK(cJSON_GetArraySize(list)==3 && !strcmp(cJSON_GetArrayItem(list,0)->child->valuestring,"Home") &&
+            !strcmp(cJSON_GetObjectItemCaseSensitive(cJSON_GetArrayItem(list,1),"ssid")->valuestring,"Cafe \"Free\"") &&
+            cJSON_IsTrue(cJSON_GetObjectItemCaseSensitive(cJSON_GetArrayItem(list,1),"open")) &&
+            cJSON_GetObjectItemCaseSensitive(cJSON_GetArrayItem(list,0),"rssi")->valueint==-40); cJSON_Delete(j); }
+    CHECK(has(postWifi("{\"op\":\"connect\",\"ssid\":\"Home\",\"password\":\"short\"}"),"E_WIFI_PASSWORD") && web.lastCode==409);
+    CHECK(has(postWifi("{\"op\":\"connect\",\"ssid\":\"\",\"password\":\"\"}"),"E_WIFI_SSID") && !WiFi.beganSsid.size());
+    CHECK(has(postWifi("{\"op\":\"bogus\"}"),"E_OP") && has(postWifi("nonsense"),"E_JSON"));
+    // Wrong password: nothing is saved and the previous (here: no) network is restored.
+    size_t nvsBefore=fakeNvs["flip-network"]["config"].size();
+    CHECK(has(postWifi("{\"op\":\"connect\",\"ssid\":\"Home\",\"password\":\"wrong-password\"}"),"\"ok\":true") && WiFi.beganSsid=="Home");
+    CHECK(has(postWifi("{\"op\":\"connect\",\"ssid\":\"Home\",\"password\":\"another-one\"}"),"E_BUSY") && has(getWifi(),"\"state\":\"running\""));
+    WiFi.state=WL_CONNECT_FAILED; spin(2000); CHECK(has(getWifi(),"\"state\":\"running\"")); spin(2000);
+    json=getWifi(); CHECK(has(json,"\"state\":\"fail\"") && has(json,"E_WIFI_AUTH") && !network.ssid[0] && !trialPassword[0] &&
+      fakeNvs["flip-network"]["config"].size()==nvsBefore && WiFi.disconnected);
+    CHECK(!has(json,"wrong-password")); // the password never leaves the device
+    // Timeout.
+    WiFi.state=WL_DISCONNECTED; postWifi("{\"op\":\"connect\",\"ssid\":\"Home\",\"password\":\"right-password\"}"); WiFi.state=WL_DISCONNECTED;
+    spin(21000); json=getWifi(); CHECK(has(json,"E_WIFI_TIMEOUT") && !network.ssid[0]);
+    // Verified connection: saved, persisted across a reload, password cleared from RAM trial buffer.
+    postWifi("{\"op\":\"connect\",\"ssid\":\"Home\",\"password\":\"right-password\"}"); WiFi.state=WL_CONNECTED; spin(200);
+    json=getWifi(); CHECK(has(json,"\"state\":\"ok\"") && has(json,"192.168.1.77") && has(json,"\"connected\":true") && has(json,"\"saved\":\"Home\"") && !trialPassword[0]);
+    { Network live=network; network=Network(); loadNetwork(); CHECK(!strcmp(network.ssid,"Home") && !strcmp(network.password,"right-password")); network=live; }
+    // A failed attempt on another network goes back to the saved one.
+    postWifi("{\"op\":\"connect\",\"ssid\":\"Other\",\"password\":\"other-password\"}"); WiFi.state=WL_NO_SSID_AVAIL; spin(3500);
+    json=getWifi(); CHECK(has(json,"E_WIFI_NOT_FOUND") && !strcmp(network.ssid,"Home") && WiFi.beganSsid=="Home" && !strcmp(network.password,"right-password"));
+    // Connected but the save fails: reported as failure, old credentials kept.
+    WiFi.state=WL_DISCONNECTED; postWifi("{\"op\":\"connect\",\"ssid\":\"New\",\"password\":\"new-password1\"}"); WiFi.state=WL_CONNECTED;
+    nvsWriteFailure=true; spin(200); nvsWriteFailure=false; json=getWifi(); CHECK(has(json,"E_WIFI_SAVE") && !strcmp(network.ssid,"Home"));
+    // Forget.
+    CHECK(has(postWifi("{\"op\":\"forget\"}"),"\"ok\":true") && !network.ssid[0] && WiFi.disconnected);
+    { Network live=network; network.ssid[0]='x'; loadNetwork(); CHECK(!network.ssid[0]); network=live; }
+    WiFi.state=WL_DISCONNECTED;
+  }
+  // ---- NTP correction: small ones keep a running clock running; large ones wait for confirmation ----
+  {
+    planner.config.autoTime=true; planner.display=target(rtc.utc,planner.config); planner.position=true; planner.paused=false; largeConfirmed_=false;
+    spin(2500); CHECK(!planner.paused && !jobSeq);
+    int64_t small=rtc.utc+20; xQueueOverwrite(syncQueue,&small); spin(1500);
+    CHECK(!pendingSync && !strcmp(source,"sntp") && !planner.paused);
+    int64_t large=rtc.utc+4000; xQueueOverwrite(syncQueue,&large); spin(500);
+    CHECK(pendingSync==large && pendingSyncConfirm_ && planner.paused && !syncResume);
+    web.get["/api/state"](); CHECK(has(web.lastBody,"\"syncAsk\":true") && has(web.lastBody,"\"ntp\":true"));
+    pendingSync=0; pendingSyncConfirm_=false; planner.paused=true; spin(300); planner.config.autoTime=false;
+    CHECK(planner.paused); // a background save that finishes after this must not undo the pause
+  }
+  // ---- A pause or change that arrives while a background position save is in flight must win ----
+  {
+    planner.paused=true; spin(4000); CHECK(!fakeUno.armed && !jobSeq); // let any earlier catch-up finish and disarm
+    planner.paused=false; planner.position=true; planner.display=target(rtc.utc,planner.config); lastCheckpoint=fakeMs-uint32_t(planner.config.checkpoint)*60000UL-1;
+    spin(1); CHECK(savePending && planner.paused); // checkpoint save has started, not yet finished
+    commandLine("pause"); spin(1500); CHECK(!savePending && planner.paused); // pause during the save is kept
+    planner.paused=false; lastCheckpoint=fakeMs-uint32_t(planner.config.checkpoint)*60000UL-1; savedDisplay=-1;
+    spin(1); CHECK(savePending); planner.changed(false); spin(1500); CHECK(!savePending && planner.paused); // so is any other planner change
+    planner.paused=false; savedDisplay=int32_t(planner.display); lastCheckpoint=fakeMs-uint32_t(planner.config.checkpoint)*60000UL-1;
+    spin(1500); CHECK(!savePending && !planner.paused); // an undisturbed save still resumes the running clock
+    planner.paused=true;
+  }
   // ---- PCF8563 module (HW-689): found at 0x51, same time semantics as the DS3231 path ----
   {
     int64_t savedBase=Wire.rtcBase; uint32_t savedAt=Wire.rtcAt; Wire.pcf=true; Rtc chip;
@@ -108,6 +176,20 @@ int main() {
     Wire.rtcMissing=true; CHECK(!chip.read(fakeMs) && chip.errors>0); Wire.rtcMissing=false;
     CHECK(chip.read(fakeMs) && chip.valid); // re-detected after the device returns
     Wire.pcf=false; Wire.rtcBase=savedBase; Wire.rtcAt=savedAt; Rtc ds; CHECK(ds.read(fakeMs) && !ds.pcf8563());
+  }
+  // ---- Fast zeroing: many pages are ONE continuous move (ramp up, cruise, ramp down), not one move per page ----
+  // The simulated Uno advances once per millisecond, so 500 steps/s is the fastest rate it reproduces exactly.
+  commandLine("set_config",",\"values\":{\"max_step_rate\":500,\"acceleration\":3000}");
+  CHECK(contains("completed") && planner.config.rate==500 && planner.config.accel==3000);
+  {
+    uint16_t d0=planner.display; uint32_t moves=Wire.moveAccepts,t0=fakeMs; CHECK(planner.position);
+    commandLine("advance_pages",",\"pages\":100"); CHECK(contains("accepted"));
+    spin(34000);
+    CHECK(!jobSeq && !manualPages && planner.display==uint16_t((d0+100)%720) && !fakeUno.armed && manualCompleted_==100);
+    CHECK(Wire.moveAccepts-moves==2 && fakeMs-t0<40000); // 65 + 35 pages; the per-page profile needed ~4 minutes
+    commandLine("advance_pages",",\"pages\":721"); CHECK(contains("E_RANGE"));
+    commandLine("jog_steps",",\"steps\":2000"); spin(8000); CHECK(!jobSeq && !queuedJog_ && fakeUno.executed==2000 && !fakeUno.mask);
+    commandLine("jog_steps",",\"steps\":8001"); CHECK(contains("E_RANGE"));
   }
   // ---- OTA over HTTP: idle-only, validated, never half-applied ----
   auto upload=[](HTTPUploadStatus status,std::string& bytes) {

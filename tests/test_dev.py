@@ -29,7 +29,7 @@ class DevTests(unittest.TestCase):
         with patch.object(dev,'ports',return_value=[SimpleNamespace(device='COM7'),SimpleNamespace(device='COM8')]),patch.object(dev,'settings',return_value={'uno_motor_port':'COM8'}):
             self.assertEqual(dev.choose_port('uno_motor'),'COM8')
     def test_status_is_read_only_and_checks_version(self):
-        device=FakeSerial([b'{"board":"UNO","firmware":"0.2.0","protocol":1,"armed":false,"coil_mask":0}\n'])
+        device=FakeSerial([b'{"board":"UNO","firmware":"0.3.0","protocol":1,"armed":false,"coil_mask":0}\n'])
         with patch.object(dev,'open_serial',return_value=device),contextlib.redirect_stdout(io.StringIO()):
             result=dev.uno_status(record=False)
         self.assertFalse(result['armed'])
@@ -39,7 +39,7 @@ class DevTests(unittest.TestCase):
         with patch.object(dev,'open_serial',return_value=device),contextlib.redirect_stdout(io.StringIO()):
             with self.assertRaises(RuntimeError): dev.uno_status(record=False)
     def test_armed_is_not_safe_standby(self):
-        device=FakeSerial([b'{"board":"UNO","firmware":"0.2.0","protocol":1,"armed":true,"coil_mask":1}\n'])
+        device=FakeSerial([b'{"board":"UNO","firmware":"0.3.0","protocol":1,"armed":true,"coil_mask":1}\n'])
         with patch.object(dev,'open_serial',return_value=device),contextlib.redirect_stdout(io.StringIO()):
             with self.assertRaises(RuntimeError): dev.uno_status(record=False)
     def test_wifi_password_only_sent_to_device(self):

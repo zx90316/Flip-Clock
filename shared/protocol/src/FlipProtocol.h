@@ -4,6 +4,9 @@
 #include <stddef.h>
 #include <string.h>
 namespace flip {
+// Half-steps per second / per second squared. A move always ramps up from rest and down to rest:
+// speed = min(rate, sqrt(2*accel*min(distance from start, distance to go))).
+static const uint16_t MAX_RATE=1000,MAX_ACCEL=4000;
 enum Op : uint8_t { OPEN=1, ARM=2, HEARTBEAT=3, MOVE=0x10, STOP=0x11, DISARM=0x12, CLEAR=0x13 };
 enum State : uint8_t { BOOT=0, IDLE=1, RUNNING=2, DONE=3, STOPPED=4, FAULT=5 };
 enum Error : uint8_t { OK=0, BAD_FRAME, BAD_SESSION, NOT_ARMED, BUSY, RANGE, SEQ_REUSE,
@@ -111,7 +114,7 @@ class Endpoint {
  private:
   struct Cache { uint32_t seq; uint8_t payload[30]; uint8_t result; } cache_[4];
   uint32_t watermark_=0,beat_=0,start_=0,timeout_=0,lastUs_=0,maxJob_=120000;
-  uint16_t rate_=200,accel_=100,cap_=200;
+  uint16_t rate_=200,accel_=100,cap_=200; // rate_/accel_ are overwritten per MOVE; cap_ per ARM
   uint8_t count_=0,next_=0;
   int8_t direction_=1;
   bool reverse_=false,heartbeat_=false,clockStarted_=false;
@@ -126,7 +129,7 @@ class Endpoint {
         if(!clean(f,2)) return BAD_FRAME;
         if(state==RUNNING) return BUSY;
         if(state==FAULT || !heartbeat_ || uint32_t(now-beat_)>500) return NOT_ARMED;
-        if(f.arg(0)<10 || f.arg(0)>200 || !f.arg(1) || f.arg(1)>120000UL) return RANGE;
+        if(f.arg(0)<10 || f.arg(0)>MAX_RATE || !f.arg(1) || f.arg(1)>120000UL) return RANGE;
         cap_=uint16_t(f.arg(0)); maxJob_=f.arg(1); armed=true;
         if(state==BOOT || state==STOPPED) state=IDLE;
         return OK;
@@ -135,7 +138,7 @@ class Endpoint {
         if(!armed || state==FAULT || !heartbeat_ || uint32_t(now-beat_)>1500) return NOT_ARMED;
         if(state==RUNNING) return BUSY;
         uint32_t n=magnitude(f.steps());
-        if(!n || n>10000UL || f.arg(1)<10 || f.arg(1)>cap_ || f.arg(2)<1 || f.arg(2)>1000 ||
+        if(!n || n>10000UL || f.arg(1)<10 || f.arg(1)>cap_ || f.arg(2)<1 || f.arg(2)>MAX_ACCEL ||
             !f.arg(3) || f.arg(3)>maxJob_) return RANGE;
         if(f.steps()<0 && !reverse_) return REVERSE_DISABLED;
         executed=0; remaining=n; direction_=f.steps()<0?-1:1;

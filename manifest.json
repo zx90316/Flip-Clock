@@ -1,6 +1,6 @@
 {
   "project": "ESP32-CAM + Uno single-motor split-flap clock",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "protocol": 1,
   "license": "GPL-3.0-only",
   "hardware_validation": "Uno flash verification and UART standby checked on COM3; motor/ESP/RTC pending",
@@ -82,27 +82,27 @@
   },
   "firmware": {
     "uno_motor": {
-      "firmware": "0.2.0",
+      "firmware": "0.3.0",
       "protocol": 1,
       "fqbn": "arduino:avr:uno",
       "sha256": {
-        "uno_motor.ino.elf": "27bf6d39c683c951cf4513d5dab519a771287f3e15b8f65dc461dd49d2813a4f",
-        "uno_motor.ino.hex": "4ba3157d9e642d509b905b9eb9393379391bcce46f0a4db8849f984a6a1750de",
-        "uno_motor.ino.with_bootloader.bin": "731de04b1236a43218a54769576d4f584a3eeb8616bbc3ad510da54ee4adaa54",
-        "uno_motor.ino.with_bootloader.hex": "65b6b73b7a4e0de1112f1a0b801ae9b63c2117900153493caf1d3177044b6ef5"
+        "uno_motor.ino.elf": "4db9c19b31823b86817ea54117d9abf9df42d33c1015adc5f3b98a6deff7a257",
+        "uno_motor.ino.hex": "908b46661d7bb3709a181dd1386a9bd131a59bc452a13b7f177db8a38fcea44e",
+        "uno_motor.ino.with_bootloader.bin": "8b9a9f94d1de25efb0ebf8163f2a403ba5abbdd6acc6d18bb01347a2c56f0ca1",
+        "uno_motor.ino.with_bootloader.hex": "1ee641d9c1b54d02a8d2d2f9d855bef5957a6d456963e1683ec7e2fd331171a6"
       }
     },
     "esp32_clock": {
-      "firmware": "0.2.0",
+      "firmware": "0.3.0",
       "protocol": 1,
       "fqbn": "esp32:esp32:esp32cam:PartitionScheme=min_spiffs,FlashFreq=40",
       "sha256": {
         "boot_app0_flashed.bin": "f94c5d786a7a8fab06ac5d10e33bf37711a6697636dc037559ea19cc410a17f0",
-        "esp32_clock.ino.bin": "48e4627f04e13d6aaf6b7160d995b53a358a91a202746130ed8b5cdf6548b310",
+        "esp32_clock.ino.bin": "6ef15883593244e2d5ca4f793a2d4f37fc4ec3d3b05a9ecac7034ae8c7a89295",
         "esp32_clock.ino.bootloader.bin": "2da374cc3a53e0a629e5880660a6b1e9e98ed1bb0f560ea75a5bd2a3276a1b8d",
         "esp32_clock.ino.bootloader_flashed.bin": "2da374cc3a53e0a629e5880660a6b1e9e98ed1bb0f560ea75a5bd2a3276a1b8d",
-        "esp32_clock.ino.elf": "67fd72908e20bc000933fe4a98d5697027776fdb1c955c5db238d4e893419fc5",
-        "esp32_clock.ino.merged.bin": "3664124803513bf708c2aea5552d97bc91ed0739e909260c7ed95eab76c93d40",
+        "esp32_clock.ino.elf": "ca790adb6c081f1220d6b4714b3657ec40e7acb77bd8b840f95e704966185955",
+        "esp32_clock.ino.merged.bin": "520036aa0585b5e24d85b658dcfb49b875692a10190684761bbc774bb3a8c29e",
         "esp32_clock.ino.partitions.bin": "0a8b5720e7b77ff11f1462458c3a509dee79224e5279898f26d6a2e3ae0517b7",
         "esp32_clock.ino.partitions_flashed.bin": "0a8b5720e7b77ff11f1462458c3a509dee79224e5279898f26d6a2e3ae0517b7",
         "esp32_clock.ino_flashed.bin": "4ba9664e416d8dc080d84d6240b751aaa77e8a41919584e25b6f36cfeb510404"
@@ -110,27 +110,27 @@
     }
   },
   "compiled_source_sha256": {
-    "firmware/esp32_clock/app.cpp": "c48e69cc106110c9e956044477c60e39e407cbb86af3de35267239d494bbe1b2",
+    "firmware/esp32_clock/app.cpp": "2a92b2cebfe7664c62a22ed9395abe1852b09f533bfd8bdb041901a0d02db04f",
     "firmware/esp32_clock/app.h": "bb65868bdeeaebc870bc7e4cec6dcd6daa4dba0a245fc01afe754c87816e6df8",
     "firmware/esp32_clock/build/esp32.esp32.esp32cam/boot_app0.bin": "f94c5d786a7a8fab06ac5d10e33bf37711a6697636dc037559ea19cc410a17f0",
     "firmware/esp32_clock/build/esp32.esp32.esp32cam/build.options.json": "f80a4523b161b779d3d84e41530d79b111d9b2318075c0fb321c9a077bedebaa",
-    "firmware/esp32_clock/build/esp32.esp32.esp32cam/esp32_clock.ino.bin": "48e4627f04e13d6aaf6b7160d995b53a358a91a202746130ed8b5cdf6548b310",
+    "firmware/esp32_clock/build/esp32.esp32.esp32cam/esp32_clock.ino.bin": "6ef15883593244e2d5ca4f793a2d4f37fc4ec3d3b05a9ecac7034ae8c7a89295",
     "firmware/esp32_clock/build/esp32.esp32.esp32cam/esp32_clock.ino.bootloader.bin": "2da374cc3a53e0a629e5880660a6b1e9e98ed1bb0f560ea75a5bd2a3276a1b8d",
-    "firmware/esp32_clock/build/esp32.esp32.esp32cam/esp32_clock.ino.elf": "67fd72908e20bc000933fe4a98d5697027776fdb1c955c5db238d4e893419fc5",
-    "firmware/esp32_clock/build/esp32.esp32.esp32cam/esp32_clock.ino.map": "340da91c3d65a193d07fc138495d3adb52dc75de306f54c37f3f5bcc5c451fbd",
-    "firmware/esp32_clock/build/esp32.esp32.esp32cam/esp32_clock.ino.merged.bin": "3664124803513bf708c2aea5552d97bc91ed0739e909260c7ed95eab76c93d40",
+    "firmware/esp32_clock/build/esp32.esp32.esp32cam/esp32_clock.ino.elf": "ca790adb6c081f1220d6b4714b3657ec40e7acb77bd8b840f95e704966185955",
+    "firmware/esp32_clock/build/esp32.esp32.esp32cam/esp32_clock.ino.map": "adb9f5f49dc8f9dec27a4b9a897b6c2bf20b73d59f8a499b6b1712f76436d5f8",
+    "firmware/esp32_clock/build/esp32.esp32.esp32cam/esp32_clock.ino.merged.bin": "520036aa0585b5e24d85b658dcfb49b875692a10190684761bbc774bb3a8c29e",
     "firmware/esp32_clock/build/esp32.esp32.esp32cam/esp32_clock.ino.partitions.bin": "0a8b5720e7b77ff11f1462458c3a509dee79224e5279898f26d6a2e3ae0517b7",
     "firmware/esp32_clock/build/esp32.esp32.esp32cam/flash_args": "aecf15c31eb98b06d558c726ce8fade61443655d2c8106c64a19d8863265bcef",
     "firmware/esp32_clock/build/esp32.esp32.esp32cam/partitions.csv": "fe66cdf53d5216316f59ec446e68820b32de1de31d751799d48a8df2452f72fa",
     "firmware/esp32_clock/build/esp32.esp32.esp32cam/sdkconfig": "7488c7a556daa24fc65e0a806c5ebbbf13d019a14e9f7b14d326c7d0d5e6a4a0",
     "firmware/esp32_clock/esp32_clock.ino": "d589e8c0460191bf415c6580a81d3ade02917c8d286c3d47ea9208c67c5771b5",
     "firmware/esp32_clock/services.h": "baabf201d3db54c2b5caa925d695cc9ca815ab863d8451f1e6be71150b636fbe",
-    "firmware/esp32_clock/web_page.h": "c021faa29a0136d0cbe012f0a12d2f7d13a5d141b0fd83c628d43d9c1fe15960",
-    "firmware/uno_motor/uno_motor.ino": "90cf5c321d9dcb5e936c0db9507dce2f2b34a787eae4c38f1d11951313d9860b",
+    "firmware/esp32_clock/web_page.h": "f007078a5281c4a2930f7b2535ea0179c015e7916345eee03953dde2e515d775",
+    "firmware/uno_motor/uno_motor.ino": "314db8b91bbbe70d24b6436aa5d0a0a895e7681fa45af8f3334ea4969d1ddb0c",
     "shared/protocol/src/FlipBench.h": "818f9d3ea74ba9f1c174f47acb65e37c357b1428ee3b5810f0172c90009cb6b5",
     "shared/protocol/src/FlipCalendar.h": "9b2ac81ddb09c6355457e18c8515bc27399a4cc97090d93228e27d9534f1646f",
-    "shared/protocol/src/FlipPlan.h": "bb7e5cd87626b7ad97a25ce6a4fe3690bd08c726224ebb208daa4595c7e619a8",
-    "shared/protocol/src/FlipProtocol.h": "b846a916f7e0f7c967d901ee0c2da2e6eacddcbe92a5bd30aa32c871d22d73c4",
+    "shared/protocol/src/FlipPlan.h": "d2f9f382fe5d57d7a71192c17c1d444a9f8caa76ffff8814e86ff58b8c753701",
+    "shared/protocol/src/FlipProtocol.h": "375b643c4ecc4eb1a8f94ded1981d2abbe023dc3f9ee3dd3455563ee268a7fc3",
     "shared/protocol/src/FlipStorage.h": "3eb30e5ee650eb1d5e744410967958217cfa7a8da2f12472ecf48d9ac77232ac",
     "shared/protocol/src/FlipStream.h": "bab84a9d6b68c1d2bc78fde667a0148d2b31c0c981d3f92984a8bf1d3bf4a170"
   },

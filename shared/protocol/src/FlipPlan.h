@@ -10,7 +10,7 @@ struct Config {
   bool mechanics=false,reverse=false,autoTime=true;
   int8_t direction=1;
   bool valid() const { return q>=D && q<=10000ULL*D && (cycle==720 || cycle==1440) &&
-    rate>=10 && rate<=200 && accel>=1 && accel<=1000 && settle<=5000 && offset>=-720 && offset<=840 &&
+    rate>=10 && rate<=MAX_RATE && accel>=1 && accel<=MAX_ACCEL && settle<=5000 && offset>=-720 && offset<=840 &&
     maxPages>=1 && maxPages<=60 && maxSeconds>=1 && maxSeconds<=120 && checkpoint<=1440 &&
     (direction==1 || direction==-1); }
 };
@@ -54,9 +54,10 @@ class Planner {
        floorDiv(utc+int64_t(config.offset)*60,60)!=preview.minute || (preview.large && !large)) return false;
     paused=false; manualPause=false; preview.id=0; return true;
   }
-  bool commit(uint32_t job,uint32_t next) {
-    if(!position || !job || job<=committed || next>=D) return false;
-    display=uint16_t((display+1)%config.cycle); remainder=next; committed=job; ++revision; return true;
+  // `pages` > 1 commits one continuous move that covered several pages.
+  bool commit(uint32_t job,uint32_t next,uint16_t pages=1) {
+    if(!position || !job || job<=committed || next>=D || !pages || pages>config.cycle) return false;
+    display=uint16_t((display+pages)%config.cycle); remainder=next; committed=job; ++revision; return true;
   }
   Preview preview;
 };

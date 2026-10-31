@@ -1,9 +1,9 @@
 {
   "port": "COM3",
-  "observed_at": "2026-11-01T02:15:29.349957+08:00",
+  "observed_at": "2026-11-01T02:48:48.614376+08:00",
   "status": {
     "board": "UNO",
-    "firmware": "0.2.0",
+    "firmware": "0.3.0",
     "protocol": 1,
     "state": 0,
     "armed": false,
@@ -14,7 +14,6 @@
     "reset_cause": 0
   },
   "lines": [
-    "FlipClock UNO 0.2.0 protocol=1 BOOT_UNARMED; STATUS / STOP",
-    "{\"board\":\"UNO\",\"firmware\":\"0.2.0\",\"protocol\":1,\"state\":0,\"armed\":false,\"coil_mask\":0,\"session\":0,\"executed\":0,\"remaining\":0,\"reset_cause\":0}"
+    "{\"board\":\"UNO\",\"firmware\":\"0.3.0\",\"protocol\":1,\"state\":0,\"armed\":false,\"coil_mask\":0,\"session\":0,\"executed\":0,\"remaining\":0,\"reset_cause\":0}"
   ]
 }
