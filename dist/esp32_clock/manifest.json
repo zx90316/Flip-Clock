@@ -1,14 +1,14 @@
 {
-  "firmware": "0.4.2",
+  "firmware": "0.4.3",
   "protocol": 1,
   "fqbn": "esp32:esp32:esp32cam:PartitionScheme=min_spiffs,FlashFreq=40",
   "sha256": {
     "boot_app0_flashed.bin": "f94c5d786a7a8fab06ac5d10e33bf37711a6697636dc037559ea19cc410a17f0",
-    "esp32_clock.ino.bin": "041b01d13a7523e736e74df0ba53099bd080d737cff8081b3504b6cee813a39c",
+    "esp32_clock.ino.bin": "e3bb587aa770b69dff39ebbc4d3d6a4f99b4645152b3e83727232a737f06413d",
     "esp32_clock.ino.bootloader.bin": "2da374cc3a53e0a629e5880660a6b1e9e98ed1bb0f560ea75a5bd2a3276a1b8d",
     "esp32_clock.ino.bootloader_flashed.bin": "2da374cc3a53e0a629e5880660a6b1e9e98ed1bb0f560ea75a5bd2a3276a1b8d",
-    "esp32_clock.ino.elf": "16e183156de1d0a981f7afd958a74198f0910d5aa347774fc82a82dd95e5953c",
-    "esp32_clock.ino.merged.bin": "14a6895dee50f596751372d0b4d1a4fc90576f0230f7df9cdbe6bcb36b6cd039",
+    "esp32_clock.ino.elf": "151c1d184005fd3e93516dca76abc38b32308f4ce0365c84b1e1652cee172e3f",
+    "esp32_clock.ino.merged.bin": "34002bd0d91bd322a82602b53a5569861fdbea142a3a542424955ebd65210fb1",
     "esp32_clock.ino.partitions.bin": "0a8b5720e7b77ff11f1462458c3a509dee79224e5279898f26d6a2e3ae0517b7",
     "esp32_clock.ino.partitions_flashed.bin": "0a8b5720e7b77ff11f1462458c3a509dee79224e5279898f26d6a2e3ae0517b7",
     "esp32_clock.ino_flashed.bin": "4ba9664e416d8dc080d84d6240b751aaa77e8a41919584e25b6f36cfeb510404"

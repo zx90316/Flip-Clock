@@ -1,6 +1,8 @@
 #pragma once
 #include "Arduino.h"
 constexpr int WL_NO_SSID_AVAIL=1,WL_CONNECTED=3,WL_CONNECT_FAILED=4,WL_DISCONNECTED=6,WIFI_STA=1,WIFI_AP_STA=3;
+using WiFiEvent_t=int; constexpr int ARDUINO_EVENT_WIFI_STA_DISCONNECTED=1;
+struct WiFiEventInfo_t { struct { int reason; } wifi_sta_disconnected; };
 constexpr int WIFI_SCAN_RUNNING=-1,WIFI_SCAN_FAILED=-2,WIFI_AUTH_OPEN=0,WIFI_AUTH_WPA2_PSK=3;
 // Test adapter: a scripted radio. `state` is what WiFi.status() reports; scans complete after `scanPolls` polls.
 struct FakeNet { std::string ssid; int rssi; int auth; };
@@ -8,8 +10,11 @@ struct FakeIp { std::string toString() const { return "192.168.1.77"; } };
 struct FakeWifi {
   int state=WL_DISCONNECTED; std::string apName,apPassword,beganSsid,beganPassword; bool disconnected=false;
   std::vector<FakeNet> nets; int scanPolls=0,scanCalls=0; bool scanning=false;
+  void (*eventCb)(WiFiEvent_t,WiFiEventInfo_t)=nullptr; int begins=0;
+  void onEvent(void (*cb)(WiFiEvent_t,WiFiEventInfo_t),int) { eventCb=cb; }
+  void fireDisconnect(int reason) { WiFiEventInfo_t info; info.wifi_sta_disconnected.reason=reason; eventCb(ARDUINO_EVENT_WIFI_STA_DISCONNECTED,info); }
   int status() { return state; } void persistent(bool) {} void mode(int) {}
-  void begin(const char* ssid,const char* password) { beganSsid=ssid; beganPassword=password; disconnected=false; }
+  void begin(const char* ssid,const char* password) { beganSsid=ssid; beganPassword=password; disconnected=false; ++begins; }
   void disconnect(bool=false,bool=false) { disconnected=true; beganSsid.clear(); state=WL_DISCONNECTED; }
   bool softAP(const char* name,const char* password) { apName=name; apPassword=password; return true; }
   int scanNetworks(bool,bool=false) { ++scanCalls; scanning=true; scanPolls=0; return WIFI_SCAN_RUNNING; }

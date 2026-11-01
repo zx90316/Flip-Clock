@@ -7,8 +7,8 @@ ROOT = Path(__file__).resolve().parents[1]
 def sha(path):
     return hashlib.sha256(path.read_bytes()).hexdigest()
 data = {
-    'project': 'ESP32-CAM single-motor split-flap clock', 'version': '0.4.2', 'protocol': 1,
-    'license': 'GPL-3.0-only', 'hardware_validation': '0.4.2 single-controller build not yet run on hardware; see docs/hardware/progress.md',
+    'project': 'ESP32-CAM single-motor split-flap clock', 'version': '0.4.3', 'protocol': 1,
+    'license': 'GPL-3.0-only', 'hardware_validation': '0.4.3 single-controller build not yet run on hardware; see docs/hardware/progress.md',
     'upstream': {'url': 'https://github.com/zx90316/split-flap', 'ref': 'esp32-purchased-bom',
                  'commit': 'f4216b735131ca2adf7772f3dbfca01d22112111'},
     'specification': {'file': 'docs/engineering-spec.zh-TW.md', 'version': '2.0 / 2026-10-31',

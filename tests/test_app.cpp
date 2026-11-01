@@ -140,7 +140,11 @@ int main() {
     CHECK(!has(json,"wrong-password")); // the password never leaves the device
     // Timeout.
     WiFi.state=WL_DISCONNECTED; postWifi("{\"op\":\"connect\",\"ssid\":\"Home\",\"password\":\"right-password\"}"); WiFi.state=WL_DISCONNECTED;
-    spin(46000); json=getWifi(); CHECK(has(json,"E_WIFI_TIMEOUT") && !network.ssid[0]);
+    CHECK(!NimBLEDevice::getAdvertising()->on);  // BLE stays quiet during the attempt
+    { int begins=WiFi.begins; WiFi.fireDisconnect(8); spin(16000); CHECK(WiFi.begins==begins); // our own disconnect is not a failure
+      WiFi.fireDisconnect(15); CHECK(has(getWifi(),"\"why\":15")); spin(100); CHECK(WiFi.begins==begins+1); // a real failure retries; the cause is reported
+      WiFi.fireDisconnect(15); spin(30000); }
+    json=getWifi(); CHECK(has(json,"E_WIFI_TIMEOUT") && has(json,"\"why\":15") && !network.ssid[0] && NimBLEDevice::getAdvertising()->on);
     // The connection comes up after the trial gave up: it is kept, so it survives a power cycle.
     WiFi.begin("Home","right-password"); WiFi.state=WL_CONNECTED; spin(10); CHECK(!strcmp(network.ssid,"Home"));
     { Network live=network; network=Network(); loadNetwork(); CHECK(!strcmp(network.ssid,"Home") && !strcmp(network.password,"right-password")); network=live; }

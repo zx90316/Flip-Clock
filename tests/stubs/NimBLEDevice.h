@@ -43,7 +43,7 @@ class NimBLEServer {
   void setCallbacks(NimBLEServerCallbacks* c) { cb=c; }
   NimBLEService* createService(const char*) { return new NimBLEService; }
 };
-class FakeAdv { public: void start() {} void addServiceUUID(const char*) {} void setName(const char*) {} void enableScanResponse(bool) {} };
+class FakeAdv { public: bool on=false; void start() { on=true; } void stop() { on=false; } void addServiceUUID(const char*) {} void setName(const char*) {} void enableScanResponse(bool) {} };
 class NimBLEDevice {
  public:
   static void init(const char*) {} static void setSecurityAuth(bool,bool,bool) {} static void setSecurityIOCap(int) {}

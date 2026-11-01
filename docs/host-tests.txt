@@ -1,7 +1,7 @@
 PASS core: 23039 checks; motion, planner, calendar, NVS, BLE stream
-PASS app: 185 checks; actual command/supervisor/motor/NVS/web code with simulated devices
+PASS app: 189 checks; actual command/supervisor/motor/NVS/web code with simulated devices
 ..........
 ----------------------------------------------------------------------
-Ran 10 tests in 0.080s
+Ran 10 tests in 0.103s
 
 OK

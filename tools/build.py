@@ -106,7 +106,7 @@ def build(board):
          '--output-dir', out, ROOT / 'firmware' / board], ROOT / 'docs' / (board + '-build.txt'))
     files = {p.name: hashlib.sha256(p.read_bytes()).hexdigest() for p in out.iterdir()
              if p.suffix in {'.hex', '.bin', '.elf'}}
-    (out / 'manifest.json').write_text(json.dumps({'firmware': '0.4.2', 'protocol': 1,
+    (out / 'manifest.json').write_text(json.dumps({'firmware': '0.4.3', 'protocol': 1,
         'fqbn': BOARDS[board], 'sha256': files}, indent=2) + '\n', encoding='utf-8')
 
 def main():
