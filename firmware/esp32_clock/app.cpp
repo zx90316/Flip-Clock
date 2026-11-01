@@ -115,7 +115,7 @@ void status(uint32_t id,bool ble) {
     motor.coilZero()?"true":"false",(unsigned long)rtc.errors,rtc.valid?source:"invalid",(long long)lastSync,
     (long long)lastOffset,WiFi.status()==WL_CONNECTED?"connected":"offline",planner.config.autoTime?"true":"false",
     (long long)pendingSync,(unsigned long)store.writes);
-  snprintf(three,sizeof(three),"{\"v\":1,\"id\":%lu,\"part\":3,\"parts\":3,\"phase\":\"completed\",\"snapshot_valid\":%s,\"snapshot_utc\":%lld,\"snapshot_display_index\":%u,\"snapshot_remainder\":%lu,\"snapshot_phase\":%u,\"snapshot_generation\":%lu,\"mechanics_confirmed\":%s,\"motor_state\":%u,\"firmware\":\"0.4.1\",\"protocol\":1}\n",
+  snprintf(three,sizeof(three),"{\"v\":1,\"id\":%lu,\"part\":3,\"parts\":3,\"phase\":\"completed\",\"snapshot_valid\":%s,\"snapshot_utc\":%lld,\"snapshot_display_index\":%u,\"snapshot_remainder\":%lu,\"snapshot_phase\":%u,\"snapshot_generation\":%lu,\"mechanics_confirmed\":%s,\"motor_state\":%u,\"firmware\":\"0.4.2\",\"protocol\":1}\n",
     (unsigned long)id,store.saved.hasSnapshot?"true":"false",(long long)store.saved.utc,store.saved.display,
     (unsigned long)store.saved.r,store.saved.phase,(unsigned long)store.saved.snapshotGeneration,planner.config.mechanics?"true":"false",
     unsigned(motor.m.state));
@@ -262,7 +262,7 @@ void process(const char* line,bool ble,bool dedupe=true) {
     if(!number(root,"plan_id",1,0xffffffffLL,plan) || (cJSON_HasObjectItem(root,"confirm_large") && !boolean(root,"confirm_large",confirm))) reject(id,"E_RANGE",ble);
     else if(!rtc.valid) reject(id,"E_TIME_INVALID",ble);
     else if(!planner.resume(uint32_t(plan),confirm,rtc.utc,millis())) reject(id,"E_PLAN_STALE",ble);
-    else { largeRequired=false; largeConfirmed_=confirm; respond(id,"completed",nullptr,ble); }
+    else { largeRequired=false; largeConfirmed_=confirm; lastError[0]=0; respond(id,"completed",nullptr,ble); }
   }
   else if(!strcmp(op,"jog_steps")) {
     int64_t steps;
@@ -314,12 +314,12 @@ bool restoreSnapshot() {
 const char* tf(bool v) { return v?"true":"false"; }
 void buildState(std::string& out) {
   char b[900]; const Saved& s=store.saved;
-  snprintf(b,sizeof(b),"{\"fw\":\"0.4.1\",\"state\":\"%s\",\"rtc\":%s,\"utc\":%lld,\"off\":%d,\"display\":%u,\"cycle\":%u,\"pos\":%s,\"mech\":%s,\"q\":%llu,\"paused\":%s,\"busy\":%s,\"fault\":%s,\"err\":\"%s\",\"snap\":%s,\"snapDisplay\":%u,\"gen\":%lu,\"dirty\":%s,\"restoring\":%s,\"restored\":%s,\"left\":%lu,\"syncAsk\":%s,\"syncUtc\":%lld,\"rate\":%u,\"accel\":%u,\"ntp\":%s,\"trim\":%d}",
+  snprintf(b,sizeof(b),"{\"fw\":\"0.4.2\",\"state\":\"%s\",\"rtc\":%s,\"utc\":%lld,\"off\":%d,\"display\":%u,\"cycle\":%u,\"pos\":%s,\"mech\":%s,\"q\":%llu,\"paused\":%s,\"busy\":%s,\"fault\":%s,\"err\":\"%s\",\"snap\":%s,\"snapDisplay\":%u,\"gen\":%lu,\"dirty\":%s,\"restoring\":%s,\"restored\":%s,\"left\":%lu,\"syncAsk\":%s,\"syncUtc\":%lld,\"rate\":%u,\"accel\":%u,\"ntp\":%s,\"trim\":%d,\"ahead\":%u}",
     stateName(),tf(rtc.valid),(long long)rtc.utc,planner.config.offset,planner.display,planner.config.cycle,
     tf(planner.position),tf(planner.config.mechanics),(unsigned long long)planner.config.q,tf(planner.paused),
     tf(!safeIdle()),tf(systemFault),lastError,tf(s.hasSnapshot),s.display,(unsigned long)s.generation,
     tf(store.dirty),tf(restoreActive),tf(restoredFromSnapshot),(unsigned long)motor.m.remaining,
-    tf(pendingSync && pendingSyncConfirm_),(long long)pendingSync,planner.config.rate,planner.config.accel,tf(planner.config.autoTime),planner.config.trim);
+    tf(pendingSync && pendingSyncConfirm_),(long long)pendingSync,planner.config.rate,planner.config.accel,tf(planner.config.autoTime),planner.config.trim,rtc.valid && planner.position?pagesAhead(rtc.utc,planner.config,planner.display):0U);
   out=b;
 }
 // Wraps a browser request in the same protocol frame BLE uses; replies produced synchronously are returned.
@@ -824,9 +824,9 @@ void setupApp() {
   eventTx=service->createCharacteristic(TX,NIMBLE_PROPERTY::INDICATE|NIMBLE_PROPERTY::READ_ENC|NIMBLE_PROPERTY::READ_AUTHEN,512);
   eventTx->setCallbacks(&txCallbacks);
   auto* info=service->createCharacteristic(INFO,NIMBLE_PROPERTY::READ,20);
-  char shortInfo[21]; snprintf(shortInfo,sizeof(shortInfo),"1|0.4.1|%s",bootId); info->setValue(shortInfo);
+  char shortInfo[21]; snprintf(shortInfo,sizeof(shortInfo),"1|0.4.2|%s",bootId); info->setValue(shortInfo);
   server->start(); auto* adv=NimBLEDevice::getAdvertising(); adv->addServiceUUID(SERVICE); adv->setName(name); adv->enableScanResponse(true); adv->start();
-  Serial.printf("FlipClock 0.4.1 protocol=1 board=AI_THINKER_ESP32_CAM boot_id=%s reset=%d %s\n",bootId,int(esp_reset_reason()),
+  Serial.printf("FlipClock 0.4.2 protocol=1 board=AI_THINKER_ESP32_CAM boot_id=%s reset=%d %s\n",bootId,int(esp_reset_reason()),
     restoreActive?"RESTORE_PENDING":"BOOT_SAFE");
   Serial.println("Motor on IO12-15. UART: status / access / pair / wifi JSON / JSONL. Web: http://192.168.4.1/");
   lastCheckpoint=millis();

@@ -52,7 +52,7 @@ input.w{width:100%}input.m{width:130px}summary{cursor:pointer;margin:6px 0;font-
 <div class="row">偏移值 <input id="trim" type="number" value="0"> 步 <button id="bTrim" onclick="act(()=>setTrim(+$('trim').value))">套用</button></div>
 <p>馬達只能正轉，所以減小偏移時會往前轉接近一分鐘的距離，時鐘可能多翻一頁，韌體會自動記下。</p></section>
 
-<section><h2>4. 驗證</h2><p>前進任意分鐘數，再對照時鐘顯示。可重複操作。</p>
+<section><h2>4. 驗證</h2><p>前進任意分鐘數，再對照時鐘顯示。可重複操作。驗證後顯示會比現在快，時鐘只能往前轉，所以開始走時後會先等時間追上，也可以轉一整圈對時。</p>
 <div class="row"><input id="vm" type="number" min="1" max="720" value="10"> 分鐘 <button class="p" id="bVerify" onclick="act(()=>verify(+$('vm').value))">前進</button>
 <button class="tq" onclick="act(()=>verify(1))">1 分鐘</button><button class="tq" onclick="act(()=>verify(60))">1 小時</button></div>
 <div id="vres"></div></section>
@@ -88,7 +88,7 @@ E_OTA_NO_PARTITION:'此韌體的分割表沒有 OTA 分區，需先用 UART 燒�
 E_OTA_END:'映像驗證失敗',E_AUTH:'未授權',E_TRIM:'偏移調整幅度太大，一次請勿超過一分鐘的步數'};
 const ST={IDLE:'待命（自動走時中）',PAUSED:'已暫停',MOVING:'換頁中',NEEDS_TIME:'等待網路時間（請連上 Wi-Fi）',NEEDS_CALIBRATION:'需要歸零',
 NEEDS_CATCHUP_CONFIRM:'需要確認補跑',FAULT:'故障'};
-let S={},busyUi=false,V=null,lastV='',filled=false,TOKEN='';
+let S={},busyUi=false,V=null,lastV='',lastB=null,filled=false,TOKEN='';
 try{TOKEN=localStorage.getItem('flipToken')||''}catch(e){}
 function setToken(t){TOKEN=t;try{if(t)localStorage.setItem('flipToken',t);else localStorage.removeItem('flipToken')}catch(e){}if(!t)showLogin(true)}
 async function F(u,o){o=Object.assign({},o);o.headers={Authorization:'Bearer '+TOKEN};const r=await fetch(u,o);if(r.status==401){setToken('');throw new Error('請重新登入')}return r}
@@ -119,9 +119,13 @@ async function verify(n){if(!Number.isInteger(n)||n<1||n>720)throw new Error('�
 say('前進 '+n+' 分鐘…');await run('advance_pages',{pages:n});await idle(600000);
 if(!S.pos||S.display!=(from+n)%S.cycle)throw new Error('換頁中斷，位置未知，請重新歸零');V={from,to:S.display,n};say('請對照時鐘實際顯示')}
 async function saveOnly(){await ensurePaused();await run('save_config');await idle(30000);if(S.dirty)throw new Error('儲存失敗，請稍候 5 秒再試');say('偏移值 '+S.trim+' 步已永久儲存')}
+function aroundMin(){return Math.ceil((S.cycle-S.ahead)*(S.q/1e6)/S.rate/60)+1}
+async function startWalking(){const p=await run('preview_sync');await run('resume',{plan_id:p.plan_id,confirm_large:true});await refresh();return p}
+async function goAround(){const n=S.cycle-S.ahead;if(!confirm('往前轉 '+n+' 分鐘到目前時間，約 '+aroundMin()+' 分鐘？'))return;await ensurePaused();
+say('轉一圈對時中…');await run('advance_pages',{pages:n});await idle(1800000);if(!S.pos)throw new Error('換頁中斷，位置未知，請重新歸零');await startWalking();say('已對時，開始自動走時')}
 async function finish(){await ensurePaused();await run('set_config',{values:{mechanics_confirmed:true}});await run('save_config');await idle(30000);
-if(S.dirty)throw new Error('儲存失敗，請稍候 5 秒再試');const p=await run('preview_sync');await run('resume',{plan_id:p.plan_id,confirm_large:true});
-say('已儲存，正在補跑到目前時間，之後自動走時')}
+if(S.dirty)throw new Error('儲存失敗，請稍候 5 秒再試');await startWalking();
+say(S.ahead?'已儲存。顯示比目前時間快 '+S.ahead+' 分鐘，時鐘會等時間追上後才開始走':'已儲存，正在轉到目前時間，之後自動走時')}
 const WE={E_WIFI_AUTH:'密碼錯誤或被拒絕',E_WIFI_NOT_FOUND:'找不到這個 Wi-Fi',E_WIFI_TIMEOUT:'連線逾時',E_WIFI_SAVE:'連上了但儲存失敗',
 E_WIFI_SSID:'請輸入 Wi-Fi 名稱',E_WIFI_PASSWORD:'密碼需 8–64 個字元（開放網路請留空）',E_BUSY:'上一個操作還在進行中'};
 let W={trial:{},networks:[]},wifiBusy=false;
@@ -162,12 +166,14 @@ say(j.ok?'更新完成，裝置重新啟動中，約 20 秒後會自動重新連
 x.onerror=()=>{otaBusy=false;say('連線中斷；若已傳完，裝置可能正在重新啟動，請稍後重新整理',1)};x.send(fd)}
 function render(){const d=S.state?1:0;if(!d)return;$('badge').textContent=S.fw?'v'+S.fw:'';
 const wn=W.saved&&!(W.sta||{}).connected?'正在連線「'+W.saved+'」':'';
-$('disp').textContent=S.pos?fmt(S.display):'位置未知';$('st').textContent=(S.state=='NEEDS_TIME'&&W.saved?(wn||'已連上 Wi-Fi')+'，等待網路時間':(ST[S.state]||S.state))+(S.err?'　'+S.err:'');
+$('disp').textContent=S.pos?fmt(S.display):'位置未知';$('st').textContent=(S.state=='NEEDS_TIME'&&W.saved?(wn||'已連上 Wi-Fi')+'，等待網路時間':S.state=='IDLE'&&S.ahead?'等時間追上（顯示快 '+S.ahead+' 分鐘）':(ST[S.state]||S.state))+(S.err?'　'+S.err:'');
 $('rt').textContent=S.rtc?new Date((S.utc+S.off*60)*1000).toISOString().replace('T',' ').slice(0,19):(W.saved?'取得中…':'尚未取得（請連上 Wi-Fi）');
 $('ps').textContent=S.pos?(S.mech?'已歸零':'未確認機構'):'未知';
 $('sv').textContent=S.snap?(fmt(S.snapDisplay)+'（第 '+S.gen+' 次儲存'+(S.dirty?'，有未儲存變更':'')+'）'):'尚無';
-$('banner').innerHTML=(S.restoring?'<p>開機自動恢復：取得網路時間後，會補跑到目前時間。</p>':'')+
-(S.syncAsk?'<p>網路時間與目前時間差異超過 5 分鐘。<button onclick="act(confirmSync)">確認用網路時間校時</button></p>':'');
+const bh=(S.restoring?'<p>開機自動恢復：取得網路時間後，會補跑到目前時間。</p>':'')+
+(S.syncAsk?'<p>網路時間與目前時間差異超過 5 分鐘。<button onclick="act(confirmSync)">確認用網路時間校時</button></p>':'')+
+(S.ahead&&!S.busy?'<p>時鐘只能往前轉。顯示比目前時間快 '+S.ahead+' 分鐘，所以會先停著，'+S.ahead+' 分鐘後才開始走。不想等可以轉一整圈對時（約 '+aroundMin()+' 分鐘）。</p><div class="row"><button onclick="act(goAround)">現在轉一圈對時</button></div>':'');
+if(bh!==lastB){$('banner').innerHTML=bh;lastB=bh}
 const idle_=!S.busy&&!busyUi;
 $('bPause').disabled=S.paused&&!S.busy;$('bClear').disabled=!S.fault;
 if(!filled&&S.mech){filled=true;$('q').value=(S.q/1e6).toFixed(6);$('rate').value=S.rate;$('accel').value=S.accel;$('trim').value=S.trim}

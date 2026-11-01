@@ -238,6 +238,22 @@ int main() {
     planner.invalidate(); commandLine("set_trim",",\"steps\":1"); CHECK(contains("E_NOT_CALIBRATED"));
     commandLine("set_display",",\"hour\":8,\"minute\":0,\"aligned\":true");
   }
+  // ---- Wizard end to end without Wi-Fi: phone time, zero at the current time, verify N minutes, save, resume ----
+  {
+    commandLine("pause"); spin(3000); int64_t phone=rtc.utc-rtc.utc%60+5; commandLine("set_time",(",\"utc_s\":"+std::to_string(phone)).c_str());
+    uint16_t now0=target(phone,planner.config);
+    commandLine("set_display",(",\"hour\":"+std::to_string(now0/60)+",\"minute\":"+std::to_string(now0%60)+",\"aligned\":true").c_str());
+    commandLine("advance_pages",",\"pages\":10"); spin(12000); CHECK(planner.display==uint16_t((now0+10)%720));
+    spin(6000); commandLine("save_config"); spin(500); CHECK(contains("persisted\":true"));
+    commandLine("preview_sync"); CHECK(contains("plan_id") && contains("\"pages\":0"));
+    char plan[80]; snprintf(plan,sizeof(plan),",\"plan_id\":%u,\"confirm_large\":true",planner.preview.id); commandLine("resume",plan); CHECK(contains("completed") && !planner.paused);
+    uint32_t moves=motor.m.moves; spin(30000); CHECK(motor.m.moves==moves && !planner.paused && planner.display==uint16_t((now0+10)%720)); // ahead of the time: it waits
+    web.get["/api/state"](); CHECK(has(web.lastBody,"\"ahead\":10") || has(web.lastBody,"\"ahead\":9"));
+    CHECK(!strlen(lastError));
+    spin(14*60000); CHECK(motor.m.moves>moves && planner.display==target(rtc.utc,planner.config) && !planner.paused); // and walks once the time catches up
+    web.get["/api/state"](); CHECK(has(web.lastBody,"\"ahead\":0"));
+    commandLine("pause"); spin(3000);
+  }
   // ---- Fast zeroing: many pages are ONE continuous move (ramp up, cruise, ramp down), not one move per page ----
   commandLine("set_config",",\"values\":{\"max_step_rate\":500,\"acceleration\":3000}");
   CHECK(contains("completed") && planner.config.rate==500 && planner.config.accel==3000);

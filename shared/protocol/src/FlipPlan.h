@@ -26,6 +26,10 @@ inline uint16_t pagesBehind(int64_t utc,const Config& c,uint16_t display) {
   uint16_t behind=modPos(int64_t(target(utc,c))-display,c.cycle);
   return behind && uint16_t(c.cycle-behind)<=AHEAD_HOLD?0:behind;
 }
+inline uint16_t pagesAhead(int64_t utc,const Config& c,uint16_t display) {
+  uint16_t behind=modPos(int64_t(target(utc,c))-display,c.cycle);
+  return behind && uint16_t(c.cycle-behind)<=AHEAD_HOLD?uint16_t(c.cycle-behind):0;
+}
 inline bool pageSteps(uint64_t q,uint32_t r,uint32_t pages,uint32_t& steps,uint32_t& next) {
   if(q<D || q>10000ULL*D || r>=D || !pages || pages>1440) return false;
   uint64_t total=uint64_t(r)+uint64_t(pages)*q;
