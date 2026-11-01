@@ -17,7 +17,7 @@ struct FakeWifi {
   void scanDelete() { scanning=false; }
   std::string SSID(int i) { return nets[i].ssid; } int RSSI(int i) { return nets[i].rssi; } int encryptionType(int i) { return nets[i].auth; }
   int RSSI() { return -52; } FakeIp localIP() { return {}; } FakeIp softAPIP() { return {}; }
-  std::string SSID() { return beganSsid; } bool setHostname(const char*) { return true; }
+  std::string SSID() { return beganSsid; } std::string psk() { return beganPassword; } bool setHostname(const char*) { return true; }
   int failScans=0; // scans that fail outright before one succeeds
 }; inline FakeWifi WiFi;
 inline void configTime(int,int,const char*,const char*,const char*) {}

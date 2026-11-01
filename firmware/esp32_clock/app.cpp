@@ -115,7 +115,7 @@ void status(uint32_t id,bool ble) {
     motor.coilZero()?"true":"false",(unsigned long)rtc.errors,rtc.valid?source:"invalid",(long long)lastSync,
     (long long)lastOffset,WiFi.status()==WL_CONNECTED?"connected":"offline",planner.config.autoTime?"true":"false",
     (long long)pendingSync,(unsigned long)store.writes);
-  snprintf(three,sizeof(three),"{\"v\":1,\"id\":%lu,\"part\":3,\"parts\":3,\"phase\":\"completed\",\"snapshot_valid\":%s,\"snapshot_utc\":%lld,\"snapshot_display_index\":%u,\"snapshot_remainder\":%lu,\"snapshot_phase\":%u,\"snapshot_generation\":%lu,\"mechanics_confirmed\":%s,\"motor_state\":%u,\"firmware\":\"0.4.0\",\"protocol\":1}\n",
+  snprintf(three,sizeof(three),"{\"v\":1,\"id\":%lu,\"part\":3,\"parts\":3,\"phase\":\"completed\",\"snapshot_valid\":%s,\"snapshot_utc\":%lld,\"snapshot_display_index\":%u,\"snapshot_remainder\":%lu,\"snapshot_phase\":%u,\"snapshot_generation\":%lu,\"mechanics_confirmed\":%s,\"motor_state\":%u,\"firmware\":\"0.4.1\",\"protocol\":1}\n",
     (unsigned long)id,store.saved.hasSnapshot?"true":"false",(long long)store.saved.utc,store.saved.display,
     (unsigned long)store.saved.r,store.saved.phase,(unsigned long)store.saved.snapshotGeneration,planner.config.mechanics?"true":"false",
     unsigned(motor.m.state));
@@ -314,7 +314,7 @@ bool restoreSnapshot() {
 const char* tf(bool v) { return v?"true":"false"; }
 void buildState(std::string& out) {
   char b[900]; const Saved& s=store.saved;
-  snprintf(b,sizeof(b),"{\"fw\":\"0.4.0\",\"state\":\"%s\",\"rtc\":%s,\"utc\":%lld,\"off\":%d,\"display\":%u,\"cycle\":%u,\"pos\":%s,\"mech\":%s,\"q\":%llu,\"paused\":%s,\"busy\":%s,\"fault\":%s,\"err\":\"%s\",\"snap\":%s,\"snapDisplay\":%u,\"gen\":%lu,\"dirty\":%s,\"restoring\":%s,\"restored\":%s,\"left\":%lu,\"syncAsk\":%s,\"syncUtc\":%lld,\"rate\":%u,\"accel\":%u,\"ntp\":%s,\"trim\":%d}",
+  snprintf(b,sizeof(b),"{\"fw\":\"0.4.1\",\"state\":\"%s\",\"rtc\":%s,\"utc\":%lld,\"off\":%d,\"display\":%u,\"cycle\":%u,\"pos\":%s,\"mech\":%s,\"q\":%llu,\"paused\":%s,\"busy\":%s,\"fault\":%s,\"err\":\"%s\",\"snap\":%s,\"snapDisplay\":%u,\"gen\":%lu,\"dirty\":%s,\"restoring\":%s,\"restored\":%s,\"left\":%lu,\"syncAsk\":%s,\"syncUtc\":%lld,\"rate\":%u,\"accel\":%u,\"ntp\":%s,\"trim\":%d}",
     stateName(),tf(rtc.valid),(long long)rtc.utc,planner.config.offset,planner.display,planner.config.cycle,
     tf(planner.position),tf(planner.config.mechanics),(unsigned long long)planner.config.q,tf(planner.paused),
     tf(!safeIdle()),tf(systemFault),lastError,tf(s.hasSnapshot),s.display,(unsigned long)s.generation,
@@ -534,7 +534,7 @@ void scanStart(uint32_t now) {
   WiFi.scanDelete(); WiFi.scanNetworks(true,true); scanRunning=true;
 }
 enum class Trial : uint8_t { IDLE, RUNNING, OK, FAIL };
-Trial trial=Trial::IDLE; char trialSsid[33]="",trialPassword[65]="",trialReason[20]=""; uint32_t trialStarted=0;
+Trial trial=Trial::IDLE; char trialSsid[33]="",trialPassword[65]="",trialReason[20]=""; uint32_t trialStarted=0,adoptAfter=0;
 void trialEnd(Trial result,const char* reason,uint32_t now) {
   trial=result; strlcpy(trialReason,reason,sizeof(trialReason)); memset(trialPassword,0,sizeof(trialPassword)); lastWifi=now;
   if(result==Trial::FAIL) { if(network.ssid[0]) WiFi.begin(network.ssid,network.password); else WiFi.disconnect(false,false); } // back to the last good network
@@ -564,13 +564,20 @@ void wifiTick(uint32_t now) {
   }
   if(trial==Trial::RUNNING) {
     int st=WiFi.status(); uint32_t elapsed=now-trialStarted;
-    if(st==WL_CONNECTED) {
+    if(st==WL_CONNECTED && !strcmp(WiFi.SSID().c_str(),trialSsid)) { // not the old connection still going down
       Network keep=network;
       strlcpy(network.ssid,trialSsid,sizeof(network.ssid)); strlcpy(network.password,trialPassword,sizeof(network.password));
       if(saveNetwork()) { wifiBackoff=30000; trialEnd(Trial::OK,"",now); }
       else { network=keep; trialEnd(Trial::FAIL,"E_WIFI_SAVE",now); }
     } else if(elapsed>3000 && (st==WL_CONNECT_FAILED || st==WL_NO_SSID_AVAIL)) trialEnd(Trial::FAIL,st==WL_NO_SSID_AVAIL?"E_WIFI_NOT_FOUND":"E_WIFI_AUTH",now);
     else if(elapsed>45000) trialEnd(Trial::FAIL,"E_WIFI_TIMEOUT",now); // AP channel switch + slow DHCP can take well over 20 s
+  } else if(WiFi.status()==WL_CONNECTED && int32_t(now-adoptAfter)>=0) {
+    // A connection that came up after the trial gave up still proves the password: keep it, or it is lost at power-off.
+    auto name=WiFi.SSID(); auto key=WiFi.psk();
+    if(name.length() && name.length()<=32 && key.length()<=64 && strcmp(name.c_str(),network.ssid)) {
+      Network keep=network; strlcpy(network.ssid,name.c_str(),sizeof(network.ssid)); strlcpy(network.password,key.c_str(),sizeof(network.password));
+      if(!saveNetwork()) { network=keep; adoptAfter=now+30000; }
+    }
   }
 }
 void wifiGet() {
@@ -614,7 +621,7 @@ void wifiPost() {
     }
   } else if(!strcmp(op->valuestring,"forget")) {
     Network keep=network; network.ssid[0]=0; network.password[0]=0;
-    if(saveNetwork()) WiFi.disconnect(false,false); else { network=keep; error="E_WIFI_SAVE"; }
+    if(saveNetwork()) { WiFi.disconnect(false,false); adoptAfter=millis()+10000; } else { network=keep; error="E_WIFI_SAVE"; }
   } else error="E_OP";
   cJSON_Delete(in);
   char reply[64]; snprintf(reply,sizeof(reply),"{\"ok\":%s,\"error\":\"%s\"}",error?"false":"true",error?error:"");
@@ -628,7 +635,7 @@ void networkTick(uint32_t now) {
   if(up && !mdnsOn) { if(MDNS.begin(HOSTNAME)) { MDNS.addService("http","tcp",80); mdnsOn=true; } }
   else if(!up && mdnsOn) { MDNS.end(); mdnsOn=false; }
   if(network.ssid[0] && WiFi.status()!=WL_CONNECTED && trial!=Trial::RUNNING && uint32_t(now-lastWifi)>=wifiBackoff) {
-    lastWifi=now; WiFi.begin(network.ssid,network.password); if(wifiBackoff<300000) wifiBackoff*=2;
+    lastWifi=now; WiFi.begin(network.ssid,network.password); if(wifiBackoff<60000) wifiBackoff*=2; // a router powering up with the clock takes a minute or more
   }
   if(WiFi.status()==WL_CONNECTED && !sntpStarted) { // network time is the only time source
     esp_sntp_set_time_sync_notification_cb(sntpCallback); esp_sntp_set_sync_interval(21600000UL);
@@ -817,9 +824,9 @@ void setupApp() {
   eventTx=service->createCharacteristic(TX,NIMBLE_PROPERTY::INDICATE|NIMBLE_PROPERTY::READ_ENC|NIMBLE_PROPERTY::READ_AUTHEN,512);
   eventTx->setCallbacks(&txCallbacks);
   auto* info=service->createCharacteristic(INFO,NIMBLE_PROPERTY::READ,20);
-  char shortInfo[21]; snprintf(shortInfo,sizeof(shortInfo),"1|0.4.0|%s",bootId); info->setValue(shortInfo);
+  char shortInfo[21]; snprintf(shortInfo,sizeof(shortInfo),"1|0.4.1|%s",bootId); info->setValue(shortInfo);
   server->start(); auto* adv=NimBLEDevice::getAdvertising(); adv->addServiceUUID(SERVICE); adv->setName(name); adv->enableScanResponse(true); adv->start();
-  Serial.printf("FlipClock 0.4.0 protocol=1 board=AI_THINKER_ESP32_CAM boot_id=%s reset=%d %s\n",bootId,int(esp_reset_reason()),
+  Serial.printf("FlipClock 0.4.1 protocol=1 board=AI_THINKER_ESP32_CAM boot_id=%s reset=%d %s\n",bootId,int(esp_reset_reason()),
     restoreActive?"RESTORE_PENDING":"BOOT_SAFE");
   Serial.println("Motor on IO12-15. UART: status / access / pair / wifi JSON / JSONL. Web: http://192.168.4.1/");
   lastCheckpoint=millis();

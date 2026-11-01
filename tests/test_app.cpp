@@ -141,10 +141,19 @@ int main() {
     // Timeout.
     WiFi.state=WL_DISCONNECTED; postWifi("{\"op\":\"connect\",\"ssid\":\"Home\",\"password\":\"right-password\"}"); WiFi.state=WL_DISCONNECTED;
     spin(46000); json=getWifi(); CHECK(has(json,"E_WIFI_TIMEOUT") && !network.ssid[0]);
+    // The connection comes up after the trial gave up: it is kept, so it survives a power cycle.
+    WiFi.begin("Home","right-password"); WiFi.state=WL_CONNECTED; spin(10); CHECK(!strcmp(network.ssid,"Home"));
+    { Network live=network; network=Network(); loadNetwork(); CHECK(!strcmp(network.ssid,"Home") && !strcmp(network.password,"right-password")); network=live; }
+    WiFi.disconnect(); network=Network(); CHECK(saveNetwork());
     // Verified connection: saved, persisted across a reload, password cleared from RAM trial buffer.
     postWifi("{\"op\":\"connect\",\"ssid\":\"Home\",\"password\":\"right-password\"}"); WiFi.state=WL_CONNECTED; spin(200);
     json=getWifi(); CHECK(has(json,"\"state\":\"ok\"") && has(json,"192.168.1.77") && has(json,"\"connected\":true") && has(json,"\"saved\":\"Home\"") && !trialPassword[0]);
     { Network live=network; network=Network(); loadNetwork(); CHECK(!strcmp(network.ssid,"Home") && !strcmp(network.password,"right-password")); network=live; }
+    // Power cycle: the saved network is joined with no help, and retries stay frequent while the router boots.
+    WiFi.state=WL_DISCONNECTED; WiFi.beganSsid.clear(); WiFi.beganPassword.clear(); network=Network(); loadNetwork(); lastWifi=fakeMs-300000; wifiBackoff=30000; spin(10);
+    CHECK(WiFi.beganSsid=="Home" && WiFi.beganPassword=="right-password");
+    spin(200000); CHECK(wifiBackoff==60000 && uint32_t(fakeMs-lastWifi)<=60000);
+    WiFi.state=WL_CONNECTED; spin(10); WiFi.state=WL_DISCONNECTED; wifiBackoff=30000;
     // A failed attempt on another network goes back to the saved one.
     postWifi("{\"op\":\"connect\",\"ssid\":\"Other\",\"password\":\"other-password\"}"); WiFi.state=WL_NO_SSID_AVAIL; spin(3500);
     json=getWifi(); CHECK(has(json,"E_WIFI_NOT_FOUND") && !strcmp(network.ssid,"Home") && WiFi.beganSsid=="Home" && !strcmp(network.password,"right-password"));
@@ -153,6 +162,7 @@ int main() {
     nvsWriteFailure=true; spin(200); nvsWriteFailure=false; json=getWifi(); CHECK(has(json,"E_WIFI_SAVE") && !strcmp(network.ssid,"Home"));
     // Forget.
     CHECK(has(postWifi("{\"op\":\"forget\"}"),"\"ok\":true") && !network.ssid[0] && WiFi.disconnected);
+    WiFi.begin("Home","right-password"); WiFi.state=WL_CONNECTED; spin(10); CHECK(!network.ssid[0]); WiFi.disconnect(); // a connection still going down is not re-saved
     { Network live=network; network.ssid[0]='x'; loadNetwork(); CHECK(!network.ssid[0]); network=live; }
     WiFi.state=WL_DISCONNECTED;
   }

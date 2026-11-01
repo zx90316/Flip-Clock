@@ -135,7 +135,7 @@ add('p','之後從區網進入這個控制頁，不必再連時鐘的熱點。�
 const url='http://'+s.ip+'/',a=add('a',url,'font-size:1.3em;font-weight:bold;word-break:break-all');a.href=url;a.target='_blank';
 const r=add('div','','margin:8px 0');const c=document.createElement('button');c.textContent='複製網址';c.onclick=async()=>{try{await navigator.clipboard.writeText(url);say('已複製 '+url)}catch(e){say('請長按網址複製：'+url)}};r.appendChild(c);
 add('p','也可以試 http://'+(s.host||'flipclock.local')+'/（iPhone、Mac、Windows 通常可用，部分 Android 不行）。換網址要重新登入一次，密碼相同。網址若改變（路由器重新分配），回到時鐘熱點即可查看新網址。','font-size:.85em;opacity:.85;margin:4px 0')}
-function renderWifi(){const s=W.sta||{};$('wst').textContent=s.connected?('已連線 '+(W.saved||'')+'　'+(s.ip||'')+'（'+s.rssi+' dBm）'):(W.saved?('已儲存「'+W.saved+'」，目前未連線'):'未設定');lanBox();
+function renderWifi(){const s=W.sta||{};$('wst').textContent=s.connected?('已連線 '+(W.saved||'')+'　'+(s.ip||'')+'（'+s.rssi+' dBm）'):(W.saved?('已儲存「'+W.saved+'」，連線中…（分享器剛開機時可能要等幾分鐘）'):'未設定，斷電後不會自動連線');lanBox();
 const box=$('wnets');if(box.dataset.k===JSON.stringify(W.networks)+W.scanning)return;box.dataset.k=JSON.stringify(W.networks)+W.scanning;box.textContent='';
 if(W.scanning){const p=document.createElement('p');p.textContent='掃描中…';box.appendChild(p)}
 for(const n of W.networks){const b=document.createElement('button');b.textContent=(n.open?'🔓 ':'🔒 ')+n.ssid+'  '+n.rssi+' dBm';b.style.margin='3px 6px 3px 0';
@@ -161,8 +161,9 @@ x.onload=()=>{let j={};try{j=JSON.parse(x.responseText)}catch(e){}otaBusy=!!j.ok
 say(j.ok?'更新完成，裝置重新啟動中，約 20 秒後會自動重新連線':'更新失敗：'+(E[j.error]||j.error||x.status)+'，目前韌體未變更',!j.ok)};
 x.onerror=()=>{otaBusy=false;say('連線中斷；若已傳完，裝置可能正在重新啟動，請稍後重新整理',1)};x.send(fd)}
 function render(){const d=S.state?1:0;if(!d)return;$('badge').textContent=S.fw?'v'+S.fw:'';
-$('disp').textContent=S.pos?fmt(S.display):'位置未知';$('st').textContent=(ST[S.state]||S.state)+(S.err?'　'+S.err:'');
-$('rt').textContent=S.rtc?new Date((S.utc+S.off*60)*1000).toISOString().replace('T',' ').slice(0,19):'尚未取得（請連上 Wi-Fi）';
+const wn=W.saved&&!(W.sta||{}).connected?'正在連線「'+W.saved+'」':'';
+$('disp').textContent=S.pos?fmt(S.display):'位置未知';$('st').textContent=(S.state=='NEEDS_TIME'&&W.saved?(wn||'已連上 Wi-Fi')+'，等待網路時間':(ST[S.state]||S.state))+(S.err?'　'+S.err:'');
+$('rt').textContent=S.rtc?new Date((S.utc+S.off*60)*1000).toISOString().replace('T',' ').slice(0,19):(W.saved?'取得中…':'尚未取得（請連上 Wi-Fi）');
 $('ps').textContent=S.pos?(S.mech?'已歸零':'未確認機構'):'未知';
 $('sv').textContent=S.snap?(fmt(S.snapDisplay)+'（第 '+S.gen+' 次儲存'+(S.dirty?'，有未儲存變更':'')+'）'):'尚無';
 $('banner').innerHTML=(S.restoring?'<p>開機自動恢復：取得網路時間後，會補跑到目前時間。</p>':'')+
