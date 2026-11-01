@@ -125,11 +125,15 @@ int main() {
   c.offset=-720; CHECK(target(calendarUtc(2000,1,1,0,0,0),c)==720);
   uint8_t date[7]={0,0,0,7,0x31,0x10,0x26}; CHECK(validUtc(decodeRtc(date,0)));
   CHECK(decodeRtc(date,0x80)==-1); date[5]=0x90; CHECK(decodeRtc(date,0)==-1);
-  Planner p; CHECK(!p.position && p.paused); p.config.mechanics=true; p.setDisplay(1);
+  Planner p; CHECK(!p.position && p.paused); p.config.mechanics=true; p.setDisplay(100);
   int64_t utc=calendarUtc(2026,10,31,16,0,0); CHECK(p.makePreview(utc,1,123));
-  CHECK(p.preview.pages==719 && p.preview.large); CHECK(!p.resume(123,false,utc,2));
+  CHECK(p.preview.pages==620 && p.preview.large); CHECK(!p.resume(123,false,utc,2));
   CHECK(!p.resume(123,true,utc+60,2)); CHECK(p.resume(123,true,utc,2));
-  CHECK(p.commit(2,999) && p.display==2 && p.remainder==999); CHECK(!p.commit(2,999) && p.display==2);
+  CHECK(p.commit(2,999) && p.display==101 && p.remainder==999); CHECK(!p.commit(2,999) && p.display==101);
+  { Config hc; hc.offset=480; int64_t t0=calendarUtc(2026,10,31,16,0,0); // target page 0; a display slightly ahead waits, it does not spin a whole cycle
+    CHECK(pagesBehind(t0,hc,0)==0 && pagesBehind(t0,hc,1)==0 && pagesBehind(t0,hc,AHEAD_HOLD)==0 && pagesBehind(t0,hc,10)==0);
+    CHECK(pagesBehind(t0,hc,AHEAD_HOLD+1)==hc.cycle-AHEAD_HOLD-1 && pagesBehind(t0,hc,hc.cycle-1)==1 && pagesBehind(t0,hc,hc.cycle-5)==5);
+    CHECK(pagesBehind(t0+120,hc,1)==1 && pagesBehind(t0+60,hc,1)==0 && pagesBehind(t0+60,hc,0)==1); }
   p.changed(false); CHECK(p.paused && p.position); CHECK(!p.resume(123,true,utc,3));
   p.changed(true); CHECK(!p.position); p.setDisplay(719); CHECK(p.commit(1,0) && p.display==0);
   p.invalidate(); CHECK(!p.position && p.paused && !p.committed);

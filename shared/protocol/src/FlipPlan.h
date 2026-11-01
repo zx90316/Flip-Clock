@@ -18,6 +18,14 @@ inline int64_t floorDiv(int64_t a,int64_t b) { return a>=0?a/b:-((-a+b-1)/b); }
 inline uint16_t modPos(int64_t a,uint16_t p) { int64_t m=a%p; return uint16_t(m<0?m+p:m); }
 inline bool validUtc(int64_t utc) { return utc>=946684800LL && utc<=4102444799LL; }
 inline uint16_t target(int64_t utc,const Config& c) { return modPos(floorDiv(utc+int64_t(c.offset)*60,60),c.cycle); }
+// A flip mechanism only turns forward, so a display that is a little AHEAD of the time (RTC or NTP stepped back by
+// a minute, a few seconds of skew across a minute boundary) would otherwise be "caught up" by almost a full cycle.
+// Within AHEAD_HOLD pages the display simply waits for the time to catch up.
+static const uint16_t AHEAD_HOLD=60;
+inline uint16_t pagesBehind(int64_t utc,const Config& c,uint16_t display) {
+  uint16_t behind=modPos(int64_t(target(utc,c))-display,c.cycle);
+  return behind && uint16_t(c.cycle-behind)<=AHEAD_HOLD?0:behind;
+}
 inline bool pageSteps(uint64_t q,uint32_t r,uint32_t pages,uint32_t& steps,uint32_t& next) {
   if(q<D || q>10000ULL*D || r>=D || !pages || pages>1440) return false;
   uint64_t total=uint64_t(r)+uint64_t(pages)*q;
@@ -42,7 +50,7 @@ class Planner {
     if(!config.valid() || !config.mechanics || !position || !validUtc(utc)) return false;
     preview.id=id?id:1; preview.revision=revision; preview.created=now;
     preview.minute=floorDiv(utc+int64_t(config.offset)*60,60);
-    preview.pages=modPos(int64_t(target(utc,config))-display,config.cycle);
+    preview.pages=pagesBehind(utc,config,display);
     uint32_t steps=0,next=0;
     if(preview.pages) pageSteps(config.q,remainder,1,steps,next);
     preview.estimate=uint32_t(uint64_t(estimateMs(steps,config))*preview.pages);

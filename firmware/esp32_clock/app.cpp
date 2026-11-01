@@ -721,7 +721,7 @@ void supervisor(uint32_t now) {
   if(planner.config.checkpoint && uint32_t(now-lastCheckpoint)>=uint32_t(planner.config.checkpoint)*60000UL) {
     savePending=true; saveRequest=0; saveWasPaused=planner.paused; saveRevision=planner.revision; planner.paused=true; return;
   }
-  uint16_t pages=manualPages?manualPages:modPos(int64_t(target(rtc.utc,planner.config))-planner.display,planner.config.cycle);
+  uint16_t pages=manualPages?manualPages:pagesBehind(rtc.utc,planner.config,planner.display);
   if(!pages) {
     largeConfirmed_=false;
     if(link.armed()) { link.send(DISARM); return; }
