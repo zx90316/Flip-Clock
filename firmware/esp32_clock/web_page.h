@@ -24,14 +24,14 @@ dl{display:grid;grid-template-columns:auto 1fr;gap:2px 12px;margin:6px 0;font-si
 </style></head><body><main>
 <h1>翻頁時鐘 <small id="badge"></small></h1>
 <section><div class="big" id="disp">--:--</div>
-<dl><dt>狀態</dt><dd id="st"></dd><dt>Uno 連線</dt><dd id="lk"></dd><dt>RTC 時間</dt><dd id="rt"></dd>
+<dl><dt>狀態</dt><dd id="st"></dd><dt>Uno 連線</dt><dd id="lk"></dd><dt>目前時間</dt><dd id="rt"></dd>
 <dt>位置記憶</dt><dd id="ps"></dd><dt>已儲存</dt><dd id="sv"></dd></dl>
 <div id="banner"></div>
 <div class="row"><button id="bPause" onclick="act(pause)">暫停走時</button>
 <button class="d" onclick="stopNow()">緊急停止</button><button id="bClear" onclick="act(clearFault)">清除故障</button></div></section>
 
-<section><h2>1. 校時</h2><p>用這支手機的時間寫入 RTC，並採用手機的時區。</p>
-<div class="row"><button class="p" id="bTime" onclick="act(timeSync)">用手機時間校時</button></div></section>
+<section><h2>1. 校時（網路時間）</h2><p>時鐘沒有電池 RTC，每次開機都靠 Wi-Fi 的網路時間（NTP）校時，連上網路後自動完成。請先在最下面的「Wi-Fi 連線」連上家中網路。沒有網路時，可暫時用手機時間（斷電後會消失）。</p>
+<div class="row"><button id="bTime" onclick="act(timeSync)">暫時用手機時間</button><button onclick="act(tzSync)">時區設為手機時區</button></div></section>
 
 <section><h2>2. 手動歸零</h2>
 <p>只能正向轉動。按下面的按鈕讓機構轉到「某個你看得出的時間」，再輸入實際顯示的時間。</p>
@@ -49,7 +49,7 @@ dl{display:grid;grid-template-columns:auto 1fr;gap:2px 12px;margin:6px 0;font-si
 
 <section><h2>4. 完成歸零</h2><p>儲存位置並啟動自動走時。之後斷電重啟，會依記憶位置自動補跑到目前時間。</p>
 <div class="row"><button class="p" id="bFinish" onclick="act(finish)">完成歸零並啟動自動走時</button></div></section>
-<section><h2>Wi-Fi 連線（選填）</h2><p>連上家中 Wi-Fi 後可用網路自動校時。掃描與測試連線時，這個熱點可能中斷約 10–20 秒，頁面會自動重新連線。</p>
+<section><h2>Wi-Fi 連線</h2><p>連上家中 Wi-Fi 才能取得網路時間（每 6 小時校正一次，誤差小於 5 分鐘不會中斷走時）。掃描與測試連線時，這個熱點可能中斷約 10–20 秒，頁面會自動重新連線。</p>
 <dl><dt>目前</dt><dd id="wst">--</dd></dl>
 <div id="wlan" hidden style="border:2px solid #2a9d4b;border-radius:8px;padding:10px;margin:8px 0"></div>
 <div class="row"><button id="bScan" onclick="wifiScan()">掃描附近 Wi-Fi</button></div>
@@ -58,19 +58,19 @@ dl{display:grid;grid-template-columns:auto 1fr;gap:2px 12px;margin:6px 0;font-si
 <div class="row"><input id="wss" placeholder="Wi-Fi 名稱" style="width:100%" autocomplete="off"></div>
 <div class="row"><input id="wpw" type="password" placeholder="密碼（開放網路留空）" style="width:100%" autocomplete="off"></div>
 <div class="row"><button class="p" id="bConn" onclick="wifiConnect()">測試連線並儲存</button><button id="bForget" onclick="wifiForget()">忘記已儲存的網路</button></div>
-<div class="row"><label><input type="checkbox" id="ntp" onchange="act(()=>setNtp($('ntp').checked))" style="width:auto"> 用網路自動校時（每 6 小時；誤差小於 5 分鐘不會中斷走時）</label></div></section>
+</section>
 
 <section><h2>韌體更新（OTA）</h2><p>選擇 <b>esp32_clock.ino.bin</b>。更新前會自動暫停走時；更新完成後裝置重新啟動，位置與設定都保留。更新期間請勿斷電。</p>
 <div class="row"><input type="file" id="fw" accept=".bin" style="width:auto"><button class="d" onclick="ota()">上傳並更新</button></div></section>
 </main><div id="msg" class="ok">連線中…</div>
 <script>
 const $=i=>document.getElementById(i),pad=n=>String(n).padStart(2,'0');
-const E={E_BUSY:'裝置忙碌，請先按「暫停走時」並等動作結束',E_TIME_INVALID:'RTC 時間無效，請先校時',E_I2C:'I²C 失敗：可能是 Uno 連線異常，或校時時讀寫不到 RTC，請檢查接線與 RTC 模組',
+const E={E_BUSY:'裝置忙碌，請先按「暫停走時」並等動作結束',E_TIME_INVALID:'尚無有效時間：請先連上 Wi-Fi 取得網路時間，或暫時用手機時間',E_I2C:'與 Uno 通訊失敗，請檢查 I²C 接線與 Uno 電源',
 E_NOT_CALIBRATED:'尚未歸零，請先完成步驟 2',E_RANGE:'數值超出範圍',E_FAULT:'系統故障，請先按「清除故障」',E_PLAN_STALE:'預覽已過期，請重試',
 E_REVERSE_DISABLED:'目前只支援正向轉動',E_SAVE_THROTTLED:'5 秒內不能重複儲存，請稍後再試',E_NVS:'儲存失敗',
 E_OTA_NO_PARTITION:'此韌體的分割表沒有 OTA 分區，需先用 UART 燒錄一次',E_OTA_IMAGE:'不是有效的 ESP32 韌體檔',E_OTA_WRITE:'寫入 Flash 失敗',
 E_OTA_END:'映像驗證失敗',E_AUTH:'未授權'};
-const ST={IDLE:'待命（自動走時中）',PAUSED:'已暫停',MOVING:'換頁中',LINK_WAIT:'等待 Uno 連線',NEEDS_TIME:'需要校時',NEEDS_CALIBRATION:'需要歸零',
+const ST={IDLE:'待命（自動走時中）',PAUSED:'已暫停',MOVING:'換頁中',LINK_WAIT:'等待 Uno 連線',NEEDS_TIME:'等待網路時間（請連上 Wi-Fi）',NEEDS_CALIBRATION:'需要歸零',
 NEEDS_CATCHUP_CONFIRM:'需要確認補跑',FAULT:'故障'};
 let S={},busyUi=false,T={tests:[],i:0};
 const OFFS=[67,181,241];
@@ -86,7 +86,8 @@ async function pause(){await run('pause');await idle(30000);say('已暫停')}
 async function stopNow(){try{await run('stop');say('已停止馬達，位置需重新確認',1)}catch(e){say(e.message,1)}}
 async function clearFault(){await run('clear_fault');await idle(15000);say('已清除故障，請重新確認顯示位置')}
 async function timeSync(){const off=-new Date().getTimezoneOffset();await run('set_config',{values:{utc_offset_min:off}});
-await run('set_time',{utc_s:Math.floor(Date.now()/1000)});say('已用手機時間校時（UTC'+(off>=0?'+':'')+off/60+'）')}
+await run('set_time',{utc_s:Math.floor(Date.now()/1000)});say('已暫時用手機時間校時，連上 Wi-Fi 後會自動改用網路時間（UTC'+(off>=0?'+':'')+off/60+'）')}
+async function tzSync(){const off=-new Date().getTimezoneOffset();await run('set_config',{values:{utc_offset_min:off}});say('時區已設為手機時區（UTC'+(off>=0?'+':'')+off/60+'）')}
 async function jog(n){await run('jog_steps',{steps:n});await idle(60000);say('已轉動 '+n+' 步，位置需重新輸入')}
 async function align(){const h=+$('ah').value,m=+$('am').value,q=Math.round(parseFloat($('q').value)*1e6),r=+$('rate').value,a=+$('accel').value;
 if(!(h>=1&&h<=12&&m>=0&&m<=59&&q>0))throw new Error('時間或每頁步數不正確');
@@ -138,7 +139,6 @@ if(!ok)throw new Error('等不到結果，請重新整理頁面確認');
 if(W.trial.state=='ok'){$('wpw').value='';say('已連上「'+W.trial.ssid+'」並儲存。請看上方綠框的區網網址，讓手機連到同一個 Wi-Fi 後開啟');$('wlan').scrollIntoView({behavior:'smooth',block:'center'})}else throw new Error('連線失敗：'+(WE[W.trial.reason]||W.trial.reason)+'；未儲存，已恢復原本的連線')}
 catch(e){say(e.message,1)}wifiBusy=false}
 async function wifiForget(){if(wifiBusy||!confirm('忘記已儲存的 Wi-Fi？'))return;wifiBusy=true;try{const j=await wifiPost({op:'forget'});if(!j.ok)throw new Error(WE[j.error]||j.error);await wifiRefresh();say('已忘記 Wi-Fi')}catch(e){say(e.message,1)}wifiBusy=false}
-async function setNtp(on){try{await run('set_config',{values:{auto_time:on}});say(on?'已啟用網路自動校時（需已連上 Wi-Fi）':'已停用網路自動校時')}catch(e){$('ntp').checked=!!S.ntp;throw e}}
 async function confirmSync(){await run('confirm_time',{utc_s:S.syncUtc});say('已用網路時間校時，請按「完成歸零並啟動自動走時」或預覽後恢復走時')}
 let otaBusy=false;
 function ota(){const f=$('fw').files[0];if(!f)return say('請先選擇 .bin 檔',1);
@@ -151,12 +151,11 @@ x.onerror=()=>{otaBusy=false;say('連線中斷；若已傳完，裝置可能正�
 function render(){const d=S.state?1:0;if(!d)return;$('badge').textContent=S.fw?'v'+S.fw:'';
 $('disp').textContent=S.pos?fmt(S.display):'位置未知';$('st').textContent=(ST[S.state]||S.state)+(S.err?'　'+S.err:'');
 $('lk').textContent=S.link?'已連線':'未連線';
-$('rt').textContent=S.rtc?new Date((S.utc+S.off*60)*1000).toISOString().replace('T',' ').slice(0,19):'無效，請先校時';
+$('rt').textContent=S.rtc?new Date((S.utc+S.off*60)*1000).toISOString().replace('T',' ').slice(0,19):'尚未取得（請連上 Wi-Fi）';
 $('ps').textContent=S.pos?(S.mech?'已歸零':'未確認機構'):'未知';
 $('sv').textContent=S.snap?(fmt(S.snapDisplay)+'（第 '+S.gen+' 次儲存'+(S.dirty?'，有未儲存變更':'')+'）'):'尚無';
 $('banner').innerHTML=(S.restoring?'<p>開機自動恢復：等待時間與 Uno 就緒後，會補跑到目前時間。</p>':'')+
-(S.syncAsk?'<p>網路時間與 RTC 差異超過 5 分鐘。<button onclick="act(confirmSync)">確認用網路時間校時</button></p>':'');
-if(document.activeElement!==$('ntp'))$('ntp').checked=!!S.ntp;
+(S.syncAsk?'<p>網路時間與目前時間差異超過 5 分鐘。<button onclick="act(confirmSync)">確認用網路時間校時</button></p>':'');
 const idle_=S.paused&&!S.busy&&!busyUi;
 $('bPause').disabled=S.paused&&!S.busy;$('bClear').disabled=!S.fault;
 for(const id of['bTime','bAlign','bFinish'])$(id).disabled=!idle_;

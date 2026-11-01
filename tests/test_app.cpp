@@ -14,7 +14,9 @@ bool contains(const char* s) { return Serial.output.find(s)!=std::string::npos; 
 int main() {
   setupApp(); spin(1000);
   CHECK(link.ready && !fakeUno.armed && fakeUno.mask==0 && !planner.position && planner.paused);
-  CHECK(rtc.valid && !systemFault);
+  CHECK(!rtc.valid && !systemFault); // no RTC: the clock has no time until the first network time arrives
+  { int64_t first=1793462400LL; xQueueOverwrite(syncQueue,&first); spin(500);
+    CHECK(rtc.valid && rtc.utc>=first && !strcmp(source,"sntp") && !pendingSync && planner.paused); }
   commandLine("resume",",\"plan_id\":1"); CHECK(contains("E_PLAN_STALE")); CHECK(fakeUno.job==0);
   commandLine("jog_steps",",\"steps\":-1"); CHECK(contains("E_REVERSE_DISABLED"));
   commandLine("set_config",",\"values\":{\"mechanics_confirmed\":true,\"steps_per_page_u6\":136533333,\"cycle_minutes\":720}");
@@ -43,9 +45,8 @@ int main() {
   commandLine("set_config",",\"values\":{\"utc_offset_min\":420}");
   char args[100]; snprintf(args,sizeof(args),",\"plan_id\":%u,\"confirm_large\":true",plan);
   commandLine("resume",args); CHECK(contains("E_PLAN_STALE"));
-  commandLine("set_time",",\"utc_s\":1793462400"); CHECK(contains("completed") && !planner.config.autoTime && !strcmp(source,"ble_manual"));
-  int64_t proposed=1793466000LL; xQueueOverwrite(syncQueue,&proposed); spin(500); CHECK(!pendingSync && !strcmp(source,"ble_manual"));
-  commandLine("set_config",",\"values\":{\"auto_time\":true}"); xQueueOverwrite(syncQueue,&proposed); spin(500);
+  commandLine("set_time",",\"utc_s\":1793462400"); CHECK(contains("completed") && !strcmp(source,"ble_manual"));
+  int64_t proposed=1793466000LL; xQueueOverwrite(syncQueue,&proposed); spin(500); // phone time is only a fallback: network time still applies
   CHECK(pendingSync==proposed && pendingSyncConfirm_ && planner.paused);
   commandLine("confirm_time",",\"utc_s\":1793466000"); CHECK(!pendingSync && !strcmp(source,"sntp"));
   commandLine("advance_pages",",\"pages\":5"); spin(200);
@@ -99,6 +100,12 @@ int main() {
   planner=Planner(); planner.config=persisted; Saved untrusted=store.saved; untrusted.config.mechanics=false;
   Saved keep=store.saved; store.saved=untrusted; CHECK(!restoreSnapshot() && !planner.position); store.saved=keep;
   planner.config=persisted; CHECK(restoreSnapshot() && restoreActive); commandLine("pause"); CHECK(!restoreActive);
+  { // Cold boot without an RTC: the position is restored but nothing moves until network time arrives.
+    int64_t keepUtc=rtc.utc; rtc=NetClock(); planner=Planner(); planner.config=persisted; spin(300); commandLine("pause");
+    CHECK(restoreSnapshot() && restoreActive); spin(1500);
+    CHECK(restoreActive && planner.paused && !jobSeq && !fakeUno.armed && !rtc.valid);
+    xQueueOverwrite(syncQueue,&keepUtc); spin(500); CHECK(rtc.valid && !restoreActive); commandLine("pause"); spin(6000);
+  }
   // ---- Wi-Fi provisioning: scan, verified connect, save only after a real connection ----
   {
     auto postWifi=[&](const char* body) { web.body=body; web.post["/api/wifi"](); return web.lastBody; };
@@ -171,18 +178,14 @@ int main() {
     spin(1500); CHECK(!savePending && !planner.paused); // an undisturbed save still resumes the running clock
     planner.paused=true;
   }
-  // ---- PCF8563 module (HW-689): found at 0x51, same time semantics as the DS3231 path ----
+  // ---- Software clock (no RTC chip): invalid until written, then counted from millis(), wrap-safe ----
   {
-    int64_t savedBase=Wire.rtcBase; uint32_t savedAt=Wire.rtcAt; Wire.pcf=true; Rtc chip;
-    CHECK(chip.read(fakeMs) && chip.valid && chip.pcf8563() && chip.utc>=savedBase);
-    for(int64_t want:{calendarUtc(2028,2,29,23,59,30),calendarUtc(2031,12,31,23,59,58),1800000000LL}) {
-      CHECK(chip.write(want,fakeMs) && chip.valid && chip.utc>=want && chip.utc<=want+2);
-    }
-    Wire.rtcMissing=true; CHECK(!chip.read(fakeMs) && chip.errors>0); Wire.rtcMissing=false;
-    CHECK(chip.read(fakeMs) && chip.valid); // re-detected after the device returns
-    Wire.pcf=false; Wire.rtcBase=savedBase; Wire.rtcAt=savedAt; Rtc ds; CHECK(ds.read(fakeMs) && !ds.pcf8563());
-  }
-  // ---- Fast zeroing: many pages are ONE continuous move (ramp up, cruise, ramp down), not one move per page ----
+    NetClock c; CHECK(!c.read(0) && !c.valid && !c.write(5,0) && !c.valid);
+    CHECK(c.write(1800000000LL,1000) && c.valid && c.utc==1800000000LL);
+    CHECK(c.read(3500) && c.utc==1800000002LL && c.read(3999) && c.utc==1800000002LL && c.read(4000) && c.utc==1800000003LL);
+    uint32_t wrapAt=0xFFFFFF00u; NetClock w; CHECK(w.write(1800000000LL,wrapAt));
+    CHECK(w.read(wrapAt+5000u) && w.utc==1800000005LL && w.read(wrapAt+9000u) && w.utc==1800000009LL);
+  }  // ---- Fast zeroing: many pages are ONE continuous move (ramp up, cruise, ramp down), not one move per page ----
   // The simulated Uno advances once per millisecond, so 500 steps/s is the fastest rate it reproduces exactly.
   commandLine("set_config",",\"values\":{\"max_step_rate\":500,\"acceleration\":3000}");
   CHECK(contains("completed") && planner.config.rate==500 && planner.config.accel==3000);

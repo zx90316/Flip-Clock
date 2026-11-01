@@ -7,78 +7,25 @@
 #include <FlipStorage.h>
 namespace clockapp {
 using namespace flip;
-class Rtc {
+// No battery-backed RTC: time comes from SNTP over Wi-Fi (or, temporarily, from the phone) and is then kept by the
+// ESP32 crystal. `valid` stays false after every power-up until the first network time arrives.
+class NetClock {
  public:
   int64_t utc=0;
   bool valid=false;
   uint32_t lastGood=0,errors=0;
-  bool pcf8563() const { return pcf_; }
   bool read(uint32_t now) {
-    uint8_t b[7],status;
-    if(!locate() || !readTime(b,status)) { ++errors; ++failures_; found_=false; }
-    else {
-      int64_t v=decodeRtc(b,status);
-      if(validUtc(v)) { utc=v; valid=true; failures_=0; lastGood=now; return true; }
-      valid=false; ++failures_;
-    }
-    if(failures_>=3 || uint32_t(now-lastGood)>3000) valid=false;
-    return false;
+    if(!valid) return false;
+    uint32_t whole=uint32_t(now-anchorMs_)/1000; // re-anchored on every call, so millis() wrap-around is harmless
+    anchorUtc_+=whole; anchorMs_+=whole*1000; utc=anchorUtc_; lastGood=now; return true;
   }
   bool write(int64_t value,uint32_t now) {
-    uint16_t y; uint8_t m,d,h,n,s;
-    if(!utcCalendar(value,y,m,d,h,n,s)) return false;
-    if(!locate()) return valid=false;
-    uint8_t check[7],status;
-    if(pcf_) {
-      // PCF8563: registers 0x02..0x08 (VL is bit 7 of seconds, cleared by this write); weekday is 0..6.
-      uint8_t control[2]={0,0}; // run, no test mode, alarms/timer/interrupt disabled
-      uint8_t p[7]={bcd(s),bcd(n),bcd(h),bcd(d),uint8_t((value/86400+4)%7),bcd(m),bcd(uint8_t(y-2000))};
-      if(!writeReg(0x00,control,2) || !writeReg(0x02,p,7) || !readTime(check,status)) return valid=false;
-      int64_t got=decodeRtc(check,status);
-      if(got<value || got>value+1) return valid=false;
-      return read(now) && utc>=value && utc<=value+2;
-    }
-    uint8_t b[7]={bcd(s),bcd(n),bcd(h),uint8_t((value/86400+4)%7+1),bcd(d),bcd(m),bcd(uint8_t(y-2000))};
-    // Clear OSF only after the written calendar registers have been read back.
-    if(!writeReg(0,b,7)) return valid=false;
-    if(!readTime(check,status)) return valid=false;
-    int64_t got=decodeRtc(check,uint8_t(status&0x7f));
-    if(got<value || got>value+1) return valid=false;
-    status&=0x7f;
-    if(!writeReg(0x0f,&status,1)) return valid=false;
-    return read(now) && utc>=value && utc<=value+2;
+    if(!validUtc(value)) return false;
+    anchorUtc_=utc=value; anchorMs_=now; valid=true; lastGood=now; return true;
   }
  private:
-  uint8_t failures_=0,addr_=0x68; bool found_=false,pcf_=false;
-  // DS3231 at 0x68 is preferred; PCF8563 modules (e.g. HW-689) answer at 0x51.
-  bool locate() {
-    if(found_) return true;
-    for(uint8_t candidate:{uint8_t(0x68),uint8_t(0x51)}) {
-      Wire.beginTransmission(candidate);
-      if(Wire.endTransmission()==0) { addr_=candidate; pcf_=candidate==0x51; found_=true; return true; }
-    }
-    return false;
-  }
-  // Both chips are normalised to the DS3231 register layout that decodeRtc() understands.
-  bool readTime(uint8_t* b,uint8_t& status) {
-    if(!pcf_) return readReg(0,b,7) && readReg(0x0f,&status,1);
-    uint8_t p[7];
-    if(!readReg(0x02,p,7)) return false;
-    status=(p[0]&0x80)?0x80:0; // VL: clock integrity not guaranteed
-    b[0]=p[0]&0x7f; b[1]=p[1]&0x7f; b[2]=p[2]&0x3f; b[3]=uint8_t((p[4]&7)+1); b[4]=p[3]&0x3f;
-    b[5]=p[5]&0x9f; b[6]=p[6]; // century bit kept so a non-2000s date is rejected
-    return true;
-  }
-  bool readReg(uint8_t reg,uint8_t* data,uint8_t n) {
-    Wire.beginTransmission(addr_); Wire.write(reg);
-    if(Wire.endTransmission(false)!=0 || Wire.requestFrom(addr_,n)!=n) return false;
-    for(uint8_t i=0;i<n;++i) data[i]=uint8_t(Wire.read()); return true;
-  }
-  bool writeReg(uint8_t reg,const uint8_t* data,uint8_t n) {
-    Wire.beginTransmission(addr_); Wire.write(reg); Wire.write(data,n); return Wire.endTransmission()==0;
-  }
-};
-class Store {
+  int64_t anchorUtc_=0; uint32_t anchorMs_=0;
+};class Store {
  public:
   Saved saved;
   bool ready=false,dirty=false,fault=false,throttled=false;
@@ -95,7 +42,7 @@ class Store {
     // Empty NVS is commissioning. Nonempty unreadable/unknown schema requires service.
     fault=an!=0 || bn!=0; return !fault;
   }
-  bool save(const Planner& p,const Rtc& rtc,uint8_t phase,uint32_t now) {
+  bool save(const Planner& p,const NetClock& rtc,uint8_t phase,uint32_t now) {
     throttled=false;
     if(!ready || fault || saved.generation==0xffffffffUL) return false;
     Saved next=saved; next.config=p.config; next.generation=saved.generation+1;

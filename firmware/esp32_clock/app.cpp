@@ -22,7 +22,7 @@ static const char* SERVICE="b50c1000-7e6b-4e67-a540-a06c4fe1b201";
 static const char* RX="b50c1001-7e6b-4e67-a540-a06c4fe1b201";
 static const char* TX="b50c1002-7e6b-4e67-a540-a06c4fe1b201";
 static const char* INFO="b50c1003-7e6b-4e67-a540-a06c4fe1b201";
-Planner planner; Store store; Rtc rtc; Link link;
+Planner planner; Store store; NetClock rtc; Link link;
 Lines bleLines,uartLines; Requests requests;
 NimBLEServer* server=nullptr; NimBLECharacteristic* eventTx=nullptr;
 std::atomic<uint16_t> peer{BLE_HS_CONN_HANDLE_NONE};
@@ -230,9 +230,9 @@ void process(const char* line,bool ble,bool dedupe=true) {
     else if(link.armed()) reject(id,"E_BUSY",ble);
     else if(!rtc.write(utc,millis())) { errorState("E_RTC_WRITE",false); reject(id,"E_I2C",ble); }
     else {
-      planner.config.autoTime=false; store.dirty=true; planner.changed(false); pendingSync=0;
+      planner.changed(false); pendingSync=0;
       observedUtc=rtc.utc; observedMs=millis(); strlcpy(source,"ble_manual",sizeof(source));
-      char extra[70]; snprintf(extra,sizeof(extra),",\"utc_s\":%lld,\"auto_time\":false",(long long)rtc.utc); respond(id,"completed",extra,ble);
+      char extra[70]; snprintf(extra,sizeof(extra),",\"utc_s\":%lld",(long long)rtc.utc); respond(id,"completed",extra,ble);
     }
   }
   else if(!strcmp(op,"set_config")) {
@@ -568,15 +568,12 @@ void networkTick(uint32_t now) {
   if(network.ssid[0] && WiFi.status()!=WL_CONNECTED && trial!=Trial::RUNNING && uint32_t(now-lastWifi)>=wifiBackoff) {
     lastWifi=now; WiFi.begin(network.ssid,network.password); if(wifiBackoff<300000) wifiBackoff*=2;
   }
-  if(!planner.config.autoTime) {
-    if(sntpStarted) { esp_sntp_stop(); sntpStarted=false; }
-    pendingSync=0;
-  } else if(WiFi.status()==WL_CONNECTED && !sntpStarted) {
+  if(WiFi.status()==WL_CONNECTED && !sntpStarted) { // network time is the only time source
     esp_sntp_set_time_sync_notification_cb(sntpCallback); esp_sntp_set_sync_interval(21600000UL);
     configTime(0,0,network.hosts[0],network.hosts[1],network.hosts[2]); sntpStarted=true; wifiBackoff=30000;
   }
   int64_t value;
-  if(xQueueReceive(syncQueue,&value,0)==pdTRUE && planner.config.autoTime && validUtc(value)) {
+  if(xQueueReceive(syncQueue,&value,0)==pdTRUE && validUtc(value)) {
     // Every adjustment first pauses; active page is allowed to finish, never interrupted by time update.
     bool wasRunning=!planner.paused;
     pendingSync=value; pendingSyncMs=now; planner.changed(false); largeRequired=false;
@@ -768,7 +765,6 @@ void setupApp() {
   if(!rxQueue || !txQueue || !syncQueue) { Serial.println("FATAL queues"); while(true) delay(1000); }
   Wire.begin(13,14,100000); Wire.setTimeOut(20);
   if(!store.begin(planner.config)) errorState("E_NVS",false);
-  rtc.read(millis()); if(rtc.valid) strlcpy(source,"rtc",sizeof(source));
   link.begin(); loadNetwork(); restoreSnapshot();
   snprintf(apName,sizeof(apName),"FlipClock-%04x",unsigned(ESP.getEfuseMac()&0xffff));
   WiFi.persistent(false); WiFi.setHostname(HOSTNAME); WiFi.mode(WIFI_AP_STA); lastWifi=millis()-300000; webSetup();
