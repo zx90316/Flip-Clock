@@ -165,7 +165,7 @@ $('disp').textContent=S.pos?fmt(S.display):'位置未知';$('st').textContent=(S
 $('rt').textContent=S.rtc?new Date((S.utc+S.off*60)*1000).toISOString().replace('T',' ').slice(0,19):'尚未取得（請連上 Wi-Fi）';
 $('ps').textContent=S.pos?(S.mech?'已歸零':'未確認機構'):'未知';
 $('sv').textContent=S.snap?(fmt(S.snapDisplay)+'（第 '+S.gen+' 次儲存'+(S.dirty?'，有未儲存變更':'')+'）'):'尚無';
-$('banner').innerHTML=(S.restoring?'<p>開機自動恢復：等待時間與 Uno 就緒後，會補跑到目前時間。</p>':'')+
+$('banner').innerHTML=(S.restoring?'<p>開機自動恢復：取得網路時間後，會補跑到目前時間。</p>':'')+
 (S.syncAsk?'<p>網路時間與目前時間差異超過 5 分鐘。<button onclick="act(confirmSync)">確認用網路時間校時</button></p>':'');
 const idle_=!S.busy&&!busyUi;
 $('bPause').disabled=S.paused&&!S.busy;$('bClear').disabled=!S.fault;

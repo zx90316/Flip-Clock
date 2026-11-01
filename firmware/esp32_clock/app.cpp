@@ -161,7 +161,7 @@ bool applyConfig(cJSON* values) {
   planner.config=c; planner.changed(geometry); store.dirty=true; largeRequired=false;
   return true;
 }
-// Motion timeout for one move: the planner's bound plus 50% and 5 s for loop jitter on the Uno at high rates.
+// Motion timeout for one move: the planner's bound plus 50% and 5 s for timer jitter at high rates.
 uint32_t moveTimeoutMs(uint32_t steps) { uint32_t e=estimateMs(steps,planner.config); return e+e/2+5000; }
 bool startJob(bool jog,int32_t steps,uint32_t request,bool ble) {
   if(jobSeq || steps<=0) return false;
