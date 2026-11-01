@@ -4,14 +4,14 @@
 namespace flip {
 static const uint32_t D=1000000UL;
 struct Config {
-  uint64_t q=136000000ULL;
+  uint64_t q=136533333ULL; // half-steps per minute: 4096/30, so the clock gains no error per revision
   uint16_t cycle=720,rate=200,accel=100,settle=200,maxPages=60,maxSeconds=120,checkpoint=30;
-  int16_t offset=480;
+  int16_t offset=480,trim=0; // trim: operator's step offset of the stopping point within a minute
   bool mechanics=false,reverse=false,autoTime=true;
   int8_t direction=1;
   bool valid() const { return q>=D && q<=10000ULL*D && (cycle==720 || cycle==1440) &&
     rate>=10 && rate<=MAX_RATE && accel>=1 && accel<=MAX_ACCEL && settle<=5000 && offset>=-720 && offset<=840 &&
-    maxPages>=1 && maxPages<=60 && maxSeconds>=1 && maxSeconds<=120 && checkpoint<=1440 &&
+    maxPages>=1 && maxPages<=60 && maxSeconds>=1 && maxSeconds<=120 && checkpoint<=1440 && trim>=-1000 && trim<=1000 &&
     (direction==1 || direction==-1); }
 };
 inline int64_t floorDiv(int64_t a,int64_t b) { return a>=0?a/b:-((-a+b-1)/b); }

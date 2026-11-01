@@ -54,7 +54,10 @@ int32_t queuedJog_=0;
 std::atomic<bool> rxOverflow_{false};
 // Web console: replies of one command are captured; late completions still go to UART.
 WebServer web(80); std::string* webOut=nullptr; uint32_t webSeq=0;
-char webPassword[13]="",apName[24]="";
+char webPassword[64]="",webToken[33]="",apName[24]="";
+uint32_t apRestartAt=0,loginLockUntil=0; uint8_t loginFails=0;
+// A trim is a jog that keeps the position: the display only changes when going backwards wraps through one page.
+bool queuedTrim_=false,jobTrim=false,trimWrap=false; int16_t trimValue=0; uint32_t trimNext=0;
 bool saveNetwork(); void wifiGet(); void wifiPost(); void wifiTick(uint32_t now); // defined with the other network code
 bool syncResume=false; // an NTP correction paused a running clock: resume by itself if the correction is small
 // Boot restore: the committed snapshot is trusted only after the commissioning wizard saved it.
@@ -165,8 +168,8 @@ bool startJob(bool jog,int32_t steps,uint32_t request,bool ble) {
   uint32_t timeout=moveTimeoutMs(magnitude(steps));
   if(timeout>120000UL) return false;
   if(!link.send(MOVE,uint32_t(steps),planner.config.rate,planner.config.accel,timeout)) return false;
-  jobSeq=link.seq; jobSteps=steps; jobJog=jog; jobRequest=request; jobBle=ble;
-  if(jog) planner.invalidate();
+  jobSeq=link.seq; jobSteps=steps; jobJog=jog; jobRequest=request; jobBle=ble; jobTrim=jog && queuedTrim_; queuedTrim_=false;
+  if(jog && !jobTrim) planner.invalidate();
   return true;
 }
 void cancelJob(const char* code) {
@@ -271,7 +274,22 @@ void process(const char* line,bool ble,bool dedupe=true) {
     if(!number(root,"steps",-8000,8000,steps) || !steps) reject(id,"E_RANGE",ble);
     else if(steps<0) reject(id,"E_REVERSE_DISABLED",ble);
     else if(!link.ready) reject(id,"E_I2C",ble);
-    else { queuedJog_=int32_t(steps); queuedJogRequest_=id; queuedJogBle_=ble; respond(id,"accepted",nullptr,ble); }
+    else { queuedJog_=int32_t(steps); queuedTrim_=false; queuedJogRequest_=id; queuedJogBle_=ble; respond(id,"accepted",nullptr,ble); }
+  }
+  else if(!strcmp(op,"set_trim")) {
+    int64_t value; uint32_t pageS=0,next=0;
+    if(!number(root,"steps",-1000,1000,value)) reject(id,"E_RANGE",ble);
+    else if(!planner.position || !planner.config.mechanics) reject(id,"E_NOT_CALIBRATED",ble);
+    else if(!link.ready) reject(id,"E_I2C",ble);
+    else if(!pageSteps(planner.config.q,planner.remainder,1,pageS,next)) reject(id,"E_RANGE",ble);
+    else {
+      int32_t delta=int32_t(value)-planner.config.trim;
+      // The motor only turns forward: a smaller offset is reached by going one page minus the difference.
+      int32_t move=delta<0?int32_t(pageS)+delta:delta;
+      if(!delta) { char extra[40]; snprintf(extra,sizeof(extra),",\"trim\":%d",planner.config.trim); respond(id,"completed",extra,ble); }
+      else if(move<=0 || delta>=int32_t(pageS)) reject(id,"E_TRIM",ble);
+      else { trimValue=int16_t(value); trimWrap=delta<0; trimNext=next; queuedJog_=move; queuedTrim_=true; queuedJogRequest_=id; queuedJogBle_=ble; respond(id,"accepted",nullptr,ble); }
+    }
   }
   else if(!strcmp(op,"advance_pages")) {
     int64_t pages;
@@ -305,12 +323,12 @@ bool restoreSnapshot() {
 const char* tf(bool v) { return v?"true":"false"; }
 void buildState(std::string& out) {
   char b[900]; const Saved& s=store.saved;
-  snprintf(b,sizeof(b),"{\"fw\":\"0.3.0\",\"state\":\"%s\",\"link\":%s,\"rtc\":%s,\"utc\":%lld,\"off\":%d,\"display\":%u,\"cycle\":%u,\"pos\":%s,\"mech\":%s,\"q\":%llu,\"paused\":%s,\"busy\":%s,\"fault\":%s,\"err\":\"%s\",\"snap\":%s,\"snapDisplay\":%u,\"gen\":%lu,\"dirty\":%s,\"restoring\":%s,\"restored\":%s,\"left\":%lu,\"syncAsk\":%s,\"syncUtc\":%lld,\"rate\":%u,\"accel\":%u,\"ntp\":%s}",
+  snprintf(b,sizeof(b),"{\"fw\":\"0.3.0\",\"state\":\"%s\",\"link\":%s,\"rtc\":%s,\"utc\":%lld,\"off\":%d,\"display\":%u,\"cycle\":%u,\"pos\":%s,\"mech\":%s,\"q\":%llu,\"paused\":%s,\"busy\":%s,\"fault\":%s,\"err\":\"%s\",\"snap\":%s,\"snapDisplay\":%u,\"gen\":%lu,\"dirty\":%s,\"restoring\":%s,\"restored\":%s,\"left\":%lu,\"syncAsk\":%s,\"syncUtc\":%lld,\"rate\":%u,\"accel\":%u,\"ntp\":%s,\"trim\":%d}",
     stateName(),tf(link.ready),tf(rtc.valid),(long long)rtc.utc,planner.config.offset,planner.display,planner.config.cycle,
     tf(planner.position),tf(planner.config.mechanics),(unsigned long long)planner.config.q,tf(planner.paused),
     tf(!safeIdle() || link.armed() || jobSeq),tf(systemFault),lastError,tf(s.hasSnapshot),s.display,(unsigned long)s.generation,
     tf(store.dirty),tf(restoreActive),tf(restoredFromSnapshot),(unsigned long)link.status.arg(1),
-    tf(pendingSync && pendingSyncConfirm_),(long long)pendingSync,planner.config.rate,planner.config.accel,tf(planner.config.autoTime));
+    tf(pendingSync && pendingSyncConfirm_),(long long)pendingSync,planner.config.rate,planner.config.accel,tf(planner.config.autoTime),planner.config.trim);
   out=b;
 }
 // Wraps a browser request in the same protocol frame BLE uses; replies produced synchronously are returned.
@@ -328,16 +346,69 @@ bool webCommand(const char* body,std::string& out) {
   if(out.empty()) out="{\"phase\":\"error\",\"code\":\"E_NO_REPLY\"}\n";
   return true;
 }
+void newWebToken() {
+  for(int i=0;i<4;++i) snprintf(webToken+i*8,9,"%08lx",(unsigned long)esp_random());
+}
 void loadWebPassword() {
   static const char alphabet[]="abcdefghjkmnpqrstuvwxyz23456789";
   Preferences p; bool open=p.begin("flip-web",false);
-  if(open && p.getBytesLength("pw")==sizeof(webPassword) && p.getBytes("pw",webPassword,sizeof(webPassword))==sizeof(webPassword) &&
-     webPassword[12]==0 && strlen(webPassword)==12) { p.end(); return; }
-  for(int i=0;i<12;++i) webPassword[i]=alphabet[esp_random()%(sizeof(alphabet)-1)];
-  webPassword[12]=0;
-  if(open) { p.putBytes("pw",webPassword,sizeof(webPassword)); p.end(); } // Random per boot if NVS is unavailable; never an open AP.
+  size_t n=open?p.getBytesLength("pw"):0;
+  if(!(n>=9 && n<=sizeof(webPassword) && p.getBytes("pw",webPassword,sizeof(webPassword))==n && webPassword[n-1]==0 && strlen(webPassword)==n-1)) {
+    for(int i=0;i<12;++i) webPassword[i]=alphabet[esp_random()%(sizeof(alphabet)-1)];
+    webPassword[12]=0;
+    if(open) p.putBytes("pw",webPassword,13); // Random per boot if NVS is unavailable; never an open AP.
+  }
+  if(!(open && p.getBytesLength("tok")==sizeof(webToken) && p.getBytes("tok",webToken,sizeof(webToken))==sizeof(webToken) && strlen(webToken)==32)) {
+    newWebToken(); if(open) p.putBytes("tok",webToken,sizeof(webToken));
+  }
+  if(open) p.end();
 }
-bool webAuth() { if(web.authenticate("admin",webPassword)) return true; web.requestAuthentication(); return false; }
+bool secretEqual(const char* a,const char* b) { // no early exit, so the time taken does not reveal a matching prefix
+  size_t la=strlen(a),lb=strlen(b); uint8_t diff=la!=lb;
+  for(size_t i=0;i<la;++i) diff|=uint8_t(a[i]^b[lb?i%lb:0]);
+  return !diff;
+}
+bool tokenOk() {
+  auto value=web.header("Authorization"); const char* s=value.c_str();
+  return !strncmp(s,"Bearer ",7) && secretEqual(s+7,webToken);
+}
+void sendJson(int code,const char* body) { web.sendHeader("Cache-Control","no-store"); web.send(code,"application/json",body); }
+bool webAuth() { if(tokenOk()) return true; sendJson(401,"{\"ok\":false,\"error\":\"E_AUTH\"}"); return false; }
+void loginPost() {
+  uint32_t now=millis();
+  if(loginLockUntil && int32_t(loginLockUntil-now)>0) { sendJson(429,"{\"ok\":false,\"error\":\"E_LOCKED\"}"); return; }
+  loginLockUntil=0;
+  std::string body(web.arg("plain").c_str()); cJSON* in=cJSON_Parse(body.c_str());
+  cJSON* pw=in?cJSON_GetObjectItemCaseSensitive(in,"password"):nullptr;
+  bool ok=cJSON_IsString(pw) && secretEqual(pw->valuestring,webPassword); cJSON_Delete(in);
+  if(!ok) {
+    if(++loginFails>=5) { loginFails=0; loginLockUntil=now+30000; }
+    sendJson(401,"{\"ok\":false,\"error\":\"E_AUTH\"}"); return;
+  }
+  loginFails=0; char reply[80]; snprintf(reply,sizeof(reply),"{\"ok\":true,\"token\":\"%s\"}",webToken); sendJson(200,reply);
+}
+// Changing the password also replaces the token, which logs every other browser out, and the hotspot password.
+void passwordPost() {
+  if(!webAuth()) return;
+  std::string body(web.arg("plain").c_str()); cJSON* in=cJSON_Parse(body.c_str());
+  cJSON* oldPw=in?cJSON_GetObjectItemCaseSensitive(in,"old"):nullptr; cJSON* newPw=in?cJSON_GetObjectItemCaseSensitive(in,"new"):nullptr;
+  const char* error=nullptr;
+  if(!cJSON_IsString(oldPw) || !secretEqual(oldPw->valuestring,webPassword)) error="E_WRONG";
+  else if(!cJSON_IsString(newPw) || strlen(newPw->valuestring)<8 || strlen(newPw->valuestring)>63) error="E_PASSWORD";
+  else for(const char* c=newPw->valuestring;*c;++c) if(*c<0x20 || *c>0x7e) error="E_PASSWORD";
+  if(!error) {
+    char keepToken[sizeof(webToken)]; strlcpy(keepToken,webToken,sizeof(keepToken)); newWebToken();
+    Preferences p; size_t n=strlen(newPw->valuestring)+1;
+    bool saved=p.begin("flip-web",false);
+    if(saved) { saved=p.putBytes("tok",webToken,sizeof(webToken))==sizeof(webToken) && p.putBytes("pw",newPw->valuestring,n)==n; p.end(); }
+    if(saved) { strlcpy(webPassword,newPw->valuestring,sizeof(webPassword)); apRestartAt=millis()|1; }
+    else { strlcpy(webToken,keepToken,sizeof(webToken)); error="E_NVS"; }
+  }
+  cJSON_Delete(in);
+  char reply[80];
+  if(error) { snprintf(reply,sizeof(reply),"{\"ok\":false,\"error\":\"%s\"}",error); sendJson(409,reply); }
+  else { snprintf(reply,sizeof(reply),"{\"ok\":true,\"token\":\"%s\"}",webToken); sendJson(200,reply); }
+}
 
 // OTA: only while the motor is idle and disarmed. The Update library validates the image on end();
 // a failed or interrupted upload leaves the running partition untouched.
@@ -345,7 +416,7 @@ bool otaActive=false,otaDenied=false,otaOk=false; size_t otaBytes=0; char otaErr
 void otaFail(const char* code) { strlcpy(otaError,code,sizeof(otaError)); if(otaActive) { Update.abort(); otaActive=false; } }
 void otaStart() {
   otaError[0]=0; otaBytes=0; otaOk=false; otaDenied=false; otaActive=false;
-  if(!web.authenticate("admin",webPassword)) { otaDenied=true; strlcpy(otaError,"E_AUTH",sizeof(otaError)); return; }
+  if(!tokenOk()) { otaDenied=true; strlcpy(otaError,"E_AUTH",sizeof(otaError)); return; }
   if(!safeIdle() || link.armed() || jobSeq) { strlcpy(otaError,"E_BUSY",sizeof(otaError)); return; }
   planner.paused=true; restoreActive=false;
   if(!Update.begin(UPDATE_SIZE_UNKNOWN)) { strlcpy(otaError,"E_OTA_NO_PARTITION",sizeof(otaError)); return; }
@@ -382,7 +453,8 @@ void webSetup() {
   loadWebPassword(); WiFi.softAP(apName,webPassword);
   web.on("/api/ota",HTTP_POST,otaFinish,otaUpload);
   web.on("/api/wifi",HTTP_GET,wifiGet); web.on("/api/wifi",HTTP_POST,wifiPost);
-  web.on("/",HTTP_GET,[]() { if(webAuth()) web.send_P(200,"text/html; charset=utf-8",WEB_PAGE); });
+  web.on("/api/login",HTTP_POST,loginPost); web.on("/api/password",HTTP_POST,passwordPost);
+  web.on("/",HTTP_GET,[]() { web.send_P(200,"text/html; charset=utf-8",WEB_PAGE); }); // holds no data: the APIs require the token
   web.on("/api/state",HTTP_GET,[]() {
     if(!webAuth()) return; std::string s; buildState(s); web.sendHeader("Cache-Control","no-store"); web.send(200,"application/json",s.c_str());
   });
@@ -562,6 +634,7 @@ void wifiPost() {
 
 void networkTick(uint32_t now) {
   wifiTick(now);
+  if(apRestartAt && uint32_t(now-apRestartAt)>=1500) { apRestartAt=0; WiFi.softAP(apName,webPassword); } // after the reply has left
   static bool mdnsOn=false; bool up=WiFi.status()==WL_CONNECTED; // flipclock.local on the home network
   if(up && !mdnsOn) { if(MDNS.begin(HOSTNAME)) { MDNS.addService("http","tcp",80); mdnsOn=true; } }
   else if(!up && mdnsOn) { MDNS.end(); mdnsOn=false; }
@@ -597,7 +670,7 @@ void localLine(const char* line) {
   if(line[0]=='{') { process(line,false); return; }
   if(!strcmp(line,"status")) { status(0,false); return; }
   if(!strcmp(line,"access")) {
-    Serial.printf("WEB wifi=%s password=%s user=admin url=http://192.168.4.1/\n",apName,webPassword);
+    Serial.printf("WEB wifi=%s password=%s url=http://192.168.4.1/\n",apName,webPassword);
     if(WiFi.status()==WL_CONNECTED) Serial.printf("LAN url=http://%s/ or http://" HOSTNAME ".local/\n",WiFi.localIP().toString().c_str());
     return;
   }
@@ -678,7 +751,12 @@ void supervisor(uint32_t now) {
       cancelJob("E_BAD_DONE"); errorState("E_BAD_DONE"); return;
     }
     if(!jobJog && !planner.commit(jobSeq,nextR,jobPages)) { cancelJob("E_COMMIT"); errorState("E_COMMIT"); return; }
-    if(jobJog) {
+    if(jobTrim) {
+      if(trimWrap && !planner.commit(jobSeq,trimNext,1)) { cancelJob("E_COMMIT"); errorState("E_COMMIT"); return; }
+      planner.config.trim=trimValue; store.dirty=true; jobTrim=false;
+      char extra[60]; snprintf(extra,sizeof(extra),",\"trim\":%d,\"position_confidence\":\"user_confirmed\"",planner.config.trim);
+      respond(jobRequest,"completed",extra,jobBle);
+    } else if(jobJog) {
       char extra[120]; snprintf(extra,sizeof(extra),",\"job_id\":%lu,\"steps_sent\":%ld,\"position_confidence\":\"unknown\"",(unsigned long)jobSeq,(long)jobSteps);
       respond(jobRequest,"completed",extra,jobBle);
     }
@@ -765,6 +843,7 @@ void setupApp() {
   if(!rxQueue || !txQueue || !syncQueue) { Serial.println("FATAL queues"); while(true) delay(1000); }
   Wire.begin(13,14,100000); Wire.setTimeOut(20);
   if(!store.begin(planner.config)) errorState("E_NVS",false);
+  if(planner.config.q==136000000ULL) planner.config.q=Config().q; // the old rounded default lost 0.53 steps every minute
   link.begin(); loadNetwork(); restoreSnapshot();
   snprintf(apName,sizeof(apName),"FlipClock-%04x",unsigned(ESP.getEfuseMac()&0xffff));
   WiFi.persistent(false); WiFi.setHostname(HOSTNAME); WiFi.mode(WIFI_AP_STA); lastWifi=millis()-300000; webSetup();

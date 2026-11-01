@@ -67,7 +67,8 @@ int main() {
   CHECK(WiFi.apName.rfind("FlipClock-",0)==0 && strlen(webPassword)==12 && WiFi.apPassword==webPassword && web.begun);
   CHECK(fakeNvs["flip-web"]["pw"].size()==13);
   web.get["/"](); CHECK(web.lastCode==200 && has(web.lastBody,"翻頁時鐘") && has(web.lastType,"text/html"));
-  web.authOk=false; web.get["/api/state"](); CHECK(web.lastCode==401 && web.lastBody.empty());
+  web.bearer=std::string("Bearer ")+webToken; CHECK(strlen(webToken)==32 && fakeNvs["flip-web"]["tok"].size()==33);
+  web.authOk=false; web.get["/api/state"](); CHECK(web.lastCode==401 && !has(web.lastBody,"display"));
   uint32_t accepted=Wire.moveAccepts; web.body="{\"op\":\"jog_steps\",\"steps\":4}"; web.post["/api/cmd"]();
   CHECK(web.lastCode==401 && Wire.moveAccepts==accepted && !queuedJog_); web.authOk=true;
   web.get["/api/state"](); { cJSON* j=cJSON_Parse(web.lastBody.c_str()); CHECK(j && cJSON_IsString(cJSON_GetObjectItemCaseSensitive(j,"state"))); cJSON_Delete(j); }
@@ -185,7 +186,48 @@ int main() {
     CHECK(c.read(3500) && c.utc==1800000002LL && c.read(3999) && c.utc==1800000002LL && c.read(4000) && c.utc==1800000003LL);
     uint32_t wrapAt=0xFFFFFF00u; NetClock w; CHECK(w.write(1800000000LL,wrapAt));
     CHECK(w.read(wrapAt+5000u) && w.utc==1800000005LL && w.read(wrapAt+9000u) && w.utc==1800000009LL);
-  }  // ---- Fast zeroing: many pages are ONE continuous move (ramp up, cruise, ramp down), not one move per page ----
+  }  // ---- Web login: password gets the permanent token; repeated failures lock out for 30 s ----
+  {
+    auto login=[&](const std::string& pw) { web.body="{\"password\":\""+pw+"\"}"; web.post["/api/login"](); return web.lastCode; };
+    std::string pw=webPassword; web.authOk=false; // login itself needs no token
+    CHECK(login("wrong-password")==401 && !has(web.lastBody,webToken));
+    CHECK(login(pw)==200 && has(web.lastBody,webToken));
+    for(int i=0;i<5;++i) CHECK(login("wrong-password")==401);
+    CHECK(login(pw)==429 && !has(web.lastBody,webToken));
+    spin(31000); CHECK(login(pw)==200); web.authOk=true;
+    // ---- Password change: old one required, replaces the token and the hotspot password, survives a reboot ----
+    auto change=[&](const std::string& o,const std::string& n) { web.body="{\"old\":\""+o+"\",\"new\":\""+n+"\"}"; web.post["/api/password"](); return web.lastBody; };
+    std::string token=webToken;
+    CHECK(has(change("nope","new-pass-123"),"E_WRONG") && pw==webPassword && token==webToken);
+    CHECK(has(change(pw,"short"),"E_PASSWORD") && has(change(pw,"中文密碼不可以用"),"E_PASSWORD") && pw==webPassword);
+    nvsWriteFailure=true; CHECK(has(change(pw,"new-pass-123"),"E_NVS") && pw==webPassword && token==webToken); nvsWriteFailure=false;
+    CHECK(has(change(pw,"new-pass-123"),"\"ok\":true") && !strcmp(webPassword,"new-pass-123") && token!=webToken && has(web.lastBody,webToken));
+    web.get["/api/state"](); CHECK(web.lastCode==401); // every other browser is logged out
+    web.bearer=std::string("Bearer ")+webToken; web.get["/api/state"](); CHECK(web.lastCode==200);
+    spin(2000); CHECK(WiFi.apPassword=="new-pass-123");
+    token=webToken; webPassword[0]=0; webToken[0]=0; loadWebPassword(); CHECK(!strcmp(webPassword,"new-pass-123") && token==webToken);
+  }
+  // ---- Step offset: moves the motor but keeps the position; only forward, so a smaller value wraps through one page ----
+  {
+    commandLine("pause"); spin(6000); commandLine("set_display",",\"hour\":8,\"minute\":0,\"aligned\":true"); CHECK(planner.position && planner.display==480);
+    int startTrim=planner.config.trim; CHECK(startTrim==0);
+    commandLine("set_trim",",\"steps\":20"); spin(3000);
+    CHECK(contains("\"trim\":20") && planner.config.trim==20 && fakeUno.executed==20 && planner.position && planner.display==480 && planner.remainder==0 && store.dirty);
+    uint32_t page=0,next=0; CHECK(pageSteps(planner.config.q,planner.remainder,1,page,next));
+    commandLine("set_trim",",\"steps\":5"); spin(6000);
+    CHECK(planner.config.trim==5 && fakeUno.executed==int32_t(page)-15 && planner.position && planner.display==481 && planner.remainder==next);
+    uint32_t accepts=Wire.moveAccepts; commandLine("set_trim",",\"steps\":5"); spin(100); CHECK(contains("completed") && Wire.moveAccepts==accepts); // nothing to do
+    commandLine("set_trim",",\"steps\":300"); CHECK(contains("E_TRIM") && planner.config.trim==5);
+    commandLine("set_trim",",\"steps\":1001"); CHECK(contains("E_RANGE"));
+    commandLine("set_display",",\"hour\":8,\"minute\":0,\"aligned\":true"); CHECK(planner.config.trim==5); // re-zeroing keeps the offset
+    spin(6000); commandLine("save_config"); spin(500); CHECK(contains("persisted\":true") && store.saved.config.trim==5 && !store.dirty);
+    Store reboot; Config loaded; CHECK(reboot.begin(loaded) && loaded.trim==5);
+    commandLine("set_trim",",\"steps\":-3"); spin(6000); CHECK(planner.config.trim==-3 && planner.position);
+    spin(6000); commandLine("save_config"); spin(500); Store reboot2; Config loaded2; CHECK(reboot2.begin(loaded2) && loaded2.trim==-3);
+    planner.invalidate(); commandLine("set_trim",",\"steps\":1"); CHECK(contains("E_NOT_CALIBRATED"));
+    commandLine("set_display",",\"hour\":8,\"minute\":0,\"aligned\":true");
+  }
+  // ---- Fast zeroing: many pages are ONE continuous move (ramp up, cruise, ramp down), not one move per page ----
   // The simulated Uno advances once per millisecond, so 500 steps/s is the fastest rate it reproduces exactly.
   commandLine("set_config",",\"values\":{\"max_step_rate\":500,\"acceleration\":3000}");
   CHECK(contains("completed") && planner.config.rate==500 && planner.config.accel==3000);
