@@ -13,9 +13,11 @@ struct FakeWifi {
   void disconnect(bool=false,bool=false) { disconnected=true; beganSsid.clear(); state=WL_DISCONNECTED; }
   bool softAP(const char* name,const char* password) { apName=name; apPassword=password; return true; }
   int scanNetworks(bool,bool=false) { ++scanCalls; scanning=true; scanPolls=0; return WIFI_SCAN_RUNNING; }
-  int scanComplete() { if(!scanning) return WIFI_SCAN_FAILED; return ++scanPolls<3?WIFI_SCAN_RUNNING:int(nets.size()); }
+  int scanComplete() { if(!scanning) return WIFI_SCAN_FAILED; if(failScans>0 && ++scanPolls>=2) { --failScans; scanning=false; return WIFI_SCAN_FAILED; } return ++scanPolls<3?WIFI_SCAN_RUNNING:int(nets.size()); }
   void scanDelete() { scanning=false; }
   std::string SSID(int i) { return nets[i].ssid; } int RSSI(int i) { return nets[i].rssi; } int encryptionType(int i) { return nets[i].auth; }
-  int RSSI() { return -52; } FakeIp localIP() { return {}; }
+  int RSSI() { return -52; } FakeIp localIP() { return {}; } FakeIp softAPIP() { return {}; }
+  std::string SSID() { return beganSsid; } bool setHostname(const char*) { return true; }
+  int failScans=0; // scans that fail outright before one succeeds
 }; inline FakeWifi WiFi;
 inline void configTime(int,int,const char*,const char*,const char*) {}

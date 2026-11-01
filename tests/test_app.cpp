@@ -113,6 +113,11 @@ int main() {
             !strcmp(cJSON_GetObjectItemCaseSensitive(cJSON_GetArrayItem(list,1),"ssid")->valuestring,"Cafe \"Free\"") &&
             cJSON_IsTrue(cJSON_GetObjectItemCaseSensitive(cJSON_GetArrayItem(list,1),"open")) &&
             cJSON_GetObjectItemCaseSensitive(cJSON_GetArrayItem(list,0),"rssi")->valueint==-40); cJSON_Delete(j); }
+    { int before=WiFi.scanCalls; WiFi.failScans=2; postWifi("{\"op\":\"scan\"}"); spin(80); json=getWifi();
+      CHECK(WiFi.scanCalls==before+3 && has(json,"\"scanned\":true") && has(json,"\"scanError\":false") && has(json,"\"Home\"")); // transient failures are retried
+      WiFi.failScans=9; postWifi("{\"op\":\"scan\"}"); spin(80); json=getWifi();
+      CHECK(has(json,"\"scanError\":true") && has(json,"\"networks\":[]") && has(json,"\"scanning\":false")); WiFi.failScans=0; // gives up with a visible error
+      postWifi("{\"op\":\"scan\"}"); spin(50); }
     CHECK(has(postWifi("{\"op\":\"connect\",\"ssid\":\"Home\",\"password\":\"short\"}"),"E_WIFI_PASSWORD") && web.lastCode==409);
     CHECK(has(postWifi("{\"op\":\"connect\",\"ssid\":\"\",\"password\":\"\"}"),"E_WIFI_SSID") && !WiFi.beganSsid.size());
     CHECK(has(postWifi("{\"op\":\"bogus\"}"),"E_OP") && has(postWifi("nonsense"),"E_JSON"));

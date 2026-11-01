@@ -5,11 +5,13 @@
 #include <WebServer.h>
 #include <Update.h>
 #include <NimBLEDevice.h>
+#include <ESPmDNS.h>
 #include <esp_sntp.h>
 #include <esp_system.h>
 #include <cJSON.h>
 #include <FlipStream.h>
 #include "web_page.h"
+#define HOSTNAME "flipclock"
 #include <atomic>
 #include <string>
 #include <math.h>
@@ -464,7 +466,12 @@ bool saveNetwork() {
 }
 // ---- Wi-Fi provisioning: scan, trial-connect, and save only after a verified connection ----
 struct ScanEntry { char ssid[33]; int rssi; bool open; };
-ScanEntry scanList[48]; uint8_t scanCount=0; bool scanRunning=false,scanDone=false;
+ScanEntry scanList[48]; uint8_t scanCount=0; bool scanRunning=false,scanDone=false,scanError=false; uint8_t scanTry=0; int scanRaw=0;
+void scanStart(uint32_t now) {
+  // A pending STA reconnect makes the radio refuse to scan, so park it first; the retry timer resumes it afterwards.
+  if(WiFi.status()!=WL_CONNECTED) { WiFi.disconnect(false,false); lastWifi=now; }
+  WiFi.scanDelete(); WiFi.scanNetworks(true,true); scanRunning=true;
+}
 enum class Trial : uint8_t { IDLE, RUNNING, OK, FAIL };
 Trial trial=Trial::IDLE; char trialSsid[33]="",trialPassword[65]="",trialReason[20]=""; uint32_t trialStarted=0;
 void trialEnd(Trial result,const char* reason,uint32_t now) {
@@ -474,9 +481,12 @@ void trialEnd(Trial result,const char* reason,uint32_t now) {
 void wifiTick(uint32_t now) {
   if(scanRunning) {
     int n=WiFi.scanComplete();
-    if(n==WIFI_SCAN_FAILED) { scanRunning=false; scanDone=true; scanCount=0; }
-    else if(n>=0) {
-      scanCount=0;
+    if(n==WIFI_SCAN_FAILED || n==0) {
+      scanRaw=0;
+      if(++scanTry<3) scanStart(now); // a failed or empty scan is usually transient: try again before giving up
+      else { scanRunning=false; scanDone=true; scanCount=0; scanError=n==WIFI_SCAN_FAILED; WiFi.scanDelete(); }
+    } else if(n>0) {
+      scanCount=0; scanRaw=n;
       for(int i=0;i<n;++i) {
         auto name=WiFi.SSID(i); if(name.length()==0 || name.length()>32) continue; // hidden or malformed
         int rssi=WiFi.RSSI(i); bool open=WiFi.encryptionType(i)==WIFI_AUTH_OPEN,found=false;
@@ -507,7 +517,11 @@ void wifiGet() {
   static const char* const names[]={"idle","running","ok","fail"};
   cJSON* root=cJSON_CreateObject(); bool connected=WiFi.status()==WL_CONNECTED;
   cJSON* sta=cJSON_AddObjectToObject(root,"sta"); cJSON_AddBoolToObject(sta,"connected",connected);
-  if(connected) { cJSON_AddStringToObject(sta,"ip",WiFi.localIP().toString().c_str()); cJSON_AddNumberToObject(sta,"rssi",WiFi.RSSI()); }
+  if(connected) {
+    cJSON_AddStringToObject(sta,"ip",WiFi.localIP().toString().c_str()); cJSON_AddNumberToObject(sta,"rssi",WiFi.RSSI());
+    cJSON_AddStringToObject(sta,"host",HOSTNAME ".local");
+  }
+  cJSON_AddBoolToObject(root,"scanError",scanError); cJSON_AddNumberToObject(root,"scanRaw",scanRaw);
   cJSON_AddStringToObject(root,"saved",network.ssid);
   cJSON* t=cJSON_AddObjectToObject(root,"trial"); cJSON_AddStringToObject(t,"state",names[uint8_t(trial)]);
   cJSON_AddStringToObject(t,"ssid",trialSsid); cJSON_AddStringToObject(t,"reason",trialReason);
@@ -527,7 +541,7 @@ void wifiPost() {
   if(!cJSON_IsString(op)) error="E_JSON";
   else if(trial==Trial::RUNNING) error="E_BUSY";
   else if(!strcmp(op->valuestring,"scan")) {
-    WiFi.scanDelete(); WiFi.scanNetworks(true,false); scanRunning=true; scanDone=false; scanCount=0;
+    scanDone=false; scanError=false; scanTry=0; scanCount=0; scanStart(millis());
   } else if(!strcmp(op->valuestring,"connect")) {
     cJSON* ssid=cJSON_GetObjectItemCaseSensitive(in,"ssid"); cJSON* pass=cJSON_GetObjectItemCaseSensitive(in,"password");
     if(!cJSON_IsString(ssid) || !strlen(ssid->valuestring) || strlen(ssid->valuestring)>32) error="E_WIFI_SSID";
@@ -548,6 +562,9 @@ void wifiPost() {
 
 void networkTick(uint32_t now) {
   wifiTick(now);
+  static bool mdnsOn=false; bool up=WiFi.status()==WL_CONNECTED; // flipclock.local on the home network
+  if(up && !mdnsOn) { if(MDNS.begin(HOSTNAME)) { MDNS.addService("http","tcp",80); mdnsOn=true; } }
+  else if(!up && mdnsOn) { MDNS.end(); mdnsOn=false; }
   if(network.ssid[0] && WiFi.status()!=WL_CONNECTED && trial!=Trial::RUNNING && uint32_t(now-lastWifi)>=wifiBackoff) {
     lastWifi=now; WiFi.begin(network.ssid,network.password); if(wifiBackoff<300000) wifiBackoff*=2;
   }
@@ -582,7 +599,11 @@ void networkTick(uint32_t now) {
 void localLine(const char* line) {
   if(line[0]=='{') { process(line,false); return; }
   if(!strcmp(line,"status")) { status(0,false); return; }
-  if(!strcmp(line,"access")) { Serial.printf("WEB wifi=%s password=%s user=admin url=http://192.168.4.1/\n",apName,webPassword); return; }
+  if(!strcmp(line,"access")) {
+    Serial.printf("WEB wifi=%s password=%s user=admin url=http://192.168.4.1/\n",apName,webPassword);
+    if(WiFi.status()==WL_CONNECTED) Serial.printf("LAN url=http://%s/ or http://" HOSTNAME ".local/\n",WiFi.localIP().toString().c_str());
+    return;
+  }
   if(!strcmp(line,"pause")) { planner.paused=true; saveWasPaused=true; manualPages=0; return; }
   if(!strcmp(line,"stop")) { cancelJob("E_STOPPED"); queuedJog_=0; link.stop(); return; }
   if(!planner.paused || !safeIdle() || link.armed()) { Serial.println("E_BUSY: pause and wait for disarm"); return; }
@@ -750,7 +771,7 @@ void setupApp() {
   rtc.read(millis()); if(rtc.valid) strlcpy(source,"rtc",sizeof(source));
   link.begin(); loadNetwork(); restoreSnapshot();
   snprintf(apName,sizeof(apName),"FlipClock-%04x",unsigned(ESP.getEfuseMac()&0xffff));
-  WiFi.persistent(false); WiFi.mode(WIFI_AP_STA); lastWifi=millis()-300000; webSetup();
+  WiFi.persistent(false); WiFi.setHostname(HOSTNAME); WiFi.mode(WIFI_AP_STA); lastWifi=millis()-300000; webSetup();
   char name[24]; strlcpy(name,apName,sizeof(name));
   NimBLEDevice::init(name); NimBLEDevice::setSecurityAuth(true,true,true);
   NimBLEDevice::setSecurityIOCap(BLE_HS_IO_DISPLAY_ONLY);
