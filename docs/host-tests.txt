@@ -2,6 +2,6 @@ PASS core: 22065 checks; protocol, replay, lease, rollover, planner, calendar, N
 PASS app: 130 checks; actual command/supervisor/RTC/NVS/link code with simulated devices
 .............
 ----------------------------------------------------------------------
-Ran 13 tests in 0.173s
+Ran 13 tests in 0.071s
 
 OK

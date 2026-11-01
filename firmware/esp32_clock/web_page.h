@@ -115,10 +115,10 @@ let W={trial:{},networks:[]},wifiBusy=false;
 async function wifiPost(o){const r=await fetch('/api/wifi',{method:'POST',body:JSON.stringify(o)});return r.json()}
 async function wifiRefresh(){W=await(await fetch('/api/wifi')).json();renderWifi()}
 function lanBox(){const s=W.sta||{},b=$('wlan');if(!s.connected||!s.ip){b.hidden=true;b.textContent='';b.dataset.k='';return}
-const k=s.ip+'|'+s.host+'|'+W.saved;if(b.dataset.k===k)return;b.dataset.k=k;b.hidden=false;b.textContent='';
+const k=s.ip+'|'+s.host+'|'+W.saved+'|'+s.ssid;if(b.dataset.k===k)return;b.dataset.k=k;b.hidden=false;b.textContent='';
 const add=(tag,text,st)=>{const e=document.createElement(tag);e.textContent=text;if(st)e.style.cssText=st;b.appendChild(e);return e};
-add('b','✅ 已連上「'+W.saved+'」，並已儲存');
-add('p','之後從區網進入這個控制頁，不必再連時鐘的熱點。請先讓手機或電腦連到同一個 Wi-Fi「'+W.saved+'」，再開啟：','margin:6px 0');
+const nm=s.ssid||W.saved;add('b','✅ 已連上「'+nm+'」'+(W.saved?'，並已儲存':'（尚未儲存，請再按一次「測試連線並儲存」）'));
+add('p','之後從區網進入這個控制頁，不必再連時鐘的熱點。請先讓手機或電腦連到同一個 Wi-Fi「'+nm+'」，再開啟：','margin:6px 0');
 const url='http://'+s.ip+'/',a=add('a',url,'font-size:1.3em;font-weight:bold;word-break:break-all');a.href=url;a.target='_blank';
 const r=add('div','','margin:8px 0');const c=document.createElement('button');c.textContent='複製網址';c.onclick=async()=>{try{await navigator.clipboard.writeText(url);say('已複製 '+url)}catch(e){say('請長按網址複製：'+url)}};r.appendChild(c);
 add('p','也可以試 http://'+(s.host||'flipclock.local')+'/（iPhone、Mac、Windows 通常可用，部分 Android 不行）。登入帳號密碼不變。網址若改變（路由器重新分配），回到時鐘熱點即可查看新網址。','font-size:.85em;opacity:.85;margin:4px 0')}
@@ -128,12 +128,12 @@ if(W.scanning){const p=document.createElement('p');p.textContent='掃描中…';
 for(const n of W.networks){const b=document.createElement('button');b.textContent=(n.open?'🔓 ':'🔒 ')+n.ssid+'  '+n.rssi+' dBm';b.style.margin='3px 6px 3px 0';
 b.onclick=()=>{$('wss').value=n.ssid;$('wpw').value='';if(n.open)say('這是開放網路，密碼留空即可');else $('wpw').focus()};box.appendChild(b)}}
 async function wifiWait(ms,done){const t=Date.now();while(Date.now()-t<ms){await new Promise(r=>setTimeout(r,1500));try{await wifiRefresh();if(done())return true}catch(e){}}return false}
-async function wifiScan(){if(wifiBusy)return;wifiBusy=true;try{say('掃描中，熱點可能短暫中斷…');const j=await wifiPost({op:'scan'});if(!j.ok)throw new Error(WE[j.error]||j.error);
-await wifiWait(30000,()=>!W.scanning&&W.scanned);say(W.networks.length?'找到 '+W.networks.length+' 個 Wi-Fi，點選後輸入密碼':(W.scanError?'掃描失敗（無線模組忙碌），請再按一次；或直接手動輸入名稱':'沒有掃到 Wi-Fi（只支援 2.4 GHz，請靠近分享器）；可直接手動輸入名稱'),!W.networks.length)}
+async function wifiScan(){if(wifiBusy)return;wifiBusy=true;try{say('掃描中。時鐘的熱點會中斷約 10–30 秒，這是正常的：請等手機自動重連 FlipClock-… ，結果會自己出現',0);const j=await wifiPost({op:'scan'});if(!j.ok)throw new Error(WE[j.error]||j.error);
+await wifiWait(60000,()=>!W.scanning&&W.scanned);say(W.networks.length?'找到 '+W.networks.length+' 個 Wi-Fi，點選後輸入密碼':(W.scanError?'掃描失敗（無線模組忙碌），請再按一次；或直接手動輸入名稱':'沒有掃到 Wi-Fi（只支援 2.4 GHz，請靠近分享器）；可直接手動輸入名稱'),!W.networks.length)}
 catch(e){say(e.message,1)}wifiBusy=false}
 async function wifiConnect(){if(wifiBusy)return;const ssid=$('wss').value.trim(),password=$('wpw').value;wifiBusy=true;
-try{if(!ssid)throw new Error(WE.E_WIFI_SSID);say('測試連線中，熱點可能中斷，請稍候…');const j=await wifiPost({op:'connect',ssid,password});if(!j.ok)throw new Error(WE[j.error]||j.error);
-const ok=await wifiWait(60000,()=>W.trial&&W.trial.state!='running');
+try{if(!ssid)throw new Error(WE.E_WIFI_SSID);say('測試連線中，最久約 45 秒。熱點會中斷，請等手機自動重連 FlipClock-…，結果會自己出現（不要重複按）');const j=await wifiPost({op:'connect',ssid,password});if(!j.ok)throw new Error(WE[j.error]||j.error);
+const ok=await wifiWait(120000,()=>W.trial&&W.trial.state!='running');
 if(!ok)throw new Error('等不到結果，請重新整理頁面確認');
 if(W.trial.state=='ok'){$('wpw').value='';say('已連上「'+W.trial.ssid+'」並儲存。請看上方綠框的區網網址，讓手機連到同一個 Wi-Fi 後開啟');$('wlan').scrollIntoView({behavior:'smooth',block:'center'})}else throw new Error('連線失敗：'+(WE[W.trial.reason]||W.trial.reason)+'；未儲存，已恢復原本的連線')}
 catch(e){say(e.message,1)}wifiBusy=false}

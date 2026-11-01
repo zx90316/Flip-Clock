@@ -509,7 +509,7 @@ void wifiTick(uint32_t now) {
       if(saveNetwork()) { wifiBackoff=30000; trialEnd(Trial::OK,"",now); }
       else { network=keep; trialEnd(Trial::FAIL,"E_WIFI_SAVE",now); }
     } else if(elapsed>3000 && (st==WL_CONNECT_FAILED || st==WL_NO_SSID_AVAIL)) trialEnd(Trial::FAIL,st==WL_NO_SSID_AVAIL?"E_WIFI_NOT_FOUND":"E_WIFI_AUTH",now);
-    else if(elapsed>20000) trialEnd(Trial::FAIL,"E_WIFI_TIMEOUT",now);
+    else if(elapsed>45000) trialEnd(Trial::FAIL,"E_WIFI_TIMEOUT",now); // AP channel switch + slow DHCP can take well over 20 s
   }
 }
 void wifiGet() {
@@ -519,7 +519,7 @@ void wifiGet() {
   cJSON* sta=cJSON_AddObjectToObject(root,"sta"); cJSON_AddBoolToObject(sta,"connected",connected);
   if(connected) {
     cJSON_AddStringToObject(sta,"ip",WiFi.localIP().toString().c_str()); cJSON_AddNumberToObject(sta,"rssi",WiFi.RSSI());
-    cJSON_AddStringToObject(sta,"host",HOSTNAME ".local");
+    cJSON_AddStringToObject(sta,"host",HOSTNAME ".local"); cJSON_AddStringToObject(sta,"ssid",WiFi.SSID().c_str());
   }
   cJSON_AddBoolToObject(root,"scanError",scanError); cJSON_AddNumberToObject(root,"scanRaw",scanRaw);
   cJSON_AddStringToObject(root,"saved",network.ssid);

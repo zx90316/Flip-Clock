@@ -131,7 +131,7 @@ int main() {
     CHECK(!has(json,"wrong-password")); // the password never leaves the device
     // Timeout.
     WiFi.state=WL_DISCONNECTED; postWifi("{\"op\":\"connect\",\"ssid\":\"Home\",\"password\":\"right-password\"}"); WiFi.state=WL_DISCONNECTED;
-    spin(21000); json=getWifi(); CHECK(has(json,"E_WIFI_TIMEOUT") && !network.ssid[0]);
+    spin(46000); json=getWifi(); CHECK(has(json,"E_WIFI_TIMEOUT") && !network.ssid[0]);
     // Verified connection: saved, persisted across a reload, password cleared from RAM trial buffer.
     postWifi("{\"op\":\"connect\",\"ssid\":\"Home\",\"password\":\"right-password\"}"); WiFi.state=WL_CONNECTED; spin(200);
     json=getWifi(); CHECK(has(json,"\"state\":\"ok\"") && has(json,"192.168.1.77") && has(json,"\"connected\":true") && has(json,"\"saved\":\"Home\"") && !trialPassword[0]);
