@@ -1,29 +1,25 @@
-# ESP32-CAM＋Uno 雙主控翻頁時鐘
+# ESP32-CAM 翻頁時鐘
 
-這是依使用者提供的 **v2.0 繁體中文工程規格**建立的獨立版本。ESP32-CAM 管理時間、BLE、Wi-Fi、RTC 與設定；Uno R3 控制一顆 28BYJ-48。參考分支的 Mega2560／ESP32-S 多字元功能未移入這個獨立 Repo；其腳位、12 V 馬達、45 字元及 4096 步設定不適用本版本。
+一顆 AI-Thinker ESP32-CAM 直接驅動 ULN2003 與一顆 5V 28BYJ-48。時間來自 Wi-Fi 的網路時間，操作全部在 ESP 提供的網頁上，韌體可用網頁 OTA 更新。
 
-**目前狀態：兩板已編譯，Uno 0.2.0 已在 COM3 燒錄／校驗並讀回安全待機；ESP 與馬達接線／實測尚未完成。** 出廠設定 `mechanics_confirmed=false`、位置 unknown、暫停、反轉停用。速度上限 1000 half-steps/s、歸零預設 700，都尚未在實機驗證，不是合格速率。沒有原點感測器，每次重啟仍須目視確認實際頁面。
+**目前狀態：0.4.0 單主控版已編譯、主機測試通過，尚未在實機上跑過。** 速度 900 步/秒、加速度 400 步/秒² 來自原作者設定，還沒在你的機構上驗證。
 
-本地基底：[zx90316/split-flap 的 esp32-purchased-bom](https://github.com/zx90316/split-flap/tree/esp32-purchased-bom)，提交 `f4216b735131ca2adf7772f3dbfca01d22112111`。本專案公開 Repo：[zx90316/Flip-Clock](https://github.com/zx90316/Flip-Clock)，分支 `main`。
+機構與步數參考：[TunyFPV 的 Flip Clock 設定](https://gitlab.com/-/snippets/4791675)。專案公開 Repo：[zx90316/Flip-Clock](https://github.com/zx90316/Flip-Clock)。先前的 ESP＋Uno 雙主控版本保留在 Git 歷史（提交 `8d25573`）。
 
-## VS Code 快速開始
+## 文件
 
-正式專案在 **D:\Project\Flip-Clock**。開啟此資料夾後，按 F5 選「Flip：主控操作台」；「終端機 → 執行工作」有 39 個建置／燒錄／維修／BLE Tasks。Ctrl+Shift+B 建置兩板。
-
-先讀 [逐段接線](docs/bringup.md) 與 [VS Code 操作](docs/vscode.md)。目前只完成 Uno 單板 USB；下一段是單顆 5V 馬達空載試轉，先不接 ESP。
-
-## 先看這些文件
-
-- [接線、電源與三種模式切換](docs/wiring.md)
-- [初次啟用、校準與日常操作](docs/operation.md)
-- [協定、保存格式與 BLE 規則](docs/protocol.md)
-- [已完成的驗證與實機待測清單](docs/validation.md)
-- [原始工程規格](docs/engineering-spec.zh-TW.md)
-- [版本與授權 manifest](manifest.json)
+- [接線與電源](docs/wiring.md)
+- [從零開始的步驟](docs/bringup.md)
+- [網頁操作與行為](docs/web.md)
+- [序列與 BLE 維修操作](docs/operation.md)
+- [BLE 協定與保存格式](docs/protocol.md)
+- [驗證紀錄與實機待測](docs/validation.md)
+- [VS Code 操作](docs/vscode.md)
+- [早期工程規格（雙主控，僅供歷史參考）](docs/engineering-spec.zh-TW.md)
 
 ## 建置
 
-需要 Python 3.12 與網路。以下從 **專案根目錄 D:\Project\Flip-Clock**執行，工具與套件安裝於本專案 `.tools/`，不修改全域 Arduino 安裝。首次 ESP32 套件下載量大，包含官方提供的多平台工具與函式庫。
+需要 Python 3.12 與網路。工具安裝於本專案 `.tools/`，不修改全域 Arduino 安裝。VS Code 開啟專案後，F5 選「Flip：主控操作台」，或 Ctrl+Shift+B 建置。
 
 ```powershell
 python tools/build.py setup
@@ -31,57 +27,26 @@ python tools/build.py test
 python tools/build.py build
 ```
 
-鎖定 Arduino CLI 1.5.1、Arduino AVR 1.8.8、Arduino-ESP32 3.3.12、NimBLE-Arduino 2.5.1。BLE 依賴有一個可檢查的配對政策補丁：拒絕自動覆蓋既有 bond；重新配對須本地清除 bond。建置腳本驗證原檔及補丁內容，並設定 Secure Connections only。不要直接在未套用設定的 Arduino IDE 中編譯後宣稱與交付映像一致。
-
-只有 Windows 專案路徑較長時，腳本才暫時對應一個未使用的磁碟代號來縮短路徑，結束後解除；這是避免官方 GCC 的路徑長度限制。主機測試使用鎖定的 Zig 0.13.0 與測試用 cJSON 1.7.19。
+鎖定 Arduino CLI 1.5.1、Arduino-ESP32 3.3.12、NimBLE-Arduino 2.5.1。FQBN 為 `esp32:esp32:esp32cam:PartitionScheme=min_spiffs,FlashFreq=40`（4 MB Flash、雙 OTA 分區各 1.9 MB）。
 
 ```text
-firmware/esp32_clock/       ESP32-CAM 韌體
-firmware/uno_motor/         Uno 馬達韌體
-shared/protocol/src/       兩板與測試共用的 C++ 核心
-shared/protocol/vectors.*  獨立 Python 協定向量
-tools/                     建置、燒錄與 BLE 驗收工具
-tests/                     真正控制程式搭配模擬外設的測試
-dist/esp32_clock/          ESP32 .bin、.elf、分區與 SHA-256
-dist/uno_motor/            Uno .hex、.elf 與 SHA-256
-docs/                      接線、操作、原規格與驗證紀錄
+firmware/esp32_clock/   韌體
+shared/protocol/src/    韌體與測試共用的核心（馬達、規劃、保存、BLE 分行）
+tools/                  建置、燒錄與 BLE 工具
+tests/                  真正的控制程式搭配模擬外設
+dist/esp32_clock/       可燒錄映像與 SHA-256
 ```
 
-## 燒錄
+## 更新韌體
 
-先關閉馬達電源，依 [模式表](docs/wiring.md)改接線，再查實際 COM。開啟 Uno 序列埠可能觸發 DTR reset，維修前先停止裝置。
-
-```powershell
-python tools/build.py ports
-python tools/build.py upload --board uno_motor --port <實際COM>
-python tools/build.py upload --board esp32_clock --port <實際COM>
-```
-
-兩條 upload 命令是**不同接線模式下分別操作**，不能接著執行而不切換接線。ESP32 FQBN 為 `esp32:esp32:esp32cam:PartitionScheme=min_spiffs,FlashFreq=40`；目前映像以 4 MB Flash、40 MHz、雙 OTA 分區（各 1.9 MB）為目標；之後可從網頁 OTA 更新 ESP，不必再接 UART，施工前確認實際 Flash 容量。ESP 首次／救援燒錄由 Uno 板載 USB UART 傳送，不是 Uno 執行 ArduinoISP。腳本會重新編譯、上傳並要求驗證，不開啟馬達。
-
-## BLE 桌面工具
-
-可在獨立虛擬環境安裝；Windows 的完整版本鎖定另附 `tools/requirements-windows.lock.txt`。
-
-```powershell
-python -m venv .venv
-.venv/Scripts/python -m pip install -r tools/requirements-windows.lock.txt
-.venv/Scripts/python tools/ble_client.py --scan
-.venv/Scripts/python tools/ble_client.py --address <掃描到的位址>
-```
-
-第一次須先在 ESP 的 UART 維修介面輸入 `pair`，120 秒內依作業系統提示輸入該次印出的六位數 passkey。之後由系統 bond 保管金鑰；工具不保存 passkey。BLE 工具是桌面驗收用，尚未交付原生 Android／iOS App，也沒有聲稱手機配對已實測。
-
-互動模式可下 `status`、`time`、`display 10:30`、`jog 4`、`pages 1`、`preview`、`resume`、`pause`、`stop`、`save`。移動命令不阻塞輸入，可繼續送 stop。`time` 會取電腦當下 UTC 秒數；手機仍可用一般 GATT 工具依協定操作。
+平常在網頁的「韌體更新（OTA）」上傳 `dist/esp32_clock/esp32_clock.ino.bin`。OTA 失敗才需要序列救援，見 [接線文件](docs/wiring.md)。
 
 ## 重要行為
 
-- RTC 存 UTC，本地預設 +480 分鐘；OSF 或日曆無效時禁止自動走時。網路時間不掩蓋 RTC 失聯。
-- 一頁一筆 Uno 工作；核對 session、工作序號、DONE、完整步數及輸出關閉後才提交顯示索引與小數餘額。
-- BLE 與 I²C 重送使用原 id／seq 及原內容，不重新執行已受理移動；斷電後 RAM 去重表不保留，故不承諾跨任意掉電 exactly-once。
-- `pause` 等當頁完成再 DISARM；`stop` 可停在半頁，位置隨即失效。Uno 心跳期限 1.5 秒，實際 1.6 秒關閉目標仍須實測。
-- 設定 A/B blob、CRC32、讀回後才回 `persisted:true`。保存的頁面只是歷史參考，不是重啟後自動採用的位置。
-- 手動校時關閉 `auto_time`；SNTP 新時間先暫停，差超過五分鐘要額外確認；小修正套用後也須重新預覽及 resume。
-- 無相機、SD、MCP23017 馬達路徑、網頁控制或 OTA。這些不列入本版必要範圍。
+- 馬達由獨立計時器驅動，網頁、Wi-Fi、BLE 不會卡住動作；步進晚到只會稍微停頓，不會補衝。
+- 每次移動有步數與時間上限，結束或逾時都會關閉線圈。
+- 開機保持暫停；取得網路時間後，從儲存的位置自動補跑到現在的時間。
+- 沒有原點感測器：步數送完不代表機構確實翻頁，移動中斷電會失去位置，需要重新歸零。
+- 顯示只比時間領先 60 分鐘以內時，原地等時間追上，不會繞一整圈。
 
-授權：[GPL-3.0](LICENSE)；依賴授權與來源見 manifest。
+授權：[GPL-3.0](LICENSE)；依賴授權與來源見 [manifest](manifest.json)。

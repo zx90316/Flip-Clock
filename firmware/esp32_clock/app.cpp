@@ -17,12 +17,12 @@
 #include <math.h>
 
 namespace clockapp {
-static const uint32_t CHUNK_STEPS=9000; // below the Uno's 10000-step move limit
+static const uint32_t CHUNK_STEPS=9000; // below the 10000-step move limit
 static const char* SERVICE="b50c1000-7e6b-4e67-a540-a06c4fe1b201";
 static const char* RX="b50c1001-7e6b-4e67-a540-a06c4fe1b201";
 static const char* TX="b50c1002-7e6b-4e67-a540-a06c4fe1b201";
 static const char* INFO="b50c1003-7e6b-4e67-a540-a06c4fe1b201";
-Planner planner; Store store; NetClock rtc; Link link;
+Planner planner; Store store; NetClock rtc; Motor motor;
 Lines bleLines,uartLines; Requests requests;
 NimBLEServer* server=nullptr; NimBLECharacteristic* eventTx=nullptr;
 std::atomic<uint16_t> peer{BLE_HS_CONN_HANDLE_NONE};
@@ -33,10 +33,10 @@ struct Chunk { uint32_t epoch; uint16_t length; uint8_t bytes[512]; };
 struct Reply { uint32_t epoch; char text[1537]; };
 QueueHandle_t rxQueue,txQueue,syncQueue;
 char bootId[9],lastError[40]="",source[16]="invalid";
-bool systemFault=false,lastLinkReady=false,largeRequired=false;
+bool systemFault=false,largeRequired=false;
 bool autoWasEnabled=true;
 uint32_t lastRtc=0,lastRtcGoodMs=0,lastSettle=0,lastCheckpoint=0;
-uint32_t jobSeq=0,nextR=0,jobRequest=0,armSeq=0,saveRequest=0;
+uint32_t jobSeq=0,jobCounter=0,nextR=0,jobRequest=0,saveRequest=0;
 bool jobBle=false,saveBle=false,jobJog=false,savePending=false,saveWasPaused=true;
 uint32_t saveRevision=0; // planner revision when a background save began; any later change keeps the clock paused
 int32_t jobSteps=0;
@@ -48,8 +48,8 @@ uint32_t observedMs=0;
 struct Network { char ssid[33]={},password[65]={}; char hosts[3][64]={"pool.ntp.org","time.cloudflare.com","time.google.com"}; } network;
 uint32_t lastWifi=0,wifiBackoff=30000,pendingSyncMs=0;
 bool sntpStarted=false;
-uint32_t stopRequest_=0,pauseRequest_=0,clearRequest_=0,queuedJogRequest_=0,clearSent_=0;
-bool stopBle_=false,pauseBle_=false,clearBle_=false,queuedJogBle_=false,largeConfirmed_=false,pendingSyncConfirm_=false;
+uint32_t pauseRequest_=0,queuedJogRequest_=0;
+bool pauseBle_=false,queuedJogBle_=false,largeConfirmed_=false,pendingSyncConfirm_=false;
 int32_t queuedJog_=0;
 std::atomic<bool> rxOverflow_{false};
 // Web console: replies of one command are captured; late completions still go to UART.
@@ -87,7 +87,7 @@ void respond(uint32_t id,const char* phase,const char* extra,bool ble) {
 void reject(uint32_t id,const char* code,bool ble) {
   char extra[100]; snprintf(extra,sizeof(extra),",\"code\":\"%s\"",code); respond(id,"error",extra,ble);
 }
-bool safeIdle() { return !jobSeq && !queuedJog_ && !manualPages && !savePending && !link.pending && !link.running(); }
+bool safeIdle() { return !jobSeq && !queuedJog_ && !manualPages && !savePending && !motor.running(); }
 bool number(cJSON* root,const char* key,int64_t lo,int64_t hi,int64_t& value) {
   cJSON* p=cJSON_GetObjectItemCaseSensitive(root,key);
   if(!cJSON_IsNumber(p) || !isfinite(p->valuedouble) || floor(p->valuedouble)!=p->valuedouble ||
@@ -99,7 +99,7 @@ bool boolean(cJSON* root,const char* key,bool& value) {
   value=cJSON_IsTrue(p); return true;
 }
 const char* stateName() {
-  return systemFault?"FAULT":!link.ready?"LINK_WAIT":!rtc.valid?"NEEDS_TIME":
+  return systemFault?"FAULT":!rtc.valid?"NEEDS_TIME":
     !planner.config.mechanics || !planner.position?"NEEDS_CALIBRATION":jobSeq?"MOVING":
     largeRequired?"NEEDS_CATCHUP_CONFIRM":planner.paused?"PAUSED":"IDLE";
 }
@@ -109,16 +109,16 @@ void status(uint32_t id,bool ble) {
   snprintf(one,sizeof(one),"{\"v\":1,\"id\":%lu,\"part\":1,\"parts\":3,\"phase\":\"completed\",\"state\":\"%s\",\"boot_id\":\"%s\",\"rtc_utc_s\":%lld,\"time_valid\":%s,\"utc_offset_min\":%d,\"display_index\":%u,\"position_confidence\":\"%s\",\"fractional_remainder\":%lu,\"moving\":%s,\"job_id\":%lu,\"remaining_steps\":%lu}\n",
     (unsigned long)id,state,bootId,(long long)rtc.utc,rtc.valid?"true":"false",planner.config.offset,
     planner.display,planner.position?(planner.committed?"open_loop":"user_confirmed"):"unknown",
-    (unsigned long)planner.remainder,jobSeq?"true":"false",(unsigned long)jobSeq,(unsigned long)link.status.arg(1));
-  snprintf(two,sizeof(two),"{\"v\":1,\"id\":%lu,\"part\":2,\"parts\":3,\"phase\":\"completed\",\"config_generation\":%lu,\"config_dirty\":%s,\"reset_reason\":%d,\"last_error\":\"%s\",\"coil_outputs_zero\":%s,\"i2c_error_count\":%lu,\"time_source\":\"%s\",\"last_sync_utc\":%lld,\"last_sync_offset_s\":%lld,\"wifi_state\":\"%s\",\"auto_time\":%s,\"pending_sync_utc\":%lld,\"nvs_write_count\":%lu}\n",
+    (unsigned long)planner.remainder,jobSeq?"true":"false",(unsigned long)jobSeq,(unsigned long)motor.m.remaining);
+  snprintf(two,sizeof(two),"{\"v\":1,\"id\":%lu,\"part\":2,\"parts\":3,\"phase\":\"completed\",\"config_generation\":%lu,\"config_dirty\":%s,\"reset_reason\":%d,\"last_error\":\"%s\",\"coil_outputs_zero\":%s,\"error_count\":%lu,\"time_source\":\"%s\",\"last_sync_utc\":%lld,\"last_sync_offset_s\":%lld,\"wifi_state\":\"%s\",\"auto_time\":%s,\"pending_sync_utc\":%lld,\"nvs_write_count\":%lu}\n",
     (unsigned long)id,(unsigned long)store.saved.generation,store.dirty?"true":"false",int(esp_reset_reason()),lastError,
-    link.coilZero()?"true":"false",(unsigned long)(link.errors+rtc.errors),rtc.valid?source:"invalid",(long long)lastSync,
+    motor.coilZero()?"true":"false",(unsigned long)rtc.errors,rtc.valid?source:"invalid",(long long)lastSync,
     (long long)lastOffset,WiFi.status()==WL_CONNECTED?"connected":"offline",planner.config.autoTime?"true":"false",
     (long long)pendingSync,(unsigned long)store.writes);
-  snprintf(three,sizeof(three),"{\"v\":1,\"id\":%lu,\"part\":3,\"parts\":3,\"phase\":\"completed\",\"snapshot_valid\":%s,\"snapshot_utc\":%lld,\"snapshot_display_index\":%u,\"snapshot_remainder\":%lu,\"snapshot_phase\":%u,\"snapshot_generation\":%lu,\"mechanics_confirmed\":%s,\"uno_session\":%lu,\"uno_state\":%u,\"uno_error\":%u,\"firmware\":\"0.3.0\",\"protocol\":1}\n",
+  snprintf(three,sizeof(three),"{\"v\":1,\"id\":%lu,\"part\":3,\"parts\":3,\"phase\":\"completed\",\"snapshot_valid\":%s,\"snapshot_utc\":%lld,\"snapshot_display_index\":%u,\"snapshot_remainder\":%lu,\"snapshot_phase\":%u,\"snapshot_generation\":%lu,\"mechanics_confirmed\":%s,\"motor_state\":%u,\"firmware\":\"0.4.0\",\"protocol\":1}\n",
     (unsigned long)id,store.saved.hasSnapshot?"true":"false",(long long)store.saved.utc,store.saved.display,
     (unsigned long)store.saved.r,store.saved.phase,(unsigned long)store.saved.snapshotGeneration,planner.config.mechanics?"true":"false",
-    (unsigned long)link.status.session(),link.status.op(),unsigned(get16(link.status.bytes+28)&255));
+    unsigned(motor.m.state));
   snprintf(all,sizeof(all),"%s%s%s",one,two,three);
   for(auto& e:requests.entries) if(e.id==id) { strlcpy(e.response,all,sizeof(e.response)); break; }
   output(all,ble);
@@ -164,11 +164,11 @@ bool applyConfig(cJSON* values) {
 // Motion timeout for one move: the planner's bound plus 50% and 5 s for loop jitter on the Uno at high rates.
 uint32_t moveTimeoutMs(uint32_t steps) { uint32_t e=estimateMs(steps,planner.config); return e+e/2+5000; }
 bool startJob(bool jog,int32_t steps,uint32_t request,bool ble) {
-  if(!link.ready || link.fault || !link.armed() || link.pending || jobSeq) return false;
+  if(jobSeq || steps<=0) return false;
   uint32_t timeout=moveTimeoutMs(magnitude(steps));
   if(timeout>120000UL) return false;
-  if(!link.send(MOVE,uint32_t(steps),planner.config.rate,planner.config.accel,timeout)) return false;
-  jobSeq=link.seq; jobSteps=steps; jobJog=jog; jobRequest=request; jobBle=ble; jobTrim=jog && queuedTrim_; queuedTrim_=false;
+  if(!motor.start(uint32_t(steps),planner.config.rate,planner.config.accel,timeout,millis())) return false;
+  jobSeq=++jobCounter; jobSteps=steps; jobJog=jog; jobRequest=request; jobBle=ble; jobTrim=jog && queuedTrim_; queuedTrim_=false;
   if(jog && !jobTrim) planner.invalidate();
   return true;
 }
@@ -203,11 +203,10 @@ void process(const char* line,bool ble,bool dedupe=true) {
   if(!strcmp(op,"get_status")) status(id,ble);
   else if(!strcmp(op,"get_config")) configReply(id,ble);
   else if(!strcmp(op,"stop")) {
-    cancelJob("E_STOPPED"); planner.paused=true; saveWasPaused=true; armSeq=0;
+    cancelJob("E_STOPPED"); planner.paused=true; saveWasPaused=true;
     if(queuedJog_) { reject(queuedJogRequest_,"E_STOPPED",queuedJogBle_); queuedJog_=0; }
     if(savePending) { if(saveRequest) reject(saveRequest,"E_STOPPED",saveBle); savePending=false; }
-    if(!link.stop()) reject(id,"E_I2C",ble);
-    else { respond(id,"accepted",nullptr,ble); stopRequest_=id; stopBle_=ble; }
+    motor.stop(); respond(id,"completed",",\"coil_outputs_zero\":true",ble);
   }
   else if(!strcmp(op,"pause")) {
     planner.paused=true; saveWasPaused=true; manualPages=0;
@@ -220,9 +219,7 @@ void process(const char* line,bool ble,bool dedupe=true) {
     if(jobSeq || savePending) reject(id,"E_BUSY",ble);
     else if(store.fault) reject(id,"E_NVS",ble);
     else {
-      planner.invalidate(); systemFault=false; lastError[0]=0; armSeq=0;
-      if(link.fault) link.retry();
-      clearRequest_=id; clearBle_=ble; respond(id,"accepted",nullptr,ble);
+      motor.clear(); planner.invalidate(); systemFault=false; lastError[0]=0; respond(id,"completed",nullptr,ble);
     }
   }
   else if(systemFault || store.fault) reject(id,"E_FAULT",ble);
@@ -230,8 +227,7 @@ void process(const char* line,bool ble,bool dedupe=true) {
   else if(!strcmp(op,"set_time")) {
     int64_t utc;
     if(!number(root,"utc_s",946684800LL,4102444799LL,utc)) reject(id,"E_RANGE",ble);
-    else if(link.armed()) reject(id,"E_BUSY",ble);
-    else if(!rtc.write(utc,millis())) { errorState("E_RTC_WRITE",false); reject(id,"E_I2C",ble); }
+    else if(!rtc.write(utc,millis())) reject(id,"E_RANGE",ble);
     else {
       planner.changed(false); pendingSync=0;
       observedUtc=rtc.utc; observedMs=millis(); strlcpy(source,"ble_manual",sizeof(source));
@@ -265,7 +261,6 @@ void process(const char* line,bool ble,bool dedupe=true) {
     int64_t plan; bool confirm=false;
     if(!number(root,"plan_id",1,0xffffffffLL,plan) || (cJSON_HasObjectItem(root,"confirm_large") && !boolean(root,"confirm_large",confirm))) reject(id,"E_RANGE",ble);
     else if(!rtc.valid) reject(id,"E_TIME_INVALID",ble);
-    else if(!link.ready) reject(id,"E_I2C",ble);
     else if(!planner.resume(uint32_t(plan),confirm,rtc.utc,millis())) reject(id,"E_PLAN_STALE",ble);
     else { largeRequired=false; largeConfirmed_=confirm; respond(id,"completed",nullptr,ble); }
   }
@@ -273,14 +268,12 @@ void process(const char* line,bool ble,bool dedupe=true) {
     int64_t steps;
     if(!number(root,"steps",-8000,8000,steps) || !steps) reject(id,"E_RANGE",ble);
     else if(steps<0) reject(id,"E_REVERSE_DISABLED",ble);
-    else if(!link.ready) reject(id,"E_I2C",ble);
     else { queuedJog_=int32_t(steps); queuedTrim_=false; queuedJogRequest_=id; queuedJogBle_=ble; respond(id,"accepted",nullptr,ble); }
   }
   else if(!strcmp(op,"set_trim")) {
     int64_t value; uint32_t pageS=0,next=0;
     if(!number(root,"steps",-1000,1000,value)) reject(id,"E_RANGE",ble);
     else if(!planner.position || !planner.config.mechanics) reject(id,"E_NOT_CALIBRATED",ble);
-    else if(!link.ready) reject(id,"E_I2C",ble);
     else if(!pageSteps(planner.config.q,planner.remainder,1,pageS,next)) reject(id,"E_RANGE",ble);
     else {
       int32_t delta=int32_t(value)-planner.config.trim;
@@ -295,17 +288,15 @@ void process(const char* line,bool ble,bool dedupe=true) {
     int64_t pages;
     if(!number(root,"pages",1,720,pages)) reject(id,"E_RANGE",ble);
     else if(!planner.position || !planner.config.mechanics) reject(id,"E_NOT_CALIBRATED",ble);
-    else if(!link.ready) reject(id,"E_I2C",ble);
     else { manualPages=uint16_t(pages); manualRequested_=manualPages; manualCompleted_=0; manualRequest=id; manualBle=ble; respond(id,"accepted",nullptr,ble); }
   }
   else if(!strcmp(op,"confirm_time")) {
     int64_t expected;
     if(!number(root,"utc_s",946684800LL,4102444799LL,expected) || expected!=pendingSync || !pendingSync || uint32_t(millis()-pendingSyncMs)>120000)
       reject(id,"E_PLAN_STALE",ble);
-    else if(link.armed()) reject(id,"E_BUSY",ble);
     else {
       int64_t value=pendingSync+uint32_t(millis()-pendingSyncMs)/1000;
-      if(!rtc.write(value,millis())) { errorState("E_RTC_WRITE",false); reject(id,"E_I2C",ble); }
+      if(!rtc.write(value,millis())) reject(id,"E_RANGE",ble);
       else { lastOffset=value-observedUtc; lastSync=value; pendingSync=0; planner.changed(false); observedUtc=rtc.utc; observedMs=millis(); strlcpy(source,"sntp",sizeof(source)); respond(id,"completed",nullptr,ble); }
     }
   }
@@ -323,11 +314,11 @@ bool restoreSnapshot() {
 const char* tf(bool v) { return v?"true":"false"; }
 void buildState(std::string& out) {
   char b[900]; const Saved& s=store.saved;
-  snprintf(b,sizeof(b),"{\"fw\":\"0.3.0\",\"state\":\"%s\",\"link\":%s,\"rtc\":%s,\"utc\":%lld,\"off\":%d,\"display\":%u,\"cycle\":%u,\"pos\":%s,\"mech\":%s,\"q\":%llu,\"paused\":%s,\"busy\":%s,\"fault\":%s,\"err\":\"%s\",\"snap\":%s,\"snapDisplay\":%u,\"gen\":%lu,\"dirty\":%s,\"restoring\":%s,\"restored\":%s,\"left\":%lu,\"syncAsk\":%s,\"syncUtc\":%lld,\"rate\":%u,\"accel\":%u,\"ntp\":%s,\"trim\":%d}",
-    stateName(),tf(link.ready),tf(rtc.valid),(long long)rtc.utc,planner.config.offset,planner.display,planner.config.cycle,
+  snprintf(b,sizeof(b),"{\"fw\":\"0.4.0\",\"state\":\"%s\",\"rtc\":%s,\"utc\":%lld,\"off\":%d,\"display\":%u,\"cycle\":%u,\"pos\":%s,\"mech\":%s,\"q\":%llu,\"paused\":%s,\"busy\":%s,\"fault\":%s,\"err\":\"%s\",\"snap\":%s,\"snapDisplay\":%u,\"gen\":%lu,\"dirty\":%s,\"restoring\":%s,\"restored\":%s,\"left\":%lu,\"syncAsk\":%s,\"syncUtc\":%lld,\"rate\":%u,\"accel\":%u,\"ntp\":%s,\"trim\":%d}",
+    stateName(),tf(rtc.valid),(long long)rtc.utc,planner.config.offset,planner.display,planner.config.cycle,
     tf(planner.position),tf(planner.config.mechanics),(unsigned long long)planner.config.q,tf(planner.paused),
-    tf(!safeIdle() || link.armed() || jobSeq),tf(systemFault),lastError,tf(s.hasSnapshot),s.display,(unsigned long)s.generation,
-    tf(store.dirty),tf(restoreActive),tf(restoredFromSnapshot),(unsigned long)link.status.arg(1),
+    tf(!safeIdle()),tf(systemFault),lastError,tf(s.hasSnapshot),s.display,(unsigned long)s.generation,
+    tf(store.dirty),tf(restoreActive),tf(restoredFromSnapshot),(unsigned long)motor.m.remaining,
     tf(pendingSync && pendingSyncConfirm_),(long long)pendingSync,planner.config.rate,planner.config.accel,tf(planner.config.autoTime),planner.config.trim);
   out=b;
 }
@@ -417,7 +408,7 @@ void otaFail(const char* code) { strlcpy(otaError,code,sizeof(otaError)); if(ota
 void otaStart() {
   otaError[0]=0; otaBytes=0; otaOk=false; otaDenied=false; otaActive=false;
   if(!tokenOk()) { otaDenied=true; strlcpy(otaError,"E_AUTH",sizeof(otaError)); return; }
-  if(!safeIdle() || link.armed() || jobSeq) { strlcpy(otaError,"E_BUSY",sizeof(otaError)); return; }
+  if(!safeIdle()) { strlcpy(otaError,"E_BUSY",sizeof(otaError)); return; }
   planner.paused=true; restoreActive=false;
   if(!Update.begin(UPDATE_SIZE_UNKNOWN)) { strlcpy(otaError,"E_OTA_NO_PARTITION",sizeof(otaError)); return; }
   otaActive=true;
@@ -439,8 +430,6 @@ void otaFinish() {
   char body[80]; snprintf(body,sizeof(body),"{\"ok\":%s,\"error\":\"%s\",\"bytes\":%lu}",otaOk?"true":"false",otaError,(unsigned long)otaBytes);
   web.sendHeader("Cache-Control","no-store"); web.send(otaOk?200:409,"application/json",body);
   if(otaOk) { delay(500); ESP.restart(); }
-  // The loop was blocked while receiving; do not let the stale heartbeat age raise a link fault.
-  link.retry(); lastLinkReady=false;
 }
 void otaUpload() {
   HTTPUpload& up=web.upload();
@@ -654,7 +643,7 @@ void networkTick(uint32_t now) {
     syncResume=wasRunning && !pendingSyncConfirm_; // only small corrections resume by themselves
     if(pendingSyncConfirm_) strlcpy(lastError,"E_TIME_CONFIRM",sizeof(lastError));
   }
-  if(pendingSync && !pendingSyncConfirm_ && !jobSeq && !link.pending && !link.armed() && !systemFault) {
+  if(pendingSync && !pendingSyncConfirm_ && !jobSeq && !systemFault) {
     if(uint32_t(now-pendingSyncMs)>120000) { pendingSync=0; if(syncResume && !systemFault) planner.paused=false; syncResume=false; return; }
     int64_t corrected=pendingSync+uint32_t(now-pendingSyncMs)/1000;
     lastOffset=rtc.valid?corrected-rtc.utc:0;
@@ -675,8 +664,8 @@ void localLine(const char* line) {
     return;
   }
   if(!strcmp(line,"pause")) { planner.paused=true; saveWasPaused=true; manualPages=0; return; }
-  if(!strcmp(line,"stop")) { cancelJob("E_STOPPED"); queuedJog_=0; link.stop(); return; }
-  if(!planner.paused || !safeIdle() || link.armed()) { Serial.println("E_BUSY: pause and wait for disarm"); return; }
+  if(!strcmp(line,"stop")) { cancelJob("E_STOPPED"); queuedJog_=0; motor.stop(); return; }
+  if(!planner.paused || !safeIdle()) { Serial.println("E_BUSY: pause and wait for the move to end"); return; }
   if(!strcmp(line,"pair")) {
     passkey=100000+esp_random()%900000; pairUntil=millis()+120000; NimBLEDevice::setSecurityPasskey(passkey.load());
     Serial.printf("PAIR 120s passkey=%06lu\n",(unsigned long)passkey.load()); return;
@@ -687,7 +676,7 @@ void localLine(const char* line) {
   }
   if(!strcmp(line,"reset_config CONFIRM")) {
     if(!store.resetConfig()) { Serial.println("E_NVS"); return; }
-    planner.config=Config(); planner.invalidate(); systemFault=false; Serial.println("CONFIG_RESET; RTC preserved; save_config required"); return;
+    planner.config=Config(); planner.invalidate(); systemFault=false; Serial.println("CONFIG_RESET; save_config required"); return;
   }
   if(!strncmp(line,"wifi ",5)) {
     cJSON* obj=cJSON_Parse(line+5); cJSON* ssid=cJSON_GetObjectItemCaseSensitive(obj,"ssid"),*password=cJSON_GetObjectItemCaseSensitive(obj,"password");
@@ -712,44 +701,21 @@ void localLine(const char* line) {
 
 // Pending operations belong to the loop, never to callbacks.
 void supervisor(uint32_t now) {
-  if(link.fault) {
-    if(!systemFault) { cancelJob("E_I2C"); errorState("E_I2C"); }
-    if(savePending) { if(saveRequest) reject(saveRequest,"E_I2C",saveBle); savePending=false; }
-    return;
-  }
-  if(lastLinkReady && !link.ready && !clearRequest_) { cancelJob("E_UNO_RESET"); errorState("E_UNO_RESET"); }
-  lastLinkReady=link.ready;
-  if(link.ready && link.status.op()==FAULT && !clearRequest_) {
-    if(!systemFault) { cancelJob("E_UNO_FAULT"); errorState("E_UNO_FAULT"); }
+  if(motor.faulted()) {
+    if(!systemFault) { cancelJob("E_MOTOR_TIMEOUT"); errorState("E_MOTOR_TIMEOUT"); }
+    if(savePending) { if(saveRequest) reject(saveRequest,"E_FAULT",saveBle); savePending=false; }
     return;
   }
   // Automatic restore after power loss: resume once, then catch up to the current RTC time.
   if(restoreActive) {
     if(systemFault || !planner.position) restoreActive=false;
-    else if(rtc.valid && link.ready && safeIdle() && planner.paused && !pendingSync && !link.armed()) {
+    else if(rtc.valid && safeIdle() && planner.paused && !pendingSync) {
       restoreActive=false; planner.paused=false; largeConfirmed_=true;
     }
   }
-  if(stopRequest_ && !link.pending && link.coilZero() && !link.armed()) {
-    respond(stopRequest_,"completed",",\"coil_outputs_zero\":true",stopBle_); stopRequest_=0;
-  }
-  if(clearRequest_ && link.ready && !link.pending) {
-    if(link.armed() || link.running()) { link.stop(); return; }
-    if(link.status.op()==FAULT || clearSent_==0) { if(link.send(CLEAR)) clearSent_=link.seq; return; }
-    if(link.acknowledged==clearSent_) {
-      if(link.result==flip::OK) { systemFault=false; lastError[0]=0; respond(clearRequest_,"completed",nullptr,clearBle_); }
-      else { errorState("E_CLEAR"); reject(clearRequest_,"E_I2C",clearBle_); }
-      clearRequest_=clearSent_=0;
-    }
-    return;
-  }
-  if(jobSeq && !link.pending && link.acknowledged==jobSeq && link.result!=flip::OK) {
-    cancelJob("E_MOVE_REJECTED"); errorState("E_MOVE_REJECTED"); return;
-  }
-  if(jobSeq && link.status.session()==link.session && link.status.seq()==jobSeq && link.status.op()==DONE) {
-    if(link.status.steps()!=jobSteps || link.status.arg(1)!=0 || !link.coilZero() || uint8_t(get16(link.status.bytes+28))!=flip::OK) {
-      cancelJob("E_BAD_DONE"); errorState("E_BAD_DONE"); return;
-    }
+  if(jobSeq && motor.done()) {
+    if(motor.m.executed!=jobSteps || motor.m.remaining || !motor.coilZero()) { cancelJob("E_BAD_DONE"); errorState("E_BAD_DONE"); return; }
+    motor.m.acknowledge();
     if(!jobJog && !planner.commit(jobSeq,nextR,jobPages)) { cancelJob("E_COMMIT"); errorState("E_COMMIT"); return; }
     if(jobTrim) {
       if(trimWrap && !planner.commit(jobSeq,trimNext,1)) { cancelJob("E_COMMIT"); errorState("E_COMMIT"); return; }
@@ -769,19 +735,17 @@ void supervisor(uint32_t now) {
       respond(manualRequest,"completed",extra,manualBle); manualRequest=0;
     }
   }
-  if(jobSeq || link.pending) return;
+  if(jobSeq) return;
   if(queuedJog_ && !systemFault) {
-    if(!link.armed()) { if(link.ready && link.send(ARM,planner.config.rate,120000)) armSeq=link.seq; return; }
-    if(armSeq && link.acknowledged==armSeq && link.result!=flip::OK) { reject(queuedJogRequest_,"E_I2C",queuedJogBle_); queuedJog_=0; errorState("E_ARM"); return; }
-    if(startJob(true,queuedJog_,queuedJogRequest_,queuedJogBle_)) queuedJog_=0;
+    if(!startJob(true,queuedJog_,queuedJogRequest_,queuedJogBle_)) reject(queuedJogRequest_,"E_RANGE",queuedJogBle_);
+    queuedJog_=0;
     return;
   }
   bool wantsMove=((!planner.paused && rtc.valid) || manualPages) && planner.position && planner.config.mechanics && !systemFault;
   if(!wantsMove || savePending || pendingSync) {
-    if(link.armed()) { link.send(DISARM); return; }
     if(pauseRequest_) { respond(pauseRequest_,"completed",",\"paused\":true",pauseBle_); pauseRequest_=0; }
-    if(savePending && link.ready && link.coilZero()) {
-      bool ok=store.save(planner,rtc,uint8_t(get16(link.status.bytes+28)>>8),now);
+    if(savePending && motor.coilZero()) {
+      bool ok=store.save(planner,rtc,motor.m.phase,now);
       if(saveRequest) {
         if(ok) respond(saveRequest,"completed",",\"persisted\":true",saveBle); else reject(saveRequest,store.throttled?"E_SAVE_THROTTLED":"E_NVS",saveBle);
       }
@@ -792,14 +756,13 @@ void supervisor(uint32_t now) {
     }
     return;
   }
-  if(uint32_t(now-lastSettle)<planner.config.settle || !link.ready) return;
+  if(uint32_t(now-lastSettle)<planner.config.settle) return;
   if(planner.config.checkpoint && uint32_t(now-lastCheckpoint)>=uint32_t(planner.config.checkpoint)*60000UL) {
     savePending=true; saveRequest=0; saveWasPaused=planner.paused; saveRevision=planner.revision; planner.paused=true; return;
   }
   uint16_t pages=manualPages?manualPages:pagesBehind(rtc.utc,planner.config,planner.display);
   if(!pages) {
     largeConfirmed_=false;
-    if(link.armed()) { link.send(DISARM); return; }
     // Caught up: persist the position so a power loss restores to this page, not an older one.
     if(planner.position && rtc.valid && planner.config.mechanics && !jobSeq &&
        (int32_t(planner.display)!=savedDisplay || planner.remainder!=savedRemainder)) {
@@ -811,7 +774,7 @@ void supervisor(uint32_t now) {
   if(!pageSteps(planner.config.q,planner.remainder,1,steps,nextR)) { errorState("E_PLAN"); return; }
   uint64_t estimate=uint64_t(estimateMs(steps,planner.config))*pages;
   // Several pages are driven as ONE move so the motor can reach cruise speed between the start ramp and the
-  // arrival ramp. Bounded by the Uno's per-move step limit and by the 120 s move timeout.
+  // arrival ramp. Bounded by the per-move step limit and by the 120 s move timeout.
   uint16_t chunk=1; uint32_t chunkSteps=steps,chunkNext=nextR;
   if(pages>1) {
     uint64_t byLimit=(uint64_t(CHUNK_STEPS)*D)/planner.config.q; if(byLimit<1) byLimit=1;
@@ -828,23 +791,19 @@ void supervisor(uint32_t now) {
     if(manualRequest) { reject(manualRequest,"E_RANGE",manualBle); manualRequest=0; manualPages=0; }
     return;
   }
-  if(!link.armed()) {
-    if(armSeq && link.acknowledged==armSeq && link.result!=flip::OK) { errorState("E_ARM"); return; }
-    if(link.send(ARM,planner.config.rate,120000)) armSeq=link.seq;
-    return;
-  }
   nextR=chunkNext;
   if(!startJob(false,int32_t(chunkSteps)*planner.config.direction,0,false)) errorState("E_START");
   else jobPages=chunk;
 }
 void setupApp() {
+  motor.begin(); // first, so the coils are driven low as early as possible
   Serial.begin(115200); snprintf(bootId,sizeof(bootId),"%08lx",(unsigned long)esp_random());
   rxQueue=xQueueCreate(4,sizeof(Chunk)); txQueue=xQueueCreate(4,sizeof(Reply)); syncQueue=xQueueCreate(1,sizeof(int64_t));
   if(!rxQueue || !txQueue || !syncQueue) { Serial.println("FATAL queues"); while(true) delay(1000); }
-  Wire.begin(13,14,100000); Wire.setTimeOut(20);
   if(!store.begin(planner.config)) errorState("E_NVS",false);
   if(planner.config.q==136000000ULL) planner.config.q=Config().q; // the old rounded default lost 0.53 steps every minute
-  link.begin(); loadNetwork(); restoreSnapshot();
+  if(store.saved.phase<=7) motor.m.phase=store.saved.phase; // continue the coil sequence where the rotor stopped
+  loadNetwork(); restoreSnapshot();
   snprintf(apName,sizeof(apName),"FlipClock-%04x",unsigned(ESP.getEfuseMac()&0xffff));
   WiFi.persistent(false); WiFi.setHostname(HOSTNAME); WiFi.mode(WIFI_AP_STA); lastWifi=millis()-300000; webSetup();
   char name[24]; strlcpy(name,apName,sizeof(name));
@@ -858,15 +817,15 @@ void setupApp() {
   eventTx=service->createCharacteristic(TX,NIMBLE_PROPERTY::INDICATE|NIMBLE_PROPERTY::READ_ENC|NIMBLE_PROPERTY::READ_AUTHEN,512);
   eventTx->setCallbacks(&txCallbacks);
   auto* info=service->createCharacteristic(INFO,NIMBLE_PROPERTY::READ,20);
-  char shortInfo[21]; snprintf(shortInfo,sizeof(shortInfo),"1|0.3.0|%s",bootId); info->setValue(shortInfo);
+  char shortInfo[21]; snprintf(shortInfo,sizeof(shortInfo),"1|0.4.0|%s",bootId); info->setValue(shortInfo);
   server->start(); auto* adv=NimBLEDevice::getAdvertising(); adv->addServiceUUID(SERVICE); adv->setName(name); adv->enableScanResponse(true); adv->start();
-  Serial.printf("FlipClock 0.3.0 protocol=1 board=AI_THINKER_ESP32_CAM_DUAL_UNO boot_id=%s reset=%d %s\n",bootId,int(esp_reset_reason()),
+  Serial.printf("FlipClock 0.4.0 protocol=1 board=AI_THINKER_ESP32_CAM boot_id=%s reset=%d %s\n",bootId,int(esp_reset_reason()),
     restoreActive?"RESTORE_PENDING":"BOOT_SAFE");
-  Serial.println("No camera/SD/OTA. UART: status / access / pair / wifi JSON / JSONL. Web: http://192.168.4.1/");
+  Serial.println("Motor on IO12-15. UART: status / access / pair / wifi JSON / JSONL. Web: http://192.168.4.1/");
   lastCheckpoint=millis();
 }
 void loopApp() {
-  uint32_t now=millis(); link.tick(now);
+  uint32_t now=millis(); motor.tick(now);
   if(disconnected.exchange(false)) {
     bleLines.reset(); xQueueReset(rxQueue); xQueueReset(txQueue); queuedJog_=0;
     if(manualPages || jobJog) { planner.paused=true; manualPages=0; }
@@ -876,7 +835,7 @@ void loopApp() {
     bleLines.reset(); planner.paused=true; strlcpy(lastError,"E_RX_OVERFLOW",sizeof(lastError)); server->disconnect(peer.load());
   }
   if(!pairOpen() && peer.load()!=BLE_HS_CONN_HANDLE_NONE && !authenticated.load()) server->disconnect(peer.load());
-  // Bound transport work per loop so I2C heartbeat and STOP retain time to run.
+  // Bound transport work per loop so STOP retains time to run.
   Chunk packet;
   if(xQueueReceive(rxQueue,&packet,0)==pdTRUE && packet.epoch==connectionEpoch.load() && authenticated.load()) {
     for(uint16_t i=0;i<packet.length;++i) {

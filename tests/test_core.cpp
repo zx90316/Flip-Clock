@@ -1,6 +1,5 @@
 // SPDX-License-Identifier: GPL-3.0-only
 #include <FlipProtocol.h>
-#include <FlipBench.h>
 #include <FlipPlan.h>
 #include <FlipStorage.h>
 #include <FlipStream.h>
@@ -8,103 +7,47 @@
 #include <assert.h>
 #include <stdio.h>
 #include <string>
+#include <vector>
 using namespace flip;
 static unsigned checks=0;
 #define CHECK(x) do { ++checks; if(!(x)) { fprintf(stderr,"FAIL line %d: %s\n",__LINE__,#x); return 1; } } while(0)
-Frame make(Op op,uint32_t seq=0,uint32_t a=0,uint32_t b=0,uint32_t c=0,uint32_t d=0,uint32_t session=42) {
-  Frame f=command(op,session,seq); f.arg(0,a); f.arg(1,b); f.arg(2,c); f.arg(3,d); f.seal(); return f;
-}
-void openArm(Endpoint& e,uint32_t now=0) {
-  e.handle(make(OPEN),now); e.handle(make(HEARTBEAT),now); e.handle(make(ARM,1,200,120000),now);
-}
-uint32_t complete(Endpoint& e,uint32_t start=0) {
-  uint32_t end=start;
-  for(uint32_t us=0;us<120000000UL && e.state==RUNNING;us+=1000) {
-    if(us%250000==0) e.handle(make(HEARTBEAT),start+us/1000);
-    e.tick(start+us/1000,us);
-    end=start+us/1000;
-  }
-  return end;
-}
+// Runs a move to its end the way the firmware's timer does; returns the elapsed microseconds.
+uint64_t run(Motion& m) { uint64_t us=0; for(uint32_t wait=m.step();wait;wait=m.step()) us+=wait; return us; }
 int main() {
-  CHECK(crc16((const uint8_t*)"123456789",9)==0x29b1);
   CHECK(crc32((const uint8_t*)"123456789",9)==0xcbf43926UL);
-  Frame move=make(MOVE,2,136,200,100,20000);
-  CHECK(move.valid());
-  const char* golden="a50110002a0000000200000088000000c800000064000000204e000000007d80";
-  for(unsigned i=0;i<32;++i) { unsigned v=0; sscanf(golden+2*i,"%2x",&v); CHECK(move.bytes[i]==v); }
-  for(unsigned i=0;i<32;++i) for(unsigned bit=0;bit<8;++bit) {
-    Frame bad=move; bad.bytes[i]^=uint8_t(1<<bit); Endpoint e; openArm(e); e.handle(bad,1);
-    CHECK(e.state!=RUNNING); CHECK(!bad.valid());
+  { // Limits: nothing starts outside them, and a refused start changes nothing.
+    Motion m; CHECK(m.state==Motion::IDLE && m.mask==0);
+    CHECK(!m.start(0,200,100,1000,0) && !m.start(MAX_MOVE_STEPS+1,200,100,1000,0) && !m.start(1,9,100,1000,0) && !m.start(1,1001,100,1000,0));
+    CHECK(!m.start(1,200,0,1000,0) && !m.start(1,200,4001,1000,0) && !m.start(1,200,100,0,0) && m.state==Motion::IDLE && !m.moves);
+    CHECK(m.step()==0 && m.mask==0);
+    CHECK(m.start(136,200,100,20000,0) && m.state==Motion::RUNNING && !m.start(1,200,100,1000,0) && m.remaining==136);
+    run(m); CHECK(m.state==Motion::DONE && m.executed==136 && !m.remaining && !m.mask);
+    uint8_t phase=m.phase; CHECK(m.step()==0 && m.phase==phase); m.acknowledge(); CHECK(m.state==Motion::IDLE);
   }
-  Endpoint e; CHECK(e.mask==0 && !e.armed && e.session==0);
-  e.handle(move,0); CHECK(e.state==BOOT && e.error==BAD_SESSION);
-  e.handle(make(OPEN),0); e.handle(make(ARM,1,200,120000),0); CHECK(!e.armed && e.error==NOT_ARMED);
-  e.handle(make(HEARTBEAT),1); e.handle(make(ARM,2,200,120000),1); CHECK(e.armed);
-  auto m=make(MOVE,3,136,200,100,20000); e.handle(m,1); CHECK(e.state==RUNNING);
-  e.handle(m,2); CHECK(e.executed==0 && e.remaining==136);
-  auto changed=m; changed.arg(0,137); changed.seal(); e.handle(changed,3); CHECK(e.error==SEQ_REUSE && e.remaining==136);
-  e.handle(m,3); uint32_t finished=complete(e,3); CHECK(e.state==DONE && e.executed==136 && e.mask==0);
-  uint8_t phase=e.phase; e.handle(m,finished+1); CHECK(e.state==DONE && e.executed==136 && e.phase==phase);
-  e.handle(make(HEARTBEAT),finished+2); CHECK(e.state==DONE && e.executed==136 && e.job==3);
-  e.handle(make(OPEN),finished+3); CHECK(e.job==3 && e.processed==3);
-  for(uint32_t i=4;i<=9;++i) e.handle(make(DISARM,i),finished+4);
-  e.handle(m,finished+5); CHECK(e.error==STALE_SEQ && e.executed==136 && e.job==3);
-  e.handle(make(OPEN,0,0,0,0,0,77),finished+6); CHECK(e.session==77 && e.unknown && e.processed==0);
-  Endpoint lease; openArm(lease,0xfffffff0UL); lease.handle(make(MOVE,2,1000,200,100,20000),0xfffffff0UL);
-  lease.tick(0xfffffff0UL+1501UL,2000000); CHECK(lease.state==FAULT && lease.error==LINK_TIMEOUT && !lease.armed && lease.mask==0);
-  lease.handle(make(HEARTBEAT),2000); CHECK(lease.state==FAULT && !lease.armed);
-  Endpoint lateBeat; openArm(lateBeat); lateBeat.handle(make(MOVE,2,1000,200,100,20000),0);
-  lateBeat.handle(make(HEARTBEAT),1501); CHECK(lateBeat.state==FAULT && !lateBeat.armed && lateBeat.mask==0);
-  Endpoint timeout; openArm(timeout); timeout.handle(make(MOVE,2,100,200,100,5),0); timeout.tick(5,5000);
-  CHECK(timeout.state==FAULT && timeout.error==MOTION_TIMEOUT && !timeout.mask);
-  Endpoint invalid; openArm(invalid); auto flag=make(MOVE,2,1,100,100,1000); flag.bytes[3]=1; flag.seal(); invalid.handle(flag,0);
-  CHECK(invalid.error==BAD_FRAME && invalid.state!=RUNNING);
-  invalid.handle(make(MOVE,3,uint32_t(-1),100,100,1000),0); CHECK(invalid.error==REVERSE_DISABLED);
-  invalid.handle(make(MOVE,4,1,201,100,1000),0); CHECK(invalid.error==RANGE);
-  invalid.handle(make(MOVE,5,0x80000000UL,100,100,1000),0); CHECK(invalid.error==RANGE);
-  // High-speed profile: new limits, and the motor must ramp up from rest and ramp down before arrival.
-  {
-    Endpoint fast; fast.handle(make(OPEN),0); fast.handle(make(HEARTBEAT),0);
-    fast.handle(make(ARM,1,1001,120000),0); CHECK(fast.error==RANGE && !fast.armed);
-    fast.handle(make(ARM,2,1000,120000),0); CHECK(fast.armed);
-    fast.handle(make(MOVE,3,1000,1001,100,60000),0); CHECK(fast.error==RANGE && fast.state!=RUNNING);
-    fast.handle(make(MOVE,4,1000,800,4001,60000),0); CHECK(fast.error==RANGE && fast.state!=RUNNING);
-    fast.handle(make(MOVE,5,10001,800,2000,60000),0); CHECK(fast.error==RANGE);
-    fast.handle(make(MOVE,6,3000,800,2000,60000),0); CHECK(fast.state==RUNNING);
-    uint32_t last=0,first=0,minGap=0xffffffffUL,lastGap=0,steps=0,done=0;
-    for(uint32_t us=0;us<60000000UL && fast.state==RUNNING;us+=100) {
-      if(us%250000==0) fast.handle(make(HEARTBEAT),us/1000);
-      int32_t before=fast.executed; fast.tick(us/1000,us);
-      if(fast.executed!=before) {
-        if(steps==1) first=us-last; // gap between step 1 and step 2: start of the ramp
-        if(steps>1 && us-last<minGap) minGap=us-last;
-        lastGap=us-last; last=us; ++steps; done=us;
-      }
-    }
-    CHECK(fast.state==DONE && fast.executed==3000 && !fast.mask);
-    CHECK(first>8000 && lastGap>4000);          // slow at the start and just before stopping (>= 4 ms/step = <250 steps/s)
-    CHECK(minGap<=1300 && minGap>=1000);        // cruise reaches the 800..1000 steps/s window (loop granularity 0.1 ms)
-    CHECK(done<5500000UL);                      // far faster than 3000 steps at the old 200 steps/s limit (15 s)
+  { // Half-step coil sequence: one or two adjacent coils, and it carries across moves.
+    Motion m; static const uint8_t expected[8]={1,3,2,6,4,12,8,9};
+    for(unsigned i=0;i<20;++i) { CHECK(m.start(1,200,100,1000,0)); m.step(); CHECK(m.mask==expected[i%8] && m.phase==i%8); CHECK(m.step()==0 && !m.mask); m.acknowledge(); }
   }
-  Endpoint stop; openArm(stop); stop.handle(make(MOVE,2,1000,200,100,20000),0);
-  for(uint32_t us=0;us<=200000;us+=1000) stop.tick(us/1000,us);
-  CHECK(stop.executed>0 && stop.executed<1000); int32_t partial=stop.executed;
-  stop.handle(make(STOP,3),201); CHECK(stop.executed==partial && stop.mask==0 && !stop.armed && stop.unknown);
-  stop.handle(make(MOVE,2,1000,200,100,20000),202); CHECK(stop.state==STOPPED && stop.executed==partial);
-  Endpoint micro; openArm(micro); micro.handle(make(MOVE,2,2,10,1,20000),0);
-  micro.tick(0,0xffff0000UL); micro.tick(200,0xffff0000UL+200000UL); CHECK(micro.executed==1);
-  micro.tick(400,0xffff0000UL+400000UL); CHECK(micro.executed==2 && micro.state==DONE);
-  Endpoint reset; openArm(reset); reset.handle(make(MOVE,2,100,100,100,20000),0); reset=Endpoint(); reset.handle(make(MOVE,2,100,100,100,20000),0);
-  CHECK(reset.session==0 && reset.state==BOOT && reset.mask==0);
-  Endpoint many; openArm(many,2000);
-  for(uint32_t seq=2;seq<20;++seq) {
-    many.handle(make(HEARTBEAT),seq*1000);
-    many.handle(make(MOVE,seq,5,200,100,20000),seq*1000); complete(many,seq*1000);
-    CHECK(many.state==DONE && many.executed==5 && many.mask==0);
+  { // A restored phase continues exactly one half-step on from where the rotor stopped.
+    Motion m; m.phase=7; CHECK(m.start(1,200,100,1000,0)); m.step(); CHECK(m.phase==0 && m.mask==1);
   }
-  CHECK(many.phase==uint8_t((18*5-1)%8));
-  Endpoint overflow; openArm(overflow); overflow.fail(RX_OVERFLOW); CHECK(!overflow.armed && overflow.mask==0 && overflow.state==FAULT);
+  { // High-speed profile: must ramp up from rest and ramp down before arrival.
+    Motion m; CHECK(m.start(3000,800,2000,60000,0));
+    std::vector<uint32_t> gaps; for(uint32_t wait=m.step();wait;wait=m.step()) gaps.push_back(wait);
+    CHECK(gaps.size()==3000 && m.executed==3000 && !m.mask && m.state==Motion::DONE);
+    uint32_t fastest=0xffffffffUL; uint64_t total=0; for(uint32_t g:gaps) { if(g<fastest) fastest=g; total+=g; }
+    CHECK(gaps.front()>8000 && gaps.back()>8000);  // slow at the start and just before stopping
+    CHECK(fastest==1250);                          // cruise is exactly the 800 steps/s limit
+    CHECK(total<5500000ULL);                       // far faster than 3000 steps at 200 steps/s (15 s)
+    for(size_t i=1;i<1500;++i) CHECK(gaps[i]<=gaps[i-1]);
+  }
+  { // Stop, fault and timeout all release the coils at once, across a millis() wrap too.
+    Motion m; CHECK(m.start(1000,200,100,20000,0)); for(int i=0;i<10;++i) m.step(); CHECK(m.mask);
+    m.stop(); CHECK(m.state==Motion::IDLE && !m.mask && m.executed==10 && m.step()==0);
+    Motion t; uint32_t at=0xfffffff0UL; CHECK(t.start(100,200,100,5,at)); CHECK(!t.timedOut(at+4)); CHECK(t.timedOut(at+5));
+    t.step(); t.fail(); CHECK(t.state==Motion::FAULT && !t.mask && t.step()==0);
+    CHECK(!t.start(1,200,100,1000,0)); t.stop(); CHECK(t.state==Motion::FAULT); t.clear(); CHECK(t.state==Motion::IDLE && t.start(1,200,100,1000,0));
+  }
   uint32_t steps,r; CHECK(pageSteps(136533333ULL,0,30,steps,r) && steps==4095 && r==999990);
   uint32_t total=0,rem=0;
   for(unsigned i=0;i<30;++i) { uint32_t n,nr; CHECK(pageSteps(136533333ULL,rem,1,n,nr)); total+=n; rem=nr; }
@@ -156,15 +99,6 @@ int main() {
   for(uint32_t i=2;i<=20;++i) CHECK(ids.check(i,"C",entry)==Requests::NEW);
   CHECK(ids.check(1,"A",entry)==Requests::STALE);
   CHECK(ids.check(0xffffffffUL,"D",entry)==Requests::NEW); CHECK(ids.check(1,"A",entry)==Requests::STALE);
-  Endpoint benchMotor; BenchGate gate;
-  CHECK(!gate.submit(make(OPEN),benchMotor,0)); CHECK(gate.enable(benchMotor));
-  CHECK(gate.submit(make(OPEN),benchMotor,0)); CHECK(gate.submit(make(HEARTBEAT),benchMotor,0));
-  CHECK(!gate.submit(make(ARM,1,51,10000),benchMotor,0));
-  CHECK(gate.submit(make(ARM,1,30,10000),benchMotor,0));
-  CHECK(!gate.submit(make(MOVE,2,257,30,100,10000),benchMotor,0));
-  CHECK(gate.submit(make(MOVE,2,16,30,100,10000),benchMotor,0));
-  gate.masterActivity(benchMotor); CHECK(!gate.enabled && !benchMotor.armed && !benchMotor.mask);
-  CHECK(!gate.enable(benchMotor));
-  printf("PASS core: %u checks; protocol, replay, lease, rollover, planner, calendar, NVS, BLE stream\n",checks);
+  printf("PASS core: %u checks; motion, planner, calendar, NVS, BLE stream\n",checks);
   return 0;
 }

@@ -34,12 +34,14 @@
       }
     },
     {
-      "name": "Flip：建置兩板",
+      "name": "Flip：建置韌體",
       "type": "debugpy",
       "request": "launch",
       "program": "${workspaceFolder}/tools/build.py",
       "args": [
-        "build"
+        "build",
+        "--board",
+        "esp32_clock"
       ],
       "cwd": "${workspaceFolder}",
       "console": "integratedTerminal",
@@ -66,59 +68,7 @@
       }
     },
     {
-      "name": "Uno：燒錄並驗證（單板 USB）",
-      "type": "debugpy",
-      "request": "launch",
-      "program": "${workspaceFolder}/tools/dev.py",
-      "args": [
-        "upload",
-        "--board",
-        "uno_motor"
-      ],
-      "cwd": "${workspaceFolder}",
-      "console": "integratedTerminal",
-      "justMyCode": true,
-      "env": {
-        "PYTHONUTF8": "1",
-        "PYTHONUNBUFFERED": "1"
-      }
-    },
-    {
-      "name": "Uno：讀取安全待機狀態",
-      "type": "debugpy",
-      "request": "launch",
-      "program": "${workspaceFolder}/tools/dev.py",
-      "args": [
-        "uno-status"
-      ],
-      "cwd": "${workspaceFolder}",
-      "console": "integratedTerminal",
-      "justMyCode": true,
-      "env": {
-        "PYTHONUTF8": "1",
-        "PYTHONUNBUFFERED": "1"
-      }
-    },
-    {
-      "name": "Uno：序列維修台",
-      "type": "debugpy",
-      "request": "launch",
-      "program": "${workspaceFolder}/tools/dev.py",
-      "args": [
-        "monitor",
-        "--board",
-        "uno_motor"
-      ],
-      "cwd": "${workspaceFolder}",
-      "console": "integratedTerminal",
-      "justMyCode": true,
-      "env": {
-        "PYTHONUTF8": "1",
-        "PYTHONUNBUFFERED": "1"
-      }
-    },
-    {
-      "name": "ESP：燒錄並驗證（Uno UART 模式）",
+      "name": "ESP：序列燒錄（救援用）",
       "type": "debugpy",
       "request": "launch",
       "program": "${workspaceFolder}/tools/dev.py",

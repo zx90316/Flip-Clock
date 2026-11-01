@@ -29,7 +29,7 @@ input.w{width:100%}input.m{width:130px}summary{cursor:pointer;margin:6px 0;font-
 <main id="app" hidden>
 <h1>翻頁時鐘 <small id="badge"></small></h1>
 <section><div class="big" id="disp">--:--</div>
-<dl><dt>狀態</dt><dd id="st"></dd><dt>Uno 連線</dt><dd id="lk"></dd><dt>目前時間</dt><dd id="rt"></dd>
+<dl><dt>狀態</dt><dd id="st"></dd><dt>目前時間</dt><dd id="rt"></dd>
 <dt>位置記憶</dt><dd id="ps"></dd><dt>已儲存</dt><dd id="sv"></dd></dl>
 <div id="banner"></div>
 <div class="row"><button id="bPause" onclick="act(pause)">暫停走時</button>
@@ -81,12 +81,12 @@ input.w{width:100%}input.m{width:130px}summary{cursor:pointer;margin:6px 0;font-
 </main><div id="msg" class="ok" hidden>連線中…</div>
 <script>
 const $=i=>document.getElementById(i),pad=n=>String(n).padStart(2,'0');
-const E={E_BUSY:'裝置忙碌，請先按「暫停走時」並等動作結束',E_TIME_INVALID:'尚無有效時間：請先連上 Wi-Fi 取得網路時間，或暫時用手機時間',E_I2C:'與 Uno 通訊失敗，請檢查 I²C 接線與 Uno 電源',
+const E={E_BUSY:'裝置忙碌，請先按「暫停走時」並等動作結束',E_TIME_INVALID:'尚無有效時間：請先連上 Wi-Fi 取得網路時間，或暫時用手機時間',E_MOTOR_TIMEOUT:'馬達轉動逾時，位置未知，請清除故障後重新歸零',
 E_NOT_CALIBRATED:'尚未歸零，請先完成步驟 2',E_RANGE:'數值超出範圍',E_FAULT:'系統故障，請先按「清除故障」',E_PLAN_STALE:'預覽已過期，請重試',
 E_REVERSE_DISABLED:'目前只支援正向轉動',E_SAVE_THROTTLED:'5 秒內不能重複儲存，請稍後再試',E_NVS:'儲存失敗',
 E_OTA_NO_PARTITION:'此韌體的分割表沒有 OTA 分區，需先用 UART 燒錄一次',E_OTA_IMAGE:'不是有效的 ESP32 韌體檔',E_OTA_WRITE:'寫入 Flash 失敗',
 E_OTA_END:'映像驗證失敗',E_AUTH:'未授權',E_TRIM:'偏移調整幅度太大，一次請勿超過一分鐘的步數'};
-const ST={IDLE:'待命（自動走時中）',PAUSED:'已暫停',MOVING:'換頁中',LINK_WAIT:'等待 Uno 連線',NEEDS_TIME:'等待網路時間（請連上 Wi-Fi）',NEEDS_CALIBRATION:'需要歸零',
+const ST={IDLE:'待命（自動走時中）',PAUSED:'已暫停',MOVING:'換頁中',NEEDS_TIME:'等待網路時間（請連上 Wi-Fi）',NEEDS_CALIBRATION:'需要歸零',
 NEEDS_CATCHUP_CONFIRM:'需要確認補跑',FAULT:'故障'};
 let S={},busyUi=false,V=null,lastV='',filled=false,TOKEN='';
 try{TOKEN=localStorage.getItem('flipToken')||''}catch(e){}
@@ -162,7 +162,6 @@ say(j.ok?'更新完成，裝置重新啟動中，約 20 秒後會自動重新連
 x.onerror=()=>{otaBusy=false;say('連線中斷；若已傳完，裝置可能正在重新啟動，請稍後重新整理',1)};x.send(fd)}
 function render(){const d=S.state?1:0;if(!d)return;$('badge').textContent=S.fw?'v'+S.fw:'';
 $('disp').textContent=S.pos?fmt(S.display):'位置未知';$('st').textContent=(ST[S.state]||S.state)+(S.err?'　'+S.err:'');
-$('lk').textContent=S.link?'已連線':'未連線';
 $('rt').textContent=S.rtc?new Date((S.utc+S.off*60)*1000).toISOString().replace('T',' ').slice(0,19):'尚未取得（請連上 Wi-Fi）';
 $('ps').textContent=S.pos?(S.mech?'已歸零':'未確認機構'):'未知';
 $('sv').textContent=S.snap?(fmt(S.snapDisplay)+'（第 '+S.gen+' 次儲存'+(S.dirty?'，有未儲存變更':'')+'）'):'尚無';

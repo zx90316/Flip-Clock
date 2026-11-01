@@ -1,7 +1,7 @@
-PASS core: 22068 checks; protocol, replay, lease, rollover, planner, calendar, NVS, BLE stream
-PASS app: 163 checks; actual command/supervisor/RTC/NVS/link code with simulated devices
-.............
+PASS core: 23039 checks; motion, planner, calendar, NVS, BLE stream
+PASS app: 170 checks; actual command/supervisor/motor/NVS/web code with simulated devices
+..........
 ----------------------------------------------------------------------
-Ran 13 tests in 0.081s
+Ran 10 tests in 0.083s
 
 OK

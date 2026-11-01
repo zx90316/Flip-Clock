@@ -13,11 +13,12 @@ void spin(uint32_t ms) { uint32_t start=fakeMs; while(uint32_t(fakeMs-start)<ms)
 bool contains(const char* s) { return Serial.output.find(s)!=std::string::npos; }
 int main() {
   setupApp(); spin(1000);
-  CHECK(link.ready && !fakeUno.armed && fakeUno.mask==0 && !planner.position && planner.paused);
+  CHECK(!motor.running() && motor.m.mask==0 && !planner.position && planner.paused);
+  for(uint8_t pin:{12,13,14,15}) CHECK(fakePinModes[pin]==OUTPUT && !fakePins[pin]);
   CHECK(!rtc.valid && !systemFault); // no RTC: the clock has no time until the first network time arrives
   { int64_t first=1793462400LL; xQueueOverwrite(syncQueue,&first); spin(500);
     CHECK(rtc.valid && rtc.utc>=first && !strcmp(source,"sntp") && !pendingSync && planner.paused); }
-  commandLine("resume",",\"plan_id\":1"); CHECK(contains("E_PLAN_STALE")); CHECK(fakeUno.job==0);
+  commandLine("resume",",\"plan_id\":1"); CHECK(contains("E_PLAN_STALE")); CHECK(motor.m.moves==0);
   commandLine("jog_steps",",\"steps\":-1"); CHECK(contains("E_REVERSE_DISABLED"));
   commandLine("set_config",",\"values\":{\"mechanics_confirmed\":true,\"steps_per_page_u6\":136533333,\"cycle_minutes\":720}");
   CHECK(contains("completed") && planner.config.mechanics && store.dirty);
@@ -25,13 +26,13 @@ int main() {
   commandLine("set_config",",\"values\":{\"acceleration\":4001}"); CHECK(contains("E_RANGE") && planner.config.accel==100);
   commandLine("set_display",",\"hour\":8,\"minute\":0,\"aligned\":true"); CHECK(planner.position && planner.display==480);
   std::string jog=request("jog_steps",",\"steps\":4"); Serial.output.clear(); process(jog.c_str(),false); spin(2500);
-  CHECK(contains("steps_sent\":4") && !planner.position && fakeUno.executed==4 && !fakeUno.mask);
-  uint32_t accepts=Wire.moveAccepts;
-  Serial.output.clear(); process(jog.c_str(),false); spin(200); CHECK(Wire.moveAccepts==accepts && contains("completed"));
-  std::string reuse=jog; reuse[reuse.find("steps\":4")+7]='5'; process(reuse.c_str(),false); CHECK(contains("E_ID_REUSE") && Wire.moveAccepts==accepts);
+  CHECK(contains("steps_sent\":4") && !planner.position && motor.m.executed==4 && !motor.m.mask);
+  uint32_t accepts=motor.m.moves;
+  Serial.output.clear(); process(jog.c_str(),false); spin(200); CHECK(motor.m.moves==accepts && contains("completed"));
+  std::string reuse=jog; reuse[reuse.find("steps\":4")+7]='5'; process(reuse.c_str(),false); CHECK(contains("E_ID_REUSE") && motor.m.moves==accepts);
   commandLine("set_display",",\"hour\":8,\"minute\":0,\"aligned\":true");
   commandLine("advance_pages",",\"pages\":2"); spin(7000);
-  CHECK(planner.display==482 && planner.remainder==66666 && !jobSeq && !fakeUno.armed);
+  CHECK(planner.display==482 && planner.remainder==66666 && !jobSeq && !motor.running());
   CHECK(contains("pages_completed\":2"));
   commandLine("save_config"); spin(500);
   CHECK(contains("persisted\":true") && store.saved.generation==1 && store.saved.hasSnapshot);
@@ -50,17 +51,17 @@ int main() {
   CHECK(pendingSync==proposed && pendingSyncConfirm_ && planner.paused);
   commandLine("confirm_time",",\"utc_s\":1793466000"); CHECK(!pendingSync && !strcmp(source,"sntp"));
   commandLine("advance_pages",",\"pages\":5"); spin(200);
-  commandLine("pause"); spin(9000); CHECK(!jobSeq && !manualPages && planner.position && !fakeUno.armed); // pause lets the whole continuous move finish
+  commandLine("pause"); spin(9000); CHECK(!jobSeq && !manualPages && planner.position && !motor.running()); // pause lets the whole continuous move finish
   commandLine("advance_pages",",\"pages\":1"); spin(350); CHECK(jobSeq);
-  commandLine("stop"); spin(500); CHECK(!planner.position && !fakeUno.armed && !fakeUno.mask && contains("coil_outputs_zero\":true"));
+  commandLine("stop"); spin(500); CHECK(!planner.position && !motor.running() && !motor.m.mask && contains("coil_outputs_zero\":true"));
   commandLine("set_display",",\"hour\":9,\"minute\":0,\"aligned\":true");
-  commandLine("advance_pages",",\"pages\":1"); spin(300); fakeUno=Endpoint(); spin(300);
-  CHECK(systemFault && !planner.position && !fakeUno.armed && !fakeUno.mask);
-  commandLine("clear_fault"); spin(2000); CHECK(!systemFault && link.ready && !planner.position);
-  commandLine("set_display",",\"hour\":9,\"minute\":0,\"aligned\":true");
-  commandLine("advance_pages",",\"pages\":1"); spin(300); Wire.unoMissing=true; spin(2500);
-  CHECK(systemFault && !fakeUno.armed && !fakeUno.mask && !planner.position);
-  Wire.unoMissing=false; commandLine("clear_fault"); spin(2500); CHECK(!systemFault && link.ready);
+  commandLine("advance_pages",",\"pages\":1"); spin(300); CHECK(motor.running()); motor.fail(); spin(300);
+  CHECK(systemFault && !planner.position && !motor.running() && !motor.m.mask && !fakePins[12] && !fakePins[13] && !fakePins[14] && !fakePins[15]);
+  commandLine("advance_pages",",\"pages\":1"); CHECK(contains("E_FAULT"));
+  commandLine("clear_fault"); spin(100); CHECK(!systemFault && !motor.faulted() && !planner.position);
+  // A move that never finishes is cut off by the timeout, with the coils released.
+  { uint32_t t=fakeMs; CHECK(motor.start(50,10,1,200,t)); spin(300); CHECK(motor.faulted() && !motor.m.mask && !fakePins[12] && !fakePins[13] && !fakePins[14] && !fakePins[15]);
+    spin(10); CHECK(systemFault); commandLine("clear_fault"); spin(100); CHECK(!systemFault); }
   // ---- Web console: authenticated, same protocol, client-supplied ids ignored ----
   auto webCmd=[](const char* body) { web.body=body; web.post["/api/cmd"](); return web.lastBody; };
   auto has=[](const std::string& s,const char* needle) { return s.find(needle)!=std::string::npos; };
@@ -69,8 +70,8 @@ int main() {
   web.get["/"](); CHECK(web.lastCode==200 && has(web.lastBody,"翻頁時鐘") && has(web.lastType,"text/html"));
   web.bearer=std::string("Bearer ")+webToken; CHECK(strlen(webToken)==32 && fakeNvs["flip-web"]["tok"].size()==33);
   web.authOk=false; web.get["/api/state"](); CHECK(web.lastCode==401 && !has(web.lastBody,"display"));
-  uint32_t accepted=Wire.moveAccepts; web.body="{\"op\":\"jog_steps\",\"steps\":4}"; web.post["/api/cmd"]();
-  CHECK(web.lastCode==401 && Wire.moveAccepts==accepted && !queuedJog_); web.authOk=true;
+  uint32_t accepted=motor.m.moves; web.body="{\"op\":\"jog_steps\",\"steps\":4}"; web.post["/api/cmd"]();
+  CHECK(web.lastCode==401 && motor.m.moves==accepted && !queuedJog_); web.authOk=true;
   web.get["/api/state"](); { cJSON* j=cJSON_Parse(web.lastBody.c_str()); CHECK(j && cJSON_IsString(cJSON_GetObjectItemCaseSensitive(j,"state"))); cJSON_Delete(j); }
   CHECK(has(webCmd("not json"),"E_JSON") && has(webCmd("{\"op\":1}"),"E_JSON"));
   CHECK(has(webCmd("{\"op\":\"bogus\"}"),"E_OP"));
@@ -94,7 +95,7 @@ int main() {
   web.get["/api/state"](); CHECK(has(web.lastBody,"\"restoring\":true") && has(web.lastBody,"\"pos\":true"));
   planner.config.maxPages=1; // 3 pages exceeds the interactive limit; a restore must still catch up without a prompt
   spin(500); CHECK(!restoreActive && !planner.paused && largeConfirmed_ && restoredFromSnapshot);
-  spin(14000); CHECK(planner.display==486 && !fakeUno.armed && !fakeUno.mask && !largeConfirmed_ && !systemFault);
+  spin(14000); CHECK(planner.display==486 && !motor.running() && !motor.m.mask && !largeConfirmed_ && !systemFault);
   CHECK(savedDisplay==486 && store.saved.display==486 && !planner.paused && !largeRequired);
   // Any deliberate action cancels a pending restore, and an unconfirmed-mechanics snapshot is never restored.
   commandLine("pause"); spin(500); restoreActive=false;
@@ -104,7 +105,7 @@ int main() {
   { // Cold boot without an RTC: the position is restored but nothing moves until network time arrives.
     int64_t keepUtc=rtc.utc; rtc=NetClock(); planner=Planner(); planner.config=persisted; spin(300); commandLine("pause");
     CHECK(restoreSnapshot() && restoreActive); spin(1500);
-    CHECK(restoreActive && planner.paused && !jobSeq && !fakeUno.armed && !rtc.valid);
+    CHECK(restoreActive && planner.paused && !jobSeq && !motor.running() && !rtc.valid);
     xQueueOverwrite(syncQueue,&keepUtc); spin(500); CHECK(rtc.valid && !restoreActive); commandLine("pause"); spin(6000);
   }
   // ---- Wi-Fi provisioning: scan, verified connect, save only after a real connection ----
@@ -169,7 +170,7 @@ int main() {
   }
   // ---- A pause or change that arrives while a background position save is in flight must win ----
   {
-    planner.paused=true; spin(4000); CHECK(!fakeUno.armed && !jobSeq); // let any earlier catch-up finish and disarm
+    planner.paused=true; spin(4000); CHECK(!motor.running() && !jobSeq); // let any earlier catch-up finish and disarm
     planner.paused=false; planner.position=true; planner.display=target(rtc.utc,planner.config); lastCheckpoint=fakeMs-uint32_t(planner.config.checkpoint)*60000UL-1;
     spin(1); CHECK(savePending && planner.paused); // checkpoint save has started, not yet finished
     commandLine("pause"); spin(1500); CHECK(!savePending && planner.paused); // pause during the save is kept
@@ -212,11 +213,11 @@ int main() {
     commandLine("pause"); spin(6000); commandLine("set_display",",\"hour\":8,\"minute\":0,\"aligned\":true"); CHECK(planner.position && planner.display==480);
     int startTrim=planner.config.trim; CHECK(startTrim==0);
     commandLine("set_trim",",\"steps\":20"); spin(3000);
-    CHECK(contains("\"trim\":20") && planner.config.trim==20 && fakeUno.executed==20 && planner.position && planner.display==480 && planner.remainder==0 && store.dirty);
+    CHECK(contains("\"trim\":20") && planner.config.trim==20 && motor.m.executed==20 && planner.position && planner.display==480 && planner.remainder==0 && store.dirty);
     uint32_t page=0,next=0; CHECK(pageSteps(planner.config.q,planner.remainder,1,page,next));
     commandLine("set_trim",",\"steps\":5"); spin(6000);
-    CHECK(planner.config.trim==5 && fakeUno.executed==int32_t(page)-15 && planner.position && planner.display==481 && planner.remainder==next);
-    uint32_t accepts=Wire.moveAccepts; commandLine("set_trim",",\"steps\":5"); spin(100); CHECK(contains("completed") && Wire.moveAccepts==accepts); // nothing to do
+    CHECK(planner.config.trim==5 && motor.m.executed==int32_t(page)-15 && planner.position && planner.display==481 && planner.remainder==next);
+    uint32_t accepts=motor.m.moves; commandLine("set_trim",",\"steps\":5"); spin(100); CHECK(contains("completed") && motor.m.moves==accepts); // nothing to do
     commandLine("set_trim",",\"steps\":300"); CHECK(contains("E_TRIM") && planner.config.trim==5);
     commandLine("set_trim",",\"steps\":1001"); CHECK(contains("E_RANGE"));
     commandLine("set_display",",\"hour\":8,\"minute\":0,\"aligned\":true"); CHECK(planner.config.trim==5); // re-zeroing keeps the offset
@@ -228,17 +229,16 @@ int main() {
     commandLine("set_display",",\"hour\":8,\"minute\":0,\"aligned\":true");
   }
   // ---- Fast zeroing: many pages are ONE continuous move (ramp up, cruise, ramp down), not one move per page ----
-  // The simulated Uno advances once per millisecond, so 500 steps/s is the fastest rate it reproduces exactly.
   commandLine("set_config",",\"values\":{\"max_step_rate\":500,\"acceleration\":3000}");
   CHECK(contains("completed") && planner.config.rate==500 && planner.config.accel==3000);
   {
-    uint16_t d0=planner.display; uint32_t moves=Wire.moveAccepts,t0=fakeMs; CHECK(planner.position);
+    uint16_t d0=planner.display; uint32_t moves=motor.m.moves,t0=fakeMs; CHECK(planner.position);
     commandLine("advance_pages",",\"pages\":100"); CHECK(contains("accepted"));
     spin(34000);
-    CHECK(!jobSeq && !manualPages && planner.display==uint16_t((d0+100)%720) && !fakeUno.armed && manualCompleted_==100);
-    CHECK(Wire.moveAccepts-moves==2 && fakeMs-t0<40000); // 65 + 35 pages; the per-page profile needed ~4 minutes
+    CHECK(!jobSeq && !manualPages && planner.display==uint16_t((d0+100)%720) && !motor.running() && manualCompleted_==100);
+    CHECK(motor.m.moves-moves==2 && fakeMs-t0<40000); // 65 + 35 pages; the per-page profile needed ~4 minutes
     commandLine("advance_pages",",\"pages\":721"); CHECK(contains("E_RANGE"));
-    commandLine("jog_steps",",\"steps\":2000"); spin(8000); CHECK(!jobSeq && !queuedJog_ && fakeUno.executed==2000 && !fakeUno.mask);
+    commandLine("jog_steps",",\"steps\":2000"); spin(8000); CHECK(!jobSeq && !queuedJog_ && motor.m.executed==2000 && !motor.m.mask);
     commandLine("jog_steps",",\"steps\":8001"); CHECK(contains("E_RANGE"));
   }
   // ---- OTA over HTTP: idle-only, validated, never half-applied ----
@@ -252,12 +252,11 @@ int main() {
   ESP.restarted=false; Update=FakeUpdate();
   web.authOk=false; sendImage(image); CHECK(web.lastCode==401 && !Update.began && Update.data.empty() && !ESP.restarted); web.authOk=true;
   queuedJog_=4; sendImage(image); CHECK(web.lastCode==409 && has(web.lastBody,"E_BUSY") && !Update.began && !ESP.restarted); queuedJog_=0;
-  link.retry(); spin(1500); CHECK(link.ready && !systemFault);
   std::string bad(70000,'x'); sendImage(bad); CHECK(web.lastCode==409 && has(web.lastBody,"E_OTA_IMAGE") && Update.aborted && Update.data.empty() && !ESP.restarted);
   Update=FakeUpdate(); Update.failBegin=true; sendImage(image); CHECK(web.lastCode==409 && has(web.lastBody,"E_OTA_NO_PARTITION") && !ESP.restarted);
   Update=FakeUpdate(); std::string tiny(100,'x'); tiny[0]=char(0xE9); sendImage(tiny); CHECK(web.lastCode==409 && has(web.lastBody,"E_OTA_END") && Update.aborted && !ESP.restarted);
   Update=FakeUpdate(); Update.failEnd=true; sendImage(image); CHECK(web.lastCode==409 && has(web.lastBody,"E_OTA_END") && Update.aborted && !ESP.restarted);
-  spin(1500); CHECK(link.ready && !systemFault); // a failed upload must not leave a spurious link fault behind
+  spin(1500); CHECK(!systemFault); // a failed upload must not leave a fault behind
   Update=FakeUpdate(); planner.paused=false; sendImage(image);
   CHECK(web.lastCode==200 && has(web.lastBody,"\"ok\":true") && Update.ended && Update.data==image && ESP.restarted && planner.paused);
   uint32_t generationBefore=store.saved.generation; planner.invalidate(); restoreActive=false; planner.config.offset=300;
@@ -289,6 +288,6 @@ int main() {
   connection.auth=false;
   static_cast<NimBLEServerCallbacks&>(serverCallbacks).onAuthenticationComplete(connection);
   CHECK(!authenticated.load());
-  printf("PASS app: %u checks; actual command/supervisor/RTC/NVS/link code with simulated devices\n",checks);
+  printf("PASS app: %u checks; actual command/supervisor/motor/NVS/web code with simulated devices\n",checks);
   return 0;
 }

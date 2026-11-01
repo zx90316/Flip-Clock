@@ -16,8 +16,7 @@ ROOT = Path(__file__).resolve().parents[1]
 TOOLS = ROOT / '.tools'
 CLI_VERSION = '1.5.1'
 INDEX = 'https://espressif.github.io/arduino-esp32/package_esp32_index.json'
-BOARDS = {'uno_motor': 'arduino:avr:uno',
-          'esp32_clock': 'esp32:esp32:esp32cam:PartitionScheme=min_spiffs,FlashFreq=40'}
+BOARDS = {'esp32_clock': 'esp32:esp32:esp32cam:PartitionScheme=min_spiffs,FlashFreq=40'}
 SHORT_ROOT = ROOT
 
 def shorten_windows_paths():
@@ -87,8 +86,7 @@ def setup():
             z.extract('arduino-cli.exe', TOOLS / 'cli')
     run([cli(), 'version'])
     run([cli(), 'core', 'update-index', '--additional-urls', INDEX])
-    for core in ['arduino:avr@1.8.8', 'esp32:esp32@3.3.12']:
-        run([cli(), 'core', 'install', core, '--additional-urls', INDEX])
+    run([cli(), 'core', 'install', 'esp32:esp32@3.3.12', '--additional-urls', INDEX])
     run([cli(), 'lib', 'install', 'NimBLE-Arduino@2.5.1'])
     if not (TOOLS / 'host/ziglang').exists():
         run([sys.executable, '-m', 'pip', 'install', '--target', TOOLS / 'host', 'ziglang==0.13.0'])
@@ -108,7 +106,7 @@ def build(board):
          '--output-dir', out, ROOT / 'firmware' / board], ROOT / 'docs' / (board + '-build.txt'))
     files = {p.name: hashlib.sha256(p.read_bytes()).hexdigest() for p in out.iterdir()
              if p.suffix in {'.hex', '.bin', '.elf'}}
-    (out / 'manifest.json').write_text(json.dumps({'firmware': '0.3.0', 'protocol': 1,
+    (out / 'manifest.json').write_text(json.dumps({'firmware': '0.4.0', 'protocol': 1,
         'fqbn': BOARDS[board], 'sha256': files}, indent=2) + '\n', encoding='utf-8')
 
 def main():

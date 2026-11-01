@@ -10,22 +10,15 @@ definitions = [
     ('Flip：準備桌面操作工具', 'dev', ['desktop-setup']),
     ('Flip：安裝編譯環境', 'build', ['setup']),
     ('Flip：列出連接埠', 'dev', ['ports']),
-    ('Flip：建置 Uno', 'build', ['build','--board','uno_motor']),
-    ('Flip：建置 ESP32-CAM', 'build', ['build','--board','esp32_clock']),
-    ('Flip：建置兩板', 'build', ['build']),
+    ('Flip：建置韌體', 'build', ['build','--board','esp32_clock']),
     ('Flip：執行全部軟體測試', 'build', ['test']),
-    ('Uno：燒錄並驗證（單板 USB）', 'dev', ['upload','--board','uno_motor']),
-    ('Uno：讀取安全待機狀態', 'dev', ['uno-status']),
-    ('Uno：單顆空載試轉 16 半步（需先接線）', 'dev', ['bench','--steps','16','--rate','30']),
-    ('Uno：序列維修台', 'dev', ['monitor','--board','uno_motor']),
-    ('Uno：堆疊分析', 'analyze_uno_stack', []),
-    ('ESP：燒錄並驗證（Uno UART 模式）', 'dev', ['upload','--board','esp32_clock']),
+    ('ESP：序列燒錄（救援用）', 'dev', ['upload','--board','esp32_clock']),
     ('ESP：序列維修台', 'dev', ['monitor','--board','esp32_clock']),
     ('ESP：開啟 BLE 配對窗口', 'dev', ['pair']),
     ('ESP：設定 Wi-Fi（密碼不顯示）', 'dev', ['wifi']),
     ('ESP：設定 NTP 伺服器', 'dev', ['monitor','--board','esp32_clock','--initial','ntp ${input:ntpServers}']),
     ('ESP：清除 BLE bond（本地維修）', 'dev', ['monitor','--board','esp32_clock','--initial','clear_bonds CONFIRM']),
-    ('ESP：清除已保存設定（本地維修，RTC 保留）', 'dev', ['monitor','--board','esp32_clock','--initial','reset_config CONFIRM']),
+    ('ESP：清除已保存設定（本地維修）', 'dev', ['monitor','--board','esp32_clock','--initial','reset_config CONFIRM']),
     ('BLE：掃描裝置', 'dev', ['ble-scan']),
     ('BLE：互動主控台', 'dev', ['ble']),
     ('BLE：讀取狀態', 'dev', ['ble-op','--op','get_status']),
@@ -52,7 +45,7 @@ for title, script, args in definitions:
             'options':{'cwd':'${workspaceFolder}','env':{'PYTHONUTF8':'1','PYTHONUNBUFFERED':'1'}},
             'presentation':{'reveal':'always','panel':'dedicated','clear':False,'focus':True},
             'problemMatcher':['$gcc'] if script=='build' else []}
-    if title=='Flip：建置兩板': task['group']={'kind':'build','isDefault':True}
+    if title=='Flip：建置韌體': task['group']={'kind':'build','isDefault':True}
     if title=='Flip：執行全部軟體測試': task['group']={'kind':'test','isDefault':True}
     tasks.append(task)
 inputs = [{'id':key,'type':'promptString','description':description,'default':default} for key,description,default in [
@@ -67,9 +60,8 @@ inputs.append({'id':'confirmLarge','type':'pickString','description':'是否明�
 launches = []
 for title,script,args in definitions:
     if '${input:' in ' '.join(args) or script not in {'dev','build'}: continue
-    if title not in {'Flip：主控操作台','Flip：檢查環境','Flip：建置兩板','Flip：執行全部軟體測試',
-                     'Uno：燒錄並驗證（單板 USB）','Uno：讀取安全待機狀態','Uno：序列維修台',
-                     'ESP：燒錄並驗證（Uno UART 模式）','ESP：序列維修台','ESP：開啟 BLE 配對窗口',
+    if title not in {'Flip：主控操作台','Flip：檢查環境','Flip：建置韌體','Flip：執行全部軟體測試',
+                     'ESP：序列燒錄（救援用）','ESP：序列維修台','ESP：開啟 BLE 配對窗口',
                      'ESP：設定 Wi-Fi（密碼不顯示）','BLE：互動主控台'}: continue
     launches.append({'name':title,'type':'debugpy','request':'launch',
         'program':'${workspaceFolder}/tools/'+script+'.py','args':args,'cwd':'${workspaceFolder}',

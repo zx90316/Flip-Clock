@@ -19,7 +19,7 @@ inline void encodeSaved(const Saved& s,uint8_t* b) {
   put16(b+32,s.config.maxSeconds); put16(b+34,s.config.checkpoint);
   b[36]=s.config.mechanics; b[37]=s.config.reverse; b[38]=s.config.autoTime; b[39]=uint8_t(s.config.direction);
   b[40]=s.hasSnapshot; b[41]=s.phase; put16(b+42,s.display); put32(b+44,s.r); put64(b+48,uint64_t(s.utc));
-  b[56]=1; // board profile AI_THINKER_ESP32_CAM_DUAL_UNO; fixed release_coils and SAFE_RECONFIRM.
+  b[56]=1; // board profile; unchanged since the dual-controller build so saved settings stay readable.
   put32(b+57,s.snapshotGeneration); b[61]=s.source; put16(b+62,s.snapshotCycle); put16(b+64,uint16_t(s.config.trim));
   put32(b+76,crc32(b,76));
 }

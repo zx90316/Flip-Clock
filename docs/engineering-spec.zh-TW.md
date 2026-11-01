@@ -1,3 +1,5 @@
+> **歷史文件。** 本規格描述早期的 ESP32-CAM＋Uno 雙主控設計與 RTC。現行設計是 ESP32-CAM 單主控、只用網路時間，以 [README](../README.md) 與 [接線文件](wiring.md) 為準。
+
 # ESP32-CAM＋Arduino Uno 雙主控翻頁時鐘：Codex 工程實作規格
 
 版本：2.0 · 2026-10-31 · 繁體中文

@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: GPL-3.0-only
 #pragma once
 #include <Arduino.h>
-#include <Wire.h>
+#include <esp_timer.h>
 #include <Preferences.h>
 #include <FlipCalendar.h>
 #include <FlipStorage.h>
@@ -65,7 +65,7 @@ class NetClock {
     }
     slot_=slot_==0?1:0; saved=next; dirty=false; ++writes; lastWrite=now; return true;
   }
-  // Explicit local service command only; RTC and BLE bond partition are untouched.
+  // Explicit local service command only; the BLE bond partition is untouched.
   bool resetConfig() {
     prefs.remove("a"); prefs.remove("b");
     if(prefs.getBytesLength("a") || prefs.getBytesLength("b")) return false;
@@ -74,74 +74,40 @@ class NetClock {
  private:
   Preferences prefs; int slot_=-1;
 };
-class Link {
+// Drives the ULN2003 from esp_timer's task, so web, Wi-Fi and BLE work in the loop cannot stall a move. A late
+// step only pauses the motor: there is no catch-up burst. Every move is bounded, so coils always end up off.
+class Motor {
  public:
-  Frame status;
-  uint32_t session=0,seq=0,errors=0,lastRead=0;
-  bool online=false,ready=false,pending=false,fault=false;
-  uint8_t result=0;
-  uint32_t acknowledged=0;
-  void begin() { do { session=esp_random(); } while(!session); }
-  bool running() const { return online && status.op()==RUNNING; }
-  bool armed() const { return online && (status.bytes[3]&2); }
-  bool coilZero() const { return online && (status.bytes[3]&8); }
-  bool send(Op op,uint32_t a=0,uint32_t b=0,uint32_t c=0,uint32_t d=0) {
-    if(pending || !ready || fault || seq>=0xfffffffeUL) return false;
-    waiting_=command(op,session,++seq); waiting_.arg(0,a); waiting_.arg(1,b); waiting_.arg(2,c); waiting_.arg(3,d); waiting_.seal();
-    pending=true; attempts_=0; sent_=millis(); transmit(waiting_); return true;
+  Motion m;
+  void begin() {
+    for(uint8_t pin:PINS) { pinMode(pin,OUTPUT); digitalWrite(pin,LOW); }
+    esp_timer_create_args_t args={}; args.callback=&Motor::onTimer; args.arg=this; args.name="flip-step";
+    esp_timer_create(&args,&timer_);
   }
-  bool stop() {
-    // STOP supersedes a pending application request; position must be invalidated by caller.
-    pending=false;
-    if(!online || status.session()!=session || seq>=0xfffffffeUL) return false;
-    ready=true; fault=false; return send(STOP);
+  bool start(uint32_t steps,uint16_t rate,uint16_t accel,uint32_t timeoutMs,uint32_t nowMs) {
+    esp_timer_stop(timer_);
+    portENTER_CRITICAL(&mux_); bool ok=m.start(steps,rate,accel,timeoutMs,nowMs); portEXIT_CRITICAL(&mux_);
+    if(!ok) return false;
+    if(esp_timer_start_once(timer_,1)!=ESP_OK) { stop(); return false; }
+    return true;
   }
-  void tick(uint32_t now) {
-    if(fault) return; // Do not refresh lease after an uncertain transaction.
-    if(uint32_t(now-lastPoll_)>=50) {
-      lastPoll_=now;
-      Frame f; uint8_t n=Wire.requestFrom(uint8_t(0x12),uint8_t(32));
-      if(n==32) { for(uint8_t i=0;i<32;++i) f.bytes[i]=uint8_t(Wire.read()); }
-      if(n!=32 || !f.valid() || f.op()>FAULT || (f.bytes[3]&0xf0)) { ++errors; }
-      else {
-        bool wasReady=ready; status=f; online=true; lastRead=now;
-        if(f.session()!=session) {
-          ready=false;
-          if(wasReady || pending) { fault=true; pending=false; return; }
-          if(!(f.bytes[3]&2) && f.op()!=RUNNING && uint32_t(now-lastOpen_)>=200) {
-            Frame open=command(OPEN,session); open.seal(); transmit(open); lastOpen_=now;
-          }
-        } else {
-          ready=true;
-          if(!wasReady) lastBeat_=now-250;
-          if(pending && f.arg(2)==waiting_.seq()) {
-            acknowledged=waiting_.seq(); result=uint8_t(get16(f.bytes+28)); pending=false;
-          }
-        }
-      }
-    }
-    if(online && uint32_t(now-lastRead)>500) { online=false; ready=false; fault=true; pending=false; return; }
-    if(ready && uint32_t(now-lastBeat_)>=250) {
-      Frame beat=command(HEARTBEAT,session); beat.seal(); transmit(beat); lastBeat_=now;
-    }
-    if(pending && uint32_t(now-sent_)>=200) {
-      if(attempts_>=3) { fault=true; pending=false; return; }
-      ++attempts_; sent_=now; transmit(waiting_);
-    }
-    if(seq>=0xfffffffeUL && !pending && !running()) {
-      // No wrap. Disarm in old generation before opening a fresh session.
-      if(armed()) {
-        waiting_=command(DISARM,session,0xffffffffUL); waiting_.seal(); transmit(waiting_);
-      } else { begin(); seq=0; ready=false; acknowledged=0; }
-    }
-  }
-  void retry() { fault=false; online=false; ready=false; pending=false; begin(); seq=0; lastPoll_=millis(); }
+  void stop() { esp_timer_stop(timer_); portENTER_CRITICAL(&mux_); m.stop(); write(); portEXIT_CRITICAL(&mux_); }
+  void fail() { esp_timer_stop(timer_); portENTER_CRITICAL(&mux_); m.fail(); write(); portEXIT_CRITICAL(&mux_); }
+  void clear() { esp_timer_stop(timer_); portENTER_CRITICAL(&mux_); m.clear(); write(); portEXIT_CRITICAL(&mux_); }
+  void tick(uint32_t now) { if(m.timedOut(now)) fail(); }
+  bool running() const { return m.state==Motion::RUNNING; }
+  bool done() const { return m.state==Motion::DONE; }
+  bool faulted() const { return m.state==Motion::FAULT; }
+  bool coilZero() const { return m.mask==0; }
  private:
-  Frame waiting_;
-  uint32_t lastPoll_=0,lastBeat_=0,lastOpen_=0,sent_=0;
-  uint8_t attempts_=0;
-  void transmit(const Frame& f) {
-    Wire.beginTransmission(0x12); Wire.write(f.bytes,32); if(Wire.endTransmission()!=0) ++errors;
+  static constexpr uint8_t PINS[4]={12,13,14,15}; // IN1..IN4; the only free pins with camera and SD unused
+  esp_timer_handle_t timer_=nullptr;
+  portMUX_TYPE mux_=portMUX_INITIALIZER_UNLOCKED;
+  void write() { for(uint8_t i=0;i<4;++i) digitalWrite(PINS[i],(m.mask>>i)&1?HIGH:LOW); }
+  static void onTimer(void* self) {
+    Motor* motor=static_cast<Motor*>(self);
+    portENTER_CRITICAL(&motor->mux_); uint32_t wait=motor->m.step(); motor->write(); portEXIT_CRITICAL(&motor->mux_);
+    if(wait) esp_timer_start_once(motor->timer_,wait);
   }
 };
 } // namespace clockapp
