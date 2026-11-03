@@ -8,12 +8,15 @@ constexpr int WIFI_SCAN_RUNNING=-1,WIFI_SCAN_FAILED=-2,WIFI_AUTH_OPEN=0,WIFI_AUT
 struct FakeNet { std::string ssid; int rssi; int auth; };
 struct FakeIp { std::string toString() const { return "192.168.1.77"; } };
 struct FakeWifi {
-  int state=WL_DISCONNECTED; std::string apName,apPassword,beganSsid,beganPassword; bool disconnected=false;
+  int state=WL_DISCONNECTED; std::string apName,apPassword,beganSsid,beganPassword; bool disconnected=false,autoReconnect=true;
+  uint8_t apClients=0;
   std::vector<FakeNet> nets; int scanPolls=0,scanCalls=0; bool scanning=false;
   void (*eventCb)(WiFiEvent_t,WiFiEventInfo_t)=nullptr; int begins=0;
   void onEvent(void (*cb)(WiFiEvent_t,WiFiEventInfo_t),int) { eventCb=cb; }
   void fireDisconnect(int reason) { WiFiEventInfo_t info; info.wifi_sta_disconnected.reason=reason; eventCb(ARDUINO_EVENT_WIFI_STA_DISCONNECTED,info); }
   int status() { return state; } void persistent(bool) {} void mode(int) {}
+  bool setAutoReconnect(bool value) { autoReconnect=value; return true; }
+  uint8_t softAPgetStationNum() { return apClients; }
   void begin(const char* ssid,const char* password) { beganSsid=ssid; beganPassword=password; disconnected=false; ++begins; }
   void disconnect(bool=false,bool=false) { disconnected=true; beganSsid.clear(); state=WL_DISCONNECTED; }
   bool softAP(const char* name,const char* password) { apName=name; apPassword=password; return true; }

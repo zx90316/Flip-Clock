@@ -95,6 +95,7 @@ def setup():
 def build(board):
     out = ROOT / 'dist' / board
     out.mkdir(parents=True, exist_ok=True)
+    build_path = ROOT / '.build' / board
     flags = []
     if board == 'esp32_clock':
         from harden_ble import harden
@@ -102,11 +103,23 @@ def build(board):
         flags = ['--build-property', 'compiler.c.extra_flags=-DMYNEWT_VAL_BLE_SM_SC_ONLY=1',
                  '--build-property', 'compiler.cpp.extra_flags=-DMYNEWT_VAL_BLE_SM_SC_ONLY=1']
     run([cli(), 'compile', '--fqbn', BOARDS[board], '--warnings', 'all', *flags,
-         '--libraries', ROOT / 'shared', '--build-path', ROOT / '.build' / board,
-         '--output-dir', out, ROOT / 'firmware' / board], ROOT / 'docs' / (board + '-build.txt'))
-    files = {p.name: hashlib.sha256(p.read_bytes()).hexdigest() for p in out.iterdir()
-             if p.suffix in {'.hex', '.bin', '.elf'}}
-    (out / 'manifest.json').write_text(json.dumps({'firmware': '0.4.3', 'protocol': 1,
+         '--libraries', ROOT / 'shared', '--build-path', build_path,
+         ROOT / 'firmware' / board], ROOT / 'docs' / (board + '-build.txt'))
+    # Copy after arduino-cli exits. Its --output-dir hook can fail on Windows
+    # while the linker still has the previous exported image memory-mapped.
+    image_names = [f'{board}.ino.{suffix}' for suffix in
+                   ('bin', 'bootloader.bin', 'partitions.bin', 'elf', 'merged.bin')]
+    files = {}
+    for name in image_names:
+        source = build_path / name
+        shutil.copy2(source, out / name)
+        files[name] = hashlib.sha256(source.read_bytes()).hexdigest()
+    tracked_build = ROOT / 'firmware' / board / 'build' / 'esp32.esp32.esp32cam'
+    if tracked_build.is_dir():
+        for name in [*image_names, f'{board}.ino.map', 'build.options.json',
+                     'partitions.csv', 'sdkconfig']:
+            shutil.copy2(build_path / name, tracked_build / name)
+    (out / 'manifest.json').write_text(json.dumps({'firmware': '0.4.7', 'protocol': 1,
         'fqbn': BOARDS[board], 'sha256': files}, indent=2) + '\n', encoding='utf-8')
 
 def main():

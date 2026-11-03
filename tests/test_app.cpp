@@ -65,23 +65,30 @@ int main() {
   // ---- Web console: authenticated, same protocol, client-supplied ids ignored ----
   auto webCmd=[](const char* body) { web.body=body; web.post["/api/cmd"](); return web.lastBody; };
   auto has=[](const std::string& s,const char* needle) { return s.find(needle)!=std::string::npos; };
-  CHECK(WiFi.apName.rfind("FlipClock-",0)==0 && strlen(webPassword)==12 && WiFi.apPassword==webPassword && web.begun);
+  CHECK(WiFi.apName.rfind("FlipClock-",0)==0 && strlen(webPassword)==12 && WiFi.apPassword==webPassword && web.begun && !WiFi.autoReconnect);
   CHECK(fakeNvs["flip-web"]["pw"].size()==13);
   web.get["/"](); CHECK(web.lastCode==200 && has(web.lastBody,"翻頁時鐘") && has(web.lastType,"text/html"));
   web.bearer=std::string("Bearer ")+webToken; CHECK(strlen(webToken)==32 && fakeNvs["flip-web"]["tok"].size()==33);
   web.authOk=false; web.get["/api/state"](); CHECK(web.lastCode==401 && !has(web.lastBody,"display"));
   uint32_t accepted=motor.m.moves; web.body="{\"op\":\"jog_steps\",\"steps\":4}"; web.post["/api/cmd"]();
   CHECK(web.lastCode==401 && motor.m.moves==accepted && !queuedJog_); web.authOk=true;
-  web.get["/api/state"](); { cJSON* j=cJSON_Parse(web.lastBody.c_str()); CHECK(j && cJSON_IsString(cJSON_GetObjectItemCaseSensitive(j,"state"))); cJSON_Delete(j); }
+  web.get["/api/state"](); { cJSON* j=cJSON_Parse(web.lastBody.c_str()); CHECK(j && cJSON_IsString(cJSON_GetObjectItemCaseSensitive(j,"state")) &&
+    cJSON_GetObjectItemCaseSensitive(j,"savedQ") && cJSON_GetObjectItemCaseSensitive(j,"remainder")); cJSON_Delete(j); }
+  { bool position=planner.position; uint32_t generation=store.saved.generation;
+    planner.position=false; store.saved.generation=0; web.get["/api/state"]();
+    CHECK(has(web.lastBody,"\"savedQ\":null") && has(web.lastBody,"\"remainder\":null"));
+    planner.position=position; store.saved.generation=generation; }
   CHECK(has(webCmd("not json"),"E_JSON") && has(webCmd("{\"op\":1}"),"E_JSON"));
   CHECK(has(webCmd("{\"op\":\"bogus\"}"),"E_OP"));
   CHECK(has(webCmd("{\"v\":9,\"id\":1,\"boot_id\":\"zz\",\"op\":\"get_config\"}"),"\"phase\":\"completed\""));
   std::string reply=webCmd("{\"op\":\"set_display\",\"hour\":8,\"minute\":0,\"aligned\":true}");
   CHECK(has(reply,"completed") && planner.position && planner.display==480);
+  web.get["/api/state"](); CHECK(has(web.lastBody,"\"savedQ\":136533333") && has(web.lastBody,"\"remainder\":0"));
   reply=webCmd("{\"op\":\"advance_pages\",\"pages\":3}"); CHECK(has(reply,"accepted"));
-  web.get["/api/state"](); CHECK(has(web.lastBody,"\"busy\":true"));
+  web.get["/api/state"](); CHECK(has(web.lastBody,"\"busy\":true") && has(web.lastBody,"\"remainder\":0"));
   CHECK(has(webCmd("{\"op\":\"set_time\",\"utc_s\":1793462400}"),"E_BUSY"));
   spin(12000); web.get["/api/state"](); CHECK(has(web.lastBody,"\"busy\":false") && has(web.lastBody,"\"display\":483") && planner.display==483);
+  CHECK(has(web.lastBody,"\"remainder\":599999"));
   CHECK(has(webCmd("{\"op\":\"save_config\"}"),"accepted")); spin(500);
   CHECK(store.saved.hasSnapshot && store.saved.display==483 && !store.dirty);
   // ---- Power cycle: NVS and RTC survive, volatile state is lost, position is restored and caught up ----
@@ -145,28 +152,53 @@ int main() {
       WiFi.fireDisconnect(15); CHECK(has(getWifi(),"\"why\":15")); spin(100); CHECK(WiFi.begins==begins+1); // a real failure retries; the cause is reported
       WiFi.fireDisconnect(15); spin(30000); }
     json=getWifi(); CHECK(has(json,"E_WIFI_TIMEOUT") && has(json,"\"why\":15") && !network.ssid[0] && NimBLEDevice::getAdvertising()->on);
-    // The connection comes up after the trial gave up: it is kept, so it survives a power cycle.
-    WiFi.begin("Home","right-password"); WiFi.state=WL_CONNECTED; spin(10); CHECK(!strcmp(network.ssid,"Home"));
-    { Network live=network; network=Network(); loadNetwork(); CHECK(!strcmp(network.ssid,"Home") && !strcmp(network.password,"right-password")); network=live; }
-    WiFi.disconnect(); network=Network(); CHECK(saveNetwork());
+    // A connection that arrives after a failed trial must not silently change the saved network or AP channel.
+    CHECK(has(postWifi("{\"op\":\"retry_saved\"}"),"E_WIFI_NO_SAVED"));
+    WiFi.begin("Home","right-password"); WiFi.state=WL_CONNECTED; spin(10);
+    CHECK(!network.ssid[0] && WiFi.disconnected && wifiMode==WifiMode::UNCONFIGURED);
     // Verified connection: saved, persisted across a reload, password cleared from RAM trial buffer.
     postWifi("{\"op\":\"connect\",\"ssid\":\"Home\",\"password\":\"right-password\"}"); WiFi.state=WL_CONNECTED; spin(200);
     json=getWifi(); CHECK(has(json,"\"state\":\"ok\"") && has(json,"192.168.1.77") && has(json,"\"connected\":true") && has(json,"\"saved\":\"Home\"") && !trialPassword[0]);
     { Network live=network; network=Network(); loadNetwork(); CHECK(!strcmp(network.ssid,"Home") && !strcmp(network.password,"right-password")); network=live; }
-    // Power cycle: the saved network is joined with no help, and retries stay frequent while the router boots.
-    WiFi.state=WL_DISCONNECTED; WiFi.beganSsid.clear(); WiFi.beganPassword.clear(); network=Network(); loadNetwork(); lastWifi=fakeMs-300000; wifiBackoff=30000; spin(10);
-    CHECK(WiFi.beganSsid=="Home" && WiFi.beganPassword=="right-password");
-    spin(200000); CHECK(wifiBackoff==60000 && uint32_t(fakeMs-lastWifi)<=60000);
-    WiFi.state=WL_CONNECTED; spin(10); WiFi.state=WL_DISCONNECTED; wifiBackoff=30000;
-    // A failed attempt on another network goes back to the saved one.
+    // If somebody is already using the AP, do not start a saved-network attempt.
+    WiFi.state=WL_DISCONNECTED; WiFi.apClients=1; network=Network(); loadNetwork(); startSavedTries(fakeMs);
+    { int begins=WiFi.begins; spin(10); CHECK(WiFi.begins==begins && wifiMode==WifiMode::SETUP && WiFi.disconnected);
+      WiFi.apClients=0; spin(90000); CHECK(WiFi.begins==begins && has(getWifi(),"\"connectionMode\":\"setup\"")); }
+    // No AP client: try at boot and 30 s, then keep the AP stable after 60 s.
+    startSavedTries(fakeMs);
+    { int begins=WiFi.begins; spin(10); CHECK(WiFi.begins==begins+1 && WiFi.beganSsid=="Home" && WiFi.beganPassword=="right-password");
+      spin(30010); CHECK(WiFi.begins==begins+2);
+      spin(30010); CHECK(wifiMode==WifiMode::SETUP && WiFi.disconnected);
+      spin(120000); CHECK(WiFi.begins==begins+2 && has(getWifi(),"\"connectionMode\":\"setup\"")); }
+    WiFi.begin("Home","right-password"); WiFi.state=WL_CONNECTED; spin(10);
+    CHECK(wifiMode==WifiMode::SETUP && WiFi.disconnected); // ignore a late join even if it matches the saved SSID
+    startSavedTries(fakeMs); spin(10); WiFi.apClients=1; spin(10);
+    CHECK(wifiMode==WifiMode::SETUP && WiFi.disconnected); WiFi.apClients=0; // joining the AP also cancels a running attempt
+    // Explicit retry has its own 45 s trial; failure leaves the old credentials and stable AP in place.
+    { int begins=WiFi.begins; auto savedBytes=fakeNvs["flip-network"]["config"];
+      CHECK(has(postWifi("{\"op\":\"retry_saved\"}"),"\"ok\":true") && WiFi.begins==begins+1);
+      WiFi.state=WL_NO_SSID_AVAIL; spin(3500);
+      CHECK(has(getWifi(),"E_WIFI_NOT_FOUND") && wifiMode==WifiMode::SETUP && fakeNvs["flip-network"]["config"]==savedBytes);
+      spin(65000); CHECK(WiFi.begins==begins+1);
+      postWifi("{\"op\":\"retry_saved\"}"); WiFi.state=WL_CONNECTED; spin(200);
+      CHECK(has(getWifi(),"\"state\":\"ok\"") && wifiMode==WifiMode::CONNECTED && fakeNvs["flip-network"]["config"]==savedBytes); }
+    // A connected saved network that drops gets a fresh bounded recovery window.
+    WiFi.state=WL_DISCONNECTED; spin(10); CHECK(wifiMode==WifiMode::TRYING_SAVED && WiFi.beganSsid=="Home");
+    WiFi.state=WL_CONNECTED; spin(10); CHECK(wifiMode==WifiMode::CONNECTED);
+    // A failed trial restores the saved network only when it had been connected before that trial.
     postWifi("{\"op\":\"connect\",\"ssid\":\"Other\",\"password\":\"other-password\"}"); WiFi.state=WL_NO_SSID_AVAIL; spin(3500);
     json=getWifi(); CHECK(has(json,"E_WIFI_NOT_FOUND") && !strcmp(network.ssid,"Home") && WiFi.beganSsid=="Home" && !strcmp(network.password,"right-password"));
-    // Connected but the save fails: reported as failure, old credentials kept.
-    WiFi.state=WL_DISCONNECTED; postWifi("{\"op\":\"connect\",\"ssid\":\"New\",\"password\":\"new-password1\"}"); WiFi.state=WL_CONNECTED;
-    nvsWriteFailure=true; spin(200); nvsWriteFailure=false; json=getWifi(); CHECK(has(json,"E_WIFI_SAVE") && !strcmp(network.ssid,"Home"));
+    // At a new location, a failed new-network save keeps old credentials without another background join.
+    WiFi.state=WL_DISCONNECTED; wifiMode=WifiMode::SETUP;
+    postWifi("{\"op\":\"connect\",\"ssid\":\"New\",\"password\":\"new-password1\"}"); WiFi.state=WL_CONNECTED;
+    nvsWriteFailure=true; spin(200); nvsWriteFailure=false; json=getWifi();
+    CHECK(has(json,"E_WIFI_SAVE") && !strcmp(network.ssid,"Home") && wifiMode==WifiMode::SETUP && WiFi.disconnected);
+    postWifi("{\"op\":\"connect\",\"ssid\":\"New\",\"password\":\"new-password1\"}"); WiFi.state=WL_CONNECTED; spin(200);
+    CHECK(wifiMode==WifiMode::CONNECTED && !strcmp(network.ssid,"New") && !strcmp(network.password,"new-password1"));
+    { Network live=network; network=Network(); loadNetwork(); CHECK(!strcmp(network.ssid,"New")); network=live; }
     // Forget.
     CHECK(has(postWifi("{\"op\":\"forget\"}"),"\"ok\":true") && !network.ssid[0] && WiFi.disconnected);
-    WiFi.begin("Home","right-password"); WiFi.state=WL_CONNECTED; spin(10); CHECK(!network.ssid[0]); WiFi.disconnect(); // a connection still going down is not re-saved
+    WiFi.begin("Home","right-password"); WiFi.state=WL_CONNECTED; spin(10); CHECK(!network.ssid[0] && WiFi.disconnected); // a late connection is not re-saved
     { Network live=network; network.ssid[0]='x'; loadNetwork(); CHECK(!network.ssid[0]); network=live; }
     WiFi.state=WL_DISCONNECTED;
   }
@@ -240,6 +272,19 @@ int main() {
     commandLine("set_trim",",\"steps\":-3"); spin(6000); CHECK(planner.config.trim==-3 && planner.position);
     spin(6000); commandLine("save_config"); spin(500); Store reboot2; Config loaded2; CHECK(reboot2.begin(loaded2) && loaded2.trim==-3);
     planner.invalidate(); commandLine("set_trim",",\"steps\":1"); CHECK(contains("E_NOT_CALIBRATED"));
+    commandLine("set_display",",\"hour\":8,\"minute\":0,\"aligned\":true");
+  }
+  // Manual advance changes only the motor angle; position, remainder, config and save state stay put.
+  {
+    uint16_t display=planner.display; uint32_t remainder=planner.remainder, generation=store.saved.generation;
+    int16_t trim=planner.config.trim; bool dirty=store.dirty;
+    commandLine("advance_steps",",\"steps\":8"); spin(3000);
+    CHECK(contains("\"steps_sent\":8") && motor.m.executed==8 && planner.position && planner.display==display &&
+          planner.remainder==remainder && planner.config.trim==trim && store.dirty==dirty && store.saved.generation==generation);
+    commandLine("advance_steps",",\"steps\":0"); CHECK(contains("E_RANGE"));
+    commandLine("advance_steps",",\"steps\":8001"); CHECK(contains("E_RANGE"));
+    planner.invalidate(); commandLine("advance_steps",",\"steps\":1"); spin(3000);
+    CHECK(contains("\"steps_sent\":1") && !planner.position && planner.display==display && planner.remainder==remainder);
     commandLine("set_display",",\"hour\":8,\"minute\":0,\"aligned\":true");
   }
   // ---- Wizard end to end without Wi-Fi: phone time, zero at the current time, verify N minutes, save, resume ----

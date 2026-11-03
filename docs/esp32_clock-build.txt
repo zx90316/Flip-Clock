@@ -1,2 +1,2 @@
-Sketch 使用 1327050 位元組（67%）的程式儲存空間。最大為 1966080 位元組
-全域變數使用 99024 位元組 (30%) 的動態記憶體, 保留 228656 位元組給區域變數. 最大 327680 位元組
+Sketch uses 1349274 bytes (68%) of program storage space. Maximum is 1966080 bytes.
+Global variables use 99040 bytes (30%) of dynamic memory, leaving 228640 bytes for local variables. Maximum is 327680 bytes.

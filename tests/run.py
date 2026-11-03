@@ -3,6 +3,7 @@ import hashlib
 import json
 import os
 from pathlib import Path
+import shutil
 import subprocess
 import sys
 ROOT = Path(__file__).resolve().parents[1]
@@ -38,4 +39,9 @@ if adapter.exists():
     run([ZIG, 'c++', *flags, '-I' + str(ROOT / 'tests/stubs'), '-I' + str(dep), adapter, obj, '-o', binary])
     run([binary])
 run([sys.executable, '-m', 'unittest', 'discover', '-s', ROOT / 'tests', '-p', 'test_*.py'])
+node = shutil.which('node')
+if node:
+    run([node, ROOT / 'tests/test_web_ui.js'])
+else:
+    print('SKIP web UI runtime check: Node.js unavailable', flush=True)
 (ROOT / 'docs/host-tests.txt').write_text(''.join(logs), encoding='utf-8')

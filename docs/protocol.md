@@ -35,7 +35,7 @@ UTF-8 JSON Lines，以實際 LF 結束；最大每行 512 bytes，最低 MTU 每
 | 56 | board profile=1；固定 SAFE_RECONFIRM、release_coils=true |
 | 57–61 | snapshot generation uint32、source byte（0 無／1 使用者確認／2 開迴路） |
 | 62–63 | snapshot cycle uint16，保留該歷史位置的機械週期 |
-| 64–65 | 步數偏移 trim int16 |
+| 64–65 | 舊版步數偏移 trim int16（相容保留；新版手動進步不寫入） |
 | 66–75 | 保留 0 |
 | 76–79 | CRC32 |
 

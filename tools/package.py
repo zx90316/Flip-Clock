@@ -13,7 +13,7 @@ SKIP = {'.tools', '.build', '.venv', '__pycache__', '.git'}
 files = []
 for folder, directories, names in os.walk(ROOT):
     directories[:] = [d for d in directories if d not in SKIP]
-    files.extend(Path(folder) / name for name in names if not name.endswith('.pyc'))
+    files.extend(Path(folder) / name for name in names if not name.endswith(('.pyc', '_flashed.bin')))
 hashes = {str(p.relative_to(ROOT)).replace('\\', '/'): hashlib.sha256(p.read_bytes()).hexdigest()
           for p in files if p.name != 'SHA256SUMS.json'}
 (ROOT / 'SHA256SUMS.json').write_text(json.dumps(hashes, indent=2, ensure_ascii=False) + '\n', encoding='utf-8')
