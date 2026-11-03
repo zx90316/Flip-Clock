@@ -8,4 +8,5 @@ __pycache__/
 *.log
 dist/**/*.elf
 dist/**/*.map
+dist/esp32_clock/SHA256SUMS.txt
 *.zip

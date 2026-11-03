@@ -41,6 +41,8 @@ dist/esp32_clock/       可燒錄映像與 SHA-256
 
 平常在網頁的「韌體更新（OTA）」上傳 `dist/esp32_clock/esp32_clock.ino.bin`。OTA 失敗才需要序列救援，見 [接線文件](docs/wiring.md)。
 
+每次推送到 GitHub 的 `main` 後，[Actions → Build OTA firmware](https://github.com/zx90316/Flip-Clock/actions/workflows/ota.yml) 會自動執行測試與 ESP32-CAM 建置。點開最新成功的執行紀錄，在 **Artifacts** 下載 `flip-clock-ota-v…`，解壓縮後只將 `esp32_clock.ino.bin` 上傳到裝置網頁；`SHA256SUMS.txt` 可用於核對下載檔案。也可在 Actions 頁面手動執行。GitHub 的執行產物保留 90 天；建置失敗時不會提供 OTA 產物。
+
 ## 重要行為
 
 - 馬達由獨立計時器驅動，網頁、Wi-Fi、BLE 不會卡住動作；步進晚到只會稍微停頓，不會補衝。

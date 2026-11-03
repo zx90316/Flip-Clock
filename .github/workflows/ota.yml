@@ -1,0 +1,63 @@
+name: Build OTA firmware
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ota-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build-ota:
+    runs-on: windows-2022
+    timeout-minutes: 60
+    steps:
+      - name: Check out source
+        uses: actions/checkout@v7
+
+      - name: Set up Python
+        uses: actions/setup-python@v7
+        with:
+          python-version: '3.12'
+
+      - name: Install pinned build tools
+        run: python tools/build.py setup
+
+      - name: Run host tests
+        run: |
+          node --version
+          python tools/build.py test
+
+      - name: Compile ESP32-CAM firmware
+        run: python tools/build.py build --board esp32_clock
+
+      - name: Verify OTA image and write checksum
+        id: ota
+        run: python tools/verify_ota.py
+
+      - name: Upload OTA firmware
+        id: upload
+        uses: actions/upload-artifact@v7
+        with:
+          name: flip-clock-ota-v${{ steps.ota.outputs.version }}-${{ github.run_number }}
+          path: |
+            dist/esp32_clock/esp32_clock.ino.bin
+            dist/esp32_clock/SHA256SUMS.txt
+          if-no-files-found: error
+          retention-days: 90
+          compression-level: 0
+
+      - name: Show download link
+        env:
+          ARTIFACT_URL: ${{ steps.upload.outputs.artifact-url }}
+          VERSION: ${{ steps.ota.outputs.version }}
+        shell: pwsh
+        run: |
+          "## Flip Clock OTA v$env:VERSION" >> $env:GITHUB_STEP_SUMMARY
+          "[Download the OTA firmware]($env:ARTIFACT_URL)" >> $env:GITHUB_STEP_SUMMARY
+          "Extract the ZIP and upload esp32_clock.ino.bin in the device web page." >> $env:GITHUB_STEP_SUMMARY
