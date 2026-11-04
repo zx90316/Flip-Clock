@@ -1,0 +1,14 @@
+/source/original/*
+!/source/original/README.md
+/STEP/
+/STL/
+/GLB/
+/PDF/
+/tmp/
+/runs/
+/reports/original*
+__pycache__/
+*.pyc
+/simulation/generated/
+/MUJOCO_LOG.TXT
+/reports/package_check.json

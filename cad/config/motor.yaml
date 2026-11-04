@@ -1,0 +1,29 @@
+{
+  "candidate": "28BYJ-48 5V + ULN2003",
+  "count": 1,
+  "geometry": "generic purchased-component envelope only",
+  "torque_curve": {
+    "value": null,
+    "unit": "N*m",
+    "status": "unverified",
+    "source": "bench_measurement_required",
+    "uncertainty": null,
+    "measured_at": null
+  },
+  "actual_gear_ratio": {
+    "value": null,
+    "unit": "1",
+    "status": "unverified",
+    "source": "bench_measurement_required",
+    "uncertainty": null,
+    "measured_at": null
+  },
+  "reversal_backlash": {
+    "value": null,
+    "unit": "deg",
+    "status": "unverified",
+    "source": "bench_measurement_required",
+    "uncertainty": null,
+    "measured_at": null
+  }
+}

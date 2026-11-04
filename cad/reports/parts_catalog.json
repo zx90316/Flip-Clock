@@ -1,0 +1,3937 @@
+{
+  "design_id": "FC-R1",
+  "state": "concept_only",
+  "status": "PASS",
+  "source_document_hash": "24651e980c89cd6a28b0460f78ea82e41e6c05d69c2af8e859b8323e3ad19bb9",
+  "original_geometry_included": false,
+  "chord_tolerance_mm": 0.01,
+  "parts": [
+    {
+      "id": "A00_base_L_rear",
+      "quantity": 1,
+      "occurrences": [
+        "A00_base_L_rear"
+      ],
+      "step": "STEP/parts/A00_base_L_rear.step",
+      "stl": "STL/prototype/A00_base_L_rear.stl",
+      "stl_sha256": "912cad4fbf94cc9e777cdb80c029605584f932362d5a6ea4b180d25784ab0077",
+      "step_sha256": "3612b1e8b1c0493c394f51a30a431c16e227be9e1d13838bbc959dae39125829",
+      "prototype_only": true,
+      "material": "PETG proposal; bushings may be purchased POM",
+      "print_orientation": "Z flat",
+      "size_mm": [
+        168.0,
+        140.0,
+        6.0
+      ],
+      "native_valid": true,
+      "native_solids": 1,
+      "mesh_check": {
+        "status": "PASS",
+        "triangles": 6204,
+        "nonmanifold_edges": 0,
+        "degenerate_triangles": 0,
+        "signed_volume_mm3": 140506.63795388336,
+        "vertex_matching_mm": 1e-05
+      }
+    },
+    {
+      "id": "A00_base_L_front",
+      "quantity": 1,
+      "occurrences": [
+        "A00_base_L_front"
+      ],
+      "step": "STEP/parts/A00_base_L_front.step",
+      "stl": "STL/prototype/A00_base_L_front.stl",
+      "stl_sha256": "d56897a4ac806c60642cc6cb9c38f5f73655570a86bc66b37df9189026fcfb14",
+      "step_sha256": "e50573c658f2db996deee0846bd7f1593840163159c677324717870725f6e003",
+      "prototype_only": true,
+      "material": "PETG proposal; bushings may be purchased POM",
+      "print_orientation": "Z flat",
+      "size_mm": [
+        168.0,
+        140.0,
+        6.0
+      ],
+      "native_valid": true,
+      "native_solids": 1,
+      "mesh_check": {
+        "status": "PASS",
+        "triangles": 11384,
+        "nonmanifold_edges": 0,
+        "degenerate_triangles": 0,
+        "signed_volume_mm3": 139984.4982154547,
+        "vertex_matching_mm": 1e-05
+      }
+    },
+    {
+      "id": "A00_base_R_rear",
+      "quantity": 1,
+      "occurrences": [
+        "A00_base_R_rear"
+      ],
+      "step": "STEP/parts/A00_base_R_rear.step",
+      "stl": "STL/prototype/A00_base_R_rear.stl",
+      "stl_sha256": "11128bb12ada00708f8f9bcf9b20db3004490afb48c4b6ff4972915f1ebd1e66",
+      "step_sha256": "82ef48ba047abe86d2e530c1ae4f21f115f88d1e22e3d935313f0e72312c28bc",
+      "prototype_only": true,
+      "material": "PETG proposal; bushings may be purchased POM",
+      "print_orientation": "Z flat",
+      "size_mm": [
+        144.0,
+        140.0,
+        6.0
+      ],
+      "native_valid": true,
+      "native_solids": 1,
+      "mesh_check": {
+        "status": "PASS",
+        "triangles": 4132,
+        "nonmanifold_edges": 0,
+        "degenerate_triangles": 0,
+        "signed_volume_mm3": 120555.49377203116,
+        "vertex_matching_mm": 1e-05
+      }
+    },
+    {
+      "id": "A00_base_R_front",
+      "quantity": 1,
+      "occurrences": [
+        "A00_base_R_front"
+      ],
+      "step": "STEP/parts/A00_base_R_front.step",
+      "stl": "STL/prototype/A00_base_R_front.stl",
+      "stl_sha256": "cf0e7b69df069ddcad4f01059d4aa45d18a8656d3cf31bc1966b1389a900830e",
+      "step_sha256": "8d7b02b7834a1f85efe07f092daa9b89b670272907d2e11a9f1ea2793644d70a",
+      "prototype_only": true,
+      "material": "PETG proposal; bushings may be purchased POM",
+      "print_orientation": "Z flat",
+      "size_mm": [
+        144.0,
+        140.0,
+        6.0
+      ],
+      "native_valid": true,
+      "native_solids": 1,
+      "mesh_check": {
+        "status": "PASS",
+        "triangles": 11384,
+        "nonmanifold_edges": 0,
+        "degenerate_triangles": 0,
+        "signed_volume_mm3": 119824.4981527915,
+        "vertex_matching_mm": 1e-05
+      }
+    },
+    {
+      "id": "A03_X_seam_strap_rear",
+      "quantity": 1,
+      "occurrences": [
+        "A03_X_seam_strap_rear"
+      ],
+      "step": "STEP/parts/A03_X_seam_strap_rear.step",
+      "stl": "STL/prototype/A03_X_seam_strap_rear.stl",
+      "stl_sha256": "d1bfeaf17f20584f3f4782a6f42ad861747b2dd331aabb63eafd4e5cc6937a6a",
+      "step_sha256": "8eb70d9cfcbd468be1add4f5253ab0b85e70680471908258d29d246aa2987dc1",
+      "prototype_only": true,
+      "material": "PETG proposal; bushings may be purchased POM",
+      "print_orientation": "Z flat",
+      "size_mm": [
+        48.0,
+        14.0,
+        3.0
+      ],
+      "native_valid": true,
+      "native_solids": 1,
+      "mesh_check": {
+        "status": "PASS",
+        "triangles": 2036,
+        "nonmanifold_edges": 0,
+        "degenerate_triangles": 0,
+        "signed_volume_mm3": 1961.5304369711969,
+        "vertex_matching_mm": 1e-05
+      }
+    },
+    {
+      "id": "A03_X_seam_strap_front",
+      "quantity": 1,
+      "occurrences": [
+        "A03_X_seam_strap_front"
+      ],
+      "step": "STEP/parts/A03_X_seam_strap_front.step",
+      "stl": "STL/prototype/A03_X_seam_strap_front.stl",
+      "stl_sha256": "b14dc83e21afaf5b9d10e53122e881a0c026ee4c1b84a50020f4756129af8cf7",
+      "step_sha256": "6bbefc4b98cf932f2798e4645b4de0046f4012deb818deca846ee33c8e242c87",
+      "prototype_only": true,
+      "material": "PETG proposal; bushings may be purchased POM",
+      "print_orientation": "Z flat",
+      "size_mm": [
+        48.0,
+        14.0,
+        3.0
+      ],
+      "native_valid": true,
+      "native_solids": 1,
+      "mesh_check": {
+        "status": "PASS",
+        "triangles": 2036,
+        "nonmanifold_edges": 0,
+        "degenerate_triangles": 0,
+        "signed_volume_mm3": 1961.5304369711969,
+        "vertex_matching_mm": 1e-05
+      }
+    },
+    {
+      "id": "A03_Y_seam_strap_L",
+      "quantity": 1,
+      "occurrences": [
+        "A03_Y_seam_strap_L"
+      ],
+      "step": "STEP/parts/A03_Y_seam_strap_L.step",
+      "stl": "STL/prototype/A03_Y_seam_strap_L.stl",
+      "stl_sha256": "5f0b6e82cd7bf28ae5a6893e821eca5b9dcf955bbdf1551598500e9cf5d95a6d",
+      "step_sha256": "c4acbd0cd7500f90230d025256d49c00b4d9b6535144a2df94dbe062d833cac4",
+      "prototype_only": true,
+      "material": "PETG proposal; bushings may be purchased POM",
+      "print_orientation": "Z flat",
+      "size_mm": [
+        14.0,
+        48.0,
+        3.0
+      ],
+      "native_valid": true,
+      "native_solids": 1,
+      "mesh_check": {
+        "status": "PASS",
+        "triangles": 2036,
+        "nonmanifold_edges": 0,
+        "degenerate_triangles": 0,
+        "signed_volume_mm3": 1961.5304369711957,
+        "vertex_matching_mm": 1e-05
+      }
+    },
+    {
+      "id": "A03_Y_seam_strap_R",
+      "quantity": 1,
+      "occurrences": [
+        "A03_Y_seam_strap_R"
+      ],
+      "step": "STEP/parts/A03_Y_seam_strap_R.step",
+      "stl": "STL/prototype/A03_Y_seam_strap_R.stl",
+      "stl_sha256": "5f0b6e82cd7bf28ae5a6893e821eca5b9dcf955bbdf1551598500e9cf5d95a6d",
+      "step_sha256": "85bd74d09270d9af4b88a2ffc81dacbf03bb03e4614f35f01ac0b8fab43767ed",
+      "prototype_only": true,
+      "material": "PETG proposal; bushings may be purchased POM",
+      "print_orientation": "Z flat",
+      "size_mm": [
+        14.0,
+        48.0,
+        3.0
+      ],
+      "native_valid": true,
+      "native_solids": 1,
+      "mesh_check": {
+        "status": "PASS",
+        "triangles": 2036,
+        "nonmanifold_edges": 0,
+        "degenerate_triangles": 0,
+        "signed_volume_mm3": 1961.5304369711957,
+        "vertex_matching_mm": 1e-05
+      }
+    },
+    {
+      "id": "A04_TPU_foot_0",
+      "quantity": 4,
+      "occurrences": [
+        "A04_TPU_foot_0",
+        "A04_TPU_foot_1",
+        "A04_TPU_foot_2",
+        "A04_TPU_foot_3"
+      ],
+      "step": "STEP/parts/A04_TPU_foot_0.step",
+      "stl": "STL/prototype/A04_TPU_foot_0.stl",
+      "stl_sha256": "474aee5b954e0957edff3e37b91f1251576cad8ffe7ff30be98365b309c837b2",
+      "step_sha256": "12e995b8bc40570009d24dc57d9a61249e69e9fd61b1bdc13523a1da04b67ba6",
+      "prototype_only": true,
+      "material": "TPU proposal",
+      "print_orientation": "Z flat",
+      "size_mm": [
+        14.0,
+        14.0,
+        2.0
+      ],
+      "native_valid": true,
+      "native_solids": 1,
+      "mesh_check": {
+        "status": "PASS",
+        "triangles": 1004,
+        "nonmanifold_edges": 0,
+        "degenerate_triangles": 0,
+        "signed_volume_mm3": 307.8442176604008,
+        "vertex_matching_mm": 1e-05
+      }
+    },
+    {
+      "id": "A01_side_frame_M",
+      "quantity": 1,
+      "occurrences": [
+        "A01_side_frame_M"
+      ],
+      "step": "STEP/parts/A01_side_frame_M.step",
+      "stl": "STL/prototype/A01_side_frame_M.stl",
+      "stl_sha256": "ee32b6a12fe9d47c3fa1c82a703c190d52a82b2d48f14721c496bf66587875fa",
+      "step_sha256": "5e43b74a40a1e6a30819f8946127678f24c7df3b58cc1d89f0acab0b4c54c792",
+      "prototype_only": true,
+      "material": "PETG proposal; bushings may be purchased POM",
+      "print_orientation": "X rotated 90 degrees about Y",
+      "size_mm": [
+        98.0,
+        160.0,
+        18.0
+      ],
+      "native_valid": true,
+      "native_solids": 1,
+      "mesh_check": {
+        "status": "PASS",
+        "triangles": 6156,
+        "nonmanifold_edges": 0,
+        "degenerate_triangles": 0,
+        "signed_volume_mm3": 49636.370977661696,
+        "vertex_matching_mm": 1e-05
+      }
+    },
+    {
+      "id": "A01_side_frame_H",
+      "quantity": 1,
+      "occurrences": [
+        "A01_side_frame_H"
+      ],
+      "step": "STEP/parts/A01_side_frame_H.step",
+      "stl": "STL/prototype/A01_side_frame_H.stl",
+      "stl_sha256": "8fac888185945e11b0b1d7166aee4ec9431b0ef96859f8ec8d646c074b9853ad",
+      "step_sha256": "9fda229f343d7004f347385ba69501ef969b001cba2ed226007c9667747bf82e",
+      "prototype_only": true,
+      "material": "PETG proposal; bushings may be purchased POM",
+      "print_orientation": "X rotated 90 degrees about Y",
+      "size_mm": [
+        98.0,
+        160.0,
+        18.0
+      ],
+      "native_valid": true,
+      "native_solids": 1,
+      "mesh_check": {
+        "status": "PASS",
+        "triangles": 6156,
+        "nonmanifold_edges": 0,
+        "degenerate_triangles": 0,
+        "signed_volume_mm3": 49636.370977661696,
+        "vertex_matching_mm": 1e-05
+      }
+    },
+    {
+      "id": "A02_center_twin_bearing_pedestal",
+      "quantity": 1,
+      "occurrences": [
+        "A02_center_twin_bearing_pedestal"
+      ],
+      "step": "STEP/parts/A02_center_twin_bearing_pedestal.step",
+      "stl": "STL/prototype/A02_center_twin_bearing_pedestal.stl",
+      "stl_sha256": "e2cd3cd411e5c07ba75e5bf6c595c528e705c11a68e96cd1fe5ac79ed47ae6af",
+      "step_sha256": "d44ef0eea1bd4ab2ceac8aee2dfebdc75f4b6c4117cd8ff2a3b4d075569a2a51",
+      "prototype_only": true,
+      "material": "PETG proposal; bushings may be purchased POM",
+      "print_orientation": "Y rotated 90 degrees about X",
+      "size_mm": [
+        42.0,
+        98.0,
+        32.000000000000014
+      ],
+      "native_valid": true,
+      "native_solids": 1,
+      "mesh_check": {
+        "status": "PASS",
+        "triangles": 4784,
+        "nonmanifold_edges": 0,
+        "degenerate_triangles": 0,
+        "signed_volume_mm3": 54193.41572800824,
+        "vertex_matching_mm": 1e-05
+      }
+    },
+    {
+      "id": "A11_5_to_8_coupler",
+      "quantity": 1,
+      "occurrences": [
+        "A11_5_to_8_coupler"
+      ],
+      "step": "STEP/parts/A11_5_to_8_coupler.step",
+      "stl": "STL/prototype/A11_5_to_8_coupler.stl",
+      "stl_sha256": "97a44caeb6e399405b66287da1d774b1b992610f3aa0fe7a882dc93521d23867",
+      "step_sha256": "913c445da6ffab35f4552af888090a419e1af6e286d6ee320e2b00112c790b98",
+      "prototype_only": true,
+      "material": "PETG proposal; bushings may be purchased POM",
+      "print_orientation": "X rotated 90 degrees about Y",
+      "size_mm": [
+        18.000000200000002,
+        18.0000002544759,
+        18.000000200000002
+      ],
+      "native_valid": true,
+      "native_solids": 1,
+      "mesh_check": {
+        "status": "PASS",
+        "triangles": 7984,
+        "nonmanifold_edges": 0,
+        "degenerate_triangles": 0,
+        "signed_volume_mm3": 3786.1038174539653,
+        "vertex_matching_mm": 1e-05
+      }
+    },
+    {
+      "id": "A12_adjustable_motor_mount",
+      "quantity": 1,
+      "occurrences": [
+        "A12_adjustable_motor_mount"
+      ],
+      "step": "STEP/parts/A12_adjustable_motor_mount.step",
+      "stl": "STL/prototype/A12_adjustable_motor_mount.stl",
+      "stl_sha256": "9a97389d1838333e353e1be2ac4bd85def23a31d429d7c66a62d48b943e0c408",
+      "step_sha256": "c5d17543234b6a915f6d8799f3f40fd20ca7f6dff876db8cc5c6f0adaf39fefd",
+      "prototype_only": true,
+      "material": "PETG proposal; bushings may be purchased POM",
+      "print_orientation": "X rotated 90 degrees about Y",
+      "size_mm": [
+        84.00000000000054,
+        52.0,
+        16.0
+      ],
+      "native_valid": true,
+      "native_solids": 1,
+      "mesh_check": {
+        "status": "PASS",
+        "triangles": 4664,
+        "nonmanifold_edges": 0,
+        "degenerate_triangles": 0,
+        "signed_volume_mm3": 16256.604181619703,
+        "vertex_matching_mm": 1e-05
+      }
+    },
+    {
+      "id": "CM_output",
+      "quantity": 1,
+      "occurrences": [
+        "CM_output"
+      ],
+      "step": "STEP/parts/CM_output.step",
+      "stl": "STL/prototype/CM_output.stl",
+      "stl_sha256": "722d208f0e2ce2253d7026832ab5706607e65d4255d94b04681dc8305507bb12",
+      "step_sha256": "4fd4e9749a237f2bd14a1beb7800029cf20294a6696a9e7ab67a61ffd0a49ef7",
+      "prototype_only": true,
+      "material": "PETG proposal; bushings may be purchased POM",
+      "print_orientation": "X rotated 90 degrees about Y",
+      "size_mm": [
+        75.60000020000062,
+        75.60000020000062,
+        12.000000100000006
+      ],
+      "native_valid": true,
+      "native_solids": 1,
+      "mesh_check": {
+        "status": "PASS",
+        "triangles": 105044,
+        "nonmanifold_edges": 0,
+        "degenerate_triangles": 0,
+        "signed_volume_mm3": 21637.7511697482,
+        "vertex_matching_mm": 1e-05
+      }
+    },
+    {
+      "id": "CM_carrier",
+      "quantity": 1,
+      "occurrences": [
+        "CM_carrier"
+      ],
+      "step": "STEP/parts/CM_carrier.step",
+      "stl": "STL/prototype/CM_carrier.stl",
+      "stl_sha256": "6b8f91e85992aaa92986ee83dedc8bb1f3f82650bf8afa5af68f8755ef0f53ca",
+      "step_sha256": "c0fcd93d98ae959981fbe5444c128bc31ba3e8403f255ae806242df564d20e20",
+      "prototype_only": true,
+      "material": "PETG proposal; bushings may be purchased POM",
+      "print_orientation": "X rotated 90 degrees about Y",
+      "size_mm": [
+        37.0,
+        37.0,
+        9.800000200000001
+      ],
+      "native_valid": true,
+      "native_solids": 1,
+      "mesh_check": {
+        "status": "PASS",
+        "triangles": 7496,
+        "nonmanifold_edges": 0,
+        "degenerate_triangles": 0,
+        "signed_volume_mm3": 3091.795155802717,
+        "vertex_matching_mm": 1e-05
+      }
+    },
+    {
+      "id": "CM_pawl",
+      "quantity": 1,
+      "occurrences": [
+        "CM_pawl"
+      ],
+      "step": "STEP/parts/CM_pawl.step",
+      "stl": "STL/prototype/CM_pawl.stl",
+      "stl_sha256": "6826c446a1418bb397af97210bede285bee77ddb71027053e352aac22828619e",
+      "step_sha256": "3618e48efae0c47089cce30150e2f5f19bd1e2cfe83298f20e822b6f68f32251",
+      "prototype_only": true,
+      "material": "PETG proposal; bushings may be purchased POM",
+      "print_orientation": "X rotated 90 degrees about Y",
+      "size_mm": [
+        10.3,
+        8.710251437819,
+        2.400000000000001
+      ],
+      "native_valid": true,
+      "native_solids": 1,
+      "mesh_check": {
+        "status": "PASS",
+        "triangles": 2056,
+        "nonmanifold_edges": 0,
+        "degenerate_triangles": 0,
+        "signed_volume_mm3": 89.89055923991987,
+        "vertex_matching_mm": 1e-05
+      }
+    },
+    {
+      "id": "CM_bushing",
+      "quantity": 2,
+      "occurrences": [
+        "CM_bushing",
+        "CH_bushing"
+      ],
+      "step": "STEP/parts/CM_bushing.step",
+      "stl": "STL/prototype/CM_bushing.stl",
+      "stl_sha256": "d2b543ec338b9d61883d16a2b039994f5811d121164c07d6a26b09c702e1e608",
+      "step_sha256": "f0df7398941ed7652b6af9149bd2b064ee7590f5c3d7044ed14e58bdd18c29c0",
+      "prototype_only": true,
+      "material": "PETG proposal; bushings may be purchased POM",
+      "print_orientation": "X rotated 90 degrees about Y",
+      "size_mm": [
+        12.2,
+        12.2,
+        5.8000000000000025
+      ],
+      "native_valid": true,
+      "native_solids": 1,
+      "mesh_check": {
+        "status": "PASS",
+        "triangles": 2016,
+        "nonmanifold_edges": 0,
+        "degenerate_triangles": 0,
+        "signed_volume_mm3": 348.8550506380408,
+        "vertex_matching_mm": 1e-05
+      }
+    },
+    {
+      "id": "CM_cover",
+      "quantity": 2,
+      "occurrences": [
+        "CM_cover",
+        "CH_cover"
+      ],
+      "step": "STEP/parts/CM_cover.step",
+      "stl": "STL/prototype/CM_cover.stl",
+      "stl_sha256": "db6a275c684a14473bcca747fe4bed1a7c51290e6015e4ecac8afa79ca1184fc",
+      "step_sha256": "fe4bc0c08aa846923dfae85eee59263a0b9fd682ab249b4b9f25e9d3410febc0",
+      "prototype_only": true,
+      "material": "PETG proposal; bushings may be purchased POM",
+      "print_orientation": "X rotated 90 degrees about Y",
+      "size_mm": [
+        62.4,
+        62.4,
+        1.500000000000007
+      ],
+      "native_valid": true,
+      "native_solids": 1,
+      "mesh_check": {
+        "status": "PASS",
+        "triangles": 5052,
+        "nonmanifold_edges": 0,
+        "degenerate_triangles": 0,
+        "signed_volume_mm3": 4215.796249786472,
+        "vertex_matching_mm": 1e-05
+      }
+    },
+    {
+      "id": "CH_output",
+      "quantity": 1,
+      "occurrences": [
+        "CH_output"
+      ],
+      "step": "STEP/parts/CH_output.step",
+      "stl": "STL/prototype/CH_output.stl",
+      "stl_sha256": "2613ce267519bc3f22704ce75e17fcb1a1650eebdf1349f3f6a2e7b3f9227c15",
+      "step_sha256": "e8f71df47735d036edc6ece260b9da0d3f7194a4d143c27cb87d9a80c7ef04b8",
+      "prototype_only": true,
+      "material": "PETG proposal; bushings may be purchased POM",
+      "print_orientation": "X rotated 90 degrees about Y",
+      "size_mm": [
+        111.60000020000045,
+        111.60000020000045,
+        12.000000100000008
+      ],
+      "native_valid": true,
+      "native_solids": 1,
+      "mesh_check": {
+        "status": "PASS",
+        "triangles": 134652,
+        "nonmanifold_edges": 0,
+        "degenerate_triangles": 0,
+        "signed_volume_mm3": 61679.40044909182,
+        "vertex_matching_mm": 1e-05
+      }
+    },
+    {
+      "id": "CH_carrier",
+      "quantity": 1,
+      "occurrences": [
+        "CH_carrier"
+      ],
+      "step": "STEP/parts/CH_carrier.step",
+      "stl": "STL/prototype/CH_carrier.stl",
+      "stl_sha256": "9a6695ef11c76c321fbd858f5a35114df6356df784e827d218b06e332046b4e9",
+      "step_sha256": "b43b5bf32850e508e6de5fae346516115a784dbcbc8ffbd657916a69ed2c536d",
+      "prototype_only": true,
+      "material": "PETG proposal; bushings may be purchased POM",
+      "print_orientation": "X rotated 90 degrees about Y",
+      "size_mm": [
+        37.0,
+        37.0,
+        9.800000200000001
+      ],
+      "native_valid": true,
+      "native_solids": 1,
+      "mesh_check": {
+        "status": "PASS",
+        "triangles": 7496,
+        "nonmanifold_edges": 0,
+        "degenerate_triangles": 0,
+        "signed_volume_mm3": 3091.795155802714,
+        "vertex_matching_mm": 1e-05
+      }
+    },
+    {
+      "id": "CH_pawl",
+      "quantity": 1,
+      "occurrences": [
+        "CH_pawl"
+      ],
+      "step": "STEP/parts/CH_pawl.step",
+      "stl": "STL/prototype/CH_pawl.stl",
+      "stl_sha256": "136c270ce05d5b690999e325ae6a1f7f7ec107fc8e40c3ea3efd762761155eb8",
+      "step_sha256": "4ae68649d7fe53ed7d9c47263baf7a47abc1a518ca7541840d6fd5f22a716e9f",
+      "prototype_only": true,
+      "material": "PETG proposal; bushings may be purchased POM",
+      "print_orientation": "X rotated 90 degrees about Y",
+      "size_mm": [
+        10.3,
+        8.710251437819,
+        2.400000000000001
+      ],
+      "native_valid": true,
+      "native_solids": 1,
+      "mesh_check": {
+        "status": "PASS",
+        "triangles": 2056,
+        "nonmanifold_edges": 0,
+        "degenerate_triangles": 0,
+        "signed_volume_mm3": 89.89055923991998,
+        "vertex_matching_mm": 1e-05
+      }
+    },
+    {
+      "id": "A4M_drum_gear",
+      "quantity": 1,
+      "occurrences": [
+        "A4M_drum_gear"
+      ],
+      "step": "STEP/parts/A4M_drum_gear.step",
+      "stl": "STL/prototype/A4M_drum_gear.stl",
+      "stl_sha256": "0c34c4504ccc307bc3aba59250bb17e0d6e51895e6b7d45364ef67a035ad57e9",
+      "step_sha256": "e4224f15b738f770851d1625821e34e047a6957c3d8614706510bcb253ee6a91",
+      "prototype_only": true,
+      "material": "PETG proposal; bushings may be purchased POM",
+      "print_orientation": "X rotated 90 degrees about Y",
+      "size_mm": [
+        75.60000020000062,
+        75.60000020000062,
+        9.000000200000008
+      ],
+      "native_valid": true,
+      "native_solids": 1,
+      "mesh_check": {
+        "status": "PASS",
+        "triangles": 80284,
+        "nonmanifold_edges": 0,
+        "degenerate_triangles": 0,
+        "signed_volume_mm3": 24362.508171685222,
+        "vertex_matching_mm": 1e-05
+      }
+    },
+    {
+      "id": "A40M_idler",
+      "quantity": 1,
+      "occurrences": [
+        "A40M_idler"
+      ],
+      "step": "STEP/parts/A40M_idler.step",
+      "stl": "STL/prototype/A40M_idler.stl",
+      "stl_sha256": "575e918e231131e5a3328de43281f0e131a82989f2ced95a741399157f6a0612",
+      "step_sha256": "baf234307634cf21c670f265e9a59b5c2dd5d9c7e34bdb8e54e0b6792bf47db0",
+      "prototype_only": true,
+      "material": "PETG proposal; bushings may be purchased POM",
+      "print_orientation": "X rotated 90 degrees about Y",
+      "size_mm": [
+        39.27325485113126,
+        39.27325485113126,
+        6.000000200000004
+      ],
+      "native_valid": true,
+      "native_solids": 1,
+      "mesh_check": {
+        "status": "PASS",
+        "triangles": 64512,
+        "nonmanifold_edges": 0,
+        "degenerate_triangles": 0,
+        "signed_volume_mm3": 5772.161382856927,
+        "vertex_matching_mm": 1e-05
+      }
+    },
+    {
+      "id": "A4H_drum_gear",
+      "quantity": 1,
+      "occurrences": [
+        "A4H_drum_gear"
+      ],
+      "step": "STEP/parts/A4H_drum_gear.step",
+      "stl": "STL/prototype/A4H_drum_gear.stl",
+      "stl_sha256": "a97a6c1701d780b1cf0c45b56398ce7295d8edd4b275e1b7d7909d6126d3b4f6",
+      "step_sha256": "5eab366f387a2cd04d7b40acf0525c403e42c6bae0c8b529272be506f088358d",
+      "prototype_only": true,
+      "material": "PETG proposal; bushings may be purchased POM",
+      "print_orientation": "X rotated 90 degrees about Y",
+      "size_mm": [
+        111.50755161715949,
+        111.50755161715949,
+        9.000000200000008
+      ],
+      "native_valid": true,
+      "native_solids": 1,
+      "mesh_check": {
+        "status": "PASS",
+        "triangles": 110212,
+        "nonmanifold_edges": 0,
+        "degenerate_triangles": 0,
+        "signed_volume_mm3": 54780.57163632453,
+        "vertex_matching_mm": 1e-05
+      }
+    },
+    {
+      "id": "DM_core",
+      "quantity": 2,
+      "occurrences": [
+        "DM_core",
+        "DH_core"
+      ],
+      "step": "STEP/parts/DM_core.step",
+      "stl": "STL/prototype/DM_core.stl",
+      "stl_sha256": "352b1a2fae715d2100c660ee8ac21bf757d9de9e788281a9d118073bbbd5f759",
+      "step_sha256": "ba18b49000e32907482056ac6cb88bf8e270eac1568e6debce4da05a11a30184",
+      "prototype_only": true,
+      "material": "PETG proposal; bushings may be purchased POM",
+      "print_orientation": "Y rotated 90 degrees about X",
+      "size_mm": [
+        50.0000002,
+        46.0,
+        46.0
+      ],
+      "native_valid": true,
+      "native_solids": 1,
+      "mesh_check": {
+        "status": "PASS",
+        "triangles": 12532,
+        "nonmanifold_edges": 0,
+        "degenerate_triangles": 0,
+        "signed_volume_mm3": 36209.770899765055,
+        "vertex_matching_mm": 1e-05
+      }
+    },
+    {
+      "id": "DM_flange_L",
+      "quantity": 2,
+      "occurrences": [
+        "DM_flange_L",
+        "DM_flange_R"
+      ],
+      "step": "STEP/parts/DM_flange_L.step",
+      "stl": "STL/prototype/DM_flange_L.stl",
+      "stl_sha256": "563ea97f8a4bffe27ec7f762aba5faaa36efc0c34ddbe48dc6aea62ecd9cb8a5",
+      "step_sha256": "39c86f322f16d8b543185f60fe5d89f784c29bc145fa272400c39aee79b518ce",
+      "prototype_only": true,
+      "material": "PETG proposal; bushings may be purchased POM",
+      "print_orientation": "X rotated 90 degrees about Y",
+      "size_mm": [
+        102.0,
+        102.0,
+        3.0000000000000115
+      ],
+      "native_valid": true,
+      "native_solids": 1,
+      "mesh_check": {
+        "status": "PASS",
+        "triangles": 71844,
+        "nonmanifold_edges": 0,
+        "degenerate_triangles": 0,
+        "signed_volume_mm3": 18940.35753386337,
+        "vertex_matching_mm": 1e-05
+      }
+    },
+    {
+      "id": "DH_flange_L",
+      "quantity": 2,
+      "occurrences": [
+        "DH_flange_L",
+        "DH_flange_R"
+      ],
+      "step": "STEP/parts/DH_flange_L.step",
+      "stl": "STL/prototype/DH_flange_L.stl",
+      "stl_sha256": "b5b7919b9ac6967c04b7cefa966dbdcfaafea2edf980c9229e4fb4335fe47665",
+      "step_sha256": "498ef83ed05d3de56327665ec377a62e86dbac6cfa2fa06ce29c24c6607cc2eb",
+      "prototype_only": true,
+      "material": "PETG proposal; bushings may be purchased POM",
+      "print_orientation": "X rotated 90 degrees about Y",
+      "size_mm": [
+        102.0,
+        102.0,
+        3.0000000000000115
+      ],
+      "native_valid": true,
+      "native_solids": 1,
+      "mesh_check": {
+        "status": "PASS",
+        "triangles": 35412,
+        "nonmanifold_edges": 0,
+        "degenerate_triangles": 0,
+        "signed_volume_mm3": 19389.02478071764,
+        "vertex_matching_mm": 1e-05
+      }
+    },
+    {
+      "id": "DEM_scallop_disc",
+      "quantity": 1,
+      "occurrences": [
+        "DEM_scallop_disc"
+      ],
+      "step": "STEP/parts/DEM_scallop_disc.step",
+      "stl": "STL/prototype/DEM_scallop_disc.stl",
+      "stl_sha256": "8983a0683ef1b76f9d9336ab8862cf52778c4fcc2cf672c3e2c9be5e590991a1",
+      "step_sha256": "24bf38692251b4940a3236143c095a624dc6f36cd64196bf65ecc0a0f2cd3ac6",
+      "prototype_only": true,
+      "material": "PETG proposal; bushings may be purchased POM",
+      "print_orientation": "X rotated 90 degrees about Y",
+      "size_mm": [
+        89.872054803619,
+        89.872054788896,
+        5.400000200000119
+      ],
+      "native_valid": true,
+      "native_solids": 1,
+      "mesh_check": {
+        "status": "PASS",
+        "triangles": 18920,
+        "nonmanifold_edges": 0,
+        "degenerate_triangles": 0,
+        "signed_volume_mm3": 15364.627315278429,
+        "vertex_matching_mm": 1e-05
+      }
+    },
+    {
+      "id": "DEM_pivot_arm",
+      "quantity": 1,
+      "occurrences": [
+        "DEM_pivot_arm"
+      ],
+      "step": "STEP/parts/DEM_pivot_arm.step",
+      "stl": "STL/prototype/DEM_pivot_arm.stl",
+      "stl_sha256": "d455cd8b713fe0d57da657727a28e9790d67596d5c248702e40a49c2c10dfaec",
+      "step_sha256": "d101408fceb3150c9b9434ee67c5b84f6db6cfab2bc4e60c9a291a55d5321602",
+      "prototype_only": true,
+      "material": "PETG proposal; bushings may be purchased POM",
+      "print_orientation": "X rotated 90 degrees about Y",
+      "size_mm": [
+        8.0,
+        23.0,
+        2.599999999999995
+      ],
+      "native_valid": true,
+      "native_solids": 1,
+      "mesh_check": {
+        "status": "PASS",
+        "triangles": 2036,
+        "nonmanifold_edges": 0,
+        "degenerate_triangles": 0,
+        "signed_volume_mm3": 456.7974845012809,
+        "vertex_matching_mm": 1e-05
+      }
+    },
+    {
+      "id": "DEM_bracket",
+      "quantity": 1,
+      "occurrences": [
+        "DEM_bracket"
+      ],
+      "step": "STEP/parts/DEM_bracket.step",
+      "stl": "STL/prototype/DEM_bracket.stl",
+      "stl_sha256": "23d6c08f354ee6280c8cabf22df8d95f65b1c406e510a307c074fc687dbe06cf",
+      "step_sha256": "dd8e50e65467ae20b26462e3560744d51b20eb494688a664f74f80e510984049",
+      "prototype_only": true,
+      "material": "PETG proposal; bushings may be purchased POM",
+      "print_orientation": "X rotated 90 degrees about Y",
+      "size_mm": [
+        36.80337681597901,
+        39.0,
+        18.799999999999997
+      ],
+      "native_valid": true,
+      "native_solids": 1,
+      "mesh_check": {
+        "status": "PASS",
+        "triangles": 5124,
+        "nonmanifold_edges": 0,
+        "degenerate_triangles": 0,
+        "signed_volume_mm3": 4486.751168780195,
+        "vertex_matching_mm": 1e-05
+      }
+    },
+    {
+      "id": "KM_forward_setting_knob",
+      "quantity": 2,
+      "occurrences": [
+        "KM_forward_setting_knob",
+        "KH_forward_setting_knob"
+      ],
+      "step": "STEP/parts/KM_forward_setting_knob.step",
+      "stl": "STL/prototype/KM_forward_setting_knob.stl",
+      "stl_sha256": "863ced0357fece2a094877523d0a3d24a9d3e06e8ed92b9c05019c7d52349582",
+      "step_sha256": "67fc2077ccea9e0a3e03531563b8ca9a15f2f096fbc64fc90559cfee96c85ea3",
+      "prototype_only": true,
+      "material": "PETG proposal; bushings may be purchased POM",
+      "print_orientation": "X rotated 90 degrees about Y",
+      "size_mm": [
+        33.76470588235297,
+        34.0000002,
+        7.0000002000000014
+      ],
+      "native_valid": true,
+      "native_solids": 1,
+      "mesh_check": {
+        "status": "PASS",
+        "triangles": 13448,
+        "nonmanifold_edges": 0,
+        "degenerate_triangles": 0,
+        "signed_volume_mm3": 5087.937018743393,
+        "vertex_matching_mm": 1e-05
+      }
+    },
+    {
+      "id": "RM_release_adjustment_rail",
+      "quantity": 1,
+      "occurrences": [
+        "RM_release_adjustment_rail"
+      ],
+      "step": "STEP/parts/RM_release_adjustment_rail.step",
+      "stl": "STL/prototype/RM_release_adjustment_rail.stl",
+      "stl_sha256": "bd73b0eadd1140b6961b3708a170e51a703c12beda4080f5b1cc33446a136d41",
+      "step_sha256": "2854e5ac26d7eb9ac213e9c062acb82cb16b0baad065520361f94032197bdd10",
+      "prototype_only": true,
+      "material": "PETG proposal; bushings may be purchased POM",
+      "print_orientation": "X rotated 90 degrees about Y",
+      "size_mm": [
+        109.0,
+        65.0,
+        16.0
+      ],
+      "native_valid": true,
+      "native_solids": 1,
+      "mesh_check": {
+        "status": "PASS",
+        "triangles": 4108,
+        "nonmanifold_edges": 0,
+        "degenerate_triangles": 0,
+        "signed_volume_mm3": 4927.951308677991,
+        "vertex_matching_mm": 1e-05
+      }
+    },
+    {
+      "id": "RM_release_finger_RETRACTED",
+      "quantity": 1,
+      "occurrences": [
+        "RM_release_finger_RETRACTED"
+      ],
+      "step": "STEP/parts/RM_release_finger_RETRACTED.step",
+      "stl": "STL/prototype/RM_release_finger_RETRACTED.stl",
+      "stl_sha256": "45fd1153d58c46a294a9457e30122bc153fe6c04945f62cbc3e03578e0b1de80",
+      "step_sha256": "eb8fad74ec713e9b31935bd0de95fc416b4d362c34d231f01de1d469987a5b70",
+      "prototype_only": true,
+      "material": "PETG proposal; bushings may be purchased POM",
+      "print_orientation": "Y rotated 90 degrees about X",
+      "size_mm": [
+        14.0,
+        12.0,
+        8.000000000000002
+      ],
+      "native_valid": true,
+      "native_solids": 1,
+      "mesh_check": {
+        "status": "PASS",
+        "triangles": 2036,
+        "nonmanifold_edges": 0,
+        "degenerate_triangles": 0,
+        "signed_volume_mm3": 1089.8086876823997,
+        "vertex_matching_mm": 1e-05
+      }
+    },
+    {
+      "id": "DEH_scallop_disc",
+      "quantity": 1,
+      "occurrences": [
+        "DEH_scallop_disc"
+      ],
+      "step": "STEP/parts/DEH_scallop_disc.step",
+      "stl": "STL/prototype/DEH_scallop_disc.stl",
+      "stl_sha256": "40eafcd8f2ca81127e14b2ec9f54297c0e001bdbd0195b76051bdff486b3ef0d",
+      "step_sha256": "cdab2d46819b5675b9c6df6bd073dbe51e5ee9a6e739f820247c7027ddca3e5e",
+      "prototype_only": true,
+      "material": "PETG proposal; bushings may be purchased POM",
+      "print_orientation": "X rotated 90 degrees about Y",
+      "size_mm": [
+        89.34224057332224,
+        89.34224057332224,
+        5.400000200000121
+      ],
+      "native_valid": true,
+      "native_solids": 1,
+      "mesh_check": {
+        "status": "PASS",
+        "triangles": 12680,
+        "nonmanifold_edges": 0,
+        "degenerate_triangles": 0,
+        "signed_volume_mm3": 15363.927722819273,
+        "vertex_matching_mm": 1e-05
+      }
+    },
+    {
+      "id": "DEH_pivot_arm",
+      "quantity": 1,
+      "occurrences": [
+        "DEH_pivot_arm"
+      ],
+      "step": "STEP/parts/DEH_pivot_arm.step",
+      "stl": "STL/prototype/DEH_pivot_arm.stl",
+      "stl_sha256": "d455cd8b713fe0d57da657727a28e9790d67596d5c248702e40a49c2c10dfaec",
+      "step_sha256": "152bdef1e03489b0fbc3bcc85f67f942eeb397d6e48f1b6d7096ca492ae0a436",
+      "prototype_only": true,
+      "material": "PETG proposal; bushings may be purchased POM",
+      "print_orientation": "X rotated 90 degrees about Y",
+      "size_mm": [
+        8.0,
+        23.0,
+        2.599999999999995
+      ],
+      "native_valid": true,
+      "native_solids": 1,
+      "mesh_check": {
+        "status": "PASS",
+        "triangles": 2036,
+        "nonmanifold_edges": 0,
+        "degenerate_triangles": 0,
+        "signed_volume_mm3": 456.7974845012809,
+        "vertex_matching_mm": 1e-05
+      }
+    },
+    {
+      "id": "DEH_bracket",
+      "quantity": 1,
+      "occurrences": [
+        "DEH_bracket"
+      ],
+      "step": "STEP/parts/DEH_bracket.step",
+      "stl": "STL/prototype/DEH_bracket.stl",
+      "stl_sha256": "9b63df5ad373ae1c5bc5cb8d1d53ae6230a1d796f080e36bb9dcbf82de8b4769",
+      "step_sha256": "c187f1c95337843656cee294d1e06d4043d4c2cde98cb3c3d7e0e61f72e2e4fe",
+      "prototype_only": true,
+      "material": "PETG proposal; bushings may be purchased POM",
+      "print_orientation": "X rotated 90 degrees about Y",
+      "size_mm": [
+        36.878444259994,
+        39.0,
+        18.799999999999997
+      ],
+      "native_valid": true,
+      "native_solids": 1,
+      "mesh_check": {
+        "status": "PASS",
+        "triangles": 5124,
+        "nonmanifold_edges": 0,
+        "degenerate_triangles": 0,
+        "signed_volume_mm3": 4489.753681395198,
+        "vertex_matching_mm": 1e-05
+      }
+    },
+    {
+      "id": "RH_release_adjustment_rail",
+      "quantity": 1,
+      "occurrences": [
+        "RH_release_adjustment_rail"
+      ],
+      "step": "STEP/parts/RH_release_adjustment_rail.step",
+      "stl": "STL/prototype/RH_release_adjustment_rail.stl",
+      "stl_sha256": "aa90cd96042809cf05bb22f1eccc6b24064da1ce0138d50dcd20732efa30290a",
+      "step_sha256": "17a794855c9878c3a656a166160b95304d45ab6c01257d15153d5786d02e2494",
+      "prototype_only": true,
+      "material": "PETG proposal; bushings may be purchased POM",
+      "print_orientation": "X rotated 90 degrees about Y",
+      "size_mm": [
+        109.0,
+        65.0,
+        16.0
+      ],
+      "native_valid": true,
+      "native_solids": 1,
+      "mesh_check": {
+        "status": "PASS",
+        "triangles": 4108,
+        "nonmanifold_edges": 0,
+        "degenerate_triangles": 0,
+        "signed_volume_mm3": 4927.951308677989,
+        "vertex_matching_mm": 1e-05
+      }
+    },
+    {
+      "id": "RH_release_finger_RETRACTED",
+      "quantity": 1,
+      "occurrences": [
+        "RH_release_finger_RETRACTED"
+      ],
+      "step": "STEP/parts/RH_release_finger_RETRACTED.step",
+      "stl": "STL/prototype/RH_release_finger_RETRACTED.stl",
+      "stl_sha256": "45fd1153d58c46a294a9457e30122bc153fe6c04945f62cbc3e03578e0b1de80",
+      "step_sha256": "66f98194378e2e79f4fbfe17949f521e34939ba8061f151097ecb34cbd1cdbd7",
+      "prototype_only": true,
+      "material": "PETG proposal; bushings may be purchased POM",
+      "print_orientation": "Y rotated 90 degrees about X",
+      "size_mm": [
+        14.0,
+        12.0,
+        8.000000000000002
+      ],
+      "native_valid": true,
+      "native_solids": 1,
+      "mesh_check": {
+        "status": "PASS",
+        "triangles": 2036,
+        "nonmanifold_edges": 0,
+        "degenerate_triangles": 0,
+        "signed_volume_mm3": 1089.8086876823997,
+        "vertex_matching_mm": 1e-05
+      }
+    },
+    {
+      "id": "SH_adjustable_encoder_pedestal",
+      "quantity": 1,
+      "occurrences": [
+        "SH_adjustable_encoder_pedestal"
+      ],
+      "step": "STEP/parts/SH_adjustable_encoder_pedestal.step",
+      "stl": "STL/prototype/SH_adjustable_encoder_pedestal.stl",
+      "stl_sha256": "efaf44e9cb783c381a1076de613994be159a72a6f5ebdcedf51891897e22f3d3",
+      "step_sha256": "c3258822af66ed5cf6ade657f12eca0395389957b7eeec7070e712a88f568606",
+      "prototype_only": true,
+      "material": "PETG proposal; bushings may be purchased POM",
+      "print_orientation": "X rotated 90 degrees about Y",
+      "size_mm": [
+        100.0,
+        32.0,
+        28.0
+      ],
+      "native_valid": true,
+      "native_solids": 1,
+      "mesh_check": {
+        "status": "PASS",
+        "triangles": 3064,
+        "nonmanifold_edges": 0,
+        "degenerate_triangles": 0,
+        "signed_volume_mm3": 11799.465860422817,
+        "vertex_matching_mm": 1e-05
+      }
+    },
+    {
+      "id": "SH_magnet_cap",
+      "quantity": 2,
+      "occurrences": [
+        "SH_magnet_cap",
+        "SM_magnet_cap"
+      ],
+      "step": "STEP/parts/SH_magnet_cap.step",
+      "stl": "STL/prototype/SH_magnet_cap.stl",
+      "stl_sha256": "3ae5155827a7254cc88bbbc13a1b4cfb88415a8059933a1d73eb1dab51dc8a31",
+      "step_sha256": "72399c009d717e3dedc74894dc8b3bb7e04939eb119402102d38acca671dad1f",
+      "prototype_only": true,
+      "material": "PETG proposal; bushings may be purchased POM",
+      "print_orientation": "X rotated 90 degrees about Y",
+      "size_mm": [
+        14.0,
+        14.0,
+        8.0
+      ],
+      "native_valid": true,
+      "native_solids": 1,
+      "mesh_check": {
+        "status": "PASS",
+        "triangles": 3020,
+        "nonmanifold_edges": 0,
+        "degenerate_triangles": 0,
+        "signed_volume_mm3": 918.2867658735964,
+        "vertex_matching_mm": 1e-05
+      }
+    },
+    {
+      "id": "SM_adjustable_encoder_pedestal",
+      "quantity": 1,
+      "occurrences": [
+        "SM_adjustable_encoder_pedestal"
+      ],
+      "step": "STEP/parts/SM_adjustable_encoder_pedestal.step",
+      "stl": "STL/prototype/SM_adjustable_encoder_pedestal.stl",
+      "stl_sha256": "9c70cc27e3de718bf00940711372b8e361c1bcfc3c3bb0bab4762f3a39805409",
+      "step_sha256": "29298c0d105c4819596b5527317b851cbf953506020ddc8ba572d28450474230",
+      "prototype_only": true,
+      "material": "PETG proposal; bushings may be purchased POM",
+      "print_orientation": "X rotated 90 degrees about Y",
+      "size_mm": [
+        100.0,
+        32.0,
+        28.0
+      ],
+      "native_valid": true,
+      "native_solids": 1,
+      "mesh_check": {
+        "status": "PASS",
+        "triangles": 3064,
+        "nonmanifold_edges": 0,
+        "degenerate_triangles": 0,
+        "signed_volume_mm3": 11799.465876008522,
+        "vertex_matching_mm": 1e-05
+      }
+    },
+    {
+      "id": "GH_removable_side_panel",
+      "quantity": 1,
+      "occurrences": [
+        "GH_removable_side_panel"
+      ],
+      "step": "STEP/parts/GH_removable_side_panel.step",
+      "stl": "STL/prototype/GH_removable_side_panel.stl",
+      "stl_sha256": "3e3dc0e1543b32a36c6604afe30271e1afa983cdaa6aa6ec29a62614ce1b585d",
+      "step_sha256": "59bc94e851ce0b59cbd29254581851fce76f14ea12c070fe697de93ecf4daa16",
+      "prototype_only": true,
+      "material": "PETG proposal; bushings may be purchased POM",
+      "print_orientation": "X rotated 90 degrees about Y",
+      "size_mm": [
+        128.0,
+        228.0,
+        1.6000000000000107
+      ],
+      "native_valid": true,
+      "native_solids": 1,
+      "mesh_check": {
+        "status": "PASS",
+        "triangles": 2036,
+        "nonmanifold_edges": 0,
+        "degenerate_triangles": 0,
+        "signed_volume_mm3": 44754.35341061397,
+        "vertex_matching_mm": 1e-05
+      }
+    },
+    {
+      "id": "GM_removable_side_panel",
+      "quantity": 1,
+      "occurrences": [
+        "GM_removable_side_panel"
+      ],
+      "step": "STEP/parts/GM_removable_side_panel.step",
+      "stl": "STL/prototype/GM_removable_side_panel.stl",
+      "stl_sha256": "40c5c27f6fa425a3e533154f4f5c275caf275cbb7aca1069f43142de955625f8",
+      "step_sha256": "52a7e790a8c15ec94ff6b271ed8ffc655bbb2ba313189dd0382c78c144dd8161",
+      "prototype_only": true,
+      "material": "PETG proposal; bushings may be purchased POM",
+      "print_orientation": "X rotated 90 degrees about Y",
+      "size_mm": [
+        128.0,
+        228.0,
+        1.6000000000000107
+      ],
+      "native_valid": true,
+      "native_solids": 1,
+      "mesh_check": {
+        "status": "PASS",
+        "triangles": 2036,
+        "nonmanifold_edges": 0,
+        "degenerate_triangles": 0,
+        "signed_volume_mm3": 44754.35341061397,
+        "vertex_matching_mm": 1e-05
+      }
+    },
+    {
+      "id": "CP_M24_output",
+      "quantity": 1,
+      "occurrences": [
+        "CP_M24_output"
+      ],
+      "step": "STEP/parts/CP_M24_output.step",
+      "stl": "STL/prototype/CP_M24_output.stl",
+      "stl_sha256": "ecb34cc502c6f0b20c1539a3e86aa73cc1d205f3479fe0e4d971fa8ff3ca5e7e",
+      "step_sha256": "1c19c0881895aa5fb3b48b9931c04bc2ffad04efbfa2a2e28f4212516f7f100e",
+      "prototype_only": true,
+      "material": "PETG proposal; bushings may be purchased POM",
+      "print_orientation": "Z flat",
+      "size_mm": [
+        75.60000020000062,
+        75.60000020000062,
+        12.0000001
+      ],
+      "native_valid": true,
+      "native_solids": 1,
+      "mesh_check": {
+        "status": "PASS",
+        "triangles": 95156,
+        "nonmanifold_edges": 0,
+        "degenerate_triangles": 0,
+        "signed_volume_mm3": 21647.16933013453,
+        "vertex_matching_mm": 1e-05
+      }
+    },
+    {
+      "id": "CP_M36_output",
+      "quantity": 1,
+      "occurrences": [
+        "CP_M36_output"
+      ],
+      "step": "STEP/parts/CP_M36_output.step",
+      "stl": "STL/prototype/CP_M36_output.stl",
+      "stl_sha256": "6d3c0088fb5bb1956dec76d6ce59257d6d93099bc18dc2b1df3d526311de6840",
+      "step_sha256": "361884215cfa82d377da7aef53f25c68cd28c8e1f9dd2710bd3c19cd6a3112db",
+      "prototype_only": true,
+      "material": "PETG proposal; bushings may be purchased POM",
+      "print_orientation": "Z flat",
+      "size_mm": [
+        75.60000020000062,
+        75.60000020000062,
+        12.0000001
+      ],
+      "native_valid": true,
+      "native_solids": 1,
+      "mesh_check": {
+        "status": "PASS",
+        "triangles": 105044,
+        "nonmanifold_edges": 0,
+        "degenerate_triangles": 0,
+        "signed_volume_mm3": 21637.751169748302,
+        "vertex_matching_mm": 1e-05
+      }
+    },
+    {
+      "id": "CP_M48_output",
+      "quantity": 1,
+      "occurrences": [
+        "CP_M48_output"
+      ],
+      "step": "STEP/parts/CP_M48_output.step",
+      "stl": "STL/prototype/CP_M48_output.stl",
+      "stl_sha256": "002e91eb321dc70687db4af5340e905c20cfed3c4e01d13de90239de1e246429",
+      "step_sha256": "eb3540d4eaa299502ed9739ae25c1036c2f12bc5930df3891e8207e797d70839",
+      "prototype_only": true,
+      "material": "PETG proposal; bushings may be purchased POM",
+      "print_orientation": "Z flat",
+      "size_mm": [
+        75.60000020000062,
+        75.60000020000062,
+        12.0000001
+      ],
+      "native_valid": true,
+      "native_solids": 1,
+      "mesh_check": {
+        "status": "PASS",
+        "triangles": 115988,
+        "nonmanifold_edges": 0,
+        "degenerate_triangles": 0,
+        "signed_volume_mm3": 21634.460994019522,
+        "vertex_matching_mm": 1e-05
+      }
+    },
+    {
+      "id": "CP_H36_output",
+      "quantity": 1,
+      "occurrences": [
+        "CP_H36_output"
+      ],
+      "step": "STEP/parts/CP_H36_output.step",
+      "stl": "STL/prototype/CP_H36_output.stl",
+      "stl_sha256": "092aeb0b3ea5cf9ab6ec871d58858158a1a1e00f48f63eb3bf31f93df5976bbd",
+      "step_sha256": "144fd730686a2423d7a7df00a9cc15ebbfbcfbfbc2761f3f29e2b60dbcea19d5",
+      "prototype_only": true,
+      "material": "PETG proposal; bushings may be purchased POM",
+      "print_orientation": "Z flat",
+      "size_mm": [
+        75.60000020000062,
+        75.60000020000062,
+        12.0000001
+      ],
+      "native_valid": true,
+      "native_solids": 1,
+      "mesh_check": {
+        "status": "PASS",
+        "triangles": 105044,
+        "nonmanifold_edges": 0,
+        "degenerate_triangles": 0,
+        "signed_volume_mm3": 21637.75116974818,
+        "vertex_matching_mm": 1e-05
+      }
+    },
+    {
+      "id": "CP_8mm_fit_ladder",
+      "quantity": 1,
+      "occurrences": [
+        "CP_8mm_fit_ladder"
+      ],
+      "step": "STEP/parts/CP_8mm_fit_ladder.step",
+      "stl": "STL/prototype/CP_8mm_fit_ladder.stl",
+      "stl_sha256": "ac13490488ef392891b4dd454584fabfd5438b772b59e4d993409572cbea2ce0",
+      "step_sha256": "b4d4fd36e2270af8e871d52fe725431e48528d529e494f8becd0ca4cef332bdc",
+      "prototype_only": true,
+      "material": "PETG proposal; bushings may be purchased POM",
+      "print_orientation": "Z flat",
+      "size_mm": [
+        92.0,
+        18.0,
+        6.0
+      ],
+      "native_valid": true,
+      "native_solids": 1,
+      "mesh_check": {
+        "status": "PASS",
+        "triangles": 4060,
+        "nonmanifold_edges": 0,
+        "degenerate_triangles": 0,
+        "signed_volume_mm3": 8589.998513114475,
+        "vertex_matching_mm": 1e-05
+      }
+    },
+    {
+      "id": "CP_flap_hinge_blank",
+      "quantity": 1,
+      "occurrences": [
+        "CP_flap_hinge_blank"
+      ],
+      "step": "STEP/parts/CP_flap_hinge_blank.step",
+      "stl": "STL/prototype/CP_flap_hinge_blank.stl",
+      "stl_sha256": "8a7c0672f4683e75ffbb22dd0f3c707c0356ba69074c5b22f610110b47fe59fb",
+      "step_sha256": "feef2c9b9b312798b804f6bd78eb5a45d21cd9e3dfb6cc6f21146bca864d670f",
+      "prototype_only": true,
+      "material": "PETG proposal; bushings may be purchased POM",
+      "print_orientation": "Z flat",
+      "size_mm": [
+        48.0,
+        28.0,
+        4.0
+      ],
+      "native_valid": true,
+      "native_solids": 1,
+      "mesh_check": {
+        "status": "PASS",
+        "triangles": 1952,
+        "nonmanifold_edges": 0,
+        "degenerate_triangles": 0,
+        "signed_volume_mm3": 1498.9848397679948,
+        "vertex_matching_mm": 1e-05
+      }
+    },
+    {
+      "id": "FM_00_complete_numbered_flap",
+      "quantity": 1,
+      "occurrences": [
+        "FM_00_complete_numbered_flap"
+      ],
+      "step": "STEP/parts/FM_00_complete_numbered_flap.step",
+      "stl": "STL/prototype/FM_00_complete_numbered_flap.stl",
+      "stl_sha256": "0148a0d61a418fd4cf8351622b4a150cb3a6889e2e6f507b729067fe27e8a30b",
+      "step_sha256": "897d94c94c6c76b046da4358b4830681f5f61716e3bdcec5b0df2db7b2da6b3a",
+      "prototype_only": true,
+      "material": "PETG proposal; bushings may be purchased POM",
+      "print_orientation": "Y rotated 90 degrees about X",
+      "size_mm": [
+        48.0,
+        28.0,
+        4.0
+      ],
+      "native_valid": true,
+      "native_solids": 1,
+      "mesh_check": {
+        "status": "PASS",
+        "triangles": 2112,
+        "nonmanifold_edges": 0,
+        "degenerate_triangles": 0,
+        "signed_volume_mm3": 1582.4088397679966,
+        "vertex_matching_mm": 1e-05
+      }
+    },
+    {
+      "id": "FM_01_complete_numbered_flap",
+      "quantity": 1,
+      "occurrences": [
+        "FM_01_complete_numbered_flap"
+      ],
+      "step": "STEP/parts/FM_01_complete_numbered_flap.step",
+      "stl": "STL/prototype/FM_01_complete_numbered_flap.stl",
+      "stl_sha256": "4dc3a39c5241a9ee1a78ffad78f6e13413b9966904d8fcbbb7e2638961ecaad5",
+      "step_sha256": "2dc24b7a6ab13341c0b0208163bbb1217daaa5a2b09e1a72944eca42a96c0d67",
+      "prototype_only": true,
+      "material": "PETG proposal; bushings may be purchased POM",
+      "print_orientation": "Y rotated 90 degrees about X",
+      "size_mm": [
+        48.0,
+        28.000000000000178,
+        4.0
+      ],
+      "native_valid": true,
+      "native_solids": 1,
+      "mesh_check": {
+        "status": "PASS",
+        "triangles": 2148,
+        "nonmanifold_edges": 0,
+        "degenerate_triangles": 0,
+        "signed_volume_mm3": 1575.8061723775616,
+        "vertex_matching_mm": 1e-05
+      }
+    },
+    {
+      "id": "FM_02_complete_numbered_flap",
+      "quantity": 1,
+      "occurrences": [
+        "FM_02_complete_numbered_flap"
+      ],
+      "step": "STEP/parts/FM_02_complete_numbered_flap.step",
+      "stl": "STL/prototype/FM_02_complete_numbered_flap.stl",
+      "stl_sha256": "e38d3d6601a095a287dd08ca656800c464d5aa2570f099f3c39319d912f398c7",
+      "step_sha256": "8cc32eec29cc37c33ad89e7103ee060b55a1ac4a4437cf9a53e1075108f9e5d1",
+      "prototype_only": true,
+      "material": "PETG proposal; bushings may be purchased POM",
+      "print_orientation": "Y rotated 90 degrees about X",
+      "size_mm": [
+        48.0,
+        28.0000000000001,
+        4.0
+      ],
+      "native_valid": true,
+      "native_solids": 1,
+      "mesh_check": {
+        "status": "PASS",
+        "triangles": 2216,
+        "nonmanifold_edges": 0,
+        "degenerate_triangles": 0,
+        "signed_volume_mm3": 1585.0435049871282,
+        "vertex_matching_mm": 1e-05
+      }
+    },
+    {
+      "id": "FM_03_complete_numbered_flap",
+      "quantity": 1,
+      "occurrences": [
+        "FM_03_complete_numbered_flap"
+      ],
+      "step": "STEP/parts/FM_03_complete_numbered_flap.step",
+      "stl": "STL/prototype/FM_03_complete_numbered_flap.stl",
+      "stl_sha256": "117e5348b6c20c935032aa8e44831cb2e63ff74487fe336586bf4e98a18c29e3",
+      "step_sha256": "4783ee96aeed027c28959daa10d2adb42aedc8750dd0b69f92dc263353438f6c",
+      "prototype_only": true,
+      "material": "PETG proposal; bushings may be purchased POM",
+      "print_orientation": "Y rotated 90 degrees about X",
+      "size_mm": [
+        48.0,
+        28.000000000000046,
+        4.0
+      ],
+      "native_valid": true,
+      "native_solids": 1,
+      "mesh_check": {
+        "status": "PASS",
+        "triangles": 2200,
+        "nonmanifold_edges": 0,
+        "degenerate_triangles": 0,
+        "signed_volume_mm3": 1578.1795049871296,
+        "vertex_matching_mm": 1e-05
+      }
+    },
+    {
+      "id": "FM_04_complete_numbered_flap",
+      "quantity": 1,
+      "occurrences": [
+        "FM_04_complete_numbered_flap"
+      ],
+      "step": "STEP/parts/FM_04_complete_numbered_flap.step",
+      "stl": "STL/prototype/FM_04_complete_numbered_flap.stl",
+      "stl_sha256": "ac2d84f2b7b05f3306685076ba9a02e63991b3dffe3537d53f162bbe805e0360",
+      "step_sha256": "061bf47fc2b1afcfb95e64c8ec601e4360b36ba63aef578d03ed59e7428ca546",
+      "prototype_only": true,
+      "material": "PETG proposal; bushings may be purchased POM",
+      "print_orientation": "Y rotated 90 degrees about X",
+      "size_mm": [
+        48.0,
+        28.00000000000001,
+        4.0
+      ],
+      "native_valid": true,
+      "native_solids": 1,
+      "mesh_check": {
+        "status": "PASS",
+        "triangles": 2216,
+        "nonmanifold_edges": 0,
+        "degenerate_triangles": 0,
+        "signed_volume_mm3": 1587.1555049871288,
+        "vertex_matching_mm": 1e-05
+      }
+    },
+    {
+      "id": "FM_05_complete_numbered_flap",
+      "quantity": 1,
+      "occurrences": [
+        "FM_05_complete_numbered_flap"
+      ],
+      "step": "STEP/parts/FM_05_complete_numbered_flap.step",
+      "stl": "STL/prototype/FM_05_complete_numbered_flap.stl",
+      "stl_sha256": "b122d4f30097ab6839488c4e0d2e7ea2a8359f78f6b0e0e0aa38f30ea945ff8c",
+      "step_sha256": "432caea9292644ce59ffea02d4471e7c0ca076fc07ef89716433b67e4fb32c83",
+      "prototype_only": true,
+      "material": "PETG proposal; bushings may be purchased POM",
+      "print_orientation": "Y rotated 90 degrees about X",
+      "size_mm": [
+        48.0,
+        28.000000000000107,
+        4.0
+      ],
+      "native_valid": true,
+      "native_solids": 1,
+      "mesh_check": {
+        "status": "PASS",
+        "triangles": 2232,
+        "nonmanifold_edges": 0,
+        "degenerate_triangles": 0,
+        "signed_volume_mm3": 1594.0195049871286,
+        "vertex_matching_mm": 1e-05
+      }
+    },
+    {
+      "id": "FM_06_complete_numbered_flap",
+      "quantity": 1,
+      "occurrences": [
+        "FM_06_complete_numbered_flap"
+      ],
+      "step": "STEP/parts/FM_06_complete_numbered_flap.step",
+      "stl": "STL/prototype/FM_06_complete_numbered_flap.stl",
+      "stl_sha256": "914ac03d4cc6d21bb4fd7ab2d340941e49035cd139d9cf135e9e84247ae9edea",
+      "step_sha256": "009ff3314315d6447bdd80d21e6acc902c4ae2fe5cb4d11e03e4b33fc8ca9be8",
+      "prototype_only": true,
+      "material": "PETG proposal; bushings may be purchased POM",
+      "print_orientation": "Y rotated 90 degrees about X",
+      "size_mm": [
+        48.0,
+        28.000000000000206,
+        4.0
+      ],
+      "native_valid": true,
+      "native_solids": 1,
+      "mesh_check": {
+        "status": "PASS",
+        "triangles": 2148,
+        "nonmanifold_edges": 0,
+        "degenerate_triangles": 0,
+        "signed_volume_mm3": 1575.8061723775625,
+        "vertex_matching_mm": 1e-05
+      }
+    },
+    {
+      "id": "FM_07_complete_numbered_flap",
+      "quantity": 1,
+      "occurrences": [
+        "FM_07_complete_numbered_flap"
+      ],
+      "step": "STEP/parts/FM_07_complete_numbered_flap.step",
+      "stl": "STL/prototype/FM_07_complete_numbered_flap.stl",
+      "stl_sha256": "74cc91c26822c61380bb1a4184df8e4f9d11d3faee85735576f295d9dee26f6b",
+      "step_sha256": "f2a12cde73aba8655f3a136573a71fb72c356056a115171e3bc61b72f26930e8",
+      "prototype_only": true,
+      "material": "PETG proposal; bushings may be purchased POM",
+      "print_orientation": "Y rotated 90 degrees about X",
+      "size_mm": [
+        48.0,
+        28.00000000000018,
+        4.0
+      ],
+      "native_valid": true,
+      "native_solids": 1,
+      "mesh_check": {
+        "status": "PASS",
+        "triangles": 2180,
+        "nonmanifold_edges": 0,
+        "degenerate_triangles": 0,
+        "signed_volume_mm3": 1591.6461723775608,
+        "vertex_matching_mm": 1e-05
+      }
+    },
+    {
+      "id": "FM_08_complete_numbered_flap",
+      "quantity": 1,
+      "occurrences": [
+        "FM_08_complete_numbered_flap"
+      ],
+      "step": "STEP/parts/FM_08_complete_numbered_flap.step",
+      "stl": "STL/prototype/FM_08_complete_numbered_flap.stl",
+      "stl_sha256": "7fb92aa51cbe48db977c1e0015bdba07500436a554e24678ea03e3a271cb58fe",
+      "step_sha256": "9d3cb6bb1ad3e9f5a7cc1cf6da2c3d8e3a1fe2cfe3d578558f6a0df4f6e49d52",
+      "prototype_only": true,
+      "material": "PETG proposal; bushings may be purchased POM",
+      "print_orientation": "Y rotated 90 degrees about X",
+      "size_mm": [
+        48.0,
+        28.000000000000185,
+        4.0
+      ],
+      "native_valid": true,
+      "native_solids": 1,
+      "mesh_check": {
+        "status": "PASS",
+        "triangles": 2232,
+        "nonmanifold_edges": 0,
+        "degenerate_triangles": 0,
+        "signed_volume_mm3": 1594.0195049871293,
+        "vertex_matching_mm": 1e-05
+      }
+    },
+    {
+      "id": "FM_09_complete_numbered_flap",
+      "quantity": 1,
+      "occurrences": [
+        "FM_09_complete_numbered_flap"
+      ],
+      "step": "STEP/parts/FM_09_complete_numbered_flap.step",
+      "stl": "STL/prototype/FM_09_complete_numbered_flap.stl",
+      "stl_sha256": "48c9b2062c9253d7dffa195d44a3486d673d18a23ce17b302d160d43877e08cc",
+      "step_sha256": "747c2b3986dde112548a7e84a53d4456850b8f941a08dc1dc2ca46c6de1368ff",
+      "prototype_only": true,
+      "material": "PETG proposal; bushings may be purchased POM",
+      "print_orientation": "Y rotated 90 degrees about X",
+      "size_mm": [
+        48.0,
+        28.000000000000203,
+        4.0
+      ],
+      "native_valid": true,
+      "native_solids": 1,
+      "mesh_check": {
+        "status": "PASS",
+        "triangles": 2164,
+        "nonmanifold_edges": 0,
+        "degenerate_triangles": 0,
+        "signed_volume_mm3": 1584.7821723775633,
+        "vertex_matching_mm": 1e-05
+      }
+    },
+    {
+      "id": "FM_10_complete_numbered_flap",
+      "quantity": 1,
+      "occurrences": [
+        "FM_10_complete_numbered_flap"
+      ],
+      "step": "STEP/parts/FM_10_complete_numbered_flap.step",
+      "stl": "STL/prototype/FM_10_complete_numbered_flap.stl",
+      "stl_sha256": "20b954920771075c3f1cc90eb4c6856932ba4b48b02f4a53ea04765261dfb01c",
+      "step_sha256": "93e62d6f8029d8d2b20c28fc176cce6089884f2fab96565546861276e606ca1d",
+      "prototype_only": true,
+      "material": "PETG proposal; bushings may be purchased POM",
+      "print_orientation": "Y rotated 90 degrees about X",
+      "size_mm": [
+        48.0,
+        28.000000000000114,
+        4.0
+      ],
+      "native_valid": true,
+      "native_solids": 1,
+      "mesh_check": {
+        "status": "PASS",
+        "triangles": 2048,
+        "nonmanifold_edges": 0,
+        "degenerate_triangles": 0,
+        "signed_volume_mm3": 1550.7288397679965,
+        "vertex_matching_mm": 1e-05
+      }
+    },
+    {
+      "id": "FM_11_complete_numbered_flap",
+      "quantity": 1,
+      "occurrences": [
+        "FM_11_complete_numbered_flap"
+      ],
+      "step": "STEP/parts/FM_11_complete_numbered_flap.step",
+      "stl": "STL/prototype/FM_11_complete_numbered_flap.stl",
+      "stl_sha256": "d26a6d699c74519cb84179271fb72393662af27201ce09fe4ef29d109fbe9a4b",
+      "step_sha256": "7227f7bdf57341b0ea378b9d8dc505ba41ac84c6e9ff0368524d9b7afe6f828d",
+      "prototype_only": true,
+      "material": "PETG proposal; bushings may be purchased POM",
+      "print_orientation": "Y rotated 90 degrees about X",
+      "size_mm": [
+        48.0,
+        28.00000000000001,
+        4.0
+      ],
+      "native_valid": true,
+      "native_solids": 1,
+      "mesh_check": {
+        "status": "PASS",
+        "triangles": 2084,
+        "nonmanifold_edges": 0,
+        "degenerate_triangles": 0,
+        "signed_volume_mm3": 1544.1261723775615,
+        "vertex_matching_mm": 1e-05
+      }
+    },
+    {
+      "id": "FM_12_complete_numbered_flap",
+      "quantity": 1,
+      "occurrences": [
+        "FM_12_complete_numbered_flap"
+      ],
+      "step": "STEP/parts/FM_12_complete_numbered_flap.step",
+      "stl": "STL/prototype/FM_12_complete_numbered_flap.stl",
+      "stl_sha256": "bf0f044d8f83391411b12607e3d014b4a5239add88e6a07afe1bbcaad9ca0dbf",
+      "step_sha256": "0a0afbfaa68279ec1a77de329badabbbbb65ab2bd61d40cc65da8b77c5cb1f96",
+      "prototype_only": true,
+      "material": "PETG proposal; bushings may be purchased POM",
+      "print_orientation": "Y rotated 90 degrees about X",
+      "size_mm": [
+        48.0,
+        28.000000000000046,
+        4.0
+      ],
+      "native_valid": true,
+      "native_solids": 1,
+      "mesh_check": {
+        "status": "PASS",
+        "triangles": 2152,
+        "nonmanifold_edges": 0,
+        "degenerate_triangles": 0,
+        "signed_volume_mm3": 1553.3635049871286,
+        "vertex_matching_mm": 1e-05
+      }
+    },
+    {
+      "id": "FM_13_complete_numbered_flap",
+      "quantity": 1,
+      "occurrences": [
+        "FM_13_complete_numbered_flap"
+      ],
+      "step": "STEP/parts/FM_13_complete_numbered_flap.step",
+      "stl": "STL/prototype/FM_13_complete_numbered_flap.stl",
+      "stl_sha256": "1495c9ce4f8a5390bd6fdc61a99df2f36c038e39af55766d92afd95480a58fe3",
+      "step_sha256": "bcdd5799efe45e846c1890efa950fe38652c162cb7b3ecd0264d2b6ed17d6421",
+      "prototype_only": true,
+      "material": "PETG proposal; bushings may be purchased POM",
+      "print_orientation": "Y rotated 90 degrees about X",
+      "size_mm": [
+        48.0,
+        28.0000000000001,
+        4.0
+      ],
+      "native_valid": true,
+      "native_solids": 1,
+      "mesh_check": {
+        "status": "PASS",
+        "triangles": 2136,
+        "nonmanifold_edges": 0,
+        "degenerate_triangles": 0,
+        "signed_volume_mm3": 1546.499504987129,
+        "vertex_matching_mm": 1e-05
+      }
+    },
+    {
+      "id": "FM_14_complete_numbered_flap",
+      "quantity": 1,
+      "occurrences": [
+        "FM_14_complete_numbered_flap"
+      ],
+      "step": "STEP/parts/FM_14_complete_numbered_flap.step",
+      "stl": "STL/prototype/FM_14_complete_numbered_flap.stl",
+      "stl_sha256": "e6995d95d560f5d9ae823f33f59318db42a825dfda91a978112810e424ae52a0",
+      "step_sha256": "612cdf9ce15c05a6850c735829b181fac16797df2680fa84d93684c610325011",
+      "prototype_only": true,
+      "material": "PETG proposal; bushings may be purchased POM",
+      "print_orientation": "Y rotated 90 degrees about X",
+      "size_mm": [
+        48.0,
+        28.000000000000185,
+        4.0
+      ],
+      "native_valid": true,
+      "native_solids": 1,
+      "mesh_check": {
+        "status": "PASS",
+        "triangles": 2152,
+        "nonmanifold_edges": 0,
+        "degenerate_triangles": 0,
+        "signed_volume_mm3": 1555.4755049871296,
+        "vertex_matching_mm": 1e-05
+      }
+    },
+    {
+      "id": "FM_15_complete_numbered_flap",
+      "quantity": 1,
+      "occurrences": [
+        "FM_15_complete_numbered_flap"
+      ],
+      "step": "STEP/parts/FM_15_complete_numbered_flap.step",
+      "stl": "STL/prototype/FM_15_complete_numbered_flap.stl",
+      "stl_sha256": "e04cb0deb7f18a8383eb26dc18210db65e08a39d634c38ad707ea95b718dbe83",
+      "step_sha256": "1dc8850453c61ed960e9153535bdd480c0da1cf34d4c3ef1ad14192ec6c700a9",
+      "prototype_only": true,
+      "material": "PETG proposal; bushings may be purchased POM",
+      "print_orientation": "Y rotated 90 degrees about X",
+      "size_mm": [
+        48.0,
+        28.0,
+        4.0
+      ],
+      "native_valid": true,
+      "native_solids": 1,
+      "mesh_check": {
+        "status": "PASS",
+        "triangles": 2168,
+        "nonmanifold_edges": 0,
+        "degenerate_triangles": 0,
+        "signed_volume_mm3": 1562.339504987129,
+        "vertex_matching_mm": 1e-05
+      }
+    },
+    {
+      "id": "FM_16_complete_numbered_flap",
+      "quantity": 1,
+      "occurrences": [
+        "FM_16_complete_numbered_flap"
+      ],
+      "step": "STEP/parts/FM_16_complete_numbered_flap.step",
+      "stl": "STL/prototype/FM_16_complete_numbered_flap.stl",
+      "stl_sha256": "f76b95161aa05f4fb3a9744455b866e7c01a2a7a6d0078a747afd8bb5f3d5a52",
+      "step_sha256": "ea46081b7580234cf430c524815d0c520c412e716054d3c0e4ca91d17d2a3d3e",
+      "prototype_only": true,
+      "material": "PETG proposal; bushings may be purchased POM",
+      "print_orientation": "Y rotated 90 degrees about X",
+      "size_mm": [
+        48.0,
+        28.000000000000185,
+        4.0
+      ],
+      "native_valid": true,
+      "native_solids": 1,
+      "mesh_check": {
+        "status": "PASS",
+        "triangles": 2084,
+        "nonmanifold_edges": 0,
+        "degenerate_triangles": 0,
+        "signed_volume_mm3": 1544.1261723775629,
+        "vertex_matching_mm": 1e-05
+      }
+    },
+    {
+      "id": "FM_17_complete_numbered_flap",
+      "quantity": 1,
+      "occurrences": [
+        "FM_17_complete_numbered_flap"
+      ],
+      "step": "STEP/parts/FM_17_complete_numbered_flap.step",
+      "stl": "STL/prototype/FM_17_complete_numbered_flap.stl",
+      "stl_sha256": "a1e2260c63cf943deadf3be877f1e21a2aa9f40b30b548f9c1be006d894c90d6",
+      "step_sha256": "ab354d5525f91c50e2fe541a32112aca0d475ed484d1fb67fe38ab57b3be1a84",
+      "prototype_only": true,
+      "material": "PETG proposal; bushings may be purchased POM",
+      "print_orientation": "Y rotated 90 degrees about X",
+      "size_mm": [
+        48.0,
+        28.0000000000001,
+        4.0
+      ],
+      "native_valid": true,
+      "native_solids": 1,
+      "mesh_check": {
+        "status": "PASS",
+        "triangles": 2116,
+        "nonmanifold_edges": 0,
+        "degenerate_triangles": 0,
+        "signed_volume_mm3": 1559.9661723775616,
+        "vertex_matching_mm": 1e-05
+      }
+    },
+    {
+      "id": "FM_18_complete_numbered_flap",
+      "quantity": 1,
+      "occurrences": [
+        "FM_18_complete_numbered_flap"
+      ],
+      "step": "STEP/parts/FM_18_complete_numbered_flap.step",
+      "stl": "STL/prototype/FM_18_complete_numbered_flap.stl",
+      "stl_sha256": "e92f7238d750ea791af98d95d9e44d7a9236a0d98dfc91d0bc478536d132519c",
+      "step_sha256": "713a19c1acf2578f007cedc095b13ea68d073e6ab07136bc9ee301576ab3745c",
+      "prototype_only": true,
+      "material": "PETG proposal; bushings may be purchased POM",
+      "print_orientation": "Y rotated 90 degrees about X",
+      "size_mm": [
+        48.0,
+        28.000000000000046,
+        4.0
+      ],
+      "native_valid": true,
+      "native_solids": 1,
+      "mesh_check": {
+        "status": "PASS",
+        "triangles": 2168,
+        "nonmanifold_edges": 0,
+        "degenerate_triangles": 0,
+        "signed_volume_mm3": 1562.3395049871297,
+        "vertex_matching_mm": 1e-05
+      }
+    },
+    {
+      "id": "FM_19_complete_numbered_flap",
+      "quantity": 1,
+      "occurrences": [
+        "FM_19_complete_numbered_flap"
+      ],
+      "step": "STEP/parts/FM_19_complete_numbered_flap.step",
+      "stl": "STL/prototype/FM_19_complete_numbered_flap.stl",
+      "stl_sha256": "d006777e2546fb11a50b3b2b7d991a65c268284104d8a3cc0fee95ff8e358780",
+      "step_sha256": "15f5d265bc592a395c4452e62036dd67050ae4445ac2a8f2f2707b2b2fb38946",
+      "prototype_only": true,
+      "material": "PETG proposal; bushings may be purchased POM",
+      "print_orientation": "Y rotated 90 degrees about X",
+      "size_mm": [
+        48.0,
+        28.000000000000007,
+        4.0
+      ],
+      "native_valid": true,
+      "native_solids": 1,
+      "mesh_check": {
+        "status": "PASS",
+        "triangles": 2200,
+        "nonmanifold_edges": 0,
+        "degenerate_triangles": 0,
+        "signed_volume_mm3": 1578.179504987129,
+        "vertex_matching_mm": 1e-05
+      }
+    },
+    {
+      "id": "FM_20_complete_numbered_flap",
+      "quantity": 1,
+      "occurrences": [
+        "FM_20_complete_numbered_flap"
+      ],
+      "step": "STEP/parts/FM_20_complete_numbered_flap.step",
+      "stl": "STL/prototype/FM_20_complete_numbered_flap.stl",
+      "stl_sha256": "a049834e45d69a38fadb8669272428090917679b91c4906a714eabbfa98d79fb",
+      "step_sha256": "d932d5610f0f316256683519266adc9d4d4756d44a54e49be13380dfcccbcdf6",
+      "prototype_only": true,
+      "material": "PETG proposal; bushings may be purchased POM",
+      "print_orientation": "Y rotated 90 degrees about X",
+      "size_mm": [
+        48.0,
+        28.000000000000107,
+        4.0
+      ],
+      "native_valid": true,
+      "native_solids": 1,
+      "mesh_check": {
+        "status": "PASS",
+        "triangles": 2184,
+        "nonmanifold_edges": 0,
+        "degenerate_triangles": 0,
+        "signed_volume_mm3": 1569.2035049871297,
+        "vertex_matching_mm": 1e-05
+      }
+    },
+    {
+      "id": "FM_21_complete_numbered_flap",
+      "quantity": 1,
+      "occurrences": [
+        "FM_21_complete_numbered_flap"
+      ],
+      "step": "STEP/parts/FM_21_complete_numbered_flap.step",
+      "stl": "STL/prototype/FM_21_complete_numbered_flap.stl",
+      "stl_sha256": "bb02641ec3783395a5ea47ec47944c948407dd916570e8ea514b6b5417ca9cec",
+      "step_sha256": "8bb6de9c83527a6e0f1760b2def73322144aa53c6a438362191760564507be92",
+      "prototype_only": true,
+      "material": "PETG proposal; bushings may be purchased POM",
+      "print_orientation": "Y rotated 90 degrees about X",
+      "size_mm": [
+        48.0,
+        28.0000000000002,
+        4.0
+      ],
+      "native_valid": true,
+      "native_solids": 1,
+      "mesh_check": {
+        "status": "PASS",
+        "triangles": 2220,
+        "nonmanifold_edges": 0,
+        "degenerate_triangles": 0,
+        "signed_volume_mm3": 1562.6008713376289,
+        "vertex_matching_mm": 1e-05
+      }
+    },
+    {
+      "id": "FM_22_complete_numbered_flap",
+      "quantity": 1,
+      "occurrences": [
+        "FM_22_complete_numbered_flap"
+      ],
+      "step": "STEP/parts/FM_22_complete_numbered_flap.step",
+      "stl": "STL/prototype/FM_22_complete_numbered_flap.stl",
+      "stl_sha256": "752a99d987d50133ca449bbbb124cdea3c955cd399c6c0e37db90c3626778e01",
+      "step_sha256": "227118787d557e4b1f047e8a071fbfee8f6d2611b6662ef0deb5534ab5ec3344",
+      "prototype_only": true,
+      "material": "PETG proposal; bushings may be purchased POM",
+      "print_orientation": "Y rotated 90 degrees about X",
+      "size_mm": [
+        48.0,
+        28.000000000000178,
+        4.0
+      ],
+      "native_valid": true,
+      "native_solids": 1,
+      "mesh_check": {
+        "status": "PASS",
+        "triangles": 2288,
+        "nonmanifold_edges": 0,
+        "degenerate_triangles": 0,
+        "signed_volume_mm3": 1571.8382376881293,
+        "vertex_matching_mm": 1e-05
+      }
+    },
+    {
+      "id": "FM_23_complete_numbered_flap",
+      "quantity": 1,
+      "occurrences": [
+        "FM_23_complete_numbered_flap"
+      ],
+      "step": "STEP/parts/FM_23_complete_numbered_flap.step",
+      "stl": "STL/prototype/FM_23_complete_numbered_flap.stl",
+      "stl_sha256": "258f536858b39b83aeb04dc4784f7d2ccfffa894bf9e17386917a8292645ecb4",
+      "step_sha256": "13d5dbe4557990369f546e291cfa38fd1a8ff05ecd2e4897072fc75723ba13fb",
+      "prototype_only": true,
+      "material": "PETG proposal; bushings may be purchased POM",
+      "print_orientation": "Y rotated 90 degrees about X",
+      "size_mm": [
+        48.0,
+        28.000000000000178,
+        4.0
+      ],
+      "native_valid": true,
+      "native_solids": 1,
+      "mesh_check": {
+        "status": "PASS",
+        "triangles": 2272,
+        "nonmanifold_edges": 0,
+        "degenerate_triangles": 0,
+        "signed_volume_mm3": 1564.9742376881297,
+        "vertex_matching_mm": 1e-05
+      }
+    },
+    {
+      "id": "FM_24_complete_numbered_flap",
+      "quantity": 1,
+      "occurrences": [
+        "FM_24_complete_numbered_flap"
+      ],
+      "step": "STEP/parts/FM_24_complete_numbered_flap.step",
+      "stl": "STL/prototype/FM_24_complete_numbered_flap.stl",
+      "stl_sha256": "939c9db7cfd6cb4f63a6fb62544fea0cc39a193b51ece7433eef03e868e0f1b3",
+      "step_sha256": "bc221b424ec6bc6b7a97f94e5b46b4eb23e08c858729455d5741d4a8a7b4075b",
+      "prototype_only": true,
+      "material": "PETG proposal; bushings may be purchased POM",
+      "print_orientation": "Y rotated 90 degrees about X",
+      "size_mm": [
+        48.0,
+        28.0000000000002,
+        4.0
+      ],
+      "native_valid": true,
+      "native_solids": 1,
+      "mesh_check": {
+        "status": "PASS",
+        "triangles": 2288,
+        "nonmanifold_edges": 0,
+        "degenerate_triangles": 0,
+        "signed_volume_mm3": 1573.9502376881298,
+        "vertex_matching_mm": 1e-05
+      }
+    },
+    {
+      "id": "FM_25_complete_numbered_flap",
+      "quantity": 1,
+      "occurrences": [
+        "FM_25_complete_numbered_flap"
+      ],
+      "step": "STEP/parts/FM_25_complete_numbered_flap.step",
+      "stl": "STL/prototype/FM_25_complete_numbered_flap.stl",
+      "stl_sha256": "584cbe5949cb5ae8ee381fc18be892e4cb68a371526075f8ef6cb319e82d560b",
+      "step_sha256": "3e460990bc2ca57b2291cb220bc0d4260834ac1d8137268eaa048abacfde679c",
+      "prototype_only": true,
+      "material": "PETG proposal; bushings may be purchased POM",
+      "print_orientation": "Y rotated 90 degrees about X",
+      "size_mm": [
+        48.0,
+        28.000000000000114,
+        4.0
+      ],
+      "native_valid": true,
+      "native_solids": 1,
+      "mesh_check": {
+        "status": "PASS",
+        "triangles": 2304,
+        "nonmanifold_edges": 0,
+        "degenerate_triangles": 0,
+        "signed_volume_mm3": 1580.8142376881292,
+        "vertex_matching_mm": 1e-05
+      }
+    },
+    {
+      "id": "FM_26_complete_numbered_flap",
+      "quantity": 1,
+      "occurrences": [
+        "FM_26_complete_numbered_flap"
+      ],
+      "step": "STEP/parts/FM_26_complete_numbered_flap.step",
+      "stl": "STL/prototype/FM_26_complete_numbered_flap.stl",
+      "stl_sha256": "26def8d7af0a3f4606b52105b91b25ed82a2073c9f0cba49a8b00ec8049dff8d",
+      "step_sha256": "45aec0e9b7f10f46a0a188137b46d2e56420a596e19db619e023631d27d05f93",
+      "prototype_only": true,
+      "material": "PETG proposal; bushings may be purchased POM",
+      "print_orientation": "Y rotated 90 degrees about X",
+      "size_mm": [
+        48.0,
+        28.000000000000018,
+        4.0
+      ],
+      "native_valid": true,
+      "native_solids": 1,
+      "mesh_check": {
+        "status": "PASS",
+        "triangles": 2220,
+        "nonmanifold_edges": 0,
+        "degenerate_triangles": 0,
+        "signed_volume_mm3": 1562.6008713376302,
+        "vertex_matching_mm": 1e-05
+      }
+    },
+    {
+      "id": "FM_27_complete_numbered_flap",
+      "quantity": 1,
+      "occurrences": [
+        "FM_27_complete_numbered_flap"
+      ],
+      "step": "STEP/parts/FM_27_complete_numbered_flap.step",
+      "stl": "STL/prototype/FM_27_complete_numbered_flap.stl",
+      "stl_sha256": "98137d286c847c06c6a01802aab9649c68e210a98e8a2070fffcba7d3377d5f3",
+      "step_sha256": "386ee2f7057015882dd0563920cff3ae3c8379c4f8f35a4bef6cf70ed69c985c",
+      "prototype_only": true,
+      "material": "PETG proposal; bushings may be purchased POM",
+      "print_orientation": "Y rotated 90 degrees about X",
+      "size_mm": [
+        48.0,
+        28.000000000000053,
+        4.0
+      ],
+      "native_valid": true,
+      "native_solids": 1,
+      "mesh_check": {
+        "status": "PASS",
+        "triangles": 2252,
+        "nonmanifold_edges": 0,
+        "degenerate_triangles": 0,
+        "signed_volume_mm3": 1578.440871337629,
+        "vertex_matching_mm": 1e-05
+      }
+    },
+    {
+      "id": "FM_28_complete_numbered_flap",
+      "quantity": 1,
+      "occurrences": [
+        "FM_28_complete_numbered_flap"
+      ],
+      "step": "STEP/parts/FM_28_complete_numbered_flap.step",
+      "stl": "STL/prototype/FM_28_complete_numbered_flap.stl",
+      "stl_sha256": "67eedd3fd1555ce82a482b88826a00bc6b27edfdf1c6d27b0ab84675c5adc382",
+      "step_sha256": "1022258565a16cbb76b0449891e54f91dfc9fb548ed0522013f25f8abd6c9433",
+      "prototype_only": true,
+      "material": "PETG proposal; bushings may be purchased POM",
+      "print_orientation": "Y rotated 90 degrees about X",
+      "size_mm": [
+        48.0,
+        28.0000000000001,
+        4.0
+      ],
+      "native_valid": true,
+      "native_solids": 1,
+      "mesh_check": {
+        "status": "PASS",
+        "triangles": 2304,
+        "nonmanifold_edges": 0,
+        "degenerate_triangles": 0,
+        "signed_volume_mm3": 1580.8142376881294,
+        "vertex_matching_mm": 1e-05
+      }
+    },
+    {
+      "id": "FM_29_complete_numbered_flap",
+      "quantity": 1,
+      "occurrences": [
+        "FM_29_complete_numbered_flap"
+      ],
+      "step": "STEP/parts/FM_29_complete_numbered_flap.step",
+      "stl": "STL/prototype/FM_29_complete_numbered_flap.stl",
+      "stl_sha256": "e56f4dfaa473f3f43bc121e0bb4a5252e6d582e5ebef03826a90ab0c44b0f010",
+      "step_sha256": "64e16ec96fad71ad0241500d29d454d967a3053582257065d628ba756a36f16b",
+      "prototype_only": true,
+      "material": "PETG proposal; bushings may be purchased POM",
+      "print_orientation": "Y rotated 90 degrees about X",
+      "size_mm": [
+        48.0,
+        28.000000000000178,
+        4.0
+      ],
+      "native_valid": true,
+      "native_solids": 1,
+      "mesh_check": {
+        "status": "PASS",
+        "triangles": 2268,
+        "nonmanifold_edges": 0,
+        "degenerate_triangles": 0,
+        "signed_volume_mm3": 1587.4168713376293,
+        "vertex_matching_mm": 1e-05
+      }
+    },
+    {
+      "id": "FM_30_complete_numbered_flap",
+      "quantity": 1,
+      "occurrences": [
+        "FM_30_complete_numbered_flap"
+      ],
+      "step": "STEP/parts/FM_30_complete_numbered_flap.step",
+      "stl": "STL/prototype/FM_30_complete_numbered_flap.stl",
+      "stl_sha256": "39a658431141c2961e95a066931148c11bdf76825c29ac748c494c954470b471",
+      "step_sha256": "e2bfeff209de82e0183d6373fa454f3724e76a889e9df4ca3093b3c7718b27c4",
+      "prototype_only": true,
+      "material": "PETG proposal; bushings may be purchased POM",
+      "print_orientation": "Y rotated 90 degrees about X",
+      "size_mm": [
+        48.0,
+        28.0,
+        4.0
+      ],
+      "native_valid": true,
+      "native_solids": 1,
+      "mesh_check": {
+        "status": "PASS",
+        "triangles": 2184,
+        "nonmanifold_edges": 0,
+        "degenerate_triangles": 0,
+        "signed_volume_mm3": 1569.2035049871297,
+        "vertex_matching_mm": 1e-05
+      }
+    },
+    {
+      "id": "FM_31_complete_numbered_flap",
+      "quantity": 1,
+      "occurrences": [
+        "FM_31_complete_numbered_flap"
+      ],
+      "step": "STEP/parts/FM_31_complete_numbered_flap.step",
+      "stl": "STL/prototype/FM_31_complete_numbered_flap.stl",
+      "stl_sha256": "f9dac727d91ebb1bd0a223ec37fba18812831edff99e80c4a032a55d2dd91f76",
+      "step_sha256": "392b35c557787977e336ce9f92e5e9cf21b754ebf5cad5d25c641d1916569f96",
+      "prototype_only": true,
+      "material": "PETG proposal; bushings may be purchased POM",
+      "print_orientation": "Y rotated 90 degrees about X",
+      "size_mm": [
+        48.0,
+        28.000000000000178,
+        4.0
+      ],
+      "native_valid": true,
+      "native_solids": 1,
+      "mesh_check": {
+        "status": "PASS",
+        "triangles": 2220,
+        "nonmanifold_edges": 0,
+        "degenerate_triangles": 0,
+        "signed_volume_mm3": 1562.6008713376293,
+        "vertex_matching_mm": 1e-05
+      }
+    },
+    {
+      "id": "FM_32_complete_numbered_flap",
+      "quantity": 1,
+      "occurrences": [
+        "FM_32_complete_numbered_flap"
+      ],
+      "step": "STEP/parts/FM_32_complete_numbered_flap.step",
+      "stl": "STL/prototype/FM_32_complete_numbered_flap.stl",
+      "stl_sha256": "dce5399261a98a122a54297465b1a26c4153d31a45b2c4e91b54af1a1e4497c7",
+      "step_sha256": "6fd4181c46e0580f505061607ea03ec468ebd54200c927fe09f9b928396c7d4e",
+      "prototype_only": true,
+      "material": "PETG proposal; bushings may be purchased POM",
+      "print_orientation": "Y rotated 90 degrees about X",
+      "size_mm": [
+        48.0,
+        28.000000000000092,
+        4.0
+      ],
+      "native_valid": true,
+      "native_solids": 1,
+      "mesh_check": {
+        "status": "PASS",
+        "triangles": 2288,
+        "nonmanifold_edges": 0,
+        "degenerate_triangles": 0,
+        "signed_volume_mm3": 1571.8382376881289,
+        "vertex_matching_mm": 1e-05
+      }
+    },
+    {
+      "id": "FM_33_complete_numbered_flap",
+      "quantity": 1,
+      "occurrences": [
+        "FM_33_complete_numbered_flap"
+      ],
+      "step": "STEP/parts/FM_33_complete_numbered_flap.step",
+      "stl": "STL/prototype/FM_33_complete_numbered_flap.stl",
+      "stl_sha256": "7dff721f27c5375947f4d9092d024b3d0836c035dfa17698ace53b987ac39cc8",
+      "step_sha256": "c6baa13b03594f1306490f8c733f0341bef7935b4ad9d37cb0023412ff4886d3",
+      "prototype_only": true,
+      "material": "PETG proposal; bushings may be purchased POM",
+      "print_orientation": "Y rotated 90 degrees about X",
+      "size_mm": [
+        48.0,
+        28.000000000000046,
+        4.0
+      ],
+      "native_valid": true,
+      "native_solids": 1,
+      "mesh_check": {
+        "status": "PASS",
+        "triangles": 2272,
+        "nonmanifold_edges": 0,
+        "degenerate_triangles": 0,
+        "signed_volume_mm3": 1564.9742376881297,
+        "vertex_matching_mm": 1e-05
+      }
+    },
+    {
+      "id": "FM_34_complete_numbered_flap",
+      "quantity": 1,
+      "occurrences": [
+        "FM_34_complete_numbered_flap"
+      ],
+      "step": "STEP/parts/FM_34_complete_numbered_flap.step",
+      "stl": "STL/prototype/FM_34_complete_numbered_flap.stl",
+      "stl_sha256": "b3f51354fb6ec5cb15dd655d918b554bfa42141f9c331d078820e33faae6900b",
+      "step_sha256": "2cb117c6801360c47ea9425c7d21a56106c1e14cbc80f913e7d85ff3165a4b1e",
+      "prototype_only": true,
+      "material": "PETG proposal; bushings may be purchased POM",
+      "print_orientation": "Y rotated 90 degrees about X",
+      "size_mm": [
+        48.0,
+        28.00000000000001,
+        4.0
+      ],
+      "native_valid": true,
+      "native_solids": 1,
+      "mesh_check": {
+        "status": "PASS",
+        "triangles": 2288,
+        "nonmanifold_edges": 0,
+        "degenerate_triangles": 0,
+        "signed_volume_mm3": 1573.950237688129,
+        "vertex_matching_mm": 1e-05
+      }
+    },
+    {
+      "id": "FM_35_complete_numbered_flap",
+      "quantity": 1,
+      "occurrences": [
+        "FM_35_complete_numbered_flap"
+      ],
+      "step": "STEP/parts/FM_35_complete_numbered_flap.step",
+      "stl": "STL/prototype/FM_35_complete_numbered_flap.stl",
+      "stl_sha256": "fa2bdcabdd1ffa60540dde5299efcbda75d0fd3337ce506c167d05d768938b84",
+      "step_sha256": "0e949094925dba80af2aa685c59a1521569f8e16c595b7d7dc5767ac0b675c60",
+      "prototype_only": true,
+      "material": "PETG proposal; bushings may be purchased POM",
+      "print_orientation": "Y rotated 90 degrees about X",
+      "size_mm": [
+        48.0,
+        28.000000000000107,
+        4.0
+      ],
+      "native_valid": true,
+      "native_solids": 1,
+      "mesh_check": {
+        "status": "PASS",
+        "triangles": 2304,
+        "nonmanifold_edges": 0,
+        "degenerate_triangles": 0,
+        "signed_volume_mm3": 1580.8142376881292,
+        "vertex_matching_mm": 1e-05
+      }
+    },
+    {
+      "id": "FM_36_complete_numbered_flap",
+      "quantity": 1,
+      "occurrences": [
+        "FM_36_complete_numbered_flap"
+      ],
+      "step": "STEP/parts/FM_36_complete_numbered_flap.step",
+      "stl": "STL/prototype/FM_36_complete_numbered_flap.stl",
+      "stl_sha256": "d96f02f19f089335860a547ad9bae15b4bafac07fd07326fb46363c7741ff08e",
+      "step_sha256": "24b33c5c758257e8f143859be5d05bfc6dcaa9c7b1971bf09825e3a80dbeb97a",
+      "prototype_only": true,
+      "material": "PETG proposal; bushings may be purchased POM",
+      "print_orientation": "Y rotated 90 degrees about X",
+      "size_mm": [
+        48.0,
+        28.0000000000002,
+        4.0
+      ],
+      "native_valid": true,
+      "native_solids": 1,
+      "mesh_check": {
+        "status": "PASS",
+        "triangles": 2220,
+        "nonmanifold_edges": 0,
+        "degenerate_triangles": 0,
+        "signed_volume_mm3": 1562.6008713376298,
+        "vertex_matching_mm": 1e-05
+      }
+    },
+    {
+      "id": "FM_37_complete_numbered_flap",
+      "quantity": 1,
+      "occurrences": [
+        "FM_37_complete_numbered_flap"
+      ],
+      "step": "STEP/parts/FM_37_complete_numbered_flap.step",
+      "stl": "STL/prototype/FM_37_complete_numbered_flap.stl",
+      "stl_sha256": "605c9a8cb7e74805edd46cf0774eb271c317b169b92f0977d26e97000f132e63",
+      "step_sha256": "617c6f76004c94e7e2a205b004753716d2b74337589441f82a72350e07eba022",
+      "prototype_only": true,
+      "material": "PETG proposal; bushings may be purchased POM",
+      "print_orientation": "Y rotated 90 degrees about X",
+      "size_mm": [
+        48.0,
+        28.000000000000178,
+        4.0
+      ],
+      "native_valid": true,
+      "native_solids": 1,
+      "mesh_check": {
+        "status": "PASS",
+        "triangles": 2252,
+        "nonmanifold_edges": 0,
+        "degenerate_triangles": 0,
+        "signed_volume_mm3": 1578.440871337629,
+        "vertex_matching_mm": 1e-05
+      }
+    },
+    {
+      "id": "FM_38_complete_numbered_flap",
+      "quantity": 1,
+      "occurrences": [
+        "FM_38_complete_numbered_flap"
+      ],
+      "step": "STEP/parts/FM_38_complete_numbered_flap.step",
+      "stl": "STL/prototype/FM_38_complete_numbered_flap.stl",
+      "stl_sha256": "fcea7de2e916312e81b43f14c5726aefabdfb892948212eefdad188b4aa8ed40",
+      "step_sha256": "cab4d9fb41c1327ed8ffff19b9a94e21e9fa5d94050b0d965db6136b1a561ceb",
+      "prototype_only": true,
+      "material": "PETG proposal; bushings may be purchased POM",
+      "print_orientation": "Y rotated 90 degrees about X",
+      "size_mm": [
+        48.0,
+        28.000000000000178,
+        4.0
+      ],
+      "native_valid": true,
+      "native_solids": 1,
+      "mesh_check": {
+        "status": "PASS",
+        "triangles": 2304,
+        "nonmanifold_edges": 0,
+        "degenerate_triangles": 0,
+        "signed_volume_mm3": 1580.8142376881299,
+        "vertex_matching_mm": 1e-05
+      }
+    },
+    {
+      "id": "FM_39_complete_numbered_flap",
+      "quantity": 1,
+      "occurrences": [
+        "FM_39_complete_numbered_flap"
+      ],
+      "step": "STEP/parts/FM_39_complete_numbered_flap.step",
+      "stl": "STL/prototype/FM_39_complete_numbered_flap.stl",
+      "stl_sha256": "90a03915f7b022b4ebe0c4aab3bde1fda5a76611d15ec28ac88a26f135d94e0c",
+      "step_sha256": "570278a6d136f703cee8a8b3d6ee8a4c43399d617d190c2fb86bf48c92190b50",
+      "prototype_only": true,
+      "material": "PETG proposal; bushings may be purchased POM",
+      "print_orientation": "Y rotated 90 degrees about X",
+      "size_mm": [
+        48.0,
+        28.0000000000002,
+        4.0
+      ],
+      "native_valid": true,
+      "native_solids": 1,
+      "mesh_check": {
+        "status": "PASS",
+        "triangles": 2252,
+        "nonmanifold_edges": 0,
+        "degenerate_triangles": 0,
+        "signed_volume_mm3": 1580.5528713376302,
+        "vertex_matching_mm": 1e-05
+      }
+    },
+    {
+      "id": "FM_40_complete_numbered_flap",
+      "quantity": 1,
+      "occurrences": [
+        "FM_40_complete_numbered_flap"
+      ],
+      "step": "STEP/parts/FM_40_complete_numbered_flap.step",
+      "stl": "STL/prototype/FM_40_complete_numbered_flap.stl",
+      "stl_sha256": "53d9ca4d4925ff270aa14e426142aae8d6688e691de2fe1984af1fa68df62d2f",
+      "step_sha256": "98f6e7bdf5c6885dfa70d31a9c252e1e078b665324b4c688ce28745590422543",
+      "prototype_only": true,
+      "material": "PETG proposal; bushings may be purchased POM",
+      "print_orientation": "Y rotated 90 degrees about X",
+      "size_mm": [
+        48.0,
+        28.000000000000107,
+        4.0
+      ],
+      "native_valid": true,
+      "native_solids": 1,
+      "mesh_check": {
+        "status": "PASS",
+        "triangles": 2168,
+        "nonmanifold_edges": 0,
+        "degenerate_triangles": 0,
+        "signed_volume_mm3": 1564.4515049871313,
+        "vertex_matching_mm": 1e-05
+      }
+    },
+    {
+      "id": "FM_41_complete_numbered_flap",
+      "quantity": 1,
+      "occurrences": [
+        "FM_41_complete_numbered_flap"
+      ],
+      "step": "STEP/parts/FM_41_complete_numbered_flap.step",
+      "stl": "STL/prototype/FM_41_complete_numbered_flap.stl",
+      "stl_sha256": "cfecaefd8b316d1ecb22f76816b0e32e76a97a09648910f58e281d5ee9c0944a",
+      "step_sha256": "68a844b54fd336fd1fb64c2b503ca6745fed5a99af1c360ce8bc5be34f077a44",
+      "prototype_only": true,
+      "material": "PETG proposal; bushings may be purchased POM",
+      "print_orientation": "Y rotated 90 degrees about X",
+      "size_mm": [
+        48.0,
+        28.000000000000018,
+        4.0
+      ],
+      "native_valid": true,
+      "native_solids": 1,
+      "mesh_check": {
+        "status": "PASS",
+        "triangles": 2204,
+        "nonmanifold_edges": 0,
+        "degenerate_triangles": 0,
+        "signed_volume_mm3": 1557.8488713376291,
+        "vertex_matching_mm": 1e-05
+      }
+    },
+    {
+      "id": "FM_42_complete_numbered_flap",
+      "quantity": 1,
+      "occurrences": [
+        "FM_42_complete_numbered_flap"
+      ],
+      "step": "STEP/parts/FM_42_complete_numbered_flap.step",
+      "stl": "STL/prototype/FM_42_complete_numbered_flap.stl",
+      "stl_sha256": "5071c25d6293d7cb3a96687098bead2891d86bd14c2dd2681772662aa5d13fe8",
+      "step_sha256": "5df2ab1fc813994ef5f2ac4543a9f5b2d5d3e66c4792e3e61e7325ef200d5565",
+      "prototype_only": true,
+      "material": "PETG proposal; bushings may be purchased POM",
+      "print_orientation": "Y rotated 90 degrees about X",
+      "size_mm": [
+        48.0,
+        28.000000000000046,
+        4.0
+      ],
+      "native_valid": true,
+      "native_solids": 1,
+      "mesh_check": {
+        "status": "PASS",
+        "triangles": 2272,
+        "nonmanifold_edges": 0,
+        "degenerate_triangles": 0,
+        "signed_volume_mm3": 1567.0862376881287,
+        "vertex_matching_mm": 1e-05
+      }
+    },
+    {
+      "id": "FM_43_complete_numbered_flap",
+      "quantity": 1,
+      "occurrences": [
+        "FM_43_complete_numbered_flap"
+      ],
+      "step": "STEP/parts/FM_43_complete_numbered_flap.step",
+      "stl": "STL/prototype/FM_43_complete_numbered_flap.stl",
+      "stl_sha256": "53bf6bcc0258cec357437159b037877f1537fbf8cb5982fb4229c00b1cd7eb45",
+      "step_sha256": "a9f65fbe5f6d0fdd44187ac09f958262f4749fbee0cc36d09c2334c4e4e2f3ad",
+      "prototype_only": true,
+      "material": "PETG proposal; bushings may be purchased POM",
+      "print_orientation": "Y rotated 90 degrees about X",
+      "size_mm": [
+        48.0,
+        28.0000000000001,
+        4.0
+      ],
+      "native_valid": true,
+      "native_solids": 1,
+      "mesh_check": {
+        "status": "PASS",
+        "triangles": 2256,
+        "nonmanifold_edges": 0,
+        "degenerate_triangles": 0,
+        "signed_volume_mm3": 1560.2222376881305,
+        "vertex_matching_mm": 1e-05
+      }
+    },
+    {
+      "id": "FM_44_complete_numbered_flap",
+      "quantity": 1,
+      "occurrences": [
+        "FM_44_complete_numbered_flap"
+      ],
+      "step": "STEP/parts/FM_44_complete_numbered_flap.step",
+      "stl": "STL/prototype/FM_44_complete_numbered_flap.stl",
+      "stl_sha256": "27a18a7af16b196fab39a61382b35c7b3b62dec0e2fd1855f5d9989a7f177acb",
+      "step_sha256": "1c87f882e278b3ff12f2c64c16133ae0f445f0fc6f1386fa2c3441b4c94eb3ba",
+      "prototype_only": true,
+      "material": "PETG proposal; bushings may be purchased POM",
+      "print_orientation": "Y rotated 90 degrees about X",
+      "size_mm": [
+        48.0,
+        28.000000000000178,
+        4.0
+      ],
+      "native_valid": true,
+      "native_solids": 1,
+      "mesh_check": {
+        "status": "PASS",
+        "triangles": 2272,
+        "nonmanifold_edges": 0,
+        "degenerate_triangles": 0,
+        "signed_volume_mm3": 1569.1982376881297,
+        "vertex_matching_mm": 1e-05
+      }
+    },
+    {
+      "id": "FM_45_complete_numbered_flap",
+      "quantity": 1,
+      "occurrences": [
+        "FM_45_complete_numbered_flap"
+      ],
+      "step": "STEP/parts/FM_45_complete_numbered_flap.step",
+      "stl": "STL/prototype/FM_45_complete_numbered_flap.stl",
+      "stl_sha256": "c2ea8158d807e3b83bbbf1206bea85392b283555c7545980eb5506077432682c",
+      "step_sha256": "09af2001b91d372f5cd6614ca36b0e7d0a719f3b96e8b5d33a338706d2d44346",
+      "prototype_only": true,
+      "material": "PETG proposal; bushings may be purchased POM",
+      "print_orientation": "Y rotated 90 degrees about X",
+      "size_mm": [
+        48.0,
+        28.0,
+        4.0
+      ],
+      "native_valid": true,
+      "native_solids": 1,
+      "mesh_check": {
+        "status": "PASS",
+        "triangles": 2288,
+        "nonmanifold_edges": 0,
+        "degenerate_triangles": 0,
+        "signed_volume_mm3": 1576.062237688129,
+        "vertex_matching_mm": 1e-05
+      }
+    },
+    {
+      "id": "FM_46_complete_numbered_flap",
+      "quantity": 1,
+      "occurrences": [
+        "FM_46_complete_numbered_flap"
+      ],
+      "step": "STEP/parts/FM_46_complete_numbered_flap.step",
+      "stl": "STL/prototype/FM_46_complete_numbered_flap.stl",
+      "stl_sha256": "adb99e4c68606c44e491662b9c04a4b2ff3653b3c809f7764ec3769704cee5d3",
+      "step_sha256": "b3a12baaa0d1697f6fa84a8751ba4014e0ad02ac8b78edb096b4740601ee85c9",
+      "prototype_only": true,
+      "material": "PETG proposal; bushings may be purchased POM",
+      "print_orientation": "Y rotated 90 degrees about X",
+      "size_mm": [
+        48.0,
+        28.000000000000178,
+        4.0
+      ],
+      "native_valid": true,
+      "native_solids": 1,
+      "mesh_check": {
+        "status": "PASS",
+        "triangles": 2204,
+        "nonmanifold_edges": 0,
+        "degenerate_triangles": 0,
+        "signed_volume_mm3": 1557.8488713376305,
+        "vertex_matching_mm": 1e-05
+      }
+    },
+    {
+      "id": "FM_47_complete_numbered_flap",
+      "quantity": 1,
+      "occurrences": [
+        "FM_47_complete_numbered_flap"
+      ],
+      "step": "STEP/parts/FM_47_complete_numbered_flap.step",
+      "stl": "STL/prototype/FM_47_complete_numbered_flap.stl",
+      "stl_sha256": "034ab37f4ee64c9671c1fa33edddc9bc92d3147fd32bef07db388e750c22a4f4",
+      "step_sha256": "b3b2ec1f09b27d169c52ff4228d400de8e073fdfd55db0c2981eba20e064cb2e",
+      "prototype_only": true,
+      "material": "PETG proposal; bushings may be purchased POM",
+      "print_orientation": "Y rotated 90 degrees about X",
+      "size_mm": [
+        48.0,
+        28.000000000000092,
+        4.0
+      ],
+      "native_valid": true,
+      "native_solids": 1,
+      "mesh_check": {
+        "status": "PASS",
+        "triangles": 2236,
+        "nonmanifold_edges": 0,
+        "degenerate_triangles": 0,
+        "signed_volume_mm3": 1573.6888713376293,
+        "vertex_matching_mm": 1e-05
+      }
+    },
+    {
+      "id": "FM_48_complete_numbered_flap",
+      "quantity": 1,
+      "occurrences": [
+        "FM_48_complete_numbered_flap"
+      ],
+      "step": "STEP/parts/FM_48_complete_numbered_flap.step",
+      "stl": "STL/prototype/FM_48_complete_numbered_flap.stl",
+      "stl_sha256": "1075a459533dcf661f564aca4a1f901c14b2d7d67d2b01e8ec5cd03977fa9643",
+      "step_sha256": "84c7b2c8670f46bcf17aaf54e0b71b327455232ab284936298997926e2e6f16c",
+      "prototype_only": true,
+      "material": "PETG proposal; bushings may be purchased POM",
+      "print_orientation": "Y rotated 90 degrees about X",
+      "size_mm": [
+        48.0,
+        28.000000000000046,
+        4.0
+      ],
+      "native_valid": true,
+      "native_solids": 1,
+      "mesh_check": {
+        "status": "PASS",
+        "triangles": 2288,
+        "nonmanifold_edges": 0,
+        "degenerate_triangles": 0,
+        "signed_volume_mm3": 1576.0622376881306,
+        "vertex_matching_mm": 1e-05
+      }
+    },
+    {
+      "id": "FM_49_complete_numbered_flap",
+      "quantity": 1,
+      "occurrences": [
+        "FM_49_complete_numbered_flap"
+      ],
+      "step": "STEP/parts/FM_49_complete_numbered_flap.step",
+      "stl": "STL/prototype/FM_49_complete_numbered_flap.stl",
+      "stl_sha256": "0d3649561f8d72a81bf66f5b55f34ea1fc6a654ad0441291be9f9b820f2b70f9",
+      "step_sha256": "bd01bb5d79d5541df23a6d2641b01e7cf84abdcf221310e3f5fc3e1b84fa78ac",
+      "prototype_only": true,
+      "material": "PETG proposal; bushings may be purchased POM",
+      "print_orientation": "Y rotated 90 degrees about X",
+      "size_mm": [
+        48.0,
+        28.00000000000001,
+        4.0
+      ],
+      "native_valid": true,
+      "native_solids": 1,
+      "mesh_check": {
+        "status": "PASS",
+        "triangles": 2268,
+        "nonmanifold_edges": 0,
+        "degenerate_triangles": 0,
+        "signed_volume_mm3": 1589.5288713376297,
+        "vertex_matching_mm": 1e-05
+      }
+    },
+    {
+      "id": "FM_50_complete_numbered_flap",
+      "quantity": 1,
+      "occurrences": [
+        "FM_50_complete_numbered_flap"
+      ],
+      "step": "STEP/parts/FM_50_complete_numbered_flap.step",
+      "stl": "STL/prototype/FM_50_complete_numbered_flap.stl",
+      "stl_sha256": "f9d96c61fca00749065687fe3ea2b9e24ceac1162aef29d27b4d1f6517c9a38a",
+      "step_sha256": "048a231367451b2fa32c41a993d81a5109437bf201c6d9d7a544ee73024b4c85",
+      "prototype_only": true,
+      "material": "PETG proposal; bushings may be purchased POM",
+      "print_orientation": "Y rotated 90 degrees about X",
+      "size_mm": [
+        48.0,
+        28.000000000000107,
+        4.0
+      ],
+      "native_valid": true,
+      "native_solids": 1,
+      "mesh_check": {
+        "status": "PASS",
+        "triangles": 2184,
+        "nonmanifold_edges": 0,
+        "degenerate_triangles": 0,
+        "signed_volume_mm3": 1569.2035049871295,
+        "vertex_matching_mm": 1e-05
+      }
+    },
+    {
+      "id": "FM_51_complete_numbered_flap",
+      "quantity": 1,
+      "occurrences": [
+        "FM_51_complete_numbered_flap"
+      ],
+      "step": "STEP/parts/FM_51_complete_numbered_flap.step",
+      "stl": "STL/prototype/FM_51_complete_numbered_flap.stl",
+      "stl_sha256": "91c199944385d1fe50efb1e42c6dc273f21f82d225cbcc9517e0e1d6ec8329d0",
+      "step_sha256": "5719de6e2a18cf47cf6fee0297a8a5c6b156447b07de5f365cc032479e971573",
+      "prototype_only": true,
+      "material": "PETG proposal; bushings may be purchased POM",
+      "print_orientation": "Y rotated 90 degrees about X",
+      "size_mm": [
+        48.0,
+        28.0000000000002,
+        4.0
+      ],
+      "native_valid": true,
+      "native_solids": 1,
+      "mesh_check": {
+        "status": "PASS",
+        "triangles": 2220,
+        "nonmanifold_edges": 0,
+        "degenerate_triangles": 0,
+        "signed_volume_mm3": 1562.600871337629,
+        "vertex_matching_mm": 1e-05
+      }
+    },
+    {
+      "id": "FM_52_complete_numbered_flap",
+      "quantity": 1,
+      "occurrences": [
+        "FM_52_complete_numbered_flap"
+      ],
+      "step": "STEP/parts/FM_52_complete_numbered_flap.step",
+      "stl": "STL/prototype/FM_52_complete_numbered_flap.stl",
+      "stl_sha256": "51ac9fecc481c2c4c869c9e7c9806ad80ea598fc2cae1d40e9a1695185731c23",
+      "step_sha256": "fbc339fad649dbfd6fd047ac0962c2587b8ad85e4d753d8b91e2fb03aab4e1fe",
+      "prototype_only": true,
+      "material": "PETG proposal; bushings may be purchased POM",
+      "print_orientation": "Y rotated 90 degrees about X",
+      "size_mm": [
+        48.0,
+        28.000000000000178,
+        4.0
+      ],
+      "native_valid": true,
+      "native_solids": 1,
+      "mesh_check": {
+        "status": "PASS",
+        "triangles": 2288,
+        "nonmanifold_edges": 0,
+        "degenerate_triangles": 0,
+        "signed_volume_mm3": 1571.8382376881286,
+        "vertex_matching_mm": 1e-05
+      }
+    },
+    {
+      "id": "FM_53_complete_numbered_flap",
+      "quantity": 1,
+      "occurrences": [
+        "FM_53_complete_numbered_flap"
+      ],
+      "step": "STEP/parts/FM_53_complete_numbered_flap.step",
+      "stl": "STL/prototype/FM_53_complete_numbered_flap.stl",
+      "stl_sha256": "442047364b5e29ffc22eb55a9c520204ecc798d23776a390dc531313393b5448",
+      "step_sha256": "6bd851e350bedb948be65346806c344aa9298790934d3db0e98531a288e1ca21",
+      "prototype_only": true,
+      "material": "PETG proposal; bushings may be purchased POM",
+      "print_orientation": "Y rotated 90 degrees about X",
+      "size_mm": [
+        48.0,
+        28.000000000000178,
+        4.0
+      ],
+      "native_valid": true,
+      "native_solids": 1,
+      "mesh_check": {
+        "status": "PASS",
+        "triangles": 2272,
+        "nonmanifold_edges": 0,
+        "degenerate_triangles": 0,
+        "signed_volume_mm3": 1564.974237688129,
+        "vertex_matching_mm": 1e-05
+      }
+    },
+    {
+      "id": "FM_54_complete_numbered_flap",
+      "quantity": 1,
+      "occurrences": [
+        "FM_54_complete_numbered_flap"
+      ],
+      "step": "STEP/parts/FM_54_complete_numbered_flap.step",
+      "stl": "STL/prototype/FM_54_complete_numbered_flap.stl",
+      "stl_sha256": "33b80076ad49b31f827c85f0810c855ca8ab53b5ddb359c8b58393419a316073",
+      "step_sha256": "14646905de42b65ce87b741fe397e1dd1a11016a845b7d100512fa1d7438f5a3",
+      "prototype_only": true,
+      "material": "PETG proposal; bushings may be purchased POM",
+      "print_orientation": "Y rotated 90 degrees about X",
+      "size_mm": [
+        48.0,
+        28.0000000000002,
+        4.0
+      ],
+      "native_valid": true,
+      "native_solids": 1,
+      "mesh_check": {
+        "status": "PASS",
+        "triangles": 2288,
+        "nonmanifold_edges": 0,
+        "degenerate_triangles": 0,
+        "signed_volume_mm3": 1573.9502376881287,
+        "vertex_matching_mm": 1e-05
+      }
+    },
+    {
+      "id": "FM_55_complete_numbered_flap",
+      "quantity": 1,
+      "occurrences": [
+        "FM_55_complete_numbered_flap"
+      ],
+      "step": "STEP/parts/FM_55_complete_numbered_flap.step",
+      "stl": "STL/prototype/FM_55_complete_numbered_flap.stl",
+      "stl_sha256": "8b979d4010b3ba24c72b16a62926cae3c42bb3c28cc71081d84c593378b24cd1",
+      "step_sha256": "dfe5d79f6f9b9c360fcd8d63adfb9b823f889a87c3dff7563845266cfb03184d",
+      "prototype_only": true,
+      "material": "PETG proposal; bushings may be purchased POM",
+      "print_orientation": "Y rotated 90 degrees about X",
+      "size_mm": [
+        48.0,
+        28.000000000000107,
+        4.0
+      ],
+      "native_valid": true,
+      "native_solids": 1,
+      "mesh_check": {
+        "status": "PASS",
+        "triangles": 2304,
+        "nonmanifold_edges": 0,
+        "degenerate_triangles": 0,
+        "signed_volume_mm3": 1580.8142376881294,
+        "vertex_matching_mm": 1e-05
+      }
+    },
+    {
+      "id": "FM_56_complete_numbered_flap",
+      "quantity": 1,
+      "occurrences": [
+        "FM_56_complete_numbered_flap"
+      ],
+      "step": "STEP/parts/FM_56_complete_numbered_flap.step",
+      "stl": "STL/prototype/FM_56_complete_numbered_flap.stl",
+      "stl_sha256": "b2b5ab680eb8b4e9394951a451797618488d9c05600abd3acd6143b3e833e3f2",
+      "step_sha256": "0301cc36c21d9246cee1143ec04b12670bfe3c79e36763edcd0e2a526e3b790a",
+      "prototype_only": true,
+      "material": "PETG proposal; bushings may be purchased POM",
+      "print_orientation": "Y rotated 90 degrees about X",
+      "size_mm": [
+        48.0,
+        28.00000000000001,
+        4.0
+      ],
+      "native_valid": true,
+      "native_solids": 1,
+      "mesh_check": {
+        "status": "PASS",
+        "triangles": 2220,
+        "nonmanifold_edges": 0,
+        "degenerate_triangles": 0,
+        "signed_volume_mm3": 1562.6008713376295,
+        "vertex_matching_mm": 1e-05
+      }
+    },
+    {
+      "id": "FM_57_complete_numbered_flap",
+      "quantity": 1,
+      "occurrences": [
+        "FM_57_complete_numbered_flap"
+      ],
+      "step": "STEP/parts/FM_57_complete_numbered_flap.step",
+      "stl": "STL/prototype/FM_57_complete_numbered_flap.stl",
+      "stl_sha256": "0dcfe0463d797405b4b0b454f869157cee3fc8daec497d29bea45599ad4afa0e",
+      "step_sha256": "08c4ac163541b54d96a184d732112b649c0ea5ca53d92d495112bd59670fde8c",
+      "prototype_only": true,
+      "material": "PETG proposal; bushings may be purchased POM",
+      "print_orientation": "Y rotated 90 degrees about X",
+      "size_mm": [
+        48.0,
+        28.000000000000046,
+        4.0
+      ],
+      "native_valid": true,
+      "native_solids": 1,
+      "mesh_check": {
+        "status": "PASS",
+        "triangles": 2252,
+        "nonmanifold_edges": 0,
+        "degenerate_triangles": 0,
+        "signed_volume_mm3": 1578.4408713376283,
+        "vertex_matching_mm": 1e-05
+      }
+    },
+    {
+      "id": "FM_58_complete_numbered_flap",
+      "quantity": 1,
+      "occurrences": [
+        "FM_58_complete_numbered_flap"
+      ],
+      "step": "STEP/parts/FM_58_complete_numbered_flap.step",
+      "stl": "STL/prototype/FM_58_complete_numbered_flap.stl",
+      "stl_sha256": "be2f45f2732aef9130b684e19034bb396959f6d3e9ee03ccbe6a64593a4b1491",
+      "step_sha256": "be9ef989d441acf2cc7e16ae31a4a14aaa7e3063dbd1de6e8771dabd6c7c2813",
+      "prototype_only": true,
+      "material": "PETG proposal; bushings may be purchased POM",
+      "print_orientation": "Y rotated 90 degrees about X",
+      "size_mm": [
+        48.0,
+        28.0000000000001,
+        4.0
+      ],
+      "native_valid": true,
+      "native_solids": 1,
+      "mesh_check": {
+        "status": "PASS",
+        "triangles": 2304,
+        "nonmanifold_edges": 0,
+        "degenerate_triangles": 0,
+        "signed_volume_mm3": 1580.8142376881292,
+        "vertex_matching_mm": 1e-05
+      }
+    },
+    {
+      "id": "FM_59_complete_numbered_flap",
+      "quantity": 1,
+      "occurrences": [
+        "FM_59_complete_numbered_flap"
+      ],
+      "step": "STEP/parts/FM_59_complete_numbered_flap.step",
+      "stl": "STL/prototype/FM_59_complete_numbered_flap.stl",
+      "stl_sha256": "29bac3b53a063df03569e1618b53fd25ce47f88ad7ab21a795c2f9297b5af4a6",
+      "step_sha256": "53d3ab0c24812bc184849eaa455512bbf3e09877752f34c43f9244cb7b564cfd",
+      "prototype_only": true,
+      "material": "PETG proposal; bushings may be purchased POM",
+      "print_orientation": "Y rotated 90 degrees about X",
+      "size_mm": [
+        48.0,
+        28.000000000000178,
+        4.0
+      ],
+      "native_valid": true,
+      "native_solids": 1,
+      "mesh_check": {
+        "status": "PASS",
+        "triangles": 2232,
+        "nonmanifold_edges": 0,
+        "degenerate_triangles": 0,
+        "signed_volume_mm3": 1594.0195387280623,
+        "vertex_matching_mm": 1e-05
+      }
+    },
+    {
+      "id": "FH_00_complete_numbered_flap",
+      "quantity": 1,
+      "occurrences": [
+        "FH_00_complete_numbered_flap"
+      ],
+      "step": "STEP/parts/FH_00_complete_numbered_flap.step",
+      "stl": "STL/prototype/FH_00_complete_numbered_flap.stl",
+      "stl_sha256": "0148a0d61a418fd4cf8351622b4a150cb3a6889e2e6f507b729067fe27e8a30b",
+      "step_sha256": "ed26e9b532beaf4fb116751881eef44367a7276cc228e5b3ceccf31d5bcbfdf6",
+      "prototype_only": true,
+      "material": "PETG proposal; bushings may be purchased POM",
+      "print_orientation": "Y rotated 90 degrees about X",
+      "size_mm": [
+        48.0,
+        28.0,
+        4.0
+      ],
+      "native_valid": true,
+      "native_solids": 1,
+      "mesh_check": {
+        "status": "PASS",
+        "triangles": 2112,
+        "nonmanifold_edges": 0,
+        "degenerate_triangles": 0,
+        "signed_volume_mm3": 1582.4088397679966,
+        "vertex_matching_mm": 1e-05
+      }
+    },
+    {
+      "id": "FH_01_complete_numbered_flap",
+      "quantity": 1,
+      "occurrences": [
+        "FH_01_complete_numbered_flap"
+      ],
+      "step": "STEP/parts/FH_01_complete_numbered_flap.step",
+      "stl": "STL/prototype/FH_01_complete_numbered_flap.stl",
+      "stl_sha256": "b8e14f2151d59abeac27d0f5e96429e9a94bdb8fd8791cdeb9a9ad51edb498a1",
+      "step_sha256": "188265154d5df87d65fe969a14d8b1287d48db913059ca14d8bc2ce52083b647",
+      "prototype_only": true,
+      "material": "PETG proposal; bushings may be purchased POM",
+      "print_orientation": "Y rotated 90 degrees about X",
+      "size_mm": [
+        48.0,
+        28.000000000000227,
+        4.0
+      ],
+      "native_valid": true,
+      "native_solids": 1,
+      "mesh_check": {
+        "status": "PASS",
+        "triangles": 2148,
+        "nonmanifold_edges": 0,
+        "degenerate_triangles": 0,
+        "signed_volume_mm3": 1575.8061723775616,
+        "vertex_matching_mm": 1e-05
+      }
+    },
+    {
+      "id": "FH_02_complete_numbered_flap",
+      "quantity": 1,
+      "occurrences": [
+        "FH_02_complete_numbered_flap"
+      ],
+      "step": "STEP/parts/FH_02_complete_numbered_flap.step",
+      "stl": "STL/prototype/FH_02_complete_numbered_flap.stl",
+      "stl_sha256": "72f1a8060a7a57d7a5b4e93dfd7591030775e0ff756caa2bb2b6b24b7483a581",
+      "step_sha256": "dd0be79eeba35ffe5675380b37ed6e3a030db36f18cbc6604aa7f91d52b5531e",
+      "prototype_only": true,
+      "material": "PETG proposal; bushings may be purchased POM",
+      "print_orientation": "Y rotated 90 degrees about X",
+      "size_mm": [
+        48.0,
+        28.000000000000107,
+        4.0
+      ],
+      "native_valid": true,
+      "native_solids": 1,
+      "mesh_check": {
+        "status": "PASS",
+        "triangles": 2216,
+        "nonmanifold_edges": 0,
+        "degenerate_triangles": 0,
+        "signed_volume_mm3": 1585.0435049871282,
+        "vertex_matching_mm": 1e-05
+      }
+    },
+    {
+      "id": "FH_03_complete_numbered_flap",
+      "quantity": 1,
+      "occurrences": [
+        "FH_03_complete_numbered_flap"
+      ],
+      "step": "STEP/parts/FH_03_complete_numbered_flap.step",
+      "stl": "STL/prototype/FH_03_complete_numbered_flap.stl",
+      "stl_sha256": "8eca4a09276ae3e5ee285a4c580ef7ff3f50567c4254b15b9ce58d9cded12a9a",
+      "step_sha256": "cbab25b2b6c1b7884af2f9e758fe5f7a14af55b041786e9a85fd0eee23bd50f4",
+      "prototype_only": true,
+      "material": "PETG proposal; bushings may be purchased POM",
+      "print_orientation": "Y rotated 90 degrees about X",
+      "size_mm": [
+        48.0,
+        28.0,
+        4.0
+      ],
+      "native_valid": true,
+      "native_solids": 1,
+      "mesh_check": {
+        "status": "PASS",
+        "triangles": 2200,
+        "nonmanifold_edges": 0,
+        "degenerate_triangles": 0,
+        "signed_volume_mm3": 1578.1795049871291,
+        "vertex_matching_mm": 1e-05
+      }
+    },
+    {
+      "id": "FH_04_complete_numbered_flap",
+      "quantity": 1,
+      "occurrences": [
+        "FH_04_complete_numbered_flap"
+      ],
+      "step": "STEP/parts/FH_04_complete_numbered_flap.step",
+      "stl": "STL/prototype/FH_04_complete_numbered_flap.stl",
+      "stl_sha256": "752ff36d17666498e798cb042de06d399ced6ddb04791976ab7e1ce0317c08f3",
+      "step_sha256": "1ed53be26973310e423dbe5303bc6278062ecde322eb0258c8a41f4949fbeb81",
+      "prototype_only": true,
+      "material": "PETG proposal; bushings may be purchased POM",
+      "print_orientation": "Y rotated 90 degrees about X",
+      "size_mm": [
+        48.0,
+        28.000000000000114,
+        4.0
+      ],
+      "native_valid": true,
+      "native_solids": 1,
+      "mesh_check": {
+        "status": "PASS",
+        "triangles": 2216,
+        "nonmanifold_edges": 0,
+        "degenerate_triangles": 0,
+        "signed_volume_mm3": 1587.1555049871292,
+        "vertex_matching_mm": 1e-05
+      }
+    },
+    {
+      "id": "FH_05_complete_numbered_flap",
+      "quantity": 1,
+      "occurrences": [
+        "FH_05_complete_numbered_flap"
+      ],
+      "step": "STEP/parts/FH_05_complete_numbered_flap.step",
+      "stl": "STL/prototype/FH_05_complete_numbered_flap.stl",
+      "stl_sha256": "f863020ee4540a3e19b2b5040e2ba689c5179a852405926fc20f686563ab6010",
+      "step_sha256": "b0cb82250cac9d1a0eb1db19175143c2e032add3c3e0f20579b4c8f4e59d4b5a",
+      "prototype_only": true,
+      "material": "PETG proposal; bushings may be purchased POM",
+      "print_orientation": "Y rotated 90 degrees about X",
+      "size_mm": [
+        48.0,
+        28.000000000000227,
+        4.0
+      ],
+      "native_valid": true,
+      "native_solids": 1,
+      "mesh_check": {
+        "status": "PASS",
+        "triangles": 2232,
+        "nonmanifold_edges": 0,
+        "degenerate_triangles": 0,
+        "signed_volume_mm3": 1594.0195049871286,
+        "vertex_matching_mm": 1e-05
+      }
+    },
+    {
+      "id": "FH_06_complete_numbered_flap",
+      "quantity": 1,
+      "occurrences": [
+        "FH_06_complete_numbered_flap"
+      ],
+      "step": "STEP/parts/FH_06_complete_numbered_flap.step",
+      "stl": "STL/prototype/FH_06_complete_numbered_flap.stl",
+      "stl_sha256": "22f48c238aa790f88e8badf6387e9f7d5a89a20adc85b1b8870b1ddb61979e5c",
+      "step_sha256": "017dedddaf0b67f2094aee3eec2b6f3864cc19c5870db477c4ee408a975c1c66",
+      "prototype_only": true,
+      "material": "PETG proposal; bushings may be purchased POM",
+      "print_orientation": "Y rotated 90 degrees about X",
+      "size_mm": [
+        48.0,
+        28.0,
+        4.0
+      ],
+      "native_valid": true,
+      "native_solids": 1,
+      "mesh_check": {
+        "status": "PASS",
+        "triangles": 2148,
+        "nonmanifold_edges": 0,
+        "degenerate_triangles": 0,
+        "signed_volume_mm3": 1575.806172377562,
+        "vertex_matching_mm": 1e-05
+      }
+    },
+    {
+      "id": "FH_07_complete_numbered_flap",
+      "quantity": 1,
+      "occurrences": [
+        "FH_07_complete_numbered_flap"
+      ],
+      "step": "STEP/parts/FH_07_complete_numbered_flap.step",
+      "stl": "STL/prototype/FH_07_complete_numbered_flap.stl",
+      "stl_sha256": "8a13e6aefb2974a68c3a7c6513252fb829a08d62fe85e3486b3612d6bae3636f",
+      "step_sha256": "8a640fdea7563552b7f46bd0a4f1ca7aadb0cd053debd1ce9c495d122c5b8d0e",
+      "prototype_only": true,
+      "material": "PETG proposal; bushings may be purchased POM",
+      "print_orientation": "Y rotated 90 degrees about X",
+      "size_mm": [
+        48.0,
+        28.000000000000227,
+        4.0
+      ],
+      "native_valid": true,
+      "native_solids": 1,
+      "mesh_check": {
+        "status": "PASS",
+        "triangles": 2180,
+        "nonmanifold_edges": 0,
+        "degenerate_triangles": 0,
+        "signed_volume_mm3": 1591.6461723775608,
+        "vertex_matching_mm": 1e-05
+      }
+    },
+    {
+      "id": "FH_08_complete_numbered_flap",
+      "quantity": 1,
+      "occurrences": [
+        "FH_08_complete_numbered_flap"
+      ],
+      "step": "STEP/parts/FH_08_complete_numbered_flap.step",
+      "stl": "STL/prototype/FH_08_complete_numbered_flap.stl",
+      "stl_sha256": "902f578c43039d5c93012251391176d304ee4df0001ab285d0f02dfb96c95baa",
+      "step_sha256": "5ebedb8a2ca2cd365f2f24d981213f69eba7b8feafa03165c9bf6b1eb0822ec8",
+      "prototype_only": true,
+      "material": "PETG proposal; bushings may be purchased POM",
+      "print_orientation": "Y rotated 90 degrees about X",
+      "size_mm": [
+        48.0,
+        28.000000000000107,
+        4.0
+      ],
+      "native_valid": true,
+      "native_solids": 1,
+      "mesh_check": {
+        "status": "PASS",
+        "triangles": 2232,
+        "nonmanifold_edges": 0,
+        "degenerate_triangles": 0,
+        "signed_volume_mm3": 1594.0195049871293,
+        "vertex_matching_mm": 1e-05
+      }
+    },
+    {
+      "id": "FH_09_complete_numbered_flap",
+      "quantity": 1,
+      "occurrences": [
+        "FH_09_complete_numbered_flap"
+      ],
+      "step": "STEP/parts/FH_09_complete_numbered_flap.step",
+      "stl": "STL/prototype/FH_09_complete_numbered_flap.stl",
+      "stl_sha256": "02f88bec18c189c5503dd3e62b21360a71d5122b46ac2b39a7322dc6238a2997",
+      "step_sha256": "cc490ebb9052f3486bc362adea552f911d07ffc69f08310d8e2dc4e0bb0d60b2",
+      "prototype_only": true,
+      "material": "PETG proposal; bushings may be purchased POM",
+      "print_orientation": "Y rotated 90 degrees about X",
+      "size_mm": [
+        48.0,
+        28.0,
+        4.0
+      ],
+      "native_valid": true,
+      "native_solids": 1,
+      "mesh_check": {
+        "status": "PASS",
+        "triangles": 2164,
+        "nonmanifold_edges": 0,
+        "degenerate_triangles": 0,
+        "signed_volume_mm3": 1584.7821723775633,
+        "vertex_matching_mm": 1e-05
+      }
+    },
+    {
+      "id": "FH_10_complete_numbered_flap",
+      "quantity": 1,
+      "occurrences": [
+        "FH_10_complete_numbered_flap"
+      ],
+      "step": "STEP/parts/FH_10_complete_numbered_flap.step",
+      "stl": "STL/prototype/FH_10_complete_numbered_flap.stl",
+      "stl_sha256": "4a6cfb5a244205de565e6e4d84ee56becd08032d8c92c79658a7a38618470071",
+      "step_sha256": "4990ad8a094d8f407fb08adfb47b340c3c656a1849cb3b86bbbcf2c4366cf1a2",
+      "prototype_only": true,
+      "material": "PETG proposal; bushings may be purchased POM",
+      "print_orientation": "Y rotated 90 degrees about X",
+      "size_mm": [
+        48.0,
+        28.000000000000114,
+        4.0
+      ],
+      "native_valid": true,
+      "native_solids": 1,
+      "mesh_check": {
+        "status": "PASS",
+        "triangles": 2048,
+        "nonmanifold_edges": 0,
+        "degenerate_triangles": 0,
+        "signed_volume_mm3": 1550.7288397679959,
+        "vertex_matching_mm": 1e-05
+      }
+    },
+    {
+      "id": "FH_11_complete_numbered_flap",
+      "quantity": 1,
+      "occurrences": [
+        "FH_11_complete_numbered_flap"
+      ],
+      "step": "STEP/parts/FH_11_complete_numbered_flap.step",
+      "stl": "STL/prototype/FH_11_complete_numbered_flap.stl",
+      "stl_sha256": "448b77f9caebbf91066d15a5de708b4be472ba2c12e5750a042a1d0e7cb9c756",
+      "step_sha256": "e16c7356bfa8328cfb3f4ccba9a624d521410d290bfa481ae5e1873a19da2fa1",
+      "prototype_only": true,
+      "material": "PETG proposal; bushings may be purchased POM",
+      "print_orientation": "Y rotated 90 degrees about X",
+      "size_mm": [
+        48.0,
+        28.000000000000234,
+        4.0
+      ],
+      "native_valid": true,
+      "native_solids": 1,
+      "mesh_check": {
+        "status": "PASS",
+        "triangles": 2084,
+        "nonmanifold_edges": 0,
+        "degenerate_triangles": 0,
+        "signed_volume_mm3": 1544.1261723775608,
+        "vertex_matching_mm": 1e-05
+      }
+    },
+    {
+      "id": "FH_12_complete_numbered_flap",
+      "quantity": 1,
+      "occurrences": [
+        "FH_12_complete_numbered_flap"
+      ],
+      "step": "STEP/parts/FH_12_complete_numbered_flap.step",
+      "stl": "STL/prototype/FH_12_complete_numbered_flap.stl",
+      "stl_sha256": "d7bb2ee3cdce9ff88541728035eb4c1167d8dd23ca609a4e8cad8caf4a9ff88e",
+      "step_sha256": "9e54b8abed48ad3190d53832f8627ec023ccbf77d35649304752482ee73375b6",
+      "prototype_only": true,
+      "material": "PETG proposal; bushings may be purchased POM",
+      "print_orientation": "Y rotated 90 degrees about X",
+      "size_mm": [
+        48.0,
+        28.0,
+        4.0
+      ],
+      "native_valid": true,
+      "native_solids": 1,
+      "mesh_check": {
+        "status": "PASS",
+        "triangles": 2152,
+        "nonmanifold_edges": 0,
+        "degenerate_triangles": 0,
+        "signed_volume_mm3": 1553.3635049871286,
+        "vertex_matching_mm": 1e-05
+      }
+    },
+    {
+      "id": "FH_13_complete_numbered_flap",
+      "quantity": 1,
+      "occurrences": [
+        "FH_13_complete_numbered_flap"
+      ],
+      "step": "STEP/parts/FH_13_complete_numbered_flap.step",
+      "stl": "STL/prototype/FH_13_complete_numbered_flap.stl",
+      "stl_sha256": "e75eec7b4adb6adb6b703d71609ff8b5fae3b6f11058f7ccf86e7e4ae6ca8611",
+      "step_sha256": "49c9480c2993667522c44291e3ced19f395d6024c32bf05f38d97dd9d5c2460a",
+      "prototype_only": true,
+      "material": "PETG proposal; bushings may be purchased POM",
+      "print_orientation": "Y rotated 90 degrees about X",
+      "size_mm": [
+        48.0,
+        28.000000000000227,
+        4.0
+      ],
+      "native_valid": true,
+      "native_solids": 1,
+      "mesh_check": {
+        "status": "PASS",
+        "triangles": 2136,
+        "nonmanifold_edges": 0,
+        "degenerate_triangles": 0,
+        "signed_volume_mm3": 1546.4995049871295,
+        "vertex_matching_mm": 1e-05
+      }
+    },
+    {
+      "id": "FH_14_complete_numbered_flap",
+      "quantity": 1,
+      "occurrences": [
+        "FH_14_complete_numbered_flap"
+      ],
+      "step": "STEP/parts/FH_14_complete_numbered_flap.step",
+      "stl": "STL/prototype/FH_14_complete_numbered_flap.stl",
+      "stl_sha256": "5eeaa96b3c5830aa7aeb38b0ab9ef46f249c768e047fe5bff8d7206796e1507b",
+      "step_sha256": "8cb95ef5044a409d7e2177f103dd5f8a66e480c4c5753982b2212d6c7032ca5e",
+      "prototype_only": true,
+      "material": "PETG proposal; bushings may be purchased POM",
+      "print_orientation": "Y rotated 90 degrees about X",
+      "size_mm": [
+        48.0,
+        28.000000000000107,
+        4.0
+      ],
+      "native_valid": true,
+      "native_solids": 1,
+      "mesh_check": {
+        "status": "PASS",
+        "triangles": 2152,
+        "nonmanifold_edges": 0,
+        "degenerate_triangles": 0,
+        "signed_volume_mm3": 1555.4755049871292,
+        "vertex_matching_mm": 1e-05
+      }
+    },
+    {
+      "id": "FH_15_complete_numbered_flap",
+      "quantity": 1,
+      "occurrences": [
+        "FH_15_complete_numbered_flap"
+      ],
+      "step": "STEP/parts/FH_15_complete_numbered_flap.step",
+      "stl": "STL/prototype/FH_15_complete_numbered_flap.stl",
+      "stl_sha256": "1ba18ad1aa05f739471070f31ff6d3aa0545adf11af4dcfbdaaba21acf456d39",
+      "step_sha256": "66c736d37f3dae3ebe57acac0f71acb9528cd199ee1faeb40701c71b31529494",
+      "prototype_only": true,
+      "material": "PETG proposal; bushings may be purchased POM",
+      "print_orientation": "Y rotated 90 degrees about X",
+      "size_mm": [
+        48.0,
+        28.0,
+        4.0
+      ],
+      "native_valid": true,
+      "native_solids": 1,
+      "mesh_check": {
+        "status": "PASS",
+        "triangles": 2168,
+        "nonmanifold_edges": 0,
+        "degenerate_triangles": 0,
+        "signed_volume_mm3": 1562.3395049871294,
+        "vertex_matching_mm": 1e-05
+      }
+    },
+    {
+      "id": "FH_16_complete_numbered_flap",
+      "quantity": 1,
+      "occurrences": [
+        "FH_16_complete_numbered_flap"
+      ],
+      "step": "STEP/parts/FH_16_complete_numbered_flap.step",
+      "stl": "STL/prototype/FH_16_complete_numbered_flap.stl",
+      "stl_sha256": "cfbeb65c39e57286067a8203f5b8fed651f3b38698257d0154a2fad4680db8af",
+      "step_sha256": "c143d8b0dc2f6bd3e6036d31ce5f16b9f2af62e6d85ad469c1a4bb708a66799b",
+      "prototype_only": true,
+      "material": "PETG proposal; bushings may be purchased POM",
+      "print_orientation": "Y rotated 90 degrees about X",
+      "size_mm": [
+        48.0,
+        28.000000000000107,
+        4.0
+      ],
+      "native_valid": true,
+      "native_solids": 1,
+      "mesh_check": {
+        "status": "PASS",
+        "triangles": 2084,
+        "nonmanifold_edges": 0,
+        "degenerate_triangles": 0,
+        "signed_volume_mm3": 1544.1261723775629,
+        "vertex_matching_mm": 1e-05
+      }
+    },
+    {
+      "id": "FH_17_complete_numbered_flap",
+      "quantity": 1,
+      "occurrences": [
+        "FH_17_complete_numbered_flap"
+      ],
+      "step": "STEP/parts/FH_17_complete_numbered_flap.step",
+      "stl": "STL/prototype/FH_17_complete_numbered_flap.stl",
+      "stl_sha256": "39201fb0fa27a07db527215ad88c012ff50a47acd6b048757935f839fcf5596d",
+      "step_sha256": "81887772b2fda46295bea668e487ef768d52d620f2f8b54ea9232b6dea406e29",
+      "prototype_only": true,
+      "material": "PETG proposal; bushings may be purchased POM",
+      "print_orientation": "Y rotated 90 degrees about X",
+      "size_mm": [
+        48.0,
+        28.000000000000234,
+        4.0
+      ],
+      "native_valid": true,
+      "native_solids": 1,
+      "mesh_check": {
+        "status": "PASS",
+        "triangles": 2116,
+        "nonmanifold_edges": 0,
+        "degenerate_triangles": 0,
+        "signed_volume_mm3": 1559.966172377561,
+        "vertex_matching_mm": 1e-05
+      }
+    },
+    {
+      "id": "FH_18_complete_numbered_flap",
+      "quantity": 1,
+      "occurrences": [
+        "FH_18_complete_numbered_flap"
+      ],
+      "step": "STEP/parts/FH_18_complete_numbered_flap.step",
+      "stl": "STL/prototype/FH_18_complete_numbered_flap.stl",
+      "stl_sha256": "4cf4f8a3a33852d63de241204f4b571059a48e6c61b60c89b454f8b1d318685c",
+      "step_sha256": "6cf78346e4375c364ffc8d65a4592003935e6805af4fd9a9c12222b0a088e515",
+      "prototype_only": true,
+      "material": "PETG proposal; bushings may be purchased POM",
+      "print_orientation": "Y rotated 90 degrees about X",
+      "size_mm": [
+        48.0,
+        28.0,
+        4.0
+      ],
+      "native_valid": true,
+      "native_solids": 1,
+      "mesh_check": {
+        "status": "PASS",
+        "triangles": 2168,
+        "nonmanifold_edges": 0,
+        "degenerate_triangles": 0,
+        "signed_volume_mm3": 1562.3395049871292,
+        "vertex_matching_mm": 1e-05
+      }
+    },
+    {
+      "id": "FH_19_complete_numbered_flap",
+      "quantity": 1,
+      "occurrences": [
+        "FH_19_complete_numbered_flap"
+      ],
+      "step": "STEP/parts/FH_19_complete_numbered_flap.step",
+      "stl": "STL/prototype/FH_19_complete_numbered_flap.stl",
+      "stl_sha256": "4b46085279be52f94a2815343e3a3d6cb2ef598b22bde6916c287db5a4974e10",
+      "step_sha256": "08bb8fba00375e64c2d9c282ca8ed9da8a484f1ebdebb4c1e10a5ecc2ef09855",
+      "prototype_only": true,
+      "material": "PETG proposal; bushings may be purchased POM",
+      "print_orientation": "Y rotated 90 degrees about X",
+      "size_mm": [
+        48.0,
+        28.000000000000227,
+        4.0
+      ],
+      "native_valid": true,
+      "native_solids": 1,
+      "mesh_check": {
+        "status": "PASS",
+        "triangles": 2200,
+        "nonmanifold_edges": 0,
+        "degenerate_triangles": 0,
+        "signed_volume_mm3": 1578.1795049871293,
+        "vertex_matching_mm": 1e-05
+      }
+    },
+    {
+      "id": "FH_20_complete_numbered_flap",
+      "quantity": 1,
+      "occurrences": [
+        "FH_20_complete_numbered_flap"
+      ],
+      "step": "STEP/parts/FH_20_complete_numbered_flap.step",
+      "stl": "STL/prototype/FH_20_complete_numbered_flap.stl",
+      "stl_sha256": "2986470db8bdee50925978f8a275f606d73fa5844587005893fc15053c0146fe",
+      "step_sha256": "85062cc0b97593b3475862980c66624a8a71c41f8cfcbad4da30b0f0d5486bc3",
+      "prototype_only": true,
+      "material": "PETG proposal; bushings may be purchased POM",
+      "print_orientation": "Y rotated 90 degrees about X",
+      "size_mm": [
+        48.0,
+        28.000000000000107,
+        4.0
+      ],
+      "native_valid": true,
+      "native_solids": 1,
+      "mesh_check": {
+        "status": "PASS",
+        "triangles": 2184,
+        "nonmanifold_edges": 0,
+        "degenerate_triangles": 0,
+        "signed_volume_mm3": 1569.2035049871301,
+        "vertex_matching_mm": 1e-05
+      }
+    },
+    {
+      "id": "FH_21_complete_numbered_flap",
+      "quantity": 1,
+      "occurrences": [
+        "FH_21_complete_numbered_flap"
+      ],
+      "step": "STEP/parts/FH_21_complete_numbered_flap.step",
+      "stl": "STL/prototype/FH_21_complete_numbered_flap.stl",
+      "stl_sha256": "2838d260da5d05616cb4919594f7308c29ce8da3585c811c1533464e49da6d13",
+      "step_sha256": "6828aa53477b2d104f03fdd53762922a01364cc313beb11b614e484392fb9dd8",
+      "prototype_only": true,
+      "material": "PETG proposal; bushings may be purchased POM",
+      "print_orientation": "Y rotated 90 degrees about X",
+      "size_mm": [
+        48.0,
+        28.0,
+        4.0
+      ],
+      "native_valid": true,
+      "native_solids": 1,
+      "mesh_check": {
+        "status": "PASS",
+        "triangles": 2220,
+        "nonmanifold_edges": 0,
+        "degenerate_triangles": 0,
+        "signed_volume_mm3": 1562.6008713376289,
+        "vertex_matching_mm": 1e-05
+      }
+    },
+    {
+      "id": "FH_22_complete_numbered_flap",
+      "quantity": 1,
+      "occurrences": [
+        "FH_22_complete_numbered_flap"
+      ],
+      "step": "STEP/parts/FH_22_complete_numbered_flap.step",
+      "stl": "STL/prototype/FH_22_complete_numbered_flap.stl",
+      "stl_sha256": "13d02048d6168524daaed7fc752cc13d484027408a0b70cf49ceeb93d0d2d2be",
+      "step_sha256": "1141ae17793d9793753335528a5151155897e677ac9e5599a56a4b0011782f0b",
+      "prototype_only": true,
+      "material": "PETG proposal; bushings may be purchased POM",
+      "print_orientation": "Y rotated 90 degrees about X",
+      "size_mm": [
+        48.0,
+        28.000000000000107,
+        4.0
+      ],
+      "native_valid": true,
+      "native_solids": 1,
+      "mesh_check": {
+        "status": "PASS",
+        "triangles": 2288,
+        "nonmanifold_edges": 0,
+        "degenerate_triangles": 0,
+        "signed_volume_mm3": 1571.8382376881293,
+        "vertex_matching_mm": 1e-05
+      }
+    },
+    {
+      "id": "FH_23_complete_numbered_flap",
+      "quantity": 1,
+      "occurrences": [
+        "FH_23_complete_numbered_flap"
+      ],
+      "step": "STEP/parts/FH_23_complete_numbered_flap.step",
+      "stl": "STL/prototype/FH_23_complete_numbered_flap.stl",
+      "stl_sha256": "56c6a2130afe3a55292163249069d2c6ab57f6d6769974848de01dcd9431ad87",
+      "step_sha256": "b3e54098603157c91a710954ce0077a5f4677761d60c70cc324e2b775abf204e",
+      "prototype_only": true,
+      "material": "PETG proposal; bushings may be purchased POM",
+      "print_orientation": "Y rotated 90 degrees about X",
+      "size_mm": [
+        48.0,
+        28.000000000000234,
+        4.0
+      ],
+      "native_valid": true,
+      "native_solids": 1,
+      "mesh_check": {
+        "status": "PASS",
+        "triangles": 2216,
+        "nonmanifold_edges": 0,
+        "degenerate_triangles": 0,
+        "signed_volume_mm3": 1585.0435387280627,
+        "vertex_matching_mm": 1e-05
+      }
+    },
+    {
+      "id": "C_cover_spacer",
+      "quantity": 6,
+      "occurrences": [
+        "CM_posts",
+        "CH_posts"
+      ],
+      "step": "STEP/parts/C_cover_spacer.step",
+      "stl": "STL/prototype/C_cover_spacer.stl",
+      "stl_sha256": "5c4be43602220288966c522df362fc68b370d9b6f1eb157b6d6474222569ee3d",
+      "prototype_only": true,
+      "material": "PETG proposal",
+      "print_orientation": "Z flat",
+      "size_mm": [
+        5.2,
+        5.2,
+        3.15
+      ],
+      "native_valid": true,
+      "native_solids": 1,
+      "mesh_check": {
+        "status": "PASS",
+        "triangles": 2016,
+        "nonmanifold_edges": 0,
+        "degenerate_triangles": 0,
+        "signed_volume_mm3": 39.9510295682403,
+        "vertex_matching_mm": 1e-05
+      }
+    }
+  ],
+  "failures": [],
+  "not_included": "purchased hardware, motor and encoder envelopes are not print parts"
+}

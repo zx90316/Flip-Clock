@@ -1,0 +1,52 @@
+{
+  "schema_version": 1,
+  "original_model_interfaces_used": false,
+  "original_compatibility_required": false,
+  "new_geometry_units": "mm",
+  "purchased_interfaces": {
+    "motor_mount": {
+      "value": null,
+      "unit": "mm",
+      "status": "unverified",
+      "source": "actual_28BYJ48_measurement_required",
+      "uncertainty": null,
+      "measured_at": null
+    },
+    "motor_shaft_flat": {
+      "value": null,
+      "unit": "mm",
+      "status": "unverified",
+      "source": "actual_28BYJ48_measurement_required",
+      "uncertainty": null,
+      "measured_at": null
+    },
+    "608_bearing_envelope": {
+      "value": [
+        8,
+        22,
+        7
+      ],
+      "unit": "mm",
+      "status": "catalog_nominal",
+      "source": "https://api.step.parts/v1/parts/bearing_608zz",
+      "uncertainty": null,
+      "measured_at": null
+    },
+    "encoder_module_holes": {
+      "value": null,
+      "unit": "mm",
+      "status": "unverified",
+      "source": "module_not_selected",
+      "uncertainty": null,
+      "measured_at": null
+    },
+    "encoder_air_gap": {
+      "value": null,
+      "unit": "mm",
+      "status": "unverified",
+      "source": "encoder_datasheet_and_calibration_required",
+      "uncertainty": null,
+      "measured_at": null
+    }
+  }
+}

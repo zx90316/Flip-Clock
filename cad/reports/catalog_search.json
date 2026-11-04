@@ -1,0 +1,83 @@
+[
+  {
+    "query": "28BYJ-48",
+    "total": 0,
+    "items": []
+  },
+  {
+    "query": "28BYJ",
+    "total": 0,
+    "items": []
+  },
+  {
+    "query": "BYJ48",
+    "total": 0,
+    "items": []
+  },
+  {
+    "query": "608zz",
+    "total": 1,
+    "items": [
+      {
+        "id": "bearing_608zz",
+        "name": "608ZZ ball bearing",
+        "stepUrl": "https://media.githubusercontent.com/media/earthtojake/step.parts/c6113328a5695b976a010a203a90fe86191769bf/catalog/step/bearing_608zz.step",
+        "sha256": "62d262cc91fb6e213ae85f182811201787e583d527d9a7718ea30a08e1f19fc9",
+        "attributes": {
+          "bearingCode": "608ZZ",
+          "sealType": "ZZ",
+          "shielded": true,
+          "nominalSize": "608ZZ"
+        }
+      }
+    ]
+  },
+  {
+    "query": "AS5048A",
+    "total": 0,
+    "items": []
+  },
+  {
+    "query": "M3 12",
+    "total": 36,
+    "items": [
+      {
+        "id": "iso10642_socket_countersunk_screw_m3x12",
+        "name": "ISO 10642 hex socket countersunk screw, M3 x 12",
+        "stepUrl": "https://media.githubusercontent.com/media/earthtojake/step.parts/c6113328a5695b976a010a203a90fe86191769bf/catalog/step/iso10642_socket_countersunk_screw_m3x12.step",
+        "sha256": "5b4864c7af57e387276f29fb1a3ae5270c749a86e576841ae8a900e080b6ea3c",
+        "attributes": {
+          "thread": "M3",
+          "lengthMm": 12,
+          "nominalSize": "M3 x 12",
+          "headStyle": "countersunk",
+          "driveStyle": "hex-socket"
+        }
+      },
+      {
+        "id": "iso4762_socket_head_cap_screw_m3x12",
+        "name": "ISO 4762 socket head cap screw, M3 x 12",
+        "stepUrl": "https://media.githubusercontent.com/media/earthtojake/step.parts/c6113328a5695b976a010a203a90fe86191769bf/catalog/step/iso4762_socket_head_cap_screw_m3x12.step",
+        "sha256": "7720179ea94ed5c4e2b32f6e4c2583a77423240599c602690c5b2b2f5471cc47",
+        "attributes": {
+          "thread": "M3",
+          "lengthMm": 12,
+          "nominalSize": "M3 x 12",
+          "headStyle": "socket-head",
+          "driveStyle": "hex-socket"
+        }
+      },
+      {
+        "id": "din125_flat_washer_m3",
+        "name": "DIN 125 flat washer, M3",
+        "stepUrl": "https://media.githubusercontent.com/media/earthtojake/step.parts/c6113328a5695b976a010a203a90fe86191769bf/catalog/step/din125_flat_washer_m3.step",
+        "sha256": "df57fbc49f55dd15c2780249a178c36e005ac299762d6def9f2c5b11fc8f7aff",
+        "attributes": {
+          "thread": "M3",
+          "nominalSize": "M3",
+          "washerStyle": "flat"
+        }
+      }
+    ]
+  }
+]

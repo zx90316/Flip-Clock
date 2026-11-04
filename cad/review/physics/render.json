@@ -1,0 +1,14 @@
+{
+  "source": "Recorded MuJoCo solver qpos/qvel, states.npz",
+  "rendered_frames": 579,
+  "replay_speed": 0.25,
+  "views": [
+    "physics.mp4",
+    "front.mp4",
+    "rear.mp4"
+  ],
+  "wall_seconds": 102.61107379999885,
+  "physics_verified": false,
+  "render_code_sha256": "2dd5166e36aa477f6d726888750c32cfa791e812c621b1fa03f82ca4ac22af34",
+  "contact_markers": "Logged solver contact positions; 2D x-ray markers show occluded contacts. Marker size is not collision margin."
+}

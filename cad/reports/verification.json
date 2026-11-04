@@ -1,0 +1,66 @@
+{
+  "design_id": "FC-R1",
+  "state": "concept_only",
+  "updated_at": "2026-11-04T16:46:27.057952+08:00",
+  "original_author_geometry_used": false,
+  "original_files_packaged": false,
+  "selected_L0_geometry": {
+    "status": "PASS",
+    "pass": 60,
+    "fail": 0,
+    "evidence": "geometry_check.json"
+  },
+  "prototype_part_meshes": {
+    "status": "PASS",
+    "definitions": 135,
+    "evidence": "parts_catalog.json"
+  },
+  "snapshot_review": {
+    "status": "PASS",
+    "evidence": "tmp/review/*.png",
+    "scope": "static visible geometry only"
+  },
+  "nominal_drawing_review": {
+    "status": "PASS",
+    "evidence": "PDF/critical_parts_drawing.pdf",
+    "tolerances_frozen": false
+  },
+  "continuous_full_assembly_collision": {
+    "status": "APPROXIMATE_MODEL_RUN",
+    "exact_native_CAD_clearance_validated": false,
+    "evidence": "physics_assessment.json"
+  },
+  "physics": {
+    "status": "EXPLORATORY_COMPLETED",
+    "engine": "MuJoCo 3.17.0",
+    "evidence": "physics_assessment.json",
+    "run": "review/physics",
+    "simulated_seconds": 1.6000000000011643,
+    "calibrated": false,
+    "physics_verified": false
+  },
+  "motor_calibration": {
+    "status": "BLOCKED",
+    "reason": "Torque-speed curve, actual ratio and reversal backlash not measured"
+  },
+  "hardware": {
+    "status": "NOT_RUN"
+  },
+  "endurance": {
+    "status": "NOT_RUN"
+  },
+  "geometry_verified": false,
+  "physics_verified": false,
+  "hardware_verified": false,
+  "manufacturing_ready": false,
+  "release": {
+    "status": "BLOCKED"
+  },
+  "assembly_sha256": "24651e980c89cd6a28b0460f78ea82e41e6c05d69c2af8e859b8323e3ad19bb9",
+  "native_main_file": "src/assembly.py",
+  "parameter_file": "config/parameters.yaml",
+  "interactive_viewer": {
+    "status": "MANUAL_CHECK_PENDING",
+    "scope": "Native window controls and desktop appearance; video and recorded solver data checked separately."
+  }
+}

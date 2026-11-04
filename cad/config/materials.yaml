@@ -1,0 +1,37 @@
+{
+  "schema_version": 1,
+  "all_properties_provisional": true,
+  "densities_kg_m3": {
+    "printed_TPU_solid": 1200,
+    "printed_PETG_solid": 1270,
+    "printed_PLA_solid": 1240,
+    "steel": 7850,
+    "POM": 1410,
+    "pcb_envelope": 1800
+  },
+  "printed_mass_rule": "CAD full-solid estimate; infill, actual mass and anisotropy unmeasured",
+  "friction_coefficient": {
+    "value": null,
+    "unit": "1",
+    "status": "unverified",
+    "source": "coupon_measurement_required",
+    "uncertainty": null,
+    "measured_at": null
+  },
+  "pawl_spring_stiffness": {
+    "value": null,
+    "unit": "N*m/rad",
+    "status": "unverified",
+    "source": "spring_selection_required",
+    "uncertainty": null,
+    "measured_at": null
+  },
+  "detent_spring_stiffness": {
+    "value": null,
+    "unit": "N/mm",
+    "status": "unverified",
+    "source": "spring_selection_required",
+    "uncertainty": null,
+    "measured_at": null
+  }
+}

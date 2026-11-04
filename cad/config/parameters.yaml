@@ -1,0 +1,326 @@
+{
+  "schema_version": 1,
+  "design_id": "FC-R1",
+  "design_state": "concept_only",
+  "supersedes_original_adaptation": true,
+  "authority": "user_2026-11-04_full_redesign",
+  "coordinates": {
+    "X": "parallel rotating axles",
+    "Y": "display front",
+    "Z": "up"
+  },
+  "parameters": {
+    "detent_plane_x": {
+      "value": 87,
+      "unit": "mm",
+      "status": "proposal",
+      "source": "FC-R1_new_design_2026-11-04",
+      "uncertainty": null,
+      "measured_at": null
+    },
+    "hour_flaps": {
+      "value": 24,
+      "unit": "count",
+      "status": "requirement",
+      "source": "user_2026-11-04",
+      "uncertainty": null,
+      "measured_at": null
+    },
+    "minute_flaps": {
+      "value": 60,
+      "unit": "count",
+      "status": "requirement",
+      "source": "user_2026-11-04",
+      "uncertainty": null,
+      "measured_at": null
+    },
+    "hour_step": {
+      "value": 15,
+      "unit": "deg",
+      "status": "requirement",
+      "source": "user_2026-11-04",
+      "uncertainty": null,
+      "measured_at": null
+    },
+    "minute_step": {
+      "value": 6,
+      "unit": "deg",
+      "status": "requirement",
+      "source": "user_2026-11-04",
+      "uncertainty": null,
+      "measured_at": null
+    },
+    "motor_count": {
+      "value": 1,
+      "unit": "count",
+      "status": "requirement",
+      "source": "user_2026-11-04",
+      "uncertainty": null,
+      "measured_at": null
+    },
+    "shift_actuator_count": {
+      "value": 0,
+      "unit": "count",
+      "status": "requirement",
+      "source": "user_2026-11-04",
+      "uncertainty": null,
+      "measured_at": null
+    },
+    "axis_height": {
+      "value": 88,
+      "unit": "mm",
+      "status": "proposal",
+      "source": "FC-R1_new_design_2026-11-04",
+      "uncertainty": null,
+      "measured_at": null
+    },
+    "input_axis_y": {
+      "value": -108,
+      "unit": "mm",
+      "status": "proposal",
+      "source": "FC-R1_new_design_2026-11-04",
+      "uncertainty": null,
+      "measured_at": null
+    },
+    "frame_x": {
+      "value": 99,
+      "unit": "mm",
+      "status": "proposal",
+      "source": "FC-R1_new_design_2026-11-04",
+      "uncertainty": null,
+      "measured_at": null
+    },
+    "gear_plane_x": {
+      "value": 76,
+      "unit": "mm",
+      "status": "proposal",
+      "source": "FC-R1_new_design_2026-11-04",
+      "uncertainty": null,
+      "measured_at": null
+    },
+    "drum_center_x": {
+      "value": 42,
+      "unit": "mm",
+      "status": "proposal",
+      "source": "FC-R1_new_design_2026-11-04",
+      "uncertainty": null,
+      "measured_at": null
+    },
+    "gear_module": {
+      "value": 1.8,
+      "unit": "mm",
+      "status": "proposal",
+      "source": "FC-R1_new_design_2026-11-04",
+      "uncertainty": null,
+      "measured_at": null
+    },
+    "gear_width": {
+      "value": 6,
+      "unit": "mm",
+      "status": "proposal",
+      "source": "FC-R1_new_design_2026-11-04",
+      "uncertainty": null,
+      "measured_at": null
+    },
+    "gear_backlash": {
+      "value": 0.22,
+      "unit": "mm",
+      "status": "proposal",
+      "source": "FC-R1_new_design_2026-11-04",
+      "uncertainty": null,
+      "measured_at": null
+    },
+    "pressure_angle": {
+      "value": 20,
+      "unit": "deg",
+      "status": "proposal",
+      "source": "FC-R1_new_design_2026-11-04",
+      "uncertainty": null,
+      "measured_at": null
+    },
+    "minute_driver_teeth": {
+      "value": 40,
+      "unit": "count",
+      "status": "proposal",
+      "source": "FC-R1_new_design_2026-11-04",
+      "uncertainty": null,
+      "measured_at": null
+    },
+    "minute_idler_teeth": {
+      "value": 20,
+      "unit": "count",
+      "status": "proposal",
+      "source": "FC-R1_new_design_2026-11-04",
+      "uncertainty": null,
+      "measured_at": null
+    },
+    "minute_output_teeth": {
+      "value": 40,
+      "unit": "count",
+      "status": "proposal",
+      "source": "FC-R1_new_design_2026-11-04",
+      "uncertainty": null,
+      "measured_at": null
+    },
+    "hour_driver_teeth": {
+      "value": 60,
+      "unit": "count",
+      "status": "proposal",
+      "source": "FC-R1_new_design_2026-11-04",
+      "uncertainty": null,
+      "measured_at": null
+    },
+    "hour_output_teeth": {
+      "value": 60,
+      "unit": "count",
+      "status": "proposal",
+      "source": "FC-R1_new_design_2026-11-04",
+      "uncertainty": null,
+      "measured_at": null
+    },
+    "ratchet_teeth": {
+      "value": 36,
+      "unit": "count",
+      "status": "proposal",
+      "source": "FC-R1_new_design_2026-11-04",
+      "uncertainty": null,
+      "measured_at": null
+    },
+    "ratchet_tip_radius": {
+      "value": 22,
+      "unit": "mm",
+      "status": "proposal",
+      "source": "FC-R1_new_design_2026-11-04",
+      "uncertainty": null,
+      "measured_at": null
+    },
+    "ratchet_root_radius": {
+      "value": 23.4,
+      "unit": "mm",
+      "status": "proposal",
+      "source": "FC-R1_new_design_2026-11-04",
+      "uncertainty": null,
+      "measured_at": null
+    },
+    "ratchet_fillet": {
+      "value": 0.12,
+      "unit": "mm",
+      "status": "proposal",
+      "source": "FC-R1_new_design_2026-11-04",
+      "uncertainty": null,
+      "measured_at": null
+    },
+    "pawl_width": {
+      "value": 2.4,
+      "unit": "mm",
+      "status": "proposal",
+      "source": "FC-R1_new_design_2026-11-04",
+      "uncertainty": null,
+      "measured_at": null
+    },
+    "flap_pivot_radius": {
+      "value": 48,
+      "unit": "mm",
+      "status": "proposal",
+      "source": "FC-R1_new_design_2026-11-04",
+      "uncertainty": null,
+      "measured_at": null
+    },
+    "flange_radius": {
+      "value": 51,
+      "unit": "mm",
+      "status": "proposal",
+      "source": "FC-R1_new_design_2026-11-04",
+      "uncertainty": null,
+      "measured_at": null
+    },
+    "flap_width": {
+      "value": 48,
+      "unit": "mm",
+      "status": "proposal",
+      "source": "FC-R1_new_design_2026-11-04",
+      "uncertainty": null,
+      "measured_at": null
+    },
+    "flap_length": {
+      "value": 26,
+      "unit": "mm",
+      "status": "proposal",
+      "source": "FC-R1_new_design_2026-11-04",
+      "uncertainty": null,
+      "measured_at": null
+    },
+    "flap_thickness": {
+      "value": 0.95,
+      "unit": "mm",
+      "status": "proposal",
+      "source": "FC-R1_new_design_2026-11-04",
+      "uncertainty": null,
+      "measured_at": null
+    },
+    "flap_barrel_radius": {
+      "value": 2,
+      "unit": "mm",
+      "status": "proposal",
+      "source": "FC-R1_new_design_2026-11-04",
+      "uncertainty": null,
+      "measured_at": null
+    },
+    "flap_pin_bore": {
+      "value": 2.3,
+      "unit": "mm",
+      "status": "proposal",
+      "source": "FC-R1_new_design_2026-11-04",
+      "uncertainty": null,
+      "measured_at": null
+    },
+    "flap_pin_diameter": {
+      "value": 2,
+      "unit": "mm",
+      "status": "proposal",
+      "source": "FC-R1_new_design_2026-11-04",
+      "uncertainty": null,
+      "measured_at": null
+    },
+    "detent_radius": {
+      "value": 45,
+      "unit": "mm",
+      "status": "proposal",
+      "source": "FC-R1_new_design_2026-11-04",
+      "uncertainty": null,
+      "measured_at": null
+    },
+    "detent_depth": {
+      "value": 0.9,
+      "unit": "mm",
+      "status": "proposal",
+      "source": "FC-R1_new_design_2026-11-04",
+      "uncertainty": null,
+      "measured_at": null
+    },
+    "mesh_chord_tolerance": {
+      "value": 0.01,
+      "unit": "mm",
+      "status": "proposal",
+      "source": "FC-R1_new_design_2026-11-04",
+      "uncertainty": null,
+      "measured_at": null
+    },
+    "hand_torque_limit": {
+      "value": 0.15,
+      "unit": "N*m",
+      "status": "proposal",
+      "source": "FC-R1_new_design_2026-11-04",
+      "uncertainty": null,
+      "measured_at": null
+    }
+  },
+  "verification": {
+    "geometry_verified": false,
+    "physics_verified": false,
+    "motor_model_calibrated": false,
+    "hardware_verified": false,
+    "endurance_verified": false,
+    "manufacturing_ready": false
+  }
+}

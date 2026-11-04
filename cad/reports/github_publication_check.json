@@ -1,0 +1,15 @@
+{
+  "status": "PASS",
+  "scope": "Git index bytes before commit; exact payload and artifact checks only.",
+  "staged_result_files": 145,
+  "staged_bytes": 81259639,
+  "largest_file": {
+    "path": "cad/review/physics/contacts.csv.gz",
+    "bytes": 29353222
+  },
+  "review_files_hash_checked": 67,
+  "excluded_author_hashes_checked": 104,
+  "original_payload_matches": 0,
+  "desktop_control_performed": false,
+  "failures": []
+}

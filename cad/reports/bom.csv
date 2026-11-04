@@ -1,0 +1,136 @@
+﻿ID,quantity,material_proposal,print_orientation,STEP,STL,status
+A00_base_L_rear,1,PETG proposal; bushings may be purchased POM,Z flat,STEP/parts/A00_base_L_rear.step,STL/prototype/A00_base_L_rear.stl,PASS
+A00_base_L_front,1,PETG proposal; bushings may be purchased POM,Z flat,STEP/parts/A00_base_L_front.step,STL/prototype/A00_base_L_front.stl,PASS
+A00_base_R_rear,1,PETG proposal; bushings may be purchased POM,Z flat,STEP/parts/A00_base_R_rear.step,STL/prototype/A00_base_R_rear.stl,PASS
+A00_base_R_front,1,PETG proposal; bushings may be purchased POM,Z flat,STEP/parts/A00_base_R_front.step,STL/prototype/A00_base_R_front.stl,PASS
+A03_X_seam_strap_rear,1,PETG proposal; bushings may be purchased POM,Z flat,STEP/parts/A03_X_seam_strap_rear.step,STL/prototype/A03_X_seam_strap_rear.stl,PASS
+A03_X_seam_strap_front,1,PETG proposal; bushings may be purchased POM,Z flat,STEP/parts/A03_X_seam_strap_front.step,STL/prototype/A03_X_seam_strap_front.stl,PASS
+A03_Y_seam_strap_L,1,PETG proposal; bushings may be purchased POM,Z flat,STEP/parts/A03_Y_seam_strap_L.step,STL/prototype/A03_Y_seam_strap_L.stl,PASS
+A03_Y_seam_strap_R,1,PETG proposal; bushings may be purchased POM,Z flat,STEP/parts/A03_Y_seam_strap_R.step,STL/prototype/A03_Y_seam_strap_R.stl,PASS
+A04_TPU_foot_0,4,TPU proposal,Z flat,STEP/parts/A04_TPU_foot_0.step,STL/prototype/A04_TPU_foot_0.stl,PASS
+A01_side_frame_M,1,PETG proposal; bushings may be purchased POM,X rotated 90 degrees about Y,STEP/parts/A01_side_frame_M.step,STL/prototype/A01_side_frame_M.stl,PASS
+A01_side_frame_H,1,PETG proposal; bushings may be purchased POM,X rotated 90 degrees about Y,STEP/parts/A01_side_frame_H.step,STL/prototype/A01_side_frame_H.stl,PASS
+A02_center_twin_bearing_pedestal,1,PETG proposal; bushings may be purchased POM,Y rotated 90 degrees about X,STEP/parts/A02_center_twin_bearing_pedestal.step,STL/prototype/A02_center_twin_bearing_pedestal.stl,PASS
+A11_5_to_8_coupler,1,PETG proposal; bushings may be purchased POM,X rotated 90 degrees about Y,STEP/parts/A11_5_to_8_coupler.step,STL/prototype/A11_5_to_8_coupler.stl,PASS
+A12_adjustable_motor_mount,1,PETG proposal; bushings may be purchased POM,X rotated 90 degrees about Y,STEP/parts/A12_adjustable_motor_mount.step,STL/prototype/A12_adjustable_motor_mount.stl,PASS
+CM_output,1,PETG proposal; bushings may be purchased POM,X rotated 90 degrees about Y,STEP/parts/CM_output.step,STL/prototype/CM_output.stl,PASS
+CM_carrier,1,PETG proposal; bushings may be purchased POM,X rotated 90 degrees about Y,STEP/parts/CM_carrier.step,STL/prototype/CM_carrier.stl,PASS
+CM_pawl,1,PETG proposal; bushings may be purchased POM,X rotated 90 degrees about Y,STEP/parts/CM_pawl.step,STL/prototype/CM_pawl.stl,PASS
+CM_bushing,2,PETG proposal; bushings may be purchased POM,X rotated 90 degrees about Y,STEP/parts/CM_bushing.step,STL/prototype/CM_bushing.stl,PASS
+CM_cover,2,PETG proposal; bushings may be purchased POM,X rotated 90 degrees about Y,STEP/parts/CM_cover.step,STL/prototype/CM_cover.stl,PASS
+CH_output,1,PETG proposal; bushings may be purchased POM,X rotated 90 degrees about Y,STEP/parts/CH_output.step,STL/prototype/CH_output.stl,PASS
+CH_carrier,1,PETG proposal; bushings may be purchased POM,X rotated 90 degrees about Y,STEP/parts/CH_carrier.step,STL/prototype/CH_carrier.stl,PASS
+CH_pawl,1,PETG proposal; bushings may be purchased POM,X rotated 90 degrees about Y,STEP/parts/CH_pawl.step,STL/prototype/CH_pawl.stl,PASS
+A4M_drum_gear,1,PETG proposal; bushings may be purchased POM,X rotated 90 degrees about Y,STEP/parts/A4M_drum_gear.step,STL/prototype/A4M_drum_gear.stl,PASS
+A40M_idler,1,PETG proposal; bushings may be purchased POM,X rotated 90 degrees about Y,STEP/parts/A40M_idler.step,STL/prototype/A40M_idler.stl,PASS
+A4H_drum_gear,1,PETG proposal; bushings may be purchased POM,X rotated 90 degrees about Y,STEP/parts/A4H_drum_gear.step,STL/prototype/A4H_drum_gear.stl,PASS
+DM_core,2,PETG proposal; bushings may be purchased POM,Y rotated 90 degrees about X,STEP/parts/DM_core.step,STL/prototype/DM_core.stl,PASS
+DM_flange_L,2,PETG proposal; bushings may be purchased POM,X rotated 90 degrees about Y,STEP/parts/DM_flange_L.step,STL/prototype/DM_flange_L.stl,PASS
+DH_flange_L,2,PETG proposal; bushings may be purchased POM,X rotated 90 degrees about Y,STEP/parts/DH_flange_L.step,STL/prototype/DH_flange_L.stl,PASS
+DEM_scallop_disc,1,PETG proposal; bushings may be purchased POM,X rotated 90 degrees about Y,STEP/parts/DEM_scallop_disc.step,STL/prototype/DEM_scallop_disc.stl,PASS
+DEM_pivot_arm,1,PETG proposal; bushings may be purchased POM,X rotated 90 degrees about Y,STEP/parts/DEM_pivot_arm.step,STL/prototype/DEM_pivot_arm.stl,PASS
+DEM_bracket,1,PETG proposal; bushings may be purchased POM,X rotated 90 degrees about Y,STEP/parts/DEM_bracket.step,STL/prototype/DEM_bracket.stl,PASS
+KM_forward_setting_knob,2,PETG proposal; bushings may be purchased POM,X rotated 90 degrees about Y,STEP/parts/KM_forward_setting_knob.step,STL/prototype/KM_forward_setting_knob.stl,PASS
+RM_release_adjustment_rail,1,PETG proposal; bushings may be purchased POM,X rotated 90 degrees about Y,STEP/parts/RM_release_adjustment_rail.step,STL/prototype/RM_release_adjustment_rail.stl,PASS
+RM_release_finger_RETRACTED,1,PETG proposal; bushings may be purchased POM,Y rotated 90 degrees about X,STEP/parts/RM_release_finger_RETRACTED.step,STL/prototype/RM_release_finger_RETRACTED.stl,PASS
+DEH_scallop_disc,1,PETG proposal; bushings may be purchased POM,X rotated 90 degrees about Y,STEP/parts/DEH_scallop_disc.step,STL/prototype/DEH_scallop_disc.stl,PASS
+DEH_pivot_arm,1,PETG proposal; bushings may be purchased POM,X rotated 90 degrees about Y,STEP/parts/DEH_pivot_arm.step,STL/prototype/DEH_pivot_arm.stl,PASS
+DEH_bracket,1,PETG proposal; bushings may be purchased POM,X rotated 90 degrees about Y,STEP/parts/DEH_bracket.step,STL/prototype/DEH_bracket.stl,PASS
+RH_release_adjustment_rail,1,PETG proposal; bushings may be purchased POM,X rotated 90 degrees about Y,STEP/parts/RH_release_adjustment_rail.step,STL/prototype/RH_release_adjustment_rail.stl,PASS
+RH_release_finger_RETRACTED,1,PETG proposal; bushings may be purchased POM,Y rotated 90 degrees about X,STEP/parts/RH_release_finger_RETRACTED.step,STL/prototype/RH_release_finger_RETRACTED.stl,PASS
+SH_adjustable_encoder_pedestal,1,PETG proposal; bushings may be purchased POM,X rotated 90 degrees about Y,STEP/parts/SH_adjustable_encoder_pedestal.step,STL/prototype/SH_adjustable_encoder_pedestal.stl,PASS
+SH_magnet_cap,2,PETG proposal; bushings may be purchased POM,X rotated 90 degrees about Y,STEP/parts/SH_magnet_cap.step,STL/prototype/SH_magnet_cap.stl,PASS
+SM_adjustable_encoder_pedestal,1,PETG proposal; bushings may be purchased POM,X rotated 90 degrees about Y,STEP/parts/SM_adjustable_encoder_pedestal.step,STL/prototype/SM_adjustable_encoder_pedestal.stl,PASS
+GH_removable_side_panel,1,PETG proposal; bushings may be purchased POM,X rotated 90 degrees about Y,STEP/parts/GH_removable_side_panel.step,STL/prototype/GH_removable_side_panel.stl,PASS
+GM_removable_side_panel,1,PETG proposal; bushings may be purchased POM,X rotated 90 degrees about Y,STEP/parts/GM_removable_side_panel.step,STL/prototype/GM_removable_side_panel.stl,PASS
+CP_M24_output,1,PETG proposal; bushings may be purchased POM,Z flat,STEP/parts/CP_M24_output.step,STL/prototype/CP_M24_output.stl,PASS
+CP_M36_output,1,PETG proposal; bushings may be purchased POM,Z flat,STEP/parts/CP_M36_output.step,STL/prototype/CP_M36_output.stl,PASS
+CP_M48_output,1,PETG proposal; bushings may be purchased POM,Z flat,STEP/parts/CP_M48_output.step,STL/prototype/CP_M48_output.stl,PASS
+CP_H36_output,1,PETG proposal; bushings may be purchased POM,Z flat,STEP/parts/CP_H36_output.step,STL/prototype/CP_H36_output.stl,PASS
+CP_8mm_fit_ladder,1,PETG proposal; bushings may be purchased POM,Z flat,STEP/parts/CP_8mm_fit_ladder.step,STL/prototype/CP_8mm_fit_ladder.stl,PASS
+CP_flap_hinge_blank,1,PETG proposal; bushings may be purchased POM,Z flat,STEP/parts/CP_flap_hinge_blank.step,STL/prototype/CP_flap_hinge_blank.stl,PASS
+FM_00_complete_numbered_flap,1,PETG proposal; bushings may be purchased POM,Y rotated 90 degrees about X,STEP/parts/FM_00_complete_numbered_flap.step,STL/prototype/FM_00_complete_numbered_flap.stl,PASS
+FM_01_complete_numbered_flap,1,PETG proposal; bushings may be purchased POM,Y rotated 90 degrees about X,STEP/parts/FM_01_complete_numbered_flap.step,STL/prototype/FM_01_complete_numbered_flap.stl,PASS
+FM_02_complete_numbered_flap,1,PETG proposal; bushings may be purchased POM,Y rotated 90 degrees about X,STEP/parts/FM_02_complete_numbered_flap.step,STL/prototype/FM_02_complete_numbered_flap.stl,PASS
+FM_03_complete_numbered_flap,1,PETG proposal; bushings may be purchased POM,Y rotated 90 degrees about X,STEP/parts/FM_03_complete_numbered_flap.step,STL/prototype/FM_03_complete_numbered_flap.stl,PASS
+FM_04_complete_numbered_flap,1,PETG proposal; bushings may be purchased POM,Y rotated 90 degrees about X,STEP/parts/FM_04_complete_numbered_flap.step,STL/prototype/FM_04_complete_numbered_flap.stl,PASS
+FM_05_complete_numbered_flap,1,PETG proposal; bushings may be purchased POM,Y rotated 90 degrees about X,STEP/parts/FM_05_complete_numbered_flap.step,STL/prototype/FM_05_complete_numbered_flap.stl,PASS
+FM_06_complete_numbered_flap,1,PETG proposal; bushings may be purchased POM,Y rotated 90 degrees about X,STEP/parts/FM_06_complete_numbered_flap.step,STL/prototype/FM_06_complete_numbered_flap.stl,PASS
+FM_07_complete_numbered_flap,1,PETG proposal; bushings may be purchased POM,Y rotated 90 degrees about X,STEP/parts/FM_07_complete_numbered_flap.step,STL/prototype/FM_07_complete_numbered_flap.stl,PASS
+FM_08_complete_numbered_flap,1,PETG proposal; bushings may be purchased POM,Y rotated 90 degrees about X,STEP/parts/FM_08_complete_numbered_flap.step,STL/prototype/FM_08_complete_numbered_flap.stl,PASS
+FM_09_complete_numbered_flap,1,PETG proposal; bushings may be purchased POM,Y rotated 90 degrees about X,STEP/parts/FM_09_complete_numbered_flap.step,STL/prototype/FM_09_complete_numbered_flap.stl,PASS
+FM_10_complete_numbered_flap,1,PETG proposal; bushings may be purchased POM,Y rotated 90 degrees about X,STEP/parts/FM_10_complete_numbered_flap.step,STL/prototype/FM_10_complete_numbered_flap.stl,PASS
+FM_11_complete_numbered_flap,1,PETG proposal; bushings may be purchased POM,Y rotated 90 degrees about X,STEP/parts/FM_11_complete_numbered_flap.step,STL/prototype/FM_11_complete_numbered_flap.stl,PASS
+FM_12_complete_numbered_flap,1,PETG proposal; bushings may be purchased POM,Y rotated 90 degrees about X,STEP/parts/FM_12_complete_numbered_flap.step,STL/prototype/FM_12_complete_numbered_flap.stl,PASS
+FM_13_complete_numbered_flap,1,PETG proposal; bushings may be purchased POM,Y rotated 90 degrees about X,STEP/parts/FM_13_complete_numbered_flap.step,STL/prototype/FM_13_complete_numbered_flap.stl,PASS
+FM_14_complete_numbered_flap,1,PETG proposal; bushings may be purchased POM,Y rotated 90 degrees about X,STEP/parts/FM_14_complete_numbered_flap.step,STL/prototype/FM_14_complete_numbered_flap.stl,PASS
+FM_15_complete_numbered_flap,1,PETG proposal; bushings may be purchased POM,Y rotated 90 degrees about X,STEP/parts/FM_15_complete_numbered_flap.step,STL/prototype/FM_15_complete_numbered_flap.stl,PASS
+FM_16_complete_numbered_flap,1,PETG proposal; bushings may be purchased POM,Y rotated 90 degrees about X,STEP/parts/FM_16_complete_numbered_flap.step,STL/prototype/FM_16_complete_numbered_flap.stl,PASS
+FM_17_complete_numbered_flap,1,PETG proposal; bushings may be purchased POM,Y rotated 90 degrees about X,STEP/parts/FM_17_complete_numbered_flap.step,STL/prototype/FM_17_complete_numbered_flap.stl,PASS
+FM_18_complete_numbered_flap,1,PETG proposal; bushings may be purchased POM,Y rotated 90 degrees about X,STEP/parts/FM_18_complete_numbered_flap.step,STL/prototype/FM_18_complete_numbered_flap.stl,PASS
+FM_19_complete_numbered_flap,1,PETG proposal; bushings may be purchased POM,Y rotated 90 degrees about X,STEP/parts/FM_19_complete_numbered_flap.step,STL/prototype/FM_19_complete_numbered_flap.stl,PASS
+FM_20_complete_numbered_flap,1,PETG proposal; bushings may be purchased POM,Y rotated 90 degrees about X,STEP/parts/FM_20_complete_numbered_flap.step,STL/prototype/FM_20_complete_numbered_flap.stl,PASS
+FM_21_complete_numbered_flap,1,PETG proposal; bushings may be purchased POM,Y rotated 90 degrees about X,STEP/parts/FM_21_complete_numbered_flap.step,STL/prototype/FM_21_complete_numbered_flap.stl,PASS
+FM_22_complete_numbered_flap,1,PETG proposal; bushings may be purchased POM,Y rotated 90 degrees about X,STEP/parts/FM_22_complete_numbered_flap.step,STL/prototype/FM_22_complete_numbered_flap.stl,PASS
+FM_23_complete_numbered_flap,1,PETG proposal; bushings may be purchased POM,Y rotated 90 degrees about X,STEP/parts/FM_23_complete_numbered_flap.step,STL/prototype/FM_23_complete_numbered_flap.stl,PASS
+FM_24_complete_numbered_flap,1,PETG proposal; bushings may be purchased POM,Y rotated 90 degrees about X,STEP/parts/FM_24_complete_numbered_flap.step,STL/prototype/FM_24_complete_numbered_flap.stl,PASS
+FM_25_complete_numbered_flap,1,PETG proposal; bushings may be purchased POM,Y rotated 90 degrees about X,STEP/parts/FM_25_complete_numbered_flap.step,STL/prototype/FM_25_complete_numbered_flap.stl,PASS
+FM_26_complete_numbered_flap,1,PETG proposal; bushings may be purchased POM,Y rotated 90 degrees about X,STEP/parts/FM_26_complete_numbered_flap.step,STL/prototype/FM_26_complete_numbered_flap.stl,PASS
+FM_27_complete_numbered_flap,1,PETG proposal; bushings may be purchased POM,Y rotated 90 degrees about X,STEP/parts/FM_27_complete_numbered_flap.step,STL/prototype/FM_27_complete_numbered_flap.stl,PASS
+FM_28_complete_numbered_flap,1,PETG proposal; bushings may be purchased POM,Y rotated 90 degrees about X,STEP/parts/FM_28_complete_numbered_flap.step,STL/prototype/FM_28_complete_numbered_flap.stl,PASS
+FM_29_complete_numbered_flap,1,PETG proposal; bushings may be purchased POM,Y rotated 90 degrees about X,STEP/parts/FM_29_complete_numbered_flap.step,STL/prototype/FM_29_complete_numbered_flap.stl,PASS
+FM_30_complete_numbered_flap,1,PETG proposal; bushings may be purchased POM,Y rotated 90 degrees about X,STEP/parts/FM_30_complete_numbered_flap.step,STL/prototype/FM_30_complete_numbered_flap.stl,PASS
+FM_31_complete_numbered_flap,1,PETG proposal; bushings may be purchased POM,Y rotated 90 degrees about X,STEP/parts/FM_31_complete_numbered_flap.step,STL/prototype/FM_31_complete_numbered_flap.stl,PASS
+FM_32_complete_numbered_flap,1,PETG proposal; bushings may be purchased POM,Y rotated 90 degrees about X,STEP/parts/FM_32_complete_numbered_flap.step,STL/prototype/FM_32_complete_numbered_flap.stl,PASS
+FM_33_complete_numbered_flap,1,PETG proposal; bushings may be purchased POM,Y rotated 90 degrees about X,STEP/parts/FM_33_complete_numbered_flap.step,STL/prototype/FM_33_complete_numbered_flap.stl,PASS
+FM_34_complete_numbered_flap,1,PETG proposal; bushings may be purchased POM,Y rotated 90 degrees about X,STEP/parts/FM_34_complete_numbered_flap.step,STL/prototype/FM_34_complete_numbered_flap.stl,PASS
+FM_35_complete_numbered_flap,1,PETG proposal; bushings may be purchased POM,Y rotated 90 degrees about X,STEP/parts/FM_35_complete_numbered_flap.step,STL/prototype/FM_35_complete_numbered_flap.stl,PASS
+FM_36_complete_numbered_flap,1,PETG proposal; bushings may be purchased POM,Y rotated 90 degrees about X,STEP/parts/FM_36_complete_numbered_flap.step,STL/prototype/FM_36_complete_numbered_flap.stl,PASS
+FM_37_complete_numbered_flap,1,PETG proposal; bushings may be purchased POM,Y rotated 90 degrees about X,STEP/parts/FM_37_complete_numbered_flap.step,STL/prototype/FM_37_complete_numbered_flap.stl,PASS
+FM_38_complete_numbered_flap,1,PETG proposal; bushings may be purchased POM,Y rotated 90 degrees about X,STEP/parts/FM_38_complete_numbered_flap.step,STL/prototype/FM_38_complete_numbered_flap.stl,PASS
+FM_39_complete_numbered_flap,1,PETG proposal; bushings may be purchased POM,Y rotated 90 degrees about X,STEP/parts/FM_39_complete_numbered_flap.step,STL/prototype/FM_39_complete_numbered_flap.stl,PASS
+FM_40_complete_numbered_flap,1,PETG proposal; bushings may be purchased POM,Y rotated 90 degrees about X,STEP/parts/FM_40_complete_numbered_flap.step,STL/prototype/FM_40_complete_numbered_flap.stl,PASS
+FM_41_complete_numbered_flap,1,PETG proposal; bushings may be purchased POM,Y rotated 90 degrees about X,STEP/parts/FM_41_complete_numbered_flap.step,STL/prototype/FM_41_complete_numbered_flap.stl,PASS
+FM_42_complete_numbered_flap,1,PETG proposal; bushings may be purchased POM,Y rotated 90 degrees about X,STEP/parts/FM_42_complete_numbered_flap.step,STL/prototype/FM_42_complete_numbered_flap.stl,PASS
+FM_43_complete_numbered_flap,1,PETG proposal; bushings may be purchased POM,Y rotated 90 degrees about X,STEP/parts/FM_43_complete_numbered_flap.step,STL/prototype/FM_43_complete_numbered_flap.stl,PASS
+FM_44_complete_numbered_flap,1,PETG proposal; bushings may be purchased POM,Y rotated 90 degrees about X,STEP/parts/FM_44_complete_numbered_flap.step,STL/prototype/FM_44_complete_numbered_flap.stl,PASS
+FM_45_complete_numbered_flap,1,PETG proposal; bushings may be purchased POM,Y rotated 90 degrees about X,STEP/parts/FM_45_complete_numbered_flap.step,STL/prototype/FM_45_complete_numbered_flap.stl,PASS
+FM_46_complete_numbered_flap,1,PETG proposal; bushings may be purchased POM,Y rotated 90 degrees about X,STEP/parts/FM_46_complete_numbered_flap.step,STL/prototype/FM_46_complete_numbered_flap.stl,PASS
+FM_47_complete_numbered_flap,1,PETG proposal; bushings may be purchased POM,Y rotated 90 degrees about X,STEP/parts/FM_47_complete_numbered_flap.step,STL/prototype/FM_47_complete_numbered_flap.stl,PASS
+FM_48_complete_numbered_flap,1,PETG proposal; bushings may be purchased POM,Y rotated 90 degrees about X,STEP/parts/FM_48_complete_numbered_flap.step,STL/prototype/FM_48_complete_numbered_flap.stl,PASS
+FM_49_complete_numbered_flap,1,PETG proposal; bushings may be purchased POM,Y rotated 90 degrees about X,STEP/parts/FM_49_complete_numbered_flap.step,STL/prototype/FM_49_complete_numbered_flap.stl,PASS
+FM_50_complete_numbered_flap,1,PETG proposal; bushings may be purchased POM,Y rotated 90 degrees about X,STEP/parts/FM_50_complete_numbered_flap.step,STL/prototype/FM_50_complete_numbered_flap.stl,PASS
+FM_51_complete_numbered_flap,1,PETG proposal; bushings may be purchased POM,Y rotated 90 degrees about X,STEP/parts/FM_51_complete_numbered_flap.step,STL/prototype/FM_51_complete_numbered_flap.stl,PASS
+FM_52_complete_numbered_flap,1,PETG proposal; bushings may be purchased POM,Y rotated 90 degrees about X,STEP/parts/FM_52_complete_numbered_flap.step,STL/prototype/FM_52_complete_numbered_flap.stl,PASS
+FM_53_complete_numbered_flap,1,PETG proposal; bushings may be purchased POM,Y rotated 90 degrees about X,STEP/parts/FM_53_complete_numbered_flap.step,STL/prototype/FM_53_complete_numbered_flap.stl,PASS
+FM_54_complete_numbered_flap,1,PETG proposal; bushings may be purchased POM,Y rotated 90 degrees about X,STEP/parts/FM_54_complete_numbered_flap.step,STL/prototype/FM_54_complete_numbered_flap.stl,PASS
+FM_55_complete_numbered_flap,1,PETG proposal; bushings may be purchased POM,Y rotated 90 degrees about X,STEP/parts/FM_55_complete_numbered_flap.step,STL/prototype/FM_55_complete_numbered_flap.stl,PASS
+FM_56_complete_numbered_flap,1,PETG proposal; bushings may be purchased POM,Y rotated 90 degrees about X,STEP/parts/FM_56_complete_numbered_flap.step,STL/prototype/FM_56_complete_numbered_flap.stl,PASS
+FM_57_complete_numbered_flap,1,PETG proposal; bushings may be purchased POM,Y rotated 90 degrees about X,STEP/parts/FM_57_complete_numbered_flap.step,STL/prototype/FM_57_complete_numbered_flap.stl,PASS
+FM_58_complete_numbered_flap,1,PETG proposal; bushings may be purchased POM,Y rotated 90 degrees about X,STEP/parts/FM_58_complete_numbered_flap.step,STL/prototype/FM_58_complete_numbered_flap.stl,PASS
+FM_59_complete_numbered_flap,1,PETG proposal; bushings may be purchased POM,Y rotated 90 degrees about X,STEP/parts/FM_59_complete_numbered_flap.step,STL/prototype/FM_59_complete_numbered_flap.stl,PASS
+FH_00_complete_numbered_flap,1,PETG proposal; bushings may be purchased POM,Y rotated 90 degrees about X,STEP/parts/FH_00_complete_numbered_flap.step,STL/prototype/FH_00_complete_numbered_flap.stl,PASS
+FH_01_complete_numbered_flap,1,PETG proposal; bushings may be purchased POM,Y rotated 90 degrees about X,STEP/parts/FH_01_complete_numbered_flap.step,STL/prototype/FH_01_complete_numbered_flap.stl,PASS
+FH_02_complete_numbered_flap,1,PETG proposal; bushings may be purchased POM,Y rotated 90 degrees about X,STEP/parts/FH_02_complete_numbered_flap.step,STL/prototype/FH_02_complete_numbered_flap.stl,PASS
+FH_03_complete_numbered_flap,1,PETG proposal; bushings may be purchased POM,Y rotated 90 degrees about X,STEP/parts/FH_03_complete_numbered_flap.step,STL/prototype/FH_03_complete_numbered_flap.stl,PASS
+FH_04_complete_numbered_flap,1,PETG proposal; bushings may be purchased POM,Y rotated 90 degrees about X,STEP/parts/FH_04_complete_numbered_flap.step,STL/prototype/FH_04_complete_numbered_flap.stl,PASS
+FH_05_complete_numbered_flap,1,PETG proposal; bushings may be purchased POM,Y rotated 90 degrees about X,STEP/parts/FH_05_complete_numbered_flap.step,STL/prototype/FH_05_complete_numbered_flap.stl,PASS
+FH_06_complete_numbered_flap,1,PETG proposal; bushings may be purchased POM,Y rotated 90 degrees about X,STEP/parts/FH_06_complete_numbered_flap.step,STL/prototype/FH_06_complete_numbered_flap.stl,PASS
+FH_07_complete_numbered_flap,1,PETG proposal; bushings may be purchased POM,Y rotated 90 degrees about X,STEP/parts/FH_07_complete_numbered_flap.step,STL/prototype/FH_07_complete_numbered_flap.stl,PASS
+FH_08_complete_numbered_flap,1,PETG proposal; bushings may be purchased POM,Y rotated 90 degrees about X,STEP/parts/FH_08_complete_numbered_flap.step,STL/prototype/FH_08_complete_numbered_flap.stl,PASS
+FH_09_complete_numbered_flap,1,PETG proposal; bushings may be purchased POM,Y rotated 90 degrees about X,STEP/parts/FH_09_complete_numbered_flap.step,STL/prototype/FH_09_complete_numbered_flap.stl,PASS
+FH_10_complete_numbered_flap,1,PETG proposal; bushings may be purchased POM,Y rotated 90 degrees about X,STEP/parts/FH_10_complete_numbered_flap.step,STL/prototype/FH_10_complete_numbered_flap.stl,PASS
+FH_11_complete_numbered_flap,1,PETG proposal; bushings may be purchased POM,Y rotated 90 degrees about X,STEP/parts/FH_11_complete_numbered_flap.step,STL/prototype/FH_11_complete_numbered_flap.stl,PASS
+FH_12_complete_numbered_flap,1,PETG proposal; bushings may be purchased POM,Y rotated 90 degrees about X,STEP/parts/FH_12_complete_numbered_flap.step,STL/prototype/FH_12_complete_numbered_flap.stl,PASS
+FH_13_complete_numbered_flap,1,PETG proposal; bushings may be purchased POM,Y rotated 90 degrees about X,STEP/parts/FH_13_complete_numbered_flap.step,STL/prototype/FH_13_complete_numbered_flap.stl,PASS
+FH_14_complete_numbered_flap,1,PETG proposal; bushings may be purchased POM,Y rotated 90 degrees about X,STEP/parts/FH_14_complete_numbered_flap.step,STL/prototype/FH_14_complete_numbered_flap.stl,PASS
+FH_15_complete_numbered_flap,1,PETG proposal; bushings may be purchased POM,Y rotated 90 degrees about X,STEP/parts/FH_15_complete_numbered_flap.step,STL/prototype/FH_15_complete_numbered_flap.stl,PASS
+FH_16_complete_numbered_flap,1,PETG proposal; bushings may be purchased POM,Y rotated 90 degrees about X,STEP/parts/FH_16_complete_numbered_flap.step,STL/prototype/FH_16_complete_numbered_flap.stl,PASS
+FH_17_complete_numbered_flap,1,PETG proposal; bushings may be purchased POM,Y rotated 90 degrees about X,STEP/parts/FH_17_complete_numbered_flap.step,STL/prototype/FH_17_complete_numbered_flap.stl,PASS
+FH_18_complete_numbered_flap,1,PETG proposal; bushings may be purchased POM,Y rotated 90 degrees about X,STEP/parts/FH_18_complete_numbered_flap.step,STL/prototype/FH_18_complete_numbered_flap.stl,PASS
+FH_19_complete_numbered_flap,1,PETG proposal; bushings may be purchased POM,Y rotated 90 degrees about X,STEP/parts/FH_19_complete_numbered_flap.step,STL/prototype/FH_19_complete_numbered_flap.stl,PASS
+FH_20_complete_numbered_flap,1,PETG proposal; bushings may be purchased POM,Y rotated 90 degrees about X,STEP/parts/FH_20_complete_numbered_flap.step,STL/prototype/FH_20_complete_numbered_flap.stl,PASS
+FH_21_complete_numbered_flap,1,PETG proposal; bushings may be purchased POM,Y rotated 90 degrees about X,STEP/parts/FH_21_complete_numbered_flap.step,STL/prototype/FH_21_complete_numbered_flap.stl,PASS
+FH_22_complete_numbered_flap,1,PETG proposal; bushings may be purchased POM,Y rotated 90 degrees about X,STEP/parts/FH_22_complete_numbered_flap.step,STL/prototype/FH_22_complete_numbered_flap.stl,PASS
+FH_23_complete_numbered_flap,1,PETG proposal; bushings may be purchased POM,Y rotated 90 degrees about X,STEP/parts/FH_23_complete_numbered_flap.step,STL/prototype/FH_23_complete_numbered_flap.stl,PASS
+C_cover_spacer,6,PETG proposal,Z flat,STEP/parts/C_cover_spacer.step,STL/prototype/C_cover_spacer.stl,PASS

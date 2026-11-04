@@ -1,0 +1,67 @@
+{
+  "engine": "MuJoCo",
+  "version": "3.3.7",
+  "python": "3.13.15 (main, Aug 25 2026, 14:00:51) [MSC v.1944 64 bit (AMD64)]",
+  "interpreter": "D:\\Project\\Flip-Clock\\.build\\cad\\uv\\archive-v0\\DNcQJFnEzynPUVZD\\Scripts\\python.exe",
+  "status": "PASS",
+  "tests": [
+    {
+      "id": "freefall_analytic",
+      "status": "PASS",
+      "value": {
+        "z_m": 0.015581821249999973,
+        "analytic_z_m": 0.0155855,
+        "error_m": 3.6787500000273754e-06
+      },
+      "criterion": "error < 10 micrometres at t=0.03s"
+    },
+    {
+      "id": "floor_contact",
+      "status": "PASS",
+      "value": {
+        "z_m": 0.0049999999668328176,
+        "contacts": 1,
+        "max_penetration_m": 1.5666386227958587e-05
+      },
+      "criterion": "ball retained by floor; final position and peak penetration <0.05 mm"
+    },
+    {
+      "id": "friction_dissipation",
+      "status": "PASS",
+      "value": {
+        "final_vx_m_s": -2.254697980585817e-09
+      },
+      "criterion": "dry friction arrests initial 0.1 m/s slide"
+    },
+    {
+      "id": "spring_restoring",
+      "status": "PASS",
+      "value": {
+        "final_angle_rad": 5.704321894033691e-10
+      },
+      "criterion": "0.2 rad initial spring deflection decays toward rest"
+    },
+    {
+      "id": "finite_torque_not_position_constraint",
+      "status": "PASS",
+      "value": {
+        "unloaded_rad": 0.02502500000000002,
+        "overloaded_rad": -0.02502500000000002
+      },
+      "criterion": "opposing load exceeding torque limit prevents forward progress"
+    },
+    {
+      "id": "offscreen_renderer",
+      "status": "PASS",
+      "value": {
+        "size": [
+          640,
+          360
+        ]
+      },
+      "criterion": "OpenGL renderer produced a 640x360 RGB frame"
+    }
+  ],
+  "clock_physics_verified": false,
+  "scope": "engine self-tests only"
+}

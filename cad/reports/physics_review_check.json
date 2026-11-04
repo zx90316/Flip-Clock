@@ -1,0 +1,44 @@
+{
+  "status": "PASS",
+  "scope": "Published artifact integrity, model flags, recorded states, video decoding; no desktop/UI automation.",
+  "bundle_files_checked": 67,
+  "original_payload_hashes_checked": 104,
+  "original_payload_matches": [],
+  "moving_bodies": 96,
+  "recorded_states": 193,
+  "videos": [
+    {
+      "file": "physics.mp4",
+      "frames_decoded": 253,
+      "size": [
+        1280,
+        720
+      ],
+      "fps": 30.0,
+      "duration_s": 8.43
+    },
+    {
+      "file": "front.mp4",
+      "frames_decoded": 253,
+      "size": [
+        1280,
+        720
+      ],
+      "fps": 30.0,
+      "duration_s": 8.43
+    },
+    {
+      "file": "rear.mp4",
+      "frames_decoded": 253,
+      "size": [
+        1280,
+        720
+      ],
+      "fps": 30.0,
+      "duration_s": 8.43
+    }
+  ],
+  "interactive_desktop_check": "MANUAL_CHECK_PENDING",
+  "physics_verified": false,
+  "failures": []
+}

@@ -1,0 +1,165 @@
+# FC-R1 模型目錄
+
+本機 CAD Viewer；所有模型均為 concept_only 工程原型。
+
+GitHub 上可先查看 [重力與碰撞影片](PHYSICS_VIEW.md)；下方模型連結供建立本機 CAD 後使用。
+
+本次檢查：60 項指定幾何檢查通過；完整動態與實機驗證另列待完成。
+
+## 整機與子系統
+
+- [assembly](http://127.0.0.1:3245/?file=D%3A%5CProject%5CFlip-Clock%5Ccad%5CSTEP%5Cassembly.step)
+- [clutch_hour](http://127.0.0.1:3245/?file=D%3A%5CProject%5CFlip-Clock%5Ccad%5CSTEP%5Cclutch_hour.step)
+- [clutch_minute](http://127.0.0.1:3245/?file=D%3A%5CProject%5CFlip-Clock%5Ccad%5CSTEP%5Cclutch_minute.step)
+- [clutch_test_rig](http://127.0.0.1:3245/?file=D%3A%5CProject%5CFlip-Clock%5Ccad%5CSTEP%5Cclutch_test_rig.step)
+- [coupon_plate](http://127.0.0.1:3245/?file=D%3A%5CProject%5CFlip-Clock%5Ccad%5CSTEP%5Ccoupon_plate.step)
+- [detent_hour](http://127.0.0.1:3245/?file=D%3A%5CProject%5CFlip-Clock%5Ccad%5CSTEP%5Cdetent_hour.step)
+- [detent_minute](http://127.0.0.1:3245/?file=D%3A%5CProject%5CFlip-Clock%5Ccad%5CSTEP%5Cdetent_minute.step)
+- [drum_hour24](http://127.0.0.1:3245/?file=D%3A%5CProject%5CFlip-Clock%5Ccad%5CSTEP%5Cdrum_hour24.step)
+- [drum_minute](http://127.0.0.1:3245/?file=D%3A%5CProject%5CFlip-Clock%5Ccad%5CSTEP%5Cdrum_minute.step)
+- [frame](http://127.0.0.1:3245/?file=D%3A%5CProject%5CFlip-Clock%5Ccad%5CSTEP%5Cframe.step)
+- [guards](http://127.0.0.1:3245/?file=D%3A%5CProject%5CFlip-Clock%5Ccad%5CSTEP%5Cguards.step)
+- [input_drive](http://127.0.0.1:3245/?file=D%3A%5CProject%5CFlip-Clock%5Ccad%5CSTEP%5Cinput_drive.step)
+- [sensors](http://127.0.0.1:3245/?file=D%3A%5CProject%5CFlip-Clock%5Ccad%5CSTEP%5Csensors.step)
+- [transmission_hour](http://127.0.0.1:3245/?file=D%3A%5CProject%5CFlip-Clock%5Ccad%5CSTEP%5Ctransmission_hour.step)
+- [transmission_minute](http://127.0.0.1:3245/?file=D%3A%5CProject%5CFlip-Clock%5Ccad%5CSTEP%5Ctransmission_minute.step)
+
+## 原型分件
+
+以下 STEP 與 STL 是相同幾何的分件匯出，已沿用所屬組裝的視覺審閱。
+
+- [A00_base_L_rear](http://127.0.0.1:3245/?file=D%3A%5CProject%5CFlip-Clock%5Ccad%5CSTEP%5Cparts%5CA00_base_L_rear.step)（數量 1）
+- [A00_base_L_front](http://127.0.0.1:3245/?file=D%3A%5CProject%5CFlip-Clock%5Ccad%5CSTEP%5Cparts%5CA00_base_L_front.step)（數量 1）
+- [A00_base_R_rear](http://127.0.0.1:3245/?file=D%3A%5CProject%5CFlip-Clock%5Ccad%5CSTEP%5Cparts%5CA00_base_R_rear.step)（數量 1）
+- [A00_base_R_front](http://127.0.0.1:3245/?file=D%3A%5CProject%5CFlip-Clock%5Ccad%5CSTEP%5Cparts%5CA00_base_R_front.step)（數量 1）
+- [A03_X_seam_strap_rear](http://127.0.0.1:3245/?file=D%3A%5CProject%5CFlip-Clock%5Ccad%5CSTEP%5Cparts%5CA03_X_seam_strap_rear.step)（數量 1）
+- [A03_X_seam_strap_front](http://127.0.0.1:3245/?file=D%3A%5CProject%5CFlip-Clock%5Ccad%5CSTEP%5Cparts%5CA03_X_seam_strap_front.step)（數量 1）
+- [A03_Y_seam_strap_L](http://127.0.0.1:3245/?file=D%3A%5CProject%5CFlip-Clock%5Ccad%5CSTEP%5Cparts%5CA03_Y_seam_strap_L.step)（數量 1）
+- [A03_Y_seam_strap_R](http://127.0.0.1:3245/?file=D%3A%5CProject%5CFlip-Clock%5Ccad%5CSTEP%5Cparts%5CA03_Y_seam_strap_R.step)（數量 1）
+- [A04_TPU_foot_0](http://127.0.0.1:3245/?file=D%3A%5CProject%5CFlip-Clock%5Ccad%5CSTEP%5Cparts%5CA04_TPU_foot_0.step)（數量 4）
+- [A01_side_frame_M](http://127.0.0.1:3245/?file=D%3A%5CProject%5CFlip-Clock%5Ccad%5CSTEP%5Cparts%5CA01_side_frame_M.step)（數量 1）
+- [A01_side_frame_H](http://127.0.0.1:3245/?file=D%3A%5CProject%5CFlip-Clock%5Ccad%5CSTEP%5Cparts%5CA01_side_frame_H.step)（數量 1）
+- [A02_center_twin_bearing_pedestal](http://127.0.0.1:3245/?file=D%3A%5CProject%5CFlip-Clock%5Ccad%5CSTEP%5Cparts%5CA02_center_twin_bearing_pedestal.step)（數量 1）
+- [A11_5_to_8_coupler](http://127.0.0.1:3245/?file=D%3A%5CProject%5CFlip-Clock%5Ccad%5CSTEP%5Cparts%5CA11_5_to_8_coupler.step)（數量 1）
+- [A12_adjustable_motor_mount](http://127.0.0.1:3245/?file=D%3A%5CProject%5CFlip-Clock%5Ccad%5CSTEP%5Cparts%5CA12_adjustable_motor_mount.step)（數量 1）
+- [CM_output](http://127.0.0.1:3245/?file=D%3A%5CProject%5CFlip-Clock%5Ccad%5CSTEP%5Cparts%5CCM_output.step)（數量 1）
+- [CM_carrier](http://127.0.0.1:3245/?file=D%3A%5CProject%5CFlip-Clock%5Ccad%5CSTEP%5Cparts%5CCM_carrier.step)（數量 1）
+- [CM_pawl](http://127.0.0.1:3245/?file=D%3A%5CProject%5CFlip-Clock%5Ccad%5CSTEP%5Cparts%5CCM_pawl.step)（數量 1）
+- [CM_bushing](http://127.0.0.1:3245/?file=D%3A%5CProject%5CFlip-Clock%5Ccad%5CSTEP%5Cparts%5CCM_bushing.step)（數量 2）
+- [CM_cover](http://127.0.0.1:3245/?file=D%3A%5CProject%5CFlip-Clock%5Ccad%5CSTEP%5Cparts%5CCM_cover.step)（數量 2）
+- [CH_output](http://127.0.0.1:3245/?file=D%3A%5CProject%5CFlip-Clock%5Ccad%5CSTEP%5Cparts%5CCH_output.step)（數量 1）
+- [CH_carrier](http://127.0.0.1:3245/?file=D%3A%5CProject%5CFlip-Clock%5Ccad%5CSTEP%5Cparts%5CCH_carrier.step)（數量 1）
+- [CH_pawl](http://127.0.0.1:3245/?file=D%3A%5CProject%5CFlip-Clock%5Ccad%5CSTEP%5Cparts%5CCH_pawl.step)（數量 1）
+- [A4M_drum_gear](http://127.0.0.1:3245/?file=D%3A%5CProject%5CFlip-Clock%5Ccad%5CSTEP%5Cparts%5CA4M_drum_gear.step)（數量 1）
+- [A40M_idler](http://127.0.0.1:3245/?file=D%3A%5CProject%5CFlip-Clock%5Ccad%5CSTEP%5Cparts%5CA40M_idler.step)（數量 1）
+- [A4H_drum_gear](http://127.0.0.1:3245/?file=D%3A%5CProject%5CFlip-Clock%5Ccad%5CSTEP%5Cparts%5CA4H_drum_gear.step)（數量 1）
+- [DM_core](http://127.0.0.1:3245/?file=D%3A%5CProject%5CFlip-Clock%5Ccad%5CSTEP%5Cparts%5CDM_core.step)（數量 2）
+- [DM_flange_L](http://127.0.0.1:3245/?file=D%3A%5CProject%5CFlip-Clock%5Ccad%5CSTEP%5Cparts%5CDM_flange_L.step)（數量 2）
+- [DH_flange_L](http://127.0.0.1:3245/?file=D%3A%5CProject%5CFlip-Clock%5Ccad%5CSTEP%5Cparts%5CDH_flange_L.step)（數量 2）
+- [DEM_scallop_disc](http://127.0.0.1:3245/?file=D%3A%5CProject%5CFlip-Clock%5Ccad%5CSTEP%5Cparts%5CDEM_scallop_disc.step)（數量 1）
+- [DEM_pivot_arm](http://127.0.0.1:3245/?file=D%3A%5CProject%5CFlip-Clock%5Ccad%5CSTEP%5Cparts%5CDEM_pivot_arm.step)（數量 1）
+- [DEM_bracket](http://127.0.0.1:3245/?file=D%3A%5CProject%5CFlip-Clock%5Ccad%5CSTEP%5Cparts%5CDEM_bracket.step)（數量 1）
+- [KM_forward_setting_knob](http://127.0.0.1:3245/?file=D%3A%5CProject%5CFlip-Clock%5Ccad%5CSTEP%5Cparts%5CKM_forward_setting_knob.step)（數量 2）
+- [RM_release_adjustment_rail](http://127.0.0.1:3245/?file=D%3A%5CProject%5CFlip-Clock%5Ccad%5CSTEP%5Cparts%5CRM_release_adjustment_rail.step)（數量 1）
+- [RM_release_finger_RETRACTED](http://127.0.0.1:3245/?file=D%3A%5CProject%5CFlip-Clock%5Ccad%5CSTEP%5Cparts%5CRM_release_finger_RETRACTED.step)（數量 1）
+- [DEH_scallop_disc](http://127.0.0.1:3245/?file=D%3A%5CProject%5CFlip-Clock%5Ccad%5CSTEP%5Cparts%5CDEH_scallop_disc.step)（數量 1）
+- [DEH_pivot_arm](http://127.0.0.1:3245/?file=D%3A%5CProject%5CFlip-Clock%5Ccad%5CSTEP%5Cparts%5CDEH_pivot_arm.step)（數量 1）
+- [DEH_bracket](http://127.0.0.1:3245/?file=D%3A%5CProject%5CFlip-Clock%5Ccad%5CSTEP%5Cparts%5CDEH_bracket.step)（數量 1）
+- [RH_release_adjustment_rail](http://127.0.0.1:3245/?file=D%3A%5CProject%5CFlip-Clock%5Ccad%5CSTEP%5Cparts%5CRH_release_adjustment_rail.step)（數量 1）
+- [RH_release_finger_RETRACTED](http://127.0.0.1:3245/?file=D%3A%5CProject%5CFlip-Clock%5Ccad%5CSTEP%5Cparts%5CRH_release_finger_RETRACTED.step)（數量 1）
+- [SH_adjustable_encoder_pedestal](http://127.0.0.1:3245/?file=D%3A%5CProject%5CFlip-Clock%5Ccad%5CSTEP%5Cparts%5CSH_adjustable_encoder_pedestal.step)（數量 1）
+- [SH_magnet_cap](http://127.0.0.1:3245/?file=D%3A%5CProject%5CFlip-Clock%5Ccad%5CSTEP%5Cparts%5CSH_magnet_cap.step)（數量 2）
+- [SM_adjustable_encoder_pedestal](http://127.0.0.1:3245/?file=D%3A%5CProject%5CFlip-Clock%5Ccad%5CSTEP%5Cparts%5CSM_adjustable_encoder_pedestal.step)（數量 1）
+- [GH_removable_side_panel](http://127.0.0.1:3245/?file=D%3A%5CProject%5CFlip-Clock%5Ccad%5CSTEP%5Cparts%5CGH_removable_side_panel.step)（數量 1）
+- [GM_removable_side_panel](http://127.0.0.1:3245/?file=D%3A%5CProject%5CFlip-Clock%5Ccad%5CSTEP%5Cparts%5CGM_removable_side_panel.step)（數量 1）
+- [CP_M24_output](http://127.0.0.1:3245/?file=D%3A%5CProject%5CFlip-Clock%5Ccad%5CSTEP%5Cparts%5CCP_M24_output.step)（數量 1）
+- [CP_M36_output](http://127.0.0.1:3245/?file=D%3A%5CProject%5CFlip-Clock%5Ccad%5CSTEP%5Cparts%5CCP_M36_output.step)（數量 1）
+- [CP_M48_output](http://127.0.0.1:3245/?file=D%3A%5CProject%5CFlip-Clock%5Ccad%5CSTEP%5Cparts%5CCP_M48_output.step)（數量 1）
+- [CP_H36_output](http://127.0.0.1:3245/?file=D%3A%5CProject%5CFlip-Clock%5Ccad%5CSTEP%5Cparts%5CCP_H36_output.step)（數量 1）
+- [CP_8mm_fit_ladder](http://127.0.0.1:3245/?file=D%3A%5CProject%5CFlip-Clock%5Ccad%5CSTEP%5Cparts%5CCP_8mm_fit_ladder.step)（數量 1）
+- [CP_flap_hinge_blank](http://127.0.0.1:3245/?file=D%3A%5CProject%5CFlip-Clock%5Ccad%5CSTEP%5Cparts%5CCP_flap_hinge_blank.step)（數量 1）
+- [FM_00_complete_numbered_flap](http://127.0.0.1:3245/?file=D%3A%5CProject%5CFlip-Clock%5Ccad%5CSTEP%5Cparts%5CFM_00_complete_numbered_flap.step)（數量 1）
+- [FM_01_complete_numbered_flap](http://127.0.0.1:3245/?file=D%3A%5CProject%5CFlip-Clock%5Ccad%5CSTEP%5Cparts%5CFM_01_complete_numbered_flap.step)（數量 1）
+- [FM_02_complete_numbered_flap](http://127.0.0.1:3245/?file=D%3A%5CProject%5CFlip-Clock%5Ccad%5CSTEP%5Cparts%5CFM_02_complete_numbered_flap.step)（數量 1）
+- [FM_03_complete_numbered_flap](http://127.0.0.1:3245/?file=D%3A%5CProject%5CFlip-Clock%5Ccad%5CSTEP%5Cparts%5CFM_03_complete_numbered_flap.step)（數量 1）
+- [FM_04_complete_numbered_flap](http://127.0.0.1:3245/?file=D%3A%5CProject%5CFlip-Clock%5Ccad%5CSTEP%5Cparts%5CFM_04_complete_numbered_flap.step)（數量 1）
+- [FM_05_complete_numbered_flap](http://127.0.0.1:3245/?file=D%3A%5CProject%5CFlip-Clock%5Ccad%5CSTEP%5Cparts%5CFM_05_complete_numbered_flap.step)（數量 1）
+- [FM_06_complete_numbered_flap](http://127.0.0.1:3245/?file=D%3A%5CProject%5CFlip-Clock%5Ccad%5CSTEP%5Cparts%5CFM_06_complete_numbered_flap.step)（數量 1）
+- [FM_07_complete_numbered_flap](http://127.0.0.1:3245/?file=D%3A%5CProject%5CFlip-Clock%5Ccad%5CSTEP%5Cparts%5CFM_07_complete_numbered_flap.step)（數量 1）
+- [FM_08_complete_numbered_flap](http://127.0.0.1:3245/?file=D%3A%5CProject%5CFlip-Clock%5Ccad%5CSTEP%5Cparts%5CFM_08_complete_numbered_flap.step)（數量 1）
+- [FM_09_complete_numbered_flap](http://127.0.0.1:3245/?file=D%3A%5CProject%5CFlip-Clock%5Ccad%5CSTEP%5Cparts%5CFM_09_complete_numbered_flap.step)（數量 1）
+- [FM_10_complete_numbered_flap](http://127.0.0.1:3245/?file=D%3A%5CProject%5CFlip-Clock%5Ccad%5CSTEP%5Cparts%5CFM_10_complete_numbered_flap.step)（數量 1）
+- [FM_11_complete_numbered_flap](http://127.0.0.1:3245/?file=D%3A%5CProject%5CFlip-Clock%5Ccad%5CSTEP%5Cparts%5CFM_11_complete_numbered_flap.step)（數量 1）
+- [FM_12_complete_numbered_flap](http://127.0.0.1:3245/?file=D%3A%5CProject%5CFlip-Clock%5Ccad%5CSTEP%5Cparts%5CFM_12_complete_numbered_flap.step)（數量 1）
+- [FM_13_complete_numbered_flap](http://127.0.0.1:3245/?file=D%3A%5CProject%5CFlip-Clock%5Ccad%5CSTEP%5Cparts%5CFM_13_complete_numbered_flap.step)（數量 1）
+- [FM_14_complete_numbered_flap](http://127.0.0.1:3245/?file=D%3A%5CProject%5CFlip-Clock%5Ccad%5CSTEP%5Cparts%5CFM_14_complete_numbered_flap.step)（數量 1）
+- [FM_15_complete_numbered_flap](http://127.0.0.1:3245/?file=D%3A%5CProject%5CFlip-Clock%5Ccad%5CSTEP%5Cparts%5CFM_15_complete_numbered_flap.step)（數量 1）
+- [FM_16_complete_numbered_flap](http://127.0.0.1:3245/?file=D%3A%5CProject%5CFlip-Clock%5Ccad%5CSTEP%5Cparts%5CFM_16_complete_numbered_flap.step)（數量 1）
+- [FM_17_complete_numbered_flap](http://127.0.0.1:3245/?file=D%3A%5CProject%5CFlip-Clock%5Ccad%5CSTEP%5Cparts%5CFM_17_complete_numbered_flap.step)（數量 1）
+- [FM_18_complete_numbered_flap](http://127.0.0.1:3245/?file=D%3A%5CProject%5CFlip-Clock%5Ccad%5CSTEP%5Cparts%5CFM_18_complete_numbered_flap.step)（數量 1）
+- [FM_19_complete_numbered_flap](http://127.0.0.1:3245/?file=D%3A%5CProject%5CFlip-Clock%5Ccad%5CSTEP%5Cparts%5CFM_19_complete_numbered_flap.step)（數量 1）
+- [FM_20_complete_numbered_flap](http://127.0.0.1:3245/?file=D%3A%5CProject%5CFlip-Clock%5Ccad%5CSTEP%5Cparts%5CFM_20_complete_numbered_flap.step)（數量 1）
+- [FM_21_complete_numbered_flap](http://127.0.0.1:3245/?file=D%3A%5CProject%5CFlip-Clock%5Ccad%5CSTEP%5Cparts%5CFM_21_complete_numbered_flap.step)（數量 1）
+- [FM_22_complete_numbered_flap](http://127.0.0.1:3245/?file=D%3A%5CProject%5CFlip-Clock%5Ccad%5CSTEP%5Cparts%5CFM_22_complete_numbered_flap.step)（數量 1）
+- [FM_23_complete_numbered_flap](http://127.0.0.1:3245/?file=D%3A%5CProject%5CFlip-Clock%5Ccad%5CSTEP%5Cparts%5CFM_23_complete_numbered_flap.step)（數量 1）
+- [FM_24_complete_numbered_flap](http://127.0.0.1:3245/?file=D%3A%5CProject%5CFlip-Clock%5Ccad%5CSTEP%5Cparts%5CFM_24_complete_numbered_flap.step)（數量 1）
+- [FM_25_complete_numbered_flap](http://127.0.0.1:3245/?file=D%3A%5CProject%5CFlip-Clock%5Ccad%5CSTEP%5Cparts%5CFM_25_complete_numbered_flap.step)（數量 1）
+- [FM_26_complete_numbered_flap](http://127.0.0.1:3245/?file=D%3A%5CProject%5CFlip-Clock%5Ccad%5CSTEP%5Cparts%5CFM_26_complete_numbered_flap.step)（數量 1）
+- [FM_27_complete_numbered_flap](http://127.0.0.1:3245/?file=D%3A%5CProject%5CFlip-Clock%5Ccad%5CSTEP%5Cparts%5CFM_27_complete_numbered_flap.step)（數量 1）
+- [FM_28_complete_numbered_flap](http://127.0.0.1:3245/?file=D%3A%5CProject%5CFlip-Clock%5Ccad%5CSTEP%5Cparts%5CFM_28_complete_numbered_flap.step)（數量 1）
+- [FM_29_complete_numbered_flap](http://127.0.0.1:3245/?file=D%3A%5CProject%5CFlip-Clock%5Ccad%5CSTEP%5Cparts%5CFM_29_complete_numbered_flap.step)（數量 1）
+- [FM_30_complete_numbered_flap](http://127.0.0.1:3245/?file=D%3A%5CProject%5CFlip-Clock%5Ccad%5CSTEP%5Cparts%5CFM_30_complete_numbered_flap.step)（數量 1）
+- [FM_31_complete_numbered_flap](http://127.0.0.1:3245/?file=D%3A%5CProject%5CFlip-Clock%5Ccad%5CSTEP%5Cparts%5CFM_31_complete_numbered_flap.step)（數量 1）
+- [FM_32_complete_numbered_flap](http://127.0.0.1:3245/?file=D%3A%5CProject%5CFlip-Clock%5Ccad%5CSTEP%5Cparts%5CFM_32_complete_numbered_flap.step)（數量 1）
+- [FM_33_complete_numbered_flap](http://127.0.0.1:3245/?file=D%3A%5CProject%5CFlip-Clock%5Ccad%5CSTEP%5Cparts%5CFM_33_complete_numbered_flap.step)（數量 1）
+- [FM_34_complete_numbered_flap](http://127.0.0.1:3245/?file=D%3A%5CProject%5CFlip-Clock%5Ccad%5CSTEP%5Cparts%5CFM_34_complete_numbered_flap.step)（數量 1）
+- [FM_35_complete_numbered_flap](http://127.0.0.1:3245/?file=D%3A%5CProject%5CFlip-Clock%5Ccad%5CSTEP%5Cparts%5CFM_35_complete_numbered_flap.step)（數量 1）
+- [FM_36_complete_numbered_flap](http://127.0.0.1:3245/?file=D%3A%5CProject%5CFlip-Clock%5Ccad%5CSTEP%5Cparts%5CFM_36_complete_numbered_flap.step)（數量 1）
+- [FM_37_complete_numbered_flap](http://127.0.0.1:3245/?file=D%3A%5CProject%5CFlip-Clock%5Ccad%5CSTEP%5Cparts%5CFM_37_complete_numbered_flap.step)（數量 1）
+- [FM_38_complete_numbered_flap](http://127.0.0.1:3245/?file=D%3A%5CProject%5CFlip-Clock%5Ccad%5CSTEP%5Cparts%5CFM_38_complete_numbered_flap.step)（數量 1）
+- [FM_39_complete_numbered_flap](http://127.0.0.1:3245/?file=D%3A%5CProject%5CFlip-Clock%5Ccad%5CSTEP%5Cparts%5CFM_39_complete_numbered_flap.step)（數量 1）
+- [FM_40_complete_numbered_flap](http://127.0.0.1:3245/?file=D%3A%5CProject%5CFlip-Clock%5Ccad%5CSTEP%5Cparts%5CFM_40_complete_numbered_flap.step)（數量 1）
+- [FM_41_complete_numbered_flap](http://127.0.0.1:3245/?file=D%3A%5CProject%5CFlip-Clock%5Ccad%5CSTEP%5Cparts%5CFM_41_complete_numbered_flap.step)（數量 1）
+- [FM_42_complete_numbered_flap](http://127.0.0.1:3245/?file=D%3A%5CProject%5CFlip-Clock%5Ccad%5CSTEP%5Cparts%5CFM_42_complete_numbered_flap.step)（數量 1）
+- [FM_43_complete_numbered_flap](http://127.0.0.1:3245/?file=D%3A%5CProject%5CFlip-Clock%5Ccad%5CSTEP%5Cparts%5CFM_43_complete_numbered_flap.step)（數量 1）
+- [FM_44_complete_numbered_flap](http://127.0.0.1:3245/?file=D%3A%5CProject%5CFlip-Clock%5Ccad%5CSTEP%5Cparts%5CFM_44_complete_numbered_flap.step)（數量 1）
+- [FM_45_complete_numbered_flap](http://127.0.0.1:3245/?file=D%3A%5CProject%5CFlip-Clock%5Ccad%5CSTEP%5Cparts%5CFM_45_complete_numbered_flap.step)（數量 1）
+- [FM_46_complete_numbered_flap](http://127.0.0.1:3245/?file=D%3A%5CProject%5CFlip-Clock%5Ccad%5CSTEP%5Cparts%5CFM_46_complete_numbered_flap.step)（數量 1）
+- [FM_47_complete_numbered_flap](http://127.0.0.1:3245/?file=D%3A%5CProject%5CFlip-Clock%5Ccad%5CSTEP%5Cparts%5CFM_47_complete_numbered_flap.step)（數量 1）
+- [FM_48_complete_numbered_flap](http://127.0.0.1:3245/?file=D%3A%5CProject%5CFlip-Clock%5Ccad%5CSTEP%5Cparts%5CFM_48_complete_numbered_flap.step)（數量 1）
+- [FM_49_complete_numbered_flap](http://127.0.0.1:3245/?file=D%3A%5CProject%5CFlip-Clock%5Ccad%5CSTEP%5Cparts%5CFM_49_complete_numbered_flap.step)（數量 1）
+- [FM_50_complete_numbered_flap](http://127.0.0.1:3245/?file=D%3A%5CProject%5CFlip-Clock%5Ccad%5CSTEP%5Cparts%5CFM_50_complete_numbered_flap.step)（數量 1）
+- [FM_51_complete_numbered_flap](http://127.0.0.1:3245/?file=D%3A%5CProject%5CFlip-Clock%5Ccad%5CSTEP%5Cparts%5CFM_51_complete_numbered_flap.step)（數量 1）
+- [FM_52_complete_numbered_flap](http://127.0.0.1:3245/?file=D%3A%5CProject%5CFlip-Clock%5Ccad%5CSTEP%5Cparts%5CFM_52_complete_numbered_flap.step)（數量 1）
+- [FM_53_complete_numbered_flap](http://127.0.0.1:3245/?file=D%3A%5CProject%5CFlip-Clock%5Ccad%5CSTEP%5Cparts%5CFM_53_complete_numbered_flap.step)（數量 1）
+- [FM_54_complete_numbered_flap](http://127.0.0.1:3245/?file=D%3A%5CProject%5CFlip-Clock%5Ccad%5CSTEP%5Cparts%5CFM_54_complete_numbered_flap.step)（數量 1）
+- [FM_55_complete_numbered_flap](http://127.0.0.1:3245/?file=D%3A%5CProject%5CFlip-Clock%5Ccad%5CSTEP%5Cparts%5CFM_55_complete_numbered_flap.step)（數量 1）
+- [FM_56_complete_numbered_flap](http://127.0.0.1:3245/?file=D%3A%5CProject%5CFlip-Clock%5Ccad%5CSTEP%5Cparts%5CFM_56_complete_numbered_flap.step)（數量 1）
+- [FM_57_complete_numbered_flap](http://127.0.0.1:3245/?file=D%3A%5CProject%5CFlip-Clock%5Ccad%5CSTEP%5Cparts%5CFM_57_complete_numbered_flap.step)（數量 1）
+- [FM_58_complete_numbered_flap](http://127.0.0.1:3245/?file=D%3A%5CProject%5CFlip-Clock%5Ccad%5CSTEP%5Cparts%5CFM_58_complete_numbered_flap.step)（數量 1）
+- [FM_59_complete_numbered_flap](http://127.0.0.1:3245/?file=D%3A%5CProject%5CFlip-Clock%5Ccad%5CSTEP%5Cparts%5CFM_59_complete_numbered_flap.step)（數量 1）
+- [FH_00_complete_numbered_flap](http://127.0.0.1:3245/?file=D%3A%5CProject%5CFlip-Clock%5Ccad%5CSTEP%5Cparts%5CFH_00_complete_numbered_flap.step)（數量 1）
+- [FH_01_complete_numbered_flap](http://127.0.0.1:3245/?file=D%3A%5CProject%5CFlip-Clock%5Ccad%5CSTEP%5Cparts%5CFH_01_complete_numbered_flap.step)（數量 1）
+- [FH_02_complete_numbered_flap](http://127.0.0.1:3245/?file=D%3A%5CProject%5CFlip-Clock%5Ccad%5CSTEP%5Cparts%5CFH_02_complete_numbered_flap.step)（數量 1）
+- [FH_03_complete_numbered_flap](http://127.0.0.1:3245/?file=D%3A%5CProject%5CFlip-Clock%5Ccad%5CSTEP%5Cparts%5CFH_03_complete_numbered_flap.step)（數量 1）
+- [FH_04_complete_numbered_flap](http://127.0.0.1:3245/?file=D%3A%5CProject%5CFlip-Clock%5Ccad%5CSTEP%5Cparts%5CFH_04_complete_numbered_flap.step)（數量 1）
+- [FH_05_complete_numbered_flap](http://127.0.0.1:3245/?file=D%3A%5CProject%5CFlip-Clock%5Ccad%5CSTEP%5Cparts%5CFH_05_complete_numbered_flap.step)（數量 1）
+- [FH_06_complete_numbered_flap](http://127.0.0.1:3245/?file=D%3A%5CProject%5CFlip-Clock%5Ccad%5CSTEP%5Cparts%5CFH_06_complete_numbered_flap.step)（數量 1）
+- [FH_07_complete_numbered_flap](http://127.0.0.1:3245/?file=D%3A%5CProject%5CFlip-Clock%5Ccad%5CSTEP%5Cparts%5CFH_07_complete_numbered_flap.step)（數量 1）
+- [FH_08_complete_numbered_flap](http://127.0.0.1:3245/?file=D%3A%5CProject%5CFlip-Clock%5Ccad%5CSTEP%5Cparts%5CFH_08_complete_numbered_flap.step)（數量 1）
+- [FH_09_complete_numbered_flap](http://127.0.0.1:3245/?file=D%3A%5CProject%5CFlip-Clock%5Ccad%5CSTEP%5Cparts%5CFH_09_complete_numbered_flap.step)（數量 1）
+- [FH_10_complete_numbered_flap](http://127.0.0.1:3245/?file=D%3A%5CProject%5CFlip-Clock%5Ccad%5CSTEP%5Cparts%5CFH_10_complete_numbered_flap.step)（數量 1）
+- [FH_11_complete_numbered_flap](http://127.0.0.1:3245/?file=D%3A%5CProject%5CFlip-Clock%5Ccad%5CSTEP%5Cparts%5CFH_11_complete_numbered_flap.step)（數量 1）
+- [FH_12_complete_numbered_flap](http://127.0.0.1:3245/?file=D%3A%5CProject%5CFlip-Clock%5Ccad%5CSTEP%5Cparts%5CFH_12_complete_numbered_flap.step)（數量 1）
+- [FH_13_complete_numbered_flap](http://127.0.0.1:3245/?file=D%3A%5CProject%5CFlip-Clock%5Ccad%5CSTEP%5Cparts%5CFH_13_complete_numbered_flap.step)（數量 1）
+- [FH_14_complete_numbered_flap](http://127.0.0.1:3245/?file=D%3A%5CProject%5CFlip-Clock%5Ccad%5CSTEP%5Cparts%5CFH_14_complete_numbered_flap.step)（數量 1）
+- [FH_15_complete_numbered_flap](http://127.0.0.1:3245/?file=D%3A%5CProject%5CFlip-Clock%5Ccad%5CSTEP%5Cparts%5CFH_15_complete_numbered_flap.step)（數量 1）
+- [FH_16_complete_numbered_flap](http://127.0.0.1:3245/?file=D%3A%5CProject%5CFlip-Clock%5Ccad%5CSTEP%5Cparts%5CFH_16_complete_numbered_flap.step)（數量 1）
+- [FH_17_complete_numbered_flap](http://127.0.0.1:3245/?file=D%3A%5CProject%5CFlip-Clock%5Ccad%5CSTEP%5Cparts%5CFH_17_complete_numbered_flap.step)（數量 1）
+- [FH_18_complete_numbered_flap](http://127.0.0.1:3245/?file=D%3A%5CProject%5CFlip-Clock%5Ccad%5CSTEP%5Cparts%5CFH_18_complete_numbered_flap.step)（數量 1）
+- [FH_19_complete_numbered_flap](http://127.0.0.1:3245/?file=D%3A%5CProject%5CFlip-Clock%5Ccad%5CSTEP%5Cparts%5CFH_19_complete_numbered_flap.step)（數量 1）
+- [FH_20_complete_numbered_flap](http://127.0.0.1:3245/?file=D%3A%5CProject%5CFlip-Clock%5Ccad%5CSTEP%5Cparts%5CFH_20_complete_numbered_flap.step)（數量 1）
+- [FH_21_complete_numbered_flap](http://127.0.0.1:3245/?file=D%3A%5CProject%5CFlip-Clock%5Ccad%5CSTEP%5Cparts%5CFH_21_complete_numbered_flap.step)（數量 1）
+- [FH_22_complete_numbered_flap](http://127.0.0.1:3245/?file=D%3A%5CProject%5CFlip-Clock%5Ccad%5CSTEP%5Cparts%5CFH_22_complete_numbered_flap.step)（數量 1）
+- [FH_23_complete_numbered_flap](http://127.0.0.1:3245/?file=D%3A%5CProject%5CFlip-Clock%5Ccad%5CSTEP%5Cparts%5CFH_23_complete_numbered_flap.step)（數量 1）
+- [C_cover_spacer](http://127.0.0.1:3245/?file=D%3A%5CProject%5CFlip-Clock%5Ccad%5CSTEP%5Cparts%5CC_cover_spacer.step)（數量 6）

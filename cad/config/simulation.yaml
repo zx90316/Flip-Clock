@@ -1,0 +1,25 @@
+{
+  "engine": "MuJoCo 3.17.0",
+  "status": "EXPLORATORY_COMPLETED",
+  "units": "SI",
+  "gravity_m_s2": [
+    0,
+    0,
+    -9.81
+  ],
+  "mm_to_m": 0.001,
+  "forbidden": [
+    "output_angle_prescription",
+    "ideal_direction_switched_clutch",
+    "slot_snapping",
+    "ignored_working_contacts"
+  ],
+  "cad_inspection_pose": "radial_flaps_not_gravity_equilibrium",
+  "motor_torque_calibrated": false,
+  "full_contact_model_implemented": false,
+  "rigid_body_contact_scene_implemented": true,
+  "exact_contact_inertia": true,
+  "main_timestep_s": 5E-05,
+  "evidence": "reports/physics_assessment.json",
+  "geometry_model_scope": "Working contact profiles and bearing joint abstractions; not every exact CAD surface"
+}

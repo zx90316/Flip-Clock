@@ -1,0 +1,4 @@
+**/*.mjb
+**/compiled.json
+__pycache__/
+*.pyc

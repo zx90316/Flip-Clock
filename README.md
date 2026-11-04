@@ -17,7 +17,14 @@
 - [VS Code 操作](docs/vscode.md)
 - [早期工程規格（雙主控，僅供歷史參考）](docs/engineering-spec.zh-TW.md)
 
-## 建置
+## 全新機構 CAD（FC-R1）
+
+單馬達雙棘輪、24 片時輪與 60 片分輪的全新參數化設計位於 [cad/README.md](cad/README.md)。
+模型未匯入原作者幾何；目前為工程原型，實測校準、負載及實機驗證尚待完成。
+已提供 [重力與碰撞影片、物理回放及已知限制](cad/PHYSICS_VIEW.md)，包含 84 片獨立翻片與有限力矩的正反向輸入。
+CAD 的雙輸出回授控制需求尚未整合至下方既有韌體。
+
+## 韌體建置
 
 需要 Python 3.12 與網路。工具安裝於本專案 `.tools/`，不修改全域 Arduino 安裝。VS Code 開啟專案後，F5 選「Flip：主控操作台」，或 Ctrl+Shift+B 建置。
 

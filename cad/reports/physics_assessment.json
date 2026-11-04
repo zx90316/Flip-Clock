@@ -1,0 +1,75 @@
+{
+  "status": "EXPLORATORY_COMPLETED",
+  "engine": "MuJoCo 3.17.0",
+  "main_run": "review/physics",
+  "simulated_seconds": 1.6000000000011643,
+  "steps": 32000,
+  "timestep_s": 5e-05,
+  "warnings": {},
+  "moving_bodies": 96,
+  "flaps": 84,
+  "equality_constraints": 0,
+  "actuators": 1,
+  "parent_child_collision_enabled": true,
+  "diagexact_enabled": true,
+  "peak_penetration_mm": 0.09580987495380595,
+  "max_solver_iterations": 18,
+  "steps_at_solver_limit": 0,
+  "gravity_control": {
+    "duration_s": 0.3499999999999696,
+    "main_g_m_s2": [
+      0,
+      0,
+      -9.81
+    ],
+    "control_g_m_s2": [
+      0,
+      0,
+      -0.0
+    ],
+    "flaps_above_1deg_with_gravity": 82,
+    "flaps_above_1deg_without_gravity": 0,
+    "control_run": "review/physics/comparisons/zero-gravity",
+    "input_torque_zero_throughout_comparison": true
+  },
+  "timestep_comparison": {
+    "duration_s": 0.19999999999998205,
+    "coarse_s": 5e-05,
+    "fine_s": 2.5e-05,
+    "maximum_flap_angle_difference_deg": 0.9752414396833541,
+    "rms_flap_difference_deg": 0.09756084794017815,
+    "maximum_all_joint_difference_deg": 0.9752414396833541,
+    "fine_run": "review/physics/comparisons/timestep-half",
+    "scope": "Initial gravity interval only; no long-run convergence claim."
+  },
+  "motor": {
+    "maximum_recorded_abs_torque_Nm": 0.025,
+    "proposed_limit_Nm": 0.025,
+    "within_limit": true,
+    "window_joint_travel": {
+      "positive_input": {
+        "I_degrees": 30.261333195797228,
+        "OM_degrees": 28.004921263683492,
+        "OH_degrees": 0.49723493912448796,
+        "M_degrees": 27.3420084573541,
+        "H_degrees": -0.49767410211736307
+      },
+      "negative_input": {
+        "I_degrees": -36.5312823450987,
+        "OM_degrees": 20.68025130243166,
+        "OH_degrees": -33.07409884327314,
+        "M_degrees": 20.53610901973079,
+        "H_degrees": 32.83756462999544
+      }
+    }
+  },
+  "physics_verified": false,
+  "hardware_verified": false,
+  "manufacturing_ready": false,
+  "limits": [
+    "Unmeasured density, friction, spring and motor parameters.",
+    "Rigid soft-contact model has measured numerical penetration; no deformation/strength prediction.",
+    "Retracted release fingers do not establish a stable HH:MM display.",
+    "Time-step comparison covers 0.2 seconds only; 1.6-second run is not endurance evidence."
+  ]
+}

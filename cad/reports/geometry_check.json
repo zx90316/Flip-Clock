@@ -1,0 +1,585 @@
+{
+  "schema_version": 1,
+  "design_id": "FC-R1",
+  "status": "PASS",
+  "scope": "selected L0 geometry checks only",
+  "saved_step": "D:\\Project\\Flip-Clock\\cad\\STEP\\assembly.step",
+  "document_hash": "24651e980c89cd6a28b0460f78ea82e41e6c05d69c2af8e859b8323e3ad19bb9",
+  "units": "mm, mm3, deg",
+  "requested_cases": 60,
+  "executed_cases": 60,
+  "pass": 60,
+  "fail": 0,
+  "blocked": 0,
+  "not_run": 0,
+  "checks": [
+    {
+      "id": "L0_positive_valid_solids",
+      "status": "PASS",
+      "measured": {
+        "occurrences": 1215,
+        "unique_prototypes": 77,
+        "solids": 1215,
+        "invalid": []
+      },
+      "threshold": "all checked prototype solids valid; volume > 1e-9 mm3"
+    },
+    {
+      "id": "L0_base_tiles_print_envelope",
+      "status": "PASS",
+      "measured": [
+        [
+          168.0,
+          140.0,
+          6.0
+        ],
+        [
+          168.0,
+          140.0,
+          6.0
+        ],
+        [
+          144.0,
+          140.0,
+          6.0
+        ],
+        [
+          144.0,
+          140.0,
+          6.0
+        ]
+      ],
+      "threshold": "four tiles; each XY <=180 mm; thickness 6 mm"
+    },
+    {
+      "id": "L0_M_physical_flap_count",
+      "status": "PASS",
+      "measured": {
+        "panels": 60,
+        "pins": 60
+      },
+      "threshold": 60
+    },
+    {
+      "id": "L0_M_number_progression_for_positive_output",
+      "status": "PASS",
+      "measured": {
+        "numbered_pin_step_deg": -5.9999999999995755,
+        "max_error_deg": 9.28856991322391e-12
+      },
+      "threshold": "next number at -6.0 deg, so positive output brings increasing numbers to a fixed release azimuth; actual gravity release NOT_RUN"
+    },
+    {
+      "id": "L0_M_number_pair_manifest",
+      "status": "PASS",
+      "measured": {
+        "upper": 60,
+        "lower": 60
+      },
+      "threshold": "leaf k: upper k / lower (k+1) mod N; visual release NOT_RUN"
+    },
+    {
+      "id": "L0_M_front_glyph_12_reading_direction",
+      "status": "PASS",
+      "measured": {
+        "screen_left_tens_1_upper_segments": 1,
+        "screen_right_ones_2_upper_segments": 3
+      },
+      "threshold": "+Y front: screen-right is -X; 12 upper half uses 1 segment on left and 3 on right"
+    },
+    {
+      "id": "L0_M_saved_hole_pattern",
+      "status": "PASS",
+      "measured": {
+        "holes": 60,
+        "pitch_deg": 6.0,
+        "max_error_deg": 7.123525620045257e-06
+      },
+      "threshold": "angular error < 0.001 deg; analytic circle centers"
+    },
+    {
+      "id": "L0_M_radial_pose_neighbor_00",
+      "status": "PASS",
+      "measured": {
+        "overlap_mm3": 0.0,
+        "minimum_gap_mm": 1.0242517993222353
+      },
+      "threshold": "radial inspection pose only: overlap <1e-6 mm3, gap >0.1 mm"
+    },
+    {
+      "id": "L0_M_radial_pose_neighbor_15",
+      "status": "PASS",
+      "measured": {
+        "overlap_mm3": 0.0,
+        "minimum_gap_mm": 1.0242517993222504
+      },
+      "threshold": "radial inspection pose only: overlap <1e-6 mm3, gap >0.1 mm"
+    },
+    {
+      "id": "L0_M_radial_pose_neighbor_30",
+      "status": "PASS",
+      "measured": {
+        "overlap_mm3": 0.0,
+        "minimum_gap_mm": 1.0242517993225997
+      },
+      "threshold": "radial inspection pose only: overlap <1e-6 mm3, gap >0.1 mm"
+    },
+    {
+      "id": "L0_M_radial_pose_neighbor_45",
+      "status": "PASS",
+      "measured": {
+        "overlap_mm3": 0.0,
+        "minimum_gap_mm": 1.0242517993226217
+      },
+      "threshold": "radial inspection pose only: overlap <1e-6 mm3, gap >0.1 mm"
+    },
+    {
+      "id": "L0_H_physical_flap_count",
+      "status": "PASS",
+      "measured": {
+        "panels": 24,
+        "pins": 24
+      },
+      "threshold": 24
+    },
+    {
+      "id": "L0_H_number_progression_for_positive_output",
+      "status": "PASS",
+      "measured": {
+        "numbered_pin_step_deg": -15.000000000000085,
+        "max_error_deg": 3.417710559006082e-12
+      },
+      "threshold": "next number at -15.0 deg, so positive output brings increasing numbers to a fixed release azimuth; actual gravity release NOT_RUN"
+    },
+    {
+      "id": "L0_H_number_pair_manifest",
+      "status": "PASS",
+      "measured": {
+        "upper": 24,
+        "lower": 24
+      },
+      "threshold": "leaf k: upper k / lower (k+1) mod N; visual release NOT_RUN"
+    },
+    {
+      "id": "L0_H_front_glyph_12_reading_direction",
+      "status": "PASS",
+      "measured": {
+        "screen_left_tens_1_upper_segments": 1,
+        "screen_right_ones_2_upper_segments": 3
+      },
+      "threshold": "+Y front: screen-right is -X; 12 upper half uses 1 segment on left and 3 on right"
+    },
+    {
+      "id": "L0_H_saved_hole_pattern",
+      "status": "PASS",
+      "measured": {
+        "holes": 24,
+        "pitch_deg": 15.0,
+        "max_error_deg": 4.906569364138136e-06
+      },
+      "threshold": "angular error < 0.001 deg; analytic circle centers"
+    },
+    {
+      "id": "L0_H_radial_pose_neighbor_00",
+      "status": "PASS",
+      "measured": {
+        "overlap_mm3": 0.0,
+        "minimum_gap_mm": 8.53051445312498
+      },
+      "threshold": "radial inspection pose only: overlap <1e-6 mm3, gap >0.1 mm"
+    },
+    {
+      "id": "L0_H_radial_pose_neighbor_06",
+      "status": "PASS",
+      "measured": {
+        "overlap_mm3": 0.0,
+        "minimum_gap_mm": 8.530514453124004
+      },
+      "threshold": "radial inspection pose only: overlap <1e-6 mm3, gap >0.1 mm"
+    },
+    {
+      "id": "L0_H_radial_pose_neighbor_12",
+      "status": "PASS",
+      "measured": {
+        "overlap_mm3": 0.0,
+        "minimum_gap_mm": 8.530514453124642
+      },
+      "threshold": "radial inspection pose only: overlap <1e-6 mm3, gap >0.1 mm"
+    },
+    {
+      "id": "L0_H_radial_pose_neighbor_18",
+      "status": "PASS",
+      "measured": {
+        "overlap_mm3": 0.0,
+        "minimum_gap_mm": 8.530514453125653
+      },
+      "threshold": "radial inspection pose only: overlap <1e-6 mm3, gap >0.1 mm"
+    },
+    {
+      "id": "L0_M_clutch_rest_clearance",
+      "status": "PASS",
+      "measured": {
+        "pawl_ring_overlap_mm3": 0.0,
+        "pawl_carrier_overlap_mm3": 0.0
+      },
+      "threshold": "no solid overlap in saved inspection pose; contact motion NOT_RUN"
+    },
+    {
+      "id": "L0_H_clutch_rest_clearance",
+      "status": "PASS",
+      "measured": {
+        "pawl_ring_overlap_mm3": 0.0,
+        "pawl_carrier_overlap_mm3": 0.0
+      },
+      "threshold": "no solid overlap in saved inspection pose; contact motion NOT_RUN"
+    },
+    {
+      "id": "L0_gear_rest_CM_output__A40M_idler",
+      "status": "PASS",
+      "measured": {
+        "overlap_mm3": 0.0
+      },
+      "threshold": "<1e-5 mm3 at saved phase; full rotational contact NOT_RUN"
+    },
+    {
+      "id": "L0_gear_rest_A40M_idler__A4M_drum_gear",
+      "status": "PASS",
+      "measured": {
+        "overlap_mm3": 0.0
+      },
+      "threshold": "<1e-5 mm3 at saved phase; full rotational contact NOT_RUN"
+    },
+    {
+      "id": "L0_gear_rest_CH_output__A4H_drum_gear",
+      "status": "PASS",
+      "measured": {
+        "overlap_mm3": 0.0
+      },
+      "threshold": "<1e-5 mm3 at saved phase; full rotational contact NOT_RUN"
+    },
+    {
+      "id": "L0_independent_output_shaft_gap",
+      "status": "PASS",
+      "measured": {
+        "axial_gap_mm": 8.0
+      },
+      "threshold": "8 mm; no shared rigid output shaft"
+    },
+    {
+      "id": "L0_HH_MM_front_order",
+      "status": "PASS",
+      "measured": {
+        "hour_X_mm": 41.999999043659166,
+        "minute_X_mm": -42.00000095634083
+      },
+      "threshold": "looking from +Y: hours at screen-left (+X), minutes at screen-right (-X)"
+    },
+    {
+      "id": "L0_guard_branch_labels",
+      "status": "PASS",
+      "measured": {
+        "hour_guard_X_mm": 93.99999999999999,
+        "minute_guard_X_mm": -93.99999999999999
+      },
+      "threshold": "guards correspond to the actual hour/minute sides"
+    },
+    {
+      "id": "L0_M_magnet_cap_shaft_fit",
+      "status": "PASS",
+      "measured": {
+        "overlap_mm3": 0.0
+      },
+      "threshold": "<1e-6 mm3; correct cap bore direction"
+    },
+    {
+      "id": "L0_M_detent_roller_inspection_pose",
+      "status": "PASS",
+      "measured": {
+        "overlap_mm3": 0.0,
+        "clearance_mm": 0.02000000000031753
+      },
+      "threshold": "no overlap; >0.005 mm geometric inspection clearance; spring-preloaded contact dynamics NOT_RUN"
+    },
+    {
+      "id": "L0_M_axial_stack_A4M_drum_gear__DEM_scallop_disc",
+      "status": "PASS",
+      "measured": {
+        "overlap_mm3": 0.0,
+        "minimum_clearance_mm": 1.0999999999999943
+      },
+      "threshold": "zero overlap and >0.15 mm axial/module clearance"
+    },
+    {
+      "id": "L0_M_axial_stack_A4M_drum_gear__KM_forward_setting_knob",
+      "status": "PASS",
+      "measured": {
+        "overlap_mm3": 0.0,
+        "minimum_clearance_mm": 22.5
+      },
+      "threshold": "zero overlap and >0.15 mm axial/module clearance"
+    },
+    {
+      "id": "L0_M_axial_stack_DEM_scallop_disc__DM_flange_L",
+      "status": "PASS",
+      "measured": {
+        "overlap_mm3": 0.0,
+        "minimum_clearance_mm": 13.099999999999994
+      },
+      "threshold": "zero overlap and >0.15 mm axial/module clearance"
+    },
+    {
+      "id": "L0_M_follower_clearance_DEM_pivot_arm__A4M_drum_gear",
+      "status": "PASS",
+      "measured": {
+        "overlap_mm3": 0.0,
+        "minimum_clearance_mm": 12.217207740491702
+      },
+      "threshold": "zero overlap and >0.15 mm at saved inspection pose"
+    },
+    {
+      "id": "L0_M_follower_clearance_DEM_pivot_arm__DM_flange_L",
+      "status": "PASS",
+      "measured": {
+        "overlap_mm3": 0.0,
+        "minimum_clearance_mm": 19.700000000000003
+      },
+      "threshold": "zero overlap and >0.15 mm at saved inspection pose"
+    },
+    {
+      "id": "L0_M_follower_clearance_DEM_pivot_arm__DEM_scallop_disc",
+      "status": "PASS",
+      "measured": {
+        "overlap_mm3": 0.0,
+        "minimum_clearance_mm": 1.2000000000000028
+      },
+      "threshold": "zero overlap and >0.15 mm at saved inspection pose"
+    },
+    {
+      "id": "L0_M_follower_clearance_DEM_pivot_arm__DEM_roller",
+      "status": "PASS",
+      "measured": {
+        "overlap_mm3": 0.0,
+        "minimum_clearance_mm": 0.7000000000000028
+      },
+      "threshold": "zero overlap and >0.15 mm at saved inspection pose"
+    },
+    {
+      "id": "L0_M_follower_clearance_DEM_bracket__A01_side_frame_M",
+      "status": "PASS",
+      "measured": {
+        "overlap_mm3": 0.0,
+        "minimum_clearance_mm": 0.20000000000000284
+      },
+      "threshold": "zero overlap and >0.15 mm at saved inspection pose"
+    },
+    {
+      "id": "L0_M_follower_clearance_DEM_bracket__DEM_pivot_arm",
+      "status": "PASS",
+      "measured": {
+        "overlap_mm3": 0.0,
+        "minimum_clearance_mm": 0.7000000000000028
+      },
+      "threshold": "zero overlap and >0.15 mm at saved inspection pose"
+    },
+    {
+      "id": "L0_M_follower_clearance_DEM_compression_spring__GM_removable_side_panel",
+      "status": "PASS",
+      "measured": {
+        "overlap_mm3": 0.0,
+        "minimum_clearance_mm": 0.21999999999542297
+      },
+      "threshold": "zero overlap and >0.15 mm at saved inspection pose"
+    },
+    {
+      "id": "L0_M_follower_clearance_KM_forward_setting_knob__SM_magnet_cap",
+      "status": "PASS",
+      "measured": {
+        "overlap_mm3": 0.0,
+        "minimum_clearance_mm": 0.5
+      },
+      "threshold": "zero overlap and >0.15 mm at saved inspection pose"
+    },
+    {
+      "id": "L0_M_follower_clearance_DEM_roller_pin__A4M_drum_gear",
+      "status": "PASS",
+      "measured": {
+        "overlap_mm3": 0.0,
+        "minimum_clearance_mm": 10.357245508647189
+      },
+      "threshold": "zero overlap and >0.15 mm at saved inspection pose"
+    },
+    {
+      "id": "L0_M_follower_clearance_DEM_roller_pin__DM_flange_L",
+      "status": "PASS",
+      "measured": {
+        "overlap_mm3": 0.0,
+        "minimum_clearance_mm": 16.25
+      },
+      "threshold": "zero overlap and >0.15 mm at saved inspection pose"
+    },
+    {
+      "id": "L0_H_magnet_cap_shaft_fit",
+      "status": "PASS",
+      "measured": {
+        "overlap_mm3": 0.0
+      },
+      "threshold": "<1e-6 mm3; correct cap bore direction"
+    },
+    {
+      "id": "L0_H_detent_roller_inspection_pose",
+      "status": "PASS",
+      "measured": {
+        "overlap_mm3": 0.0,
+        "clearance_mm": 0.019999999999840024
+      },
+      "threshold": "no overlap; >0.005 mm geometric inspection clearance; spring-preloaded contact dynamics NOT_RUN"
+    },
+    {
+      "id": "L0_H_axial_stack_A4H_drum_gear__DEH_scallop_disc",
+      "status": "PASS",
+      "measured": {
+        "overlap_mm3": 0.0,
+        "minimum_clearance_mm": 1.0999999999999943
+      },
+      "threshold": "zero overlap and >0.15 mm axial/module clearance"
+    },
+    {
+      "id": "L0_H_axial_stack_A4H_drum_gear__KH_forward_setting_knob",
+      "status": "PASS",
+      "measured": {
+        "overlap_mm3": 0.0,
+        "minimum_clearance_mm": 22.5
+      },
+      "threshold": "zero overlap and >0.15 mm axial/module clearance"
+    },
+    {
+      "id": "L0_H_axial_stack_DEH_scallop_disc__DH_flange_R",
+      "status": "PASS",
+      "measured": {
+        "overlap_mm3": 0.0,
+        "minimum_clearance_mm": 13.099999999999994
+      },
+      "threshold": "zero overlap and >0.15 mm axial/module clearance"
+    },
+    {
+      "id": "L0_H_follower_clearance_DEH_pivot_arm__A4H_drum_gear",
+      "status": "PASS",
+      "measured": {
+        "overlap_mm3": 0.0,
+        "minimum_clearance_mm": 10.700000000000003
+      },
+      "threshold": "zero overlap and >0.15 mm at saved inspection pose"
+    },
+    {
+      "id": "L0_H_follower_clearance_DEH_pivot_arm__DH_flange_R",
+      "status": "PASS",
+      "measured": {
+        "overlap_mm3": 0.0,
+        "minimum_clearance_mm": 19.700000000000003
+      },
+      "threshold": "zero overlap and >0.15 mm at saved inspection pose"
+    },
+    {
+      "id": "L0_H_follower_clearance_DEH_pivot_arm__DEH_scallop_disc",
+      "status": "PASS",
+      "measured": {
+        "overlap_mm3": 0.0,
+        "minimum_clearance_mm": 1.2000000000000028
+      },
+      "threshold": "zero overlap and >0.15 mm at saved inspection pose"
+    },
+    {
+      "id": "L0_H_follower_clearance_DEH_pivot_arm__DEH_roller",
+      "status": "PASS",
+      "measured": {
+        "overlap_mm3": 0.0,
+        "minimum_clearance_mm": 0.7000000000000028
+      },
+      "threshold": "zero overlap and >0.15 mm at saved inspection pose"
+    },
+    {
+      "id": "L0_H_follower_clearance_DEH_bracket__A01_side_frame_H",
+      "status": "PASS",
+      "measured": {
+        "overlap_mm3": 0.0,
+        "minimum_clearance_mm": 0.20000000000000284
+      },
+      "threshold": "zero overlap and >0.15 mm at saved inspection pose"
+    },
+    {
+      "id": "L0_H_follower_clearance_DEH_bracket__DEH_pivot_arm",
+      "status": "PASS",
+      "measured": {
+        "overlap_mm3": 0.0,
+        "minimum_clearance_mm": 0.7000000000000028
+      },
+      "threshold": "zero overlap and >0.15 mm at saved inspection pose"
+    },
+    {
+      "id": "L0_H_follower_clearance_DEH_compression_spring__GH_removable_side_panel",
+      "status": "PASS",
+      "measured": {
+        "overlap_mm3": 0.0,
+        "minimum_clearance_mm": 0.21999999999501085
+      },
+      "threshold": "zero overlap and >0.15 mm at saved inspection pose"
+    },
+    {
+      "id": "L0_H_follower_clearance_KH_forward_setting_knob__SH_magnet_cap",
+      "status": "PASS",
+      "measured": {
+        "overlap_mm3": 0.0,
+        "minimum_clearance_mm": 0.5
+      },
+      "threshold": "zero overlap and >0.15 mm at saved inspection pose"
+    },
+    {
+      "id": "L0_H_follower_clearance_DEH_roller_pin__A4H_drum_gear",
+      "status": "PASS",
+      "measured": {
+        "overlap_mm3": 0.0,
+        "minimum_clearance_mm": 7.25
+      },
+      "threshold": "zero overlap and >0.15 mm at saved inspection pose"
+    },
+    {
+      "id": "L0_H_follower_clearance_DEH_roller_pin__DH_flange_R",
+      "status": "PASS",
+      "measured": {
+        "overlap_mm3": 0.0,
+        "minimum_clearance_mm": 16.25
+      },
+      "threshold": "zero overlap and >0.15 mm at saved inspection pose"
+    },
+    {
+      "id": "L0_transmission_sign",
+      "status": "PASS",
+      "measured": {
+        "M": 1.0,
+        "H": -1.0
+      },
+      "threshold": "kinematic sign only, does not establish clutch behavior"
+    },
+    {
+      "id": "L0_new_design_no_imported_author_geometry",
+      "status": "PASS",
+      "measured": {
+        "source_files": 17,
+        "forbidden_import_files": []
+      },
+      "threshold": "authored model source does not import original geometry"
+    }
+  ],
+  "unchecked": [
+    "all-parts pairwise interference",
+    "continuous full rotation",
+    "flap gravity/release",
+    "contact dynamics",
+    "torque and stress",
+    "print tolerances",
+    "physical assembly access"
+  ],
+  "physics_verified": false,
+  "hardware_verified": false,
+  "manufacturing_ready": false
+}

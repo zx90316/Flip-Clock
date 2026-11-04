@@ -1,0 +1,13 @@
+{
+  "status": "PASS",
+  "cadgen": "0.7.17",
+  "build123d": "0.11.1",
+  "python": "3.13.15 (main, Aug 25 2026, 14:00:51) [MSC v.1944 64 bit (AMD64)]",
+  "platform": "Windows-11-10.0.26100-SP0",
+  "interpreter": "D:\\Project\\Flip-Clock\\.build\\cad\\uv\\archive-v0\\MAM7xr0pJyVlsuS5\\Scripts\\python.exe",
+  "native_parameter_model": "Python/build123d using text-to-cad cadgen 0.7.17",
+  "FreeCAD_available": false,
+  "PyChrono_available": false,
+  "physics_selftest": "NOT_RUN",
+  "kernel_unit_cube_mm3": 0.9999999999999998
+}

@@ -1,0 +1,16 @@
+{
+  "status": "EXPLORATORY_COMPLETED",
+  "requested_cases": [
+    "drive",
+    "gravity_control",
+    "timestep_comparison"
+  ],
+  "executed_cases": [
+    "review/physics",
+    "review/physics/comparisons/zero-gravity",
+    "review/physics/comparisons/timestep-half"
+  ],
+  "evidence": "physics_assessment.json",
+  "calibrated": false,
+  "physics_verified": false
+}

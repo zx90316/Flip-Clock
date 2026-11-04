@@ -1,0 +1,8 @@
+{
+  "run_id": "20261104T081826_923042Z_full_drive",
+  "directory": "review/physics",
+  "relative_directory": "review/physics",
+  "status": "COMPLETED",
+  "physics_verified": false,
+  "assessment": "physics_assessment.json"
+}
