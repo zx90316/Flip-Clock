@@ -1,0 +1,255 @@
+{
+  "run_id": "20261105T033059_487575Z_drive",
+  "scope": "Final saved solver state; twelve front rays per wheel at fixed aperture coordinates, visible native meshes only",
+  "status": "SAMPLED_NOT_READABILITY_VERIFIED",
+  "hits": [
+    {
+      "branch": "M",
+      "half": "upper",
+      "x_mm": -36.00000000000001,
+      "z_mm": 67.0,
+      "body": "FM_02",
+      "ray_distance_m": 0.15776610502486674,
+      "leaf_index": 2,
+      "face": "front_upper_artwork",
+      "artwork_value": 2
+    },
+    {
+      "branch": "M",
+      "half": "upper",
+      "x_mm": -36.00000000000001,
+      "z_mm": 73.0,
+      "body": "world",
+      "ray_distance_m": 0.15210016733639123
+    },
+    {
+      "branch": "M",
+      "half": "upper",
+      "x_mm": -24.0,
+      "z_mm": 67.0,
+      "body": "FM_02",
+      "ray_distance_m": 0.15776610502486674,
+      "leaf_index": 2,
+      "face": "front_upper_artwork",
+      "artwork_value": 2
+    },
+    {
+      "branch": "M",
+      "half": "upper",
+      "x_mm": -24.0,
+      "z_mm": 73.0,
+      "body": "world",
+      "ray_distance_m": 0.1521001660976632
+    },
+    {
+      "branch": "M",
+      "half": "upper",
+      "x_mm": -12.0,
+      "z_mm": 67.0,
+      "body": "FM_02",
+      "ray_distance_m": 0.15776610502486674,
+      "leaf_index": 2,
+      "face": "front_upper_artwork",
+      "artwork_value": 2
+    },
+    {
+      "branch": "M",
+      "half": "upper",
+      "x_mm": -12.0,
+      "z_mm": 73.0,
+      "body": "world",
+      "ray_distance_m": 0.15210016485139966
+    },
+    {
+      "branch": "M",
+      "half": "lower",
+      "x_mm": -36.00000000000001,
+      "z_mm": 47.0,
+      "body": "FM_01",
+      "ray_distance_m": 0.15998711047133288,
+      "leaf_index": 1,
+      "face": "back_lower_artwork",
+      "artwork_value": 2
+    },
+    {
+      "branch": "M",
+      "half": "lower",
+      "x_mm": -36.00000000000001,
+      "z_mm": 53.0,
+      "body": "FM_01",
+      "ray_distance_m": 0.1620201073516212,
+      "leaf_index": 1,
+      "face": "back_lower_artwork",
+      "artwork_value": 2
+    },
+    {
+      "branch": "M",
+      "half": "lower",
+      "x_mm": -24.0,
+      "z_mm": 47.0,
+      "body": "FM_01",
+      "ray_distance_m": 0.15998711047133288,
+      "leaf_index": 1,
+      "face": "back_lower_artwork",
+      "artwork_value": 2
+    },
+    {
+      "branch": "M",
+      "half": "lower",
+      "x_mm": -24.0,
+      "z_mm": 53.0,
+      "body": "FM_01",
+      "ray_distance_m": 0.1620201073516212,
+      "leaf_index": 1,
+      "face": "back_lower_artwork",
+      "artwork_value": 2
+    },
+    {
+      "branch": "M",
+      "half": "lower",
+      "x_mm": -12.0,
+      "z_mm": 47.0,
+      "body": "FM_01",
+      "ray_distance_m": 0.15998711047133288,
+      "leaf_index": 1,
+      "face": "back_lower_artwork",
+      "artwork_value": 2
+    },
+    {
+      "branch": "M",
+      "half": "lower",
+      "x_mm": -12.0,
+      "z_mm": 53.0,
+      "body": "FM_01",
+      "ray_distance_m": 0.1620201073516212,
+      "leaf_index": 1,
+      "face": "back_lower_artwork",
+      "artwork_value": 2
+    },
+    {
+      "branch": "H",
+      "half": "upper",
+      "x_mm": 12.0,
+      "z_mm": 67.0,
+      "body": "FH_02",
+      "ray_distance_m": 0.15776790260702364,
+      "leaf_index": 2,
+      "face": "front_upper_artwork",
+      "artwork_value": 2
+    },
+    {
+      "branch": "H",
+      "half": "upper",
+      "x_mm": 12.0,
+      "z_mm": 73.0,
+      "body": "world",
+      "ray_distance_m": 0.1521001691658965
+    },
+    {
+      "branch": "H",
+      "half": "upper",
+      "x_mm": 24.0,
+      "z_mm": 67.0,
+      "body": "FH_02",
+      "ray_distance_m": 0.1577679026070236,
+      "leaf_index": 2,
+      "face": "front_upper_artwork",
+      "artwork_value": 2
+    },
+    {
+      "branch": "H",
+      "half": "upper",
+      "x_mm": 24.0,
+      "z_mm": 73.0,
+      "body": "world",
+      "ray_distance_m": 0.15210016825392686
+    },
+    {
+      "branch": "H",
+      "half": "upper",
+      "x_mm": 36.00000000000001,
+      "z_mm": 67.0,
+      "body": "FH_02",
+      "ray_distance_m": 0.1577679026070236,
+      "leaf_index": 2,
+      "face": "front_upper_artwork",
+      "artwork_value": 2
+    },
+    {
+      "branch": "H",
+      "half": "upper",
+      "x_mm": 36.00000000000001,
+      "z_mm": 73.0,
+      "body": "world",
+      "ray_distance_m": 0.15210016698917003
+    },
+    {
+      "branch": "H",
+      "half": "lower",
+      "x_mm": 12.0,
+      "z_mm": 47.0,
+      "body": "FH_01",
+      "ray_distance_m": 0.16311169312025783,
+      "leaf_index": 1,
+      "face": "back_lower_artwork",
+      "artwork_value": 2
+    },
+    {
+      "branch": "H",
+      "half": "lower",
+      "x_mm": 12.0,
+      "z_mm": 53.0,
+      "body": "FH_01",
+      "ray_distance_m": 0.1634934742175867,
+      "leaf_index": 1,
+      "face": "back_lower_artwork",
+      "artwork_value": 2
+    },
+    {
+      "branch": "H",
+      "half": "lower",
+      "x_mm": 24.0,
+      "z_mm": 47.0,
+      "body": "FH_01",
+      "ray_distance_m": 0.16311169312025783,
+      "leaf_index": 1,
+      "face": "back_lower_artwork",
+      "artwork_value": 2
+    },
+    {
+      "branch": "H",
+      "half": "lower",
+      "x_mm": 24.0,
+      "z_mm": 53.0,
+      "body": "FH_01",
+      "ray_distance_m": 0.1634934742175867,
+      "leaf_index": 1,
+      "face": "back_lower_artwork",
+      "artwork_value": 2
+    },
+    {
+      "branch": "H",
+      "half": "lower",
+      "x_mm": 36.00000000000001,
+      "z_mm": 47.0,
+      "body": "FH_01",
+      "ray_distance_m": 0.16311169312025783,
+      "leaf_index": 1,
+      "face": "back_lower_artwork",
+      "artwork_value": 2
+    },
+    {
+      "branch": "H",
+      "half": "lower",
+      "x_mm": 36.00000000000001,
+      "z_mm": 53.0,
+      "body": "FH_01",
+      "ray_distance_m": 0.1634934742175867,
+      "leaf_index": 1,
+      "face": "back_lower_artwork",
+      "artwork_value": 2
+    }
+  ],
+  "flip_evidence_verified": false,
+  "hardware_verified": false
+}

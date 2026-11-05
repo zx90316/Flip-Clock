@@ -1,0 +1,10 @@
+{
+  "file": "FC-R2-desktop-prototype.zip",
+  "sha256": "da065d29bcc153a328b26e39abcff1e5636f2bc13a10fd31cb346ffa134b9f2a",
+  "bytes": 32186303,
+  "payload_files": 438,
+  "parts": 141,
+  "prototype_only": true,
+  "model_sources_match_rebuild_test": true,
+  "physics_and_hardware_acceptance": "See RESULTS.md; packaging success is not motion acceptance"
+}

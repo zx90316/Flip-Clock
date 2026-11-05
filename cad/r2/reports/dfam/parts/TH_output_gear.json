@@ -1,0 +1,113 @@
+{
+  "file": "D:\\Project\\Flip-Clock\\cad\\r2\\STL\\parts\\TH_output_gear.stl",
+  "mesh": {
+    "bbox_mm": [
+      50.39,
+      50.39,
+      6.0
+    ],
+    "volume_mm3": 10381.5,
+    "surface_area_mm2": 5413.7,
+    "triangle_count": 71856,
+    "watertight": true,
+    "euler_number": 0,
+    "body_count": 1
+  },
+  "scale": {
+    "bbox_diagonal_mm": 71.5121,
+    "units_suspect": false,
+    "note": "bbox consistent with millimetre units"
+  },
+  "overhangs": {
+    "angle_limit_used_deg": 45.0,
+    "down_facing_area_below_limit_mm2": 0.0,
+    "down_facing_area_below_limit_pct": 0.0,
+    "face_count_below_limit": 0,
+    "down_facing_angle_histogram_mm2": {
+      "80-90deg": 40.94
+    },
+    "largest_faces_below_limit": []
+  },
+  "wall_thickness": {
+    "samples_valid": 2000,
+    "min_mm": 1.205,
+    "p05_mm": 1.636,
+    "p25_mm": 6.0,
+    "median_mm": 6.0,
+    "max_mm": 45.908,
+    "thinnest_samples": [
+      {
+        "location_xyz": [
+          -10.17,
+          -22.97,
+          4.52
+        ],
+        "thickness_mm": 1.205
+      },
+      {
+        "location_xyz": [
+          9.06,
+          -23.43,
+          4.52
+        ],
+        "thickness_mm": 1.205
+      },
+      {
+        "location_xyz": [
+          24.56,
+          5.28,
+          1.48
+        ],
+        "thickness_mm": 1.205
+      },
+      {
+        "location_xyz": [
+          -11.85,
+          22.15,
+          1.48
+        ],
+        "thickness_mm": 1.205
+      },
+      {
+        "location_xyz": [
+          22.15,
+          11.85,
+          4.52
+        ],
+        "thickness_mm": 1.205
+      },
+      {
+        "location_xyz": [
+          11.85,
+          -22.15,
+          4.52
+        ],
+        "thickness_mm": 1.205
+      },
+      {
+        "location_xyz": [
+          -24.89,
+          3.43,
+          4.52
+        ],
+        "thickness_mm": 1.205
+      },
+      {
+        "location_xyz": [
+          16.77,
+          18.71,
+          1.48
+        ],
+        "thickness_mm": 1.205
+      }
+    ]
+  },
+  "support_volume": {
+    "angle_limit_used_deg": 45.0,
+    "estimated_support_volume_mm3": 0.0,
+    "part_volume_mm3": 10381.5,
+    "support_to_part_ratio_pct": 0.0,
+    "method": "prism from face centroid to build plate; coarse upper-bound estimate"
+  },
+  "partial": false
+}

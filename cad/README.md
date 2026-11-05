@@ -1,5 +1,7 @@
 # FC-R1：全新單馬達雙棘輪翻頁時鐘
 
+目前桌面／FDM 原型請見 [FC-R2](r2/README.md) 與 [本輪結果](r2/RESULTS.md)。R2 為 190 × 175.4 × 120 mm 包覆式設計；下文保留 R1 的版本說明，兩版的物理證據分開存放。
+
 2026-11-04 依使用者最新指示改為完整重新設計。使用 text-to-cad 0.7.17、
 build123d 0.11.1／Open CASCADE 建立可修改參數、可自動重建的精確實體。
 工程主檔是 `src/*.py` 與 `config/parameters.yaml`；STEP 是可交換工程模型。

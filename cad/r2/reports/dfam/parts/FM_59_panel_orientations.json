@@ -1,0 +1,51 @@
+{
+  "file": "D:\\Project\\Flip-Clock\\cad\\r2\\STL\\parts\\FM_59_panel.stl",
+  "scale": {
+    "bbox_diagonal_mm": 42.5641,
+    "units_suspect": false,
+    "note": "bbox consistent with millimetre units"
+  },
+  "orientations": {
+    "angle_limit_used_deg": 45.0,
+    "pct_denominator": "total surface area",
+    "candidates": [
+      {
+        "orientation": "current_plus_z",
+        "support_area_mm2": 5.45,
+        "support_area_pct": 0.4,
+        "build_height_mm": 1.7
+      },
+      {
+        "orientation": "flip_180_x",
+        "support_area_mm2": 575.58,
+        "support_area_pct": 39.4,
+        "build_height_mm": 1.7
+      },
+      {
+        "orientation": "rot_plus_90_x",
+        "support_area_mm2": 28.1,
+        "support_area_pct": 1.9,
+        "build_height_mm": 19.1
+      },
+      {
+        "orientation": "rot_minus_90_x",
+        "support_area_mm2": 26.19,
+        "support_area_pct": 1.8,
+        "build_height_mm": 19.1
+      },
+      {
+        "orientation": "rot_plus_90_y",
+        "support_area_mm2": 20.43,
+        "support_area_pct": 1.4,
+        "build_height_mm": 38.0
+      },
+      {
+        "orientation": "rot_minus_90_y",
+        "support_area_mm2": 20.43,
+        "support_area_pct": 1.4,
+        "build_height_mm": 38.0
+      }
+    ]
+  },
+  "partial": false
+}

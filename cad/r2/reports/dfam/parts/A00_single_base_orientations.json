@@ -1,0 +1,51 @@
+{
+  "file": "D:\\Project\\Flip-Clock\\cad\\r2\\STL\\parts\\A00_single_base.stl",
+  "scale": {
+    "bbox_diagonal_mm": 257.6801,
+    "units_suspect": false,
+    "note": "bbox consistent with millimetre units"
+  },
+  "orientations": {
+    "angle_limit_used_deg": 45.0,
+    "pct_denominator": "total surface area",
+    "candidates": [
+      {
+        "orientation": "current_plus_z",
+        "support_area_mm2": 577.18,
+        "support_area_pct": 0.8,
+        "build_height_mm": 4.8
+      },
+      {
+        "orientation": "flip_180_x",
+        "support_area_mm2": 0.0,
+        "support_area_pct": 0.0,
+        "build_height_mm": 4.8
+      },
+      {
+        "orientation": "rot_plus_90_x",
+        "support_area_mm2": 551.49,
+        "support_area_pct": 0.8,
+        "build_height_mm": 174.0
+      },
+      {
+        "orientation": "rot_minus_90_x",
+        "support_area_mm2": 551.49,
+        "support_area_pct": 0.8,
+        "build_height_mm": 174.0
+      },
+      {
+        "orientation": "rot_plus_90_y",
+        "support_area_mm2": 542.47,
+        "support_area_pct": 0.8,
+        "build_height_mm": 190.0
+      },
+      {
+        "orientation": "rot_minus_90_y",
+        "support_area_mm2": 542.47,
+        "support_area_pct": 0.8,
+        "build_height_mm": 190.0
+      }
+    ]
+  },
+  "partial": false
+}

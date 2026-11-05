@@ -1,0 +1,8 @@
+{
+  "source_sha256": "e0f29e0722b6eb9ab808947c3e6fc8d155108e7d4149b169fff5c8728d764469",
+  "input_states_sha256": "59abf45ec2c8e680e4887073c65bd6e4e03ae5a6bcd9a792dd700ef32363d779",
+  "runtime_parameters_restored_from": "run_config.json",
+  "source_timebase": "60 Hz recorded solver states, played 30 fps",
+  "snapshot_only": false,
+  "engine": "3.17.0"
+}

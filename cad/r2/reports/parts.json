@@ -1,0 +1,2120 @@
+{
+  "source_sha256": "ec0d7a9e4a157a168a438d842924a64c1c5f9304a83f0ba01d714045f94919e2",
+  "parts": [
+    {
+      "id": "A00_single_base",
+      "stl": "STL/parts/A00_single_base.stl",
+      "step": "STEP/parts/A00_single_base.step",
+      "stl_sha256": "d3214f86bb2ea17b1f1cfbb22f8a023e8af2f0884f6e3eb3d1785510ecf3cd01",
+      "size_mm": [
+        190.0,
+        174.000000000002,
+        4.800000000000001
+      ],
+      "fits_256_bed": true,
+      "orientation": "designed base on plate",
+      "native_valid": true,
+      "native_solids": 1
+    },
+    {
+      "id": "A10_M_internal_frame",
+      "stl": "STL/parts/A10_M_internal_frame.stl",
+      "step": "STEP/parts/A10_M_internal_frame.step",
+      "stl_sha256": "e9dcc25772d098bf1d69fa7878d850b5b8b7de22f6d0db52560c1f387df477ca",
+      "size_mm": [
+        70.2,
+        128.0,
+        6.400000000000006
+      ],
+      "fits_256_bed": true,
+      "orientation": "axle vertical; planar functional profile in XY",
+      "native_valid": true,
+      "native_solids": 1
+    },
+    {
+      "id": "A10_H_internal_frame",
+      "stl": "STL/parts/A10_H_internal_frame.stl",
+      "step": "STEP/parts/A10_H_internal_frame.step",
+      "stl_sha256": "f30f8de50950bcd1fce08a9442d1733ab8683edec7760737b6e8a18853585360",
+      "size_mm": [
+        70.2,
+        150.0,
+        6.400000000000006
+      ],
+      "fits_256_bed": true,
+      "orientation": "axle vertical; planar functional profile in XY",
+      "native_valid": true,
+      "native_solids": 1
+    },
+    {
+      "id": "A11_center_plain_bearing_pedestal",
+      "stl": "STL/parts/A11_center_plain_bearing_pedestal.stl",
+      "step": "STEP/parts/A11_center_plain_bearing_pedestal.step",
+      "stl_sha256": "103af6a75497d876793bfa2a259de5513d25992ca5e8f08c3082ef9c82028dbb",
+      "size_mm": [
+        64.2,
+        45.6,
+        6.0
+      ],
+      "fits_256_bed": true,
+      "orientation": "axle vertical; planar functional profile in XY",
+      "native_valid": true,
+      "native_solids": 1
+    },
+    {
+      "id": "TM_output_gear",
+      "stl": "STL/parts/TM_output_gear.stl",
+      "step": "STEP/parts/TM_output_gear.step",
+      "stl_sha256": "eb31a041147e2b5e3e6877a770401868537834a427fc854222b55b85b6d51c32",
+      "size_mm": [
+        50.40000019999938,
+        50.400000199999376,
+        6.000000200000001
+      ],
+      "fits_256_bed": true,
+      "orientation": "axle vertical; planar functional profile in XY",
+      "native_valid": true,
+      "native_solids": 1
+    },
+    {
+      "id": "TH_output_gear",
+      "stl": "STL/parts/TH_output_gear.stl",
+      "step": "STEP/parts/TH_output_gear.step",
+      "stl_sha256": "9f5512ea00e3b66643e04ca22ed62cbf9dc2fe554dc21a91eb389cbbd4dd5d4f",
+      "size_mm": [
+        50.38840918754925,
+        50.38840918754924,
+        6.000000200000001
+      ],
+      "fits_256_bed": true,
+      "orientation": "axle vertical; planar functional profile in XY",
+      "native_valid": true,
+      "native_solids": 1
+    },
+    {
+      "id": "T_idler",
+      "stl": "STL/parts/T_idler.stl",
+      "step": "STEP/parts/T_idler.step",
+      "stl_sha256": "63f7d208e54ece1f03e512583c0279eaab03219ca77ca4f48fbda920acf5f784",
+      "size_mm": [
+        26.176968842332617,
+        26.17696884233261,
+        6.000000200000001
+      ],
+      "fits_256_bed": true,
+      "orientation": "axle vertical; planar functional profile in XY",
+      "native_valid": true,
+      "native_solids": 1
+    },
+    {
+      "id": "T_idler_pedestal",
+      "stl": "STL/parts/T_idler_pedestal.stl",
+      "step": "STEP/parts/T_idler_pedestal.step",
+      "stl_sha256": "48c89f8261ede7c36d4f84e5db37579b8d4b6f0ab2493a4d60574baf4905c457",
+      "size_mm": [
+        56.2,
+        29.7,
+        6.400000000000006
+      ],
+      "fits_256_bed": true,
+      "orientation": "axle vertical; planar functional profile in XY",
+      "native_valid": true,
+      "native_solids": 1
+    },
+    {
+      "id": "TH_idler_0",
+      "stl": "STL/parts/TH_idler_0.stl",
+      "step": "STEP/parts/TH_idler_0.step",
+      "stl_sha256": "5549328c193ecb93c3859251a014b86e599429f04a1078b032ce8b34638f8938",
+      "size_mm": [
+        26.399993256125402,
+        26.39999325612459,
+        6.000000200000001
+      ],
+      "fits_256_bed": true,
+      "orientation": "axle vertical; planar functional profile in XY",
+      "native_valid": true,
+      "native_solids": 1
+    },
+    {
+      "id": "TH_idler_1",
+      "stl": "STL/parts/TH_idler_1.stl",
+      "step": "STEP/parts/TH_idler_1.step",
+      "stl_sha256": "44cf9164d2e7d1bc9577de106efc903584f6f0f431f3252245a6ae93a6e43831",
+      "size_mm": [
+        26.26184370731896,
+        26.26184370731815,
+        6.000000200000001
+      ],
+      "fits_256_bed": true,
+      "orientation": "axle vertical; planar functional profile in XY",
+      "native_valid": true,
+      "native_solids": 1
+    },
+    {
+      "id": "TH_idler_bridge",
+      "stl": "STL/parts/TH_idler_bridge.stl",
+      "step": "STEP/parts/TH_idler_bridge.step",
+      "stl_sha256": "95294b17a05b4dc833c4bef7d8876f10e352f0c9a4a65d24ecdd06f51e5a6222",
+      "size_mm": [
+        85.362953734006,
+        45.25862068965,
+        6.0
+      ],
+      "fits_256_bed": true,
+      "orientation": "axle vertical; planar functional profile in XY",
+      "native_valid": true,
+      "native_solids": 1
+    },
+    {
+      "id": "E_slotted_motor_saddle",
+      "stl": "STL/parts/E_slotted_motor_saddle.stl",
+      "step": "STEP/parts/E_slotted_motor_saddle.step",
+      "stl_sha256": "34f7c6991c41933c13adb443bfd92d7f5ad8c039ea835c570f86263451dc41ce",
+      "size_mm": [
+        26.000000000001116,
+        43.599999999939996,
+        20.6000002
+      ],
+      "fits_256_bed": true,
+      "orientation": "designed base on plate",
+      "native_valid": true,
+      "native_solids": 1
+    },
+    {
+      "id": "E_motor_top_clamp",
+      "stl": "STL/parts/E_motor_top_clamp.stl",
+      "step": "STEP/parts/E_motor_top_clamp.step",
+      "stl_sha256": "4b199f06304f43a5e7013f4e43073e300839e239493814e1b80995e00eec1c0a",
+      "size_mm": [
+        17.200000199999998,
+        43.599999999939996,
+        12.000000199999999
+      ],
+      "fits_256_bed": true,
+      "orientation": "axle vertical; planar functional profile in XY",
+      "native_valid": true,
+      "native_solids": 1
+    },
+    {
+      "id": "BM_center_bush",
+      "stl": "STL/parts/BM_center_bush.stl",
+      "step": "STEP/parts/BM_center_bush.step",
+      "stl_sha256": "35bfb8363061fd698f51046ce8bf3c95237ab9aebd4b44847ab8fae80744fad1",
+      "size_mm": [
+        12.0,
+        12.0,
+        2.6
+      ],
+      "fits_256_bed": true,
+      "orientation": "axle vertical; planar functional profile in XY",
+      "native_valid": true,
+      "native_solids": 1
+    },
+    {
+      "id": "BH_center_bush",
+      "stl": "STL/parts/BH_center_bush.stl",
+      "step": "STEP/parts/BH_center_bush.step",
+      "stl_sha256": "e10aefc8a0c98c2ce0cdf29a21060c116c8b929e08045e0a553fcb942aee8027",
+      "size_mm": [
+        12.0,
+        12.0,
+        2.6
+      ],
+      "fits_256_bed": true,
+      "orientation": "axle vertical; planar functional profile in XY",
+      "native_valid": true,
+      "native_solids": 1
+    },
+    {
+      "id": "CM_output",
+      "stl": "STL/parts/CM_output.stl",
+      "step": "STEP/parts/CM_output.step",
+      "stl_sha256": "d42ce6b1b185bf7c11d2649c2246892c6ea49c24a5225422c39185291811918e",
+      "size_mm": [
+        50.40000019999938,
+        50.400000199999376,
+        6.000000200000001
+      ],
+      "fits_256_bed": true,
+      "orientation": "axle vertical; planar functional profile in XY",
+      "native_valid": true,
+      "native_solids": 1
+    },
+    {
+      "id": "CM_backplate",
+      "stl": "STL/parts/CM_backplate.stl",
+      "step": "STEP/parts/CM_backplate.step",
+      "stl_sha256": "976d342cfb03753a246d9ca3ff03d8c0e97661a5d0bbbbf0d6aa517a478f924a",
+      "size_mm": [
+        44.6,
+        44.6,
+        6.0
+      ],
+      "fits_256_bed": true,
+      "orientation": "axle vertical; planar functional profile in XY",
+      "native_valid": true,
+      "native_solids": 1
+    },
+    {
+      "id": "CM_carrier",
+      "stl": "STL/parts/CM_carrier.stl",
+      "step": "STEP/parts/CM_carrier.step",
+      "stl_sha256": "cafd1757f8fe0d6cb4070700ee22dedb9c1fb71d951a352ec2e9df0cb9b2e896",
+      "size_mm": [
+        25.2,
+        25.2,
+        9.4000002
+      ],
+      "fits_256_bed": true,
+      "orientation": "axle vertical; planar functional profile in XY",
+      "native_valid": true,
+      "native_solids": 1
+    },
+    {
+      "id": "CM_pawl",
+      "stl": "STL/parts/CM_pawl.stl",
+      "step": "STEP/parts/CM_pawl.step",
+      "stl_sha256": "ce5df51a6b0a40228075826ee6de2bbc912ebcee77223866e4737477d335e606",
+      "size_mm": [
+        7.65,
+        6.582844610672,
+        2.8
+      ],
+      "fits_256_bed": true,
+      "orientation": "axle vertical; planar functional profile in XY",
+      "native_valid": true,
+      "native_solids": 1
+    },
+    {
+      "id": "CM_cover",
+      "stl": "STL/parts/CM_cover.stl",
+      "step": "STEP/parts/CM_cover.step",
+      "stl_sha256": "e62c17d19ab93923862a04fe1f853f18836b49f627b2fde7dfdf5588ce30091f",
+      "size_mm": [
+        42.4,
+        42.4,
+        2.0000000000000018
+      ],
+      "fits_256_bed": true,
+      "orientation": "axle vertical; planar functional profile in XY",
+      "native_valid": true,
+      "native_solids": 1
+    },
+    {
+      "id": "CM_bushing",
+      "stl": "STL/parts/CM_bushing.stl",
+      "step": "STEP/parts/CM_bushing.step",
+      "stl_sha256": "4f43cdcf7211cbb4b67773eecad37c400dbd3ddfa912f7279e67980a4cd3684d",
+      "size_mm": [
+        12.2,
+        12.2,
+        5.800000000000001
+      ],
+      "fits_256_bed": true,
+      "orientation": "axle vertical; planar functional profile in XY",
+      "native_valid": true,
+      "native_solids": 1
+    },
+    {
+      "id": "CM_post_0",
+      "stl": "STL/parts/CM_post_0.stl",
+      "step": "STEP/parts/CM_post_0.step",
+      "stl_sha256": "bba5315ccb9937cb2e1f06288eb2b834e8db17375f1c6831dacc91b29087305a",
+      "size_mm": [
+        5.4,
+        5.4,
+        3.4000000000000004
+      ],
+      "fits_256_bed": true,
+      "orientation": "axle vertical; planar functional profile in XY",
+      "native_valid": true,
+      "native_solids": 1
+    },
+    {
+      "id": "CM_post_1",
+      "stl": "STL/parts/CM_post_1.stl",
+      "step": "STEP/parts/CM_post_1.step",
+      "stl_sha256": "bba5315ccb9937cb2e1f06288eb2b834e8db17375f1c6831dacc91b29087305a",
+      "size_mm": [
+        5.4,
+        5.4,
+        3.4000000000000004
+      ],
+      "fits_256_bed": true,
+      "orientation": "axle vertical; planar functional profile in XY",
+      "native_valid": true,
+      "native_solids": 1
+    },
+    {
+      "id": "CM_post_2",
+      "stl": "STL/parts/CM_post_2.stl",
+      "step": "STEP/parts/CM_post_2.step",
+      "stl_sha256": "bba5315ccb9937cb2e1f06288eb2b834e8db17375f1c6831dacc91b29087305a",
+      "size_mm": [
+        5.4,
+        5.4,
+        3.4000000000000004
+      ],
+      "fits_256_bed": true,
+      "orientation": "axle vertical; planar functional profile in XY",
+      "native_valid": true,
+      "native_solids": 1
+    },
+    {
+      "id": "CH_output",
+      "stl": "STL/parts/CH_output.stl",
+      "step": "STEP/parts/CH_output.step",
+      "stl_sha256": "ebc2e2d68deb6733df3ea73209694aa735ff4748a524bb9bec8e12356b4c7588",
+      "size_mm": [
+        74.40000020000033,
+        74.40000020000033,
+        6.000000200000001
+      ],
+      "fits_256_bed": true,
+      "orientation": "axle vertical; planar functional profile in XY",
+      "native_valid": true,
+      "native_solids": 1
+    },
+    {
+      "id": "CH_backplate",
+      "stl": "STL/parts/CH_backplate.stl",
+      "step": "STEP/parts/CH_backplate.step",
+      "stl_sha256": "f6720bcaf85b47d684c71898c365fcfc0acd827c0f962a08487cd43e70523586",
+      "size_mm": [
+        68.6,
+        68.6,
+        6.0
+      ],
+      "fits_256_bed": true,
+      "orientation": "axle vertical; planar functional profile in XY",
+      "native_valid": true,
+      "native_solids": 1
+    },
+    {
+      "id": "CH_carrier",
+      "stl": "STL/parts/CH_carrier.stl",
+      "step": "STEP/parts/CH_carrier.step",
+      "stl_sha256": "8432a4eb133714e583b00d7464e42a6446d14e9ad74d361db3269f6499145290",
+      "size_mm": [
+        25.2,
+        25.2,
+        9.4000002
+      ],
+      "fits_256_bed": true,
+      "orientation": "axle vertical; planar functional profile in XY",
+      "native_valid": true,
+      "native_solids": 1
+    },
+    {
+      "id": "CH_pawl",
+      "stl": "STL/parts/CH_pawl.stl",
+      "step": "STEP/parts/CH_pawl.step",
+      "stl_sha256": "ca54a4e31a38c1bf1ff34542828539aa451686f4fa955a4ca88cfabaa24ebd36",
+      "size_mm": [
+        7.65,
+        6.582844610672,
+        2.8
+      ],
+      "fits_256_bed": true,
+      "orientation": "axle vertical; planar functional profile in XY",
+      "native_valid": true,
+      "native_solids": 1
+    },
+    {
+      "id": "CH_cover",
+      "stl": "STL/parts/CH_cover.stl",
+      "step": "STEP/parts/CH_cover.step",
+      "stl_sha256": "e62c17d19ab93923862a04fe1f853f18836b49f627b2fde7dfdf5588ce30091f",
+      "size_mm": [
+        42.4,
+        42.4,
+        2.0000000000000018
+      ],
+      "fits_256_bed": true,
+      "orientation": "axle vertical; planar functional profile in XY",
+      "native_valid": true,
+      "native_solids": 1
+    },
+    {
+      "id": "CH_bushing",
+      "stl": "STL/parts/CH_bushing.stl",
+      "step": "STEP/parts/CH_bushing.step",
+      "stl_sha256": "4f43cdcf7211cbb4b67773eecad37c400dbd3ddfa912f7279e67980a4cd3684d",
+      "size_mm": [
+        12.2,
+        12.2,
+        5.800000000000001
+      ],
+      "fits_256_bed": true,
+      "orientation": "axle vertical; planar functional profile in XY",
+      "native_valid": true,
+      "native_solids": 1
+    },
+    {
+      "id": "CH_post_0",
+      "stl": "STL/parts/CH_post_0.stl",
+      "step": "STEP/parts/CH_post_0.step",
+      "stl_sha256": "bba5315ccb9937cb2e1f06288eb2b834e8db17375f1c6831dacc91b29087305a",
+      "size_mm": [
+        5.4,
+        5.4,
+        3.4000000000000004
+      ],
+      "fits_256_bed": true,
+      "orientation": "axle vertical; planar functional profile in XY",
+      "native_valid": true,
+      "native_solids": 1
+    },
+    {
+      "id": "CH_post_1",
+      "stl": "STL/parts/CH_post_1.stl",
+      "step": "STEP/parts/CH_post_1.step",
+      "stl_sha256": "bba5315ccb9937cb2e1f06288eb2b834e8db17375f1c6831dacc91b29087305a",
+      "size_mm": [
+        5.4,
+        5.4,
+        3.4000000000000004
+      ],
+      "fits_256_bed": true,
+      "orientation": "axle vertical; planar functional profile in XY",
+      "native_valid": true,
+      "native_solids": 1
+    },
+    {
+      "id": "CH_post_2",
+      "stl": "STL/parts/CH_post_2.stl",
+      "step": "STEP/parts/CH_post_2.step",
+      "stl_sha256": "bba5315ccb9937cb2e1f06288eb2b834e8db17375f1c6831dacc91b29087305a",
+      "size_mm": [
+        5.4,
+        5.4,
+        3.4000000000000004
+      ],
+      "fits_256_bed": true,
+      "orientation": "axle vertical; planar functional profile in XY",
+      "native_valid": true,
+      "native_solids": 1
+    },
+    {
+      "id": "DM_core",
+      "stl": "STL/parts/DM_core.stl",
+      "step": "STEP/parts/DM_core.step",
+      "stl_sha256": "715e7da389b2a66aef35878499bebd3f9bfcc14dd5fb54679a875664f497ae87",
+      "size_mm": [
+        32.0,
+        32.0,
+        34.8000002
+      ],
+      "fits_256_bed": true,
+      "orientation": "axle vertical; planar functional profile in XY",
+      "native_valid": true,
+      "native_solids": 1
+    },
+    {
+      "id": "DM_flange_-1",
+      "stl": "STL/parts/DM_flange_-1.stl",
+      "step": "STEP/parts/DM_flange_-1.step",
+      "stl_sha256": "0a365b2ec86de497533a3b2127f9835b155e669d1c8ca3a4000d985f89e400ff",
+      "size_mm": [
+        80.0,
+        80.0,
+        2.4000000000000004
+      ],
+      "fits_256_bed": true,
+      "orientation": "axle vertical; planar functional profile in XY",
+      "native_valid": true,
+      "native_solids": 1
+    },
+    {
+      "id": "DM_flange_1",
+      "stl": "STL/parts/DM_flange_1.stl",
+      "step": "STEP/parts/DM_flange_1.step",
+      "stl_sha256": "4eef37164ddb4d9381a03f80bc4d786493d24f31f032a65c3d5c65f09538afde",
+      "size_mm": [
+        80.0,
+        80.0,
+        2.4000000000000004
+      ],
+      "fits_256_bed": true,
+      "orientation": "axle vertical; planar functional profile in XY",
+      "native_valid": true,
+      "native_solids": 1
+    },
+    {
+      "id": "FM_00_panel",
+      "stl": "STL/parts/FM_00_panel.stl",
+      "step": "STEP/parts/FM_00_panel.step",
+      "stl_sha256": "113ad23d8b58f798a6b7b3b906388266cf27672c2b440ca4d0116880a4838c94",
+      "size_mm": [
+        38.0,
+        19.100000000000392,
+        1.7000000000007676
+      ],
+      "fits_256_bed": true,
+      "orientation": "flat front on plate; trunnion front flat coplanar with six-layer panel",
+      "native_valid": true,
+      "native_solids": 1
+    },
+    {
+      "id": "FM_01_panel",
+      "stl": "STL/parts/FM_01_panel.stl",
+      "step": "STEP/parts/FM_01_panel.step",
+      "stl_sha256": "8589945345a83de98e14d492c22020ad2cd38673d909d29d30ffd42f5cd8dfdd",
+      "size_mm": [
+        38.0,
+        19.100000000000055,
+        1.7000000000041264
+      ],
+      "fits_256_bed": true,
+      "orientation": "flat front on plate; trunnion front flat coplanar with six-layer panel",
+      "native_valid": true,
+      "native_solids": 1
+    },
+    {
+      "id": "FM_02_panel",
+      "stl": "STL/parts/FM_02_panel.stl",
+      "step": "STEP/parts/FM_02_panel.step",
+      "stl_sha256": "373252978bdb5eada1e67b8ed0250c8b256826e95d64255fc80074498455e38d",
+      "size_mm": [
+        38.0,
+        19.100000000000005,
+        1.7000000000003812
+      ],
+      "fits_256_bed": true,
+      "orientation": "flat front on plate; trunnion front flat coplanar with six-layer panel",
+      "native_valid": true,
+      "native_solids": 1
+    },
+    {
+      "id": "FM_03_panel",
+      "stl": "STL/parts/FM_03_panel.stl",
+      "step": "STEP/parts/FM_03_panel.step",
+      "stl_sha256": "1ac297a9dda9a55820f237342613efb0a5acb67b8e2ee7830a8de4758e496e9a",
+      "size_mm": [
+        38.0,
+        19.100000000000023,
+        1.7000000000018307
+      ],
+      "fits_256_bed": true,
+      "orientation": "flat front on plate; trunnion front flat coplanar with six-layer panel",
+      "native_valid": true,
+      "native_solids": 1
+    },
+    {
+      "id": "FM_04_panel",
+      "stl": "STL/parts/FM_04_panel.stl",
+      "step": "STEP/parts/FM_04_panel.step",
+      "stl_sha256": "0861c63873705f5fb290ff9097b5fe5ce3dd7bb4d04d63b83ef0e7ec33d93531",
+      "size_mm": [
+        38.0,
+        19.10000000000005,
+        1.700000000003667
+      ],
+      "fits_256_bed": true,
+      "orientation": "flat front on plate; trunnion front flat coplanar with six-layer panel",
+      "native_valid": true,
+      "native_solids": 1
+    },
+    {
+      "id": "FM_05_panel",
+      "stl": "STL/parts/FM_05_panel.stl",
+      "step": "STEP/parts/FM_05_panel.step",
+      "stl_sha256": "7926e5eff270d52c70190545a54e1ac11060a55753f09ebc052a5d0f46c3db37",
+      "size_mm": [
+        38.0,
+        19.100000000000094,
+        1.7000000000070172
+      ],
+      "fits_256_bed": true,
+      "orientation": "flat front on plate; trunnion front flat coplanar with six-layer panel",
+      "native_valid": true,
+      "native_solids": 1
+    },
+    {
+      "id": "FM_06_panel",
+      "stl": "STL/parts/FM_06_panel.stl",
+      "step": "STEP/parts/FM_06_panel.step",
+      "stl_sha256": "89d2c2a06f34078d7ec0976ca1e0f49a3b6b72843b607e55d4033e78c94aa072",
+      "size_mm": [
+        38.0,
+        19.1,
+        1.7000000000002051
+      ],
+      "fits_256_bed": true,
+      "orientation": "flat front on plate; trunnion front flat coplanar with six-layer panel",
+      "native_valid": true,
+      "native_solids": 1
+    },
+    {
+      "id": "FM_07_panel",
+      "stl": "STL/parts/FM_07_panel.stl",
+      "step": "STEP/parts/FM_07_panel.step",
+      "stl_sha256": "8b1213773a1f2e027a4101671cb9117e362ff912ea07c4bcd3d638c77f889963",
+      "size_mm": [
+        38.0,
+        19.100000000000357,
+        1.7000000000007125
+      ],
+      "fits_256_bed": true,
+      "orientation": "flat front on plate; trunnion front flat coplanar with six-layer panel",
+      "native_valid": true,
+      "native_solids": 1
+    },
+    {
+      "id": "FM_08_panel",
+      "stl": "STL/parts/FM_08_panel.stl",
+      "step": "STEP/parts/FM_08_panel.step",
+      "stl_sha256": "91d9aea7abf449227f8ad97f16bf477521e5713bac28a63141f1f90f044bd222",
+      "size_mm": [
+        38.0,
+        19.100000000000186,
+        1.7000000000004705
+      ],
+      "fits_256_bed": true,
+      "orientation": "flat front on plate; trunnion front flat coplanar with six-layer panel",
+      "native_valid": true,
+      "native_solids": 1
+    },
+    {
+      "id": "FM_09_panel",
+      "stl": "STL/parts/FM_09_panel.stl",
+      "step": "STEP/parts/FM_09_panel.step",
+      "stl_sha256": "381ab06332c6b2cadb57284bf88c4a8bc05b8e5a5a47d12ece2f7979b5379203",
+      "size_mm": [
+        38.0,
+        19.100000000000094,
+        1.7000000000003372
+      ],
+      "fits_256_bed": true,
+      "orientation": "flat front on plate; trunnion front flat coplanar with six-layer panel",
+      "native_valid": true,
+      "native_solids": 1
+    },
+    {
+      "id": "FM_10_panel",
+      "stl": "STL/parts/FM_10_panel.stl",
+      "step": "STEP/parts/FM_10_panel.step",
+      "stl_sha256": "ef1f6bd0137a520dc1bc3db281cf3f1225434b29bdb2fdfeced70c29550a683a",
+      "size_mm": [
+        38.0,
+        19.100000000000023,
+        1.7000000000002329
+      ],
+      "fits_256_bed": true,
+      "orientation": "flat front on plate; trunnion front flat coplanar with six-layer panel",
+      "native_valid": true,
+      "native_solids": 1
+    },
+    {
+      "id": "FM_11_panel",
+      "stl": "STL/parts/FM_11_panel.stl",
+      "step": "STEP/parts/FM_11_panel.step",
+      "stl_sha256": "331aa978a1a064e83fcfa89eed655e44077a04c46524d7e2893c7c021a713937",
+      "size_mm": [
+        38.0,
+        19.100000000000207,
+        1.7000000000005033
+      ],
+      "fits_256_bed": true,
+      "orientation": "flat front on plate; trunnion front flat coplanar with six-layer panel",
+      "native_valid": true,
+      "native_solids": 1
+    },
+    {
+      "id": "FM_12_panel",
+      "stl": "STL/parts/FM_12_panel.stl",
+      "step": "STEP/parts/FM_12_panel.step",
+      "stl_sha256": "8eebbc7867d603f2d518c7530f24893690102698a4f092352bc8c9bba3cba16f",
+      "size_mm": [
+        38.0,
+        19.1000000000001,
+        1.7000000000077802
+      ],
+      "fits_256_bed": true,
+      "orientation": "flat front on plate; trunnion front flat coplanar with six-layer panel",
+      "native_valid": true,
+      "native_solids": 1
+    },
+    {
+      "id": "FM_13_panel",
+      "stl": "STL/parts/FM_13_panel.stl",
+      "step": "STEP/parts/FM_13_panel.step",
+      "stl_sha256": "d7701ee4a58122dc7fa41d0f57f49450ce0572431bd63e4d0fccf27fe12bdb9b",
+      "size_mm": [
+        38.0,
+        19.10000000000035,
+        1.700000000000707
+      ],
+      "fits_256_bed": true,
+      "orientation": "flat front on plate; trunnion front flat coplanar with six-layer panel",
+      "native_valid": true,
+      "native_solids": 1
+    },
+    {
+      "id": "FM_14_panel",
+      "stl": "STL/parts/FM_14_panel.stl",
+      "step": "STEP/parts/FM_14_panel.step",
+      "stl_sha256": "f69c26cc4bfe050adf47be79be5a4c2a542dcc91ab53bc232b4b9247d9f1be48",
+      "size_mm": [
+        38.0,
+        19.100000000000094,
+        1.7000000000069464
+      ],
+      "fits_256_bed": true,
+      "orientation": "flat front on plate; trunnion front flat coplanar with six-layer panel",
+      "native_valid": true,
+      "native_solids": 1
+    },
+    {
+      "id": "FM_15_panel",
+      "stl": "STL/parts/FM_15_panel.stl",
+      "step": "STEP/parts/FM_15_panel.step",
+      "stl_sha256": "d7a9783acac932370a49a193b8a2ce15ea4336766a05f228052cc8e8420aea8c",
+      "size_mm": [
+        38.0,
+        19.100000000000392,
+        1.7000000000007671
+      ],
+      "fits_256_bed": true,
+      "orientation": "flat front on plate; trunnion front flat coplanar with six-layer panel",
+      "native_valid": true,
+      "native_solids": 1
+    },
+    {
+      "id": "FM_16_panel",
+      "stl": "STL/parts/FM_16_panel.stl",
+      "step": "STEP/parts/FM_16_panel.step",
+      "stl_sha256": "7ffa1afe2cfd3ca91a92e6be9652f7afb043598c1239045044414ea7bd270366",
+      "size_mm": [
+        38.0,
+        19.100000000000055,
+        1.7000000000041222
+      ],
+      "fits_256_bed": true,
+      "orientation": "flat front on plate; trunnion front flat coplanar with six-layer panel",
+      "native_valid": true,
+      "native_solids": 1
+    },
+    {
+      "id": "FM_17_panel",
+      "stl": "STL/parts/FM_17_panel.stl",
+      "step": "STEP/parts/FM_17_panel.step",
+      "stl_sha256": "d49ec80ce947037a7ccdaa07a5de35bf9d7e56a939da2d47d78ea00d2e03f090",
+      "size_mm": [
+        38.0,
+        19.100000000000005,
+        1.7000000000003812
+      ],
+      "fits_256_bed": true,
+      "orientation": "flat front on plate; trunnion front flat coplanar with six-layer panel",
+      "native_valid": true,
+      "native_solids": 1
+    },
+    {
+      "id": "FM_18_panel",
+      "stl": "STL/parts/FM_18_panel.stl",
+      "step": "STEP/parts/FM_18_panel.step",
+      "stl_sha256": "6d3fd42744792549864e3eb9df0dceadf1e40e2ffb9784cc7424bfa15ca332d2",
+      "size_mm": [
+        38.0,
+        19.100000000000023,
+        1.700000000001832
+      ],
+      "fits_256_bed": true,
+      "orientation": "flat front on plate; trunnion front flat coplanar with six-layer panel",
+      "native_valid": true,
+      "native_solids": 1
+    },
+    {
+      "id": "FM_19_panel",
+      "stl": "STL/parts/FM_19_panel.stl",
+      "step": "STEP/parts/FM_19_panel.step",
+      "stl_sha256": "45b24f735efb8ed41a2260315c3e838cf17115bfcec48a32357ea2313804bd5e",
+      "size_mm": [
+        38.0,
+        19.10000000000005,
+        1.7000000000036641
+      ],
+      "fits_256_bed": true,
+      "orientation": "flat front on plate; trunnion front flat coplanar with six-layer panel",
+      "native_valid": true,
+      "native_solids": 1
+    },
+    {
+      "id": "FM_20_panel",
+      "stl": "STL/parts/FM_20_panel.stl",
+      "step": "STEP/parts/FM_20_panel.step",
+      "stl_sha256": "bcafcbd744b419b01236f83797bc6120f02ad7886bc08e01f6e7be6a64d1bf57",
+      "size_mm": [
+        38.0,
+        19.100000000000094,
+        1.7000000000070192
+      ],
+      "fits_256_bed": true,
+      "orientation": "flat front on plate; trunnion front flat coplanar with six-layer panel",
+      "native_valid": true,
+      "native_solids": 1
+    },
+    {
+      "id": "FM_21_panel",
+      "stl": "STL/parts/FM_21_panel.stl",
+      "step": "STEP/parts/FM_21_panel.step",
+      "stl_sha256": "9f26166c9e879a9561581397a4878db971d3c4245ecaeb4af9cf5c1e54e69317",
+      "size_mm": [
+        38.0,
+        19.1,
+        1.7000000000002051
+      ],
+      "fits_256_bed": true,
+      "orientation": "flat front on plate; trunnion front flat coplanar with six-layer panel",
+      "native_valid": true,
+      "native_solids": 1
+    },
+    {
+      "id": "FM_22_panel",
+      "stl": "STL/parts/FM_22_panel.stl",
+      "step": "STEP/parts/FM_22_panel.step",
+      "stl_sha256": "9eff36c91a1e633a72acc89891714172a2b26eced8b07cd14799499bf6489230",
+      "size_mm": [
+        38.0,
+        19.100000000000357,
+        1.7000000000007125
+      ],
+      "fits_256_bed": true,
+      "orientation": "flat front on plate; trunnion front flat coplanar with six-layer panel",
+      "native_valid": true,
+      "native_solids": 1
+    },
+    {
+      "id": "FM_23_panel",
+      "stl": "STL/parts/FM_23_panel.stl",
+      "step": "STEP/parts/FM_23_panel.step",
+      "stl_sha256": "ea73728c79515a4b6b0e7f8764df06998023c549ad95146de404741f72337440",
+      "size_mm": [
+        38.0,
+        19.100000000000186,
+        1.7000000000004705
+      ],
+      "fits_256_bed": true,
+      "orientation": "flat front on plate; trunnion front flat coplanar with six-layer panel",
+      "native_valid": true,
+      "native_solids": 1
+    },
+    {
+      "id": "FM_24_panel",
+      "stl": "STL/parts/FM_24_panel.stl",
+      "step": "STEP/parts/FM_24_panel.step",
+      "stl_sha256": "0e63edc68b21a0a7cad081b7abb4573a44df26ca621ab2c157540b24a45e750f",
+      "size_mm": [
+        38.0,
+        19.100000000000094,
+        1.7000000000003377
+      ],
+      "fits_256_bed": true,
+      "orientation": "flat front on plate; trunnion front flat coplanar with six-layer panel",
+      "native_valid": true,
+      "native_solids": 1
+    },
+    {
+      "id": "FM_25_panel",
+      "stl": "STL/parts/FM_25_panel.stl",
+      "step": "STEP/parts/FM_25_panel.step",
+      "stl_sha256": "744b533146b059fb49a62a104faa2f19c73f1825c7ff23439ecb5e5fbd3c6883",
+      "size_mm": [
+        38.0,
+        19.100000000000023,
+        1.7000000000002327
+      ],
+      "fits_256_bed": true,
+      "orientation": "flat front on plate; trunnion front flat coplanar with six-layer panel",
+      "native_valid": true,
+      "native_solids": 1
+    },
+    {
+      "id": "FM_26_panel",
+      "stl": "STL/parts/FM_26_panel.stl",
+      "step": "STEP/parts/FM_26_panel.step",
+      "stl_sha256": "bf57a77d64b92137b3a36c37f975b3ffdfb035750879dd6dee9bf9e19c31fd6e",
+      "size_mm": [
+        38.0,
+        19.100000000000207,
+        1.7000000000005038
+      ],
+      "fits_256_bed": true,
+      "orientation": "flat front on plate; trunnion front flat coplanar with six-layer panel",
+      "native_valid": true,
+      "native_solids": 1
+    },
+    {
+      "id": "FM_27_panel",
+      "stl": "STL/parts/FM_27_panel.stl",
+      "step": "STEP/parts/FM_27_panel.step",
+      "stl_sha256": "9e882163935c9b74d11b9a74bcfb668530c99488cff14a68ddc7b68fe5f31603",
+      "size_mm": [
+        38.0,
+        19.100000000000108,
+        1.7000000000077824
+      ],
+      "fits_256_bed": true,
+      "orientation": "flat front on plate; trunnion front flat coplanar with six-layer panel",
+      "native_valid": true,
+      "native_solids": 1
+    },
+    {
+      "id": "FM_28_panel",
+      "stl": "STL/parts/FM_28_panel.stl",
+      "step": "STEP/parts/FM_28_panel.step",
+      "stl_sha256": "6ae0e4d6bc6400512b3755d3517e12142999a966819f4c9d4e212ef02d6c0fcc",
+      "size_mm": [
+        38.0,
+        19.100000000000357,
+        1.7000000000007072
+      ],
+      "fits_256_bed": true,
+      "orientation": "flat front on plate; trunnion front flat coplanar with six-layer panel",
+      "native_valid": true,
+      "native_solids": 1
+    },
+    {
+      "id": "FM_29_panel",
+      "stl": "STL/parts/FM_29_panel.stl",
+      "step": "STEP/parts/FM_29_panel.step",
+      "stl_sha256": "6eac73e2c30ae1e497de3e1880b3049118e37a9b98bcd566750cce7ad11f6793",
+      "size_mm": [
+        38.0,
+        19.100000000000094,
+        1.700000000006939
+      ],
+      "fits_256_bed": true,
+      "orientation": "flat front on plate; trunnion front flat coplanar with six-layer panel",
+      "native_valid": true,
+      "native_solids": 1
+    },
+    {
+      "id": "FM_30_panel",
+      "stl": "STL/parts/FM_30_panel.stl",
+      "step": "STEP/parts/FM_30_panel.step",
+      "stl_sha256": "691383f435e5a0fc479f8dd7d22ef31307e9b8df4647feabf8a05e574be975f8",
+      "size_mm": [
+        38.0,
+        19.1000000000004,
+        1.7000000000007676
+      ],
+      "fits_256_bed": true,
+      "orientation": "flat front on plate; trunnion front flat coplanar with six-layer panel",
+      "native_valid": true,
+      "native_solids": 1
+    },
+    {
+      "id": "FM_31_panel",
+      "stl": "STL/parts/FM_31_panel.stl",
+      "step": "STEP/parts/FM_31_panel.step",
+      "stl_sha256": "017b2eb0dacc4cd49591d97276103d75559e3e2477cc6201f09f3167eb0c001f",
+      "size_mm": [
+        38.0,
+        19.100000000000055,
+        1.7000000000041275
+      ],
+      "fits_256_bed": true,
+      "orientation": "flat front on plate; trunnion front flat coplanar with six-layer panel",
+      "native_valid": true,
+      "native_solids": 1
+    },
+    {
+      "id": "FM_32_panel",
+      "stl": "STL/parts/FM_32_panel.stl",
+      "step": "STEP/parts/FM_32_panel.step",
+      "stl_sha256": "696c427d3f1389406ff45917f18d9d960748f66aa64ecce90d988a91389a1133",
+      "size_mm": [
+        38.0,
+        19.100000000000005,
+        1.7000000000003748
+      ],
+      "fits_256_bed": true,
+      "orientation": "flat front on plate; trunnion front flat coplanar with six-layer panel",
+      "native_valid": true,
+      "native_solids": 1
+    },
+    {
+      "id": "FM_33_panel",
+      "stl": "STL/parts/FM_33_panel.stl",
+      "step": "STEP/parts/FM_33_panel.step",
+      "stl_sha256": "51623b1c491b3ccb4d27ff6417b3412413e635014681cb5273971c754f939871",
+      "size_mm": [
+        38.0,
+        19.100000000000023,
+        1.7000000000018298
+      ],
+      "fits_256_bed": true,
+      "orientation": "flat front on plate; trunnion front flat coplanar with six-layer panel",
+      "native_valid": true,
+      "native_solids": 1
+    },
+    {
+      "id": "FM_34_panel",
+      "stl": "STL/parts/FM_34_panel.stl",
+      "step": "STEP/parts/FM_34_panel.step",
+      "stl_sha256": "2cc225b0735739c5e678e07b898ca26c8f86e60ddc881fec73612e3ff4211a2f",
+      "size_mm": [
+        38.0,
+        19.10000000000005,
+        1.7000000000036686
+      ],
+      "fits_256_bed": true,
+      "orientation": "flat front on plate; trunnion front flat coplanar with six-layer panel",
+      "native_valid": true,
+      "native_solids": 1
+    },
+    {
+      "id": "FM_35_panel",
+      "stl": "STL/parts/FM_35_panel.stl",
+      "step": "STEP/parts/FM_35_panel.step",
+      "stl_sha256": "5ce090cabb85b0ad666a0999766be3c33107330360f4756fc0b5a1aaa429bd9e",
+      "size_mm": [
+        38.0,
+        19.100000000000094,
+        1.7000000000070132
+      ],
+      "fits_256_bed": true,
+      "orientation": "flat front on plate; trunnion front flat coplanar with six-layer panel",
+      "native_valid": true,
+      "native_solids": 1
+    },
+    {
+      "id": "FM_36_panel",
+      "stl": "STL/parts/FM_36_panel.stl",
+      "step": "STEP/parts/FM_36_panel.step",
+      "stl_sha256": "56f630a13d1ece7b7bf518bb579efbaa749d8a415d17c6065e600a45bbb8ad4a",
+      "size_mm": [
+        38.0,
+        19.1,
+        1.7000000000002051
+      ],
+      "fits_256_bed": true,
+      "orientation": "flat front on plate; trunnion front flat coplanar with six-layer panel",
+      "native_valid": true,
+      "native_solids": 1
+    },
+    {
+      "id": "FM_37_panel",
+      "stl": "STL/parts/FM_37_panel.stl",
+      "step": "STEP/parts/FM_37_panel.step",
+      "stl_sha256": "1cc6bacc8cb0c09e1ab9890d1cba76023e24e87873ee14cb3a0cfe79b6afe159",
+      "size_mm": [
+        38.0,
+        19.100000000000357,
+        1.7000000000007127
+      ],
+      "fits_256_bed": true,
+      "orientation": "flat front on plate; trunnion front flat coplanar with six-layer panel",
+      "native_valid": true,
+      "native_solids": 1
+    },
+    {
+      "id": "FM_38_panel",
+      "stl": "STL/parts/FM_38_panel.stl",
+      "step": "STEP/parts/FM_38_panel.step",
+      "stl_sha256": "129b8e10bb6c031201acc364bea7276eb02079a73a72f257c3cb08566c20c560",
+      "size_mm": [
+        38.0,
+        19.100000000000193,
+        1.7000000000004705
+      ],
+      "fits_256_bed": true,
+      "orientation": "flat front on plate; trunnion front flat coplanar with six-layer panel",
+      "native_valid": true,
+      "native_solids": 1
+    },
+    {
+      "id": "FM_39_panel",
+      "stl": "STL/parts/FM_39_panel.stl",
+      "step": "STEP/parts/FM_39_panel.step",
+      "stl_sha256": "68a1818b880ecaa9b7ce428d9058e0059c6a16b5856b91120ba2f9968d060238",
+      "size_mm": [
+        38.0,
+        19.100000000000094,
+        1.700000000000338
+      ],
+      "fits_256_bed": true,
+      "orientation": "flat front on plate; trunnion front flat coplanar with six-layer panel",
+      "native_valid": true,
+      "native_solids": 1
+    },
+    {
+      "id": "FM_40_panel",
+      "stl": "STL/parts/FM_40_panel.stl",
+      "step": "STEP/parts/FM_40_panel.step",
+      "stl_sha256": "38d6f8d16be1305ab9a34126e483a62a9e382c9a77db3895ca0cca3e34f27554",
+      "size_mm": [
+        38.0,
+        19.100000000000023,
+        1.7000000000002324
+      ],
+      "fits_256_bed": true,
+      "orientation": "flat front on plate; trunnion front flat coplanar with six-layer panel",
+      "native_valid": true,
+      "native_solids": 1
+    },
+    {
+      "id": "FM_41_panel",
+      "stl": "STL/parts/FM_41_panel.stl",
+      "step": "STEP/parts/FM_41_panel.step",
+      "stl_sha256": "d2a53e20981c753875d297cac4f9fc78cbcd7185883c2c7f417df26ee8616a10",
+      "size_mm": [
+        38.0,
+        19.100000000000207,
+        1.7000000000005027
+      ],
+      "fits_256_bed": true,
+      "orientation": "flat front on plate; trunnion front flat coplanar with six-layer panel",
+      "native_valid": true,
+      "native_solids": 1
+    },
+    {
+      "id": "FM_42_panel",
+      "stl": "STL/parts/FM_42_panel.stl",
+      "step": "STEP/parts/FM_42_panel.step",
+      "stl_sha256": "0033bc0de9cee5d75f58afbc22b0f29c15679abf704f63f846b5d24b006c782e",
+      "size_mm": [
+        38.0,
+        19.100000000000108,
+        1.7000000000077762
+      ],
+      "fits_256_bed": true,
+      "orientation": "flat front on plate; trunnion front flat coplanar with six-layer panel",
+      "native_valid": true,
+      "native_solids": 1
+    },
+    {
+      "id": "FM_43_panel",
+      "stl": "STL/parts/FM_43_panel.stl",
+      "step": "STEP/parts/FM_43_panel.step",
+      "stl_sha256": "7e73a5974b61f6929c2453e80248dad024128e265f96fbf2f3e03efd240a17d6",
+      "size_mm": [
+        38.0,
+        19.10000000000035,
+        1.700000000000707
+      ],
+      "fits_256_bed": true,
+      "orientation": "flat front on plate; trunnion front flat coplanar with six-layer panel",
+      "native_valid": true,
+      "native_solids": 1
+    },
+    {
+      "id": "FM_44_panel",
+      "stl": "STL/parts/FM_44_panel.stl",
+      "step": "STEP/parts/FM_44_panel.step",
+      "stl_sha256": "c1057ba8a5bbaeadd144524e1f3c0f1eb42f90722bfc165077dd03d4faeb188b",
+      "size_mm": [
+        38.0,
+        19.100000000000094,
+        1.700000000006947
+      ],
+      "fits_256_bed": true,
+      "orientation": "flat front on plate; trunnion front flat coplanar with six-layer panel",
+      "native_valid": true,
+      "native_solids": 1
+    },
+    {
+      "id": "FM_45_panel",
+      "stl": "STL/parts/FM_45_panel.stl",
+      "step": "STEP/parts/FM_45_panel.step",
+      "stl_sha256": "ca599306403dd761e8b3eae46aa7baf16ca23729560e850f832a472a016e8cca",
+      "size_mm": [
+        38.0,
+        19.100000000000392,
+        1.700000000000768
+      ],
+      "fits_256_bed": true,
+      "orientation": "flat front on plate; trunnion front flat coplanar with six-layer panel",
+      "native_valid": true,
+      "native_solids": 1
+    },
+    {
+      "id": "FM_46_panel",
+      "stl": "STL/parts/FM_46_panel.stl",
+      "step": "STEP/parts/FM_46_panel.step",
+      "stl_sha256": "4fdcd3dfe5c33e6eef184a69a07d1051cb942d05206826df270f9382ace81c64",
+      "size_mm": [
+        38.0,
+        19.10000000000006,
+        1.7000000000041142
+      ],
+      "fits_256_bed": true,
+      "orientation": "flat front on plate; trunnion front flat coplanar with six-layer panel",
+      "native_valid": true,
+      "native_solids": 1
+    },
+    {
+      "id": "FM_47_panel",
+      "stl": "STL/parts/FM_47_panel.stl",
+      "step": "STEP/parts/FM_47_panel.step",
+      "stl_sha256": "4f3a7acdf31cc0abacc9b10e12eb7f6142216beed8e3160452d9e7c8f49ff1cf",
+      "size_mm": [
+        38.0,
+        19.10000000000001,
+        1.7000000000003772
+      ],
+      "fits_256_bed": true,
+      "orientation": "flat front on plate; trunnion front flat coplanar with six-layer panel",
+      "native_valid": true,
+      "native_solids": 1
+    },
+    {
+      "id": "FM_48_panel",
+      "stl": "STL/parts/FM_48_panel.stl",
+      "step": "STEP/parts/FM_48_panel.step",
+      "stl_sha256": "b0ce28b561eec8cae333cf0d5210ecb1d60ee0182eab45f22d89182546779a57",
+      "size_mm": [
+        38.0,
+        19.10000000000003,
+        1.7000000000018263
+      ],
+      "fits_256_bed": true,
+      "orientation": "flat front on plate; trunnion front flat coplanar with six-layer panel",
+      "native_valid": true,
+      "native_solids": 1
+    },
+    {
+      "id": "FM_49_panel",
+      "stl": "STL/parts/FM_49_panel.stl",
+      "step": "STEP/parts/FM_49_panel.step",
+      "stl_sha256": "06123378e7e17b523f1e3b2379a2f763275405b40e095104a31c9ce93282b938",
+      "size_mm": [
+        38.0,
+        19.10000000000005,
+        1.7000000000036581
+      ],
+      "fits_256_bed": true,
+      "orientation": "flat front on plate; trunnion front flat coplanar with six-layer panel",
+      "native_valid": true,
+      "native_solids": 1
+    },
+    {
+      "id": "FM_50_panel",
+      "stl": "STL/parts/FM_50_panel.stl",
+      "step": "STEP/parts/FM_50_panel.step",
+      "stl_sha256": "229e318f64c016040d2e62d9d8c11c2d2aa6450a84587bfc8eb17c616a538d46",
+      "size_mm": [
+        38.0,
+        19.100000000000094,
+        1.700000000007017
+      ],
+      "fits_256_bed": true,
+      "orientation": "flat front on plate; trunnion front flat coplanar with six-layer panel",
+      "native_valid": true,
+      "native_solids": 1
+    },
+    {
+      "id": "FM_51_panel",
+      "stl": "STL/parts/FM_51_panel.stl",
+      "step": "STEP/parts/FM_51_panel.step",
+      "stl_sha256": "00b57faa2273320c2cf9f8ac53b0e28b5e76323c5369a57226c0b0a473d3fbe0",
+      "size_mm": [
+        38.0,
+        19.1,
+        1.7000000000002051
+      ],
+      "fits_256_bed": true,
+      "orientation": "flat front on plate; trunnion front flat coplanar with six-layer panel",
+      "native_valid": true,
+      "native_solids": 1
+    },
+    {
+      "id": "FM_52_panel",
+      "stl": "STL/parts/FM_52_panel.stl",
+      "step": "STEP/parts/FM_52_panel.step",
+      "stl_sha256": "ce703aa4a4f330fd6d5b04ef8c7b84c203e928c45f46d2003fc6928846eccc4a",
+      "size_mm": [
+        38.0,
+        19.100000000000357,
+        1.700000000000713
+      ],
+      "fits_256_bed": true,
+      "orientation": "flat front on plate; trunnion front flat coplanar with six-layer panel",
+      "native_valid": true,
+      "native_solids": 1
+    },
+    {
+      "id": "FM_53_panel",
+      "stl": "STL/parts/FM_53_panel.stl",
+      "step": "STEP/parts/FM_53_panel.step",
+      "stl_sha256": "b9ef4b1503400e16c3beaa508ef142bfc8b93b1458c36dbd283db02c38b6276d",
+      "size_mm": [
+        38.0,
+        19.100000000000186,
+        1.70000000000047
+      ],
+      "fits_256_bed": true,
+      "orientation": "flat front on plate; trunnion front flat coplanar with six-layer panel",
+      "native_valid": true,
+      "native_solids": 1
+    },
+    {
+      "id": "FM_54_panel",
+      "stl": "STL/parts/FM_54_panel.stl",
+      "step": "STEP/parts/FM_54_panel.step",
+      "stl_sha256": "1864770a9a085df38f4cb5c75436a6e8293a3dbaa9a50aecdc7d374e3cec4217",
+      "size_mm": [
+        38.0,
+        19.100000000000094,
+        1.700000000000338
+      ],
+      "fits_256_bed": true,
+      "orientation": "flat front on plate; trunnion front flat coplanar with six-layer panel",
+      "native_valid": true,
+      "native_solids": 1
+    },
+    {
+      "id": "FM_55_panel",
+      "stl": "STL/parts/FM_55_panel.stl",
+      "step": "STEP/parts/FM_55_panel.step",
+      "stl_sha256": "3af75f37af6d8ed54bf7b70f48a1a0a79df089c72dfce810a8c29913e915e14d",
+      "size_mm": [
+        38.0,
+        19.100000000000023,
+        1.7000000000002333
+      ],
+      "fits_256_bed": true,
+      "orientation": "flat front on plate; trunnion front flat coplanar with six-layer panel",
+      "native_valid": true,
+      "native_solids": 1
+    },
+    {
+      "id": "FM_56_panel",
+      "stl": "STL/parts/FM_56_panel.stl",
+      "step": "STEP/parts/FM_56_panel.step",
+      "stl_sha256": "fa5bb2f3e46ad0ed78fb8c459eae2f49dc3c2d87e831650be9b9b769639d8932",
+      "size_mm": [
+        38.0,
+        19.100000000000207,
+        1.700000000000503
+      ],
+      "fits_256_bed": true,
+      "orientation": "flat front on plate; trunnion front flat coplanar with six-layer panel",
+      "native_valid": true,
+      "native_solids": 1
+    },
+    {
+      "id": "FM_57_panel",
+      "stl": "STL/parts/FM_57_panel.stl",
+      "step": "STEP/parts/FM_57_panel.step",
+      "stl_sha256": "717bbd6bc31880889985d7a6cec964e3e047c67b9f943978685389445399fe9b",
+      "size_mm": [
+        38.0,
+        19.1000000000001,
+        1.7000000000077788
+      ],
+      "fits_256_bed": true,
+      "orientation": "flat front on plate; trunnion front flat coplanar with six-layer panel",
+      "native_valid": true,
+      "native_solids": 1
+    },
+    {
+      "id": "FM_58_panel",
+      "stl": "STL/parts/FM_58_panel.stl",
+      "step": "STEP/parts/FM_58_panel.step",
+      "stl_sha256": "cfaa953e2208faf0e1bf569331c2df28d4601dd982d2422c17c58eff2b738490",
+      "size_mm": [
+        38.0,
+        19.10000000000035,
+        1.7000000000007076
+      ],
+      "fits_256_bed": true,
+      "orientation": "flat front on plate; trunnion front flat coplanar with six-layer panel",
+      "native_valid": true,
+      "native_solids": 1
+    },
+    {
+      "id": "FM_59_panel",
+      "stl": "STL/parts/FM_59_panel.stl",
+      "step": "STEP/parts/FM_59_panel.step",
+      "stl_sha256": "abf5ce399164f5ec229784e22d7973e24e4e09a49f42e6ce269002a9b9b86e34",
+      "size_mm": [
+        38.0,
+        19.100000000000094,
+        1.7000000000069428
+      ],
+      "fits_256_bed": true,
+      "orientation": "flat front on plate; trunnion front flat coplanar with six-layer panel",
+      "native_valid": true,
+      "native_solids": 1
+    },
+    {
+      "id": "DH_core",
+      "stl": "STL/parts/DH_core.stl",
+      "step": "STEP/parts/DH_core.step",
+      "stl_sha256": "6bf6dfd3aadfaad204c2c80c85af7ef91979a94747c4da663d2f5520b179acba",
+      "size_mm": [
+        26.0,
+        26.0,
+        34.8000002
+      ],
+      "fits_256_bed": true,
+      "orientation": "axle vertical; planar functional profile in XY",
+      "native_valid": true,
+      "native_solids": 1
+    },
+    {
+      "id": "DH_flange_-1",
+      "stl": "STL/parts/DH_flange_-1.stl",
+      "step": "STEP/parts/DH_flange_-1.step",
+      "stl_sha256": "67fa33ac4990f3aeedb9c3497c9c89168d8e9da670e02ff54d6bcea7c337793a",
+      "size_mm": [
+        36.8,
+        36.8,
+        2.4000000000000004
+      ],
+      "fits_256_bed": true,
+      "orientation": "axle vertical; planar functional profile in XY",
+      "native_valid": true,
+      "native_solids": 1
+    },
+    {
+      "id": "DH_flange_1",
+      "stl": "STL/parts/DH_flange_1.stl",
+      "step": "STEP/parts/DH_flange_1.step",
+      "stl_sha256": "01dca11fe3098dc3ec0657614cf92150a06722df4b02086327ba8eb0b67666ad",
+      "size_mm": [
+        36.8,
+        36.8,
+        2.4000000000000004
+      ],
+      "fits_256_bed": true,
+      "orientation": "axle vertical; planar functional profile in XY",
+      "native_valid": true,
+      "native_solids": 1
+    },
+    {
+      "id": "FH_00_panel",
+      "stl": "STL/parts/FH_00_panel.stl",
+      "step": "STEP/parts/FH_00_panel.step",
+      "stl_sha256": "113ad23d8b58f798a6b7b3b906388266cf27672c2b440ca4d0116880a4838c94",
+      "size_mm": [
+        38.0,
+        19.100000000000392,
+        1.7000000000007676
+      ],
+      "fits_256_bed": true,
+      "orientation": "flat front on plate; trunnion front flat coplanar with six-layer panel",
+      "native_valid": true,
+      "native_solids": 1
+    },
+    {
+      "id": "FH_01_panel",
+      "stl": "STL/parts/FH_01_panel.stl",
+      "step": "STEP/parts/FH_01_panel.step",
+      "stl_sha256": "26e0b2fce51b117eba442429b4467e6ea1c7b5c1f190889c2f6ab369c7fba7f8",
+      "size_mm": [
+        38.0,
+        19.1000000000002,
+        1.7000000000004878
+      ],
+      "fits_256_bed": true,
+      "orientation": "flat front on plate; trunnion front flat coplanar with six-layer panel",
+      "native_valid": true,
+      "native_solids": 1
+    },
+    {
+      "id": "FH_02_panel",
+      "stl": "STL/parts/FH_02_panel.stl",
+      "step": "STEP/parts/FH_02_panel.step",
+      "stl_sha256": "5e68c37e5cba8f52f00c7703499366fc1dc9ff1db57cb1db9b97f18e9895af53",
+      "size_mm": [
+        38.0,
+        19.100000000000094,
+        1.7000000000070172
+      ],
+      "fits_256_bed": true,
+      "orientation": "flat front on plate; trunnion front flat coplanar with six-layer panel",
+      "native_valid": true,
+      "native_solids": 1
+    },
+    {
+      "id": "FH_03_panel",
+      "stl": "STL/parts/FH_03_panel.stl",
+      "step": "STEP/parts/FH_03_panel.step",
+      "stl_sha256": "ceba2860d7b18f6fe5f36692b5596e46dfd02986d58d35db355e02ac29324162",
+      "size_mm": [
+        38.0,
+        19.10000000000005,
+        1.7000000000038826
+      ],
+      "fits_256_bed": true,
+      "orientation": "flat front on plate; trunnion front flat coplanar with six-layer panel",
+      "native_valid": true,
+      "native_solids": 1
+    },
+    {
+      "id": "FH_04_panel",
+      "stl": "STL/parts/FH_04_panel.stl",
+      "step": "STEP/parts/FH_04_panel.step",
+      "stl_sha256": "2d38476f7cec59dde038485821015c4602192ee055bf210f6e79d9e7d1e906b3",
+      "size_mm": [
+        38.0,
+        19.100000000000023,
+        1.7000000000002329
+      ],
+      "fits_256_bed": true,
+      "orientation": "flat front on plate; trunnion front flat coplanar with six-layer panel",
+      "native_valid": true,
+      "native_solids": 1
+    },
+    {
+      "id": "FH_05_panel",
+      "stl": "STL/parts/FH_05_panel.stl",
+      "step": "STEP/parts/FH_05_panel.step",
+      "stl_sha256": "c0a3e5653bf02ea32b4bf436e6eb268aebd06258704644c59940f95ae239b547",
+      "size_mm": [
+        38.0,
+        19.1000000000001,
+        1.7000000000003521
+      ],
+      "fits_256_bed": true,
+      "orientation": "flat front on plate; trunnion front flat coplanar with six-layer panel",
+      "native_valid": true,
+      "native_solids": 1
+    },
+    {
+      "id": "FH_06_panel",
+      "stl": "STL/parts/FH_06_panel.stl",
+      "step": "STEP/parts/FH_06_panel.step",
+      "stl_sha256": "2ca8ce42cde54ede3af1d5e27dace87f2580c40d4adb9fc748d4a68346e0cfe9",
+      "size_mm": [
+        38.0,
+        19.100000000000392,
+        1.7000000000007671
+      ],
+      "fits_256_bed": true,
+      "orientation": "flat front on plate; trunnion front flat coplanar with six-layer panel",
+      "native_valid": true,
+      "native_solids": 1
+    },
+    {
+      "id": "FH_07_panel",
+      "stl": "STL/parts/FH_07_panel.stl",
+      "step": "STEP/parts/FH_07_panel.step",
+      "stl_sha256": "853e0237c5d914b491c436e073494770d605c55ef09df678e265f67b49a69682",
+      "size_mm": [
+        38.0,
+        19.1000000000002,
+        1.7000000000004878
+      ],
+      "fits_256_bed": true,
+      "orientation": "flat front on plate; trunnion front flat coplanar with six-layer panel",
+      "native_valid": true,
+      "native_solids": 1
+    },
+    {
+      "id": "FH_08_panel",
+      "stl": "STL/parts/FH_08_panel.stl",
+      "step": "STEP/parts/FH_08_panel.step",
+      "stl_sha256": "702b3501b75e72aecca7872bb1ff42c0fd9c3747f407243a106fb60ee45f1140",
+      "size_mm": [
+        38.0,
+        19.100000000000094,
+        1.7000000000070192
+      ],
+      "fits_256_bed": true,
+      "orientation": "flat front on plate; trunnion front flat coplanar with six-layer panel",
+      "native_valid": true,
+      "native_solids": 1
+    },
+    {
+      "id": "FH_09_panel",
+      "stl": "STL/parts/FH_09_panel.stl",
+      "step": "STEP/parts/FH_09_panel.step",
+      "stl_sha256": "c2244520fe786971f68a7e2efedbccc9b21b40b2f70f8fbbfb205096073311ff",
+      "size_mm": [
+        38.0,
+        19.10000000000006,
+        1.7000000000038846
+      ],
+      "fits_256_bed": true,
+      "orientation": "flat front on plate; trunnion front flat coplanar with six-layer panel",
+      "native_valid": true,
+      "native_solids": 1
+    },
+    {
+      "id": "FH_10_panel",
+      "stl": "STL/parts/FH_10_panel.stl",
+      "step": "STEP/parts/FH_10_panel.step",
+      "stl_sha256": "72d77770e959ae4fad6fa8501825d1fe5fa42d20cc60d0e115146d1b3a1bcb79",
+      "size_mm": [
+        38.0,
+        19.100000000000023,
+        1.7000000000002327
+      ],
+      "fits_256_bed": true,
+      "orientation": "flat front on plate; trunnion front flat coplanar with six-layer panel",
+      "native_valid": true,
+      "native_solids": 1
+    },
+    {
+      "id": "FH_11_panel",
+      "stl": "STL/parts/FH_11_panel.stl",
+      "step": "STEP/parts/FH_11_panel.step",
+      "stl_sha256": "54ca3d32255f96f899a9b506353014f1b33651ee7c37ffd69300c759e2aaa0bb",
+      "size_mm": [
+        38.0,
+        19.100000000000108,
+        1.7000000000003523
+      ],
+      "fits_256_bed": true,
+      "orientation": "flat front on plate; trunnion front flat coplanar with six-layer panel",
+      "native_valid": true,
+      "native_solids": 1
+    },
+    {
+      "id": "FH_12_panel",
+      "stl": "STL/parts/FH_12_panel.stl",
+      "step": "STEP/parts/FH_12_panel.step",
+      "stl_sha256": "a5c44414b75cee4f58aa415965954c862a8419df2dd17ef430a4992b126de6f7",
+      "size_mm": [
+        38.0,
+        19.1000000000004,
+        1.7000000000007676
+      ],
+      "fits_256_bed": true,
+      "orientation": "flat front on plate; trunnion front flat coplanar with six-layer panel",
+      "native_valid": true,
+      "native_solids": 1
+    },
+    {
+      "id": "FH_13_panel",
+      "stl": "STL/parts/FH_13_panel.stl",
+      "step": "STEP/parts/FH_13_panel.step",
+      "stl_sha256": "d0f475b8bb4c28117898814850b5a1ae660a9efc5e70585b51c16edc77490f3b",
+      "size_mm": [
+        38.0,
+        19.1000000000002,
+        1.7000000000004878
+      ],
+      "fits_256_bed": true,
+      "orientation": "flat front on plate; trunnion front flat coplanar with six-layer panel",
+      "native_valid": true,
+      "native_solids": 1
+    },
+    {
+      "id": "FH_14_panel",
+      "stl": "STL/parts/FH_14_panel.stl",
+      "step": "STEP/parts/FH_14_panel.step",
+      "stl_sha256": "0ed776e7f64a04e09605914177e55bbb543757bddfdbdcfe05f99e77ac43cfb2",
+      "size_mm": [
+        38.0,
+        19.100000000000094,
+        1.7000000000070132
+      ],
+      "fits_256_bed": true,
+      "orientation": "flat front on plate; trunnion front flat coplanar with six-layer panel",
+      "native_valid": true,
+      "native_solids": 1
+    },
+    {
+      "id": "FH_15_panel",
+      "stl": "STL/parts/FH_15_panel.stl",
+      "step": "STEP/parts/FH_15_panel.step",
+      "stl_sha256": "f4d8632337bb1b674c88d74e96a6bc9e292558d08fa16a5977fb42b235271bce",
+      "size_mm": [
+        38.0,
+        19.10000000000005,
+        1.7000000000038802
+      ],
+      "fits_256_bed": true,
+      "orientation": "flat front on plate; trunnion front flat coplanar with six-layer panel",
+      "native_valid": true,
+      "native_solids": 1
+    },
+    {
+      "id": "FH_16_panel",
+      "stl": "STL/parts/FH_16_panel.stl",
+      "step": "STEP/parts/FH_16_panel.step",
+      "stl_sha256": "c6a2bccff81879f1d6717ee839e5ad6f29860d977fcba02e993e84fe1b6f75c0",
+      "size_mm": [
+        38.0,
+        19.100000000000023,
+        1.7000000000002324
+      ],
+      "fits_256_bed": true,
+      "orientation": "flat front on plate; trunnion front flat coplanar with six-layer panel",
+      "native_valid": true,
+      "native_solids": 1
+    },
+    {
+      "id": "FH_17_panel",
+      "stl": "STL/parts/FH_17_panel.stl",
+      "step": "STEP/parts/FH_17_panel.step",
+      "stl_sha256": "ac6893a5f60af265fe11cd504b1799f92657e45ace26c4a3b8e6dbb559c92cc5",
+      "size_mm": [
+        38.0,
+        19.1000000000001,
+        1.7000000000003517
+      ],
+      "fits_256_bed": true,
+      "orientation": "flat front on plate; trunnion front flat coplanar with six-layer panel",
+      "native_valid": true,
+      "native_solids": 1
+    },
+    {
+      "id": "FH_18_panel",
+      "stl": "STL/parts/FH_18_panel.stl",
+      "step": "STEP/parts/FH_18_panel.step",
+      "stl_sha256": "09b4652d1738a3e80d5ab18ba774f6f8d6f009e8dc6bc074b3f184254a4cd1e7",
+      "size_mm": [
+        38.0,
+        19.100000000000392,
+        1.700000000000768
+      ],
+      "fits_256_bed": true,
+      "orientation": "flat front on plate; trunnion front flat coplanar with six-layer panel",
+      "native_valid": true,
+      "native_solids": 1
+    },
+    {
+      "id": "FH_19_panel",
+      "stl": "STL/parts/FH_19_panel.stl",
+      "step": "STEP/parts/FH_19_panel.step",
+      "stl_sha256": "252bffa0314948d38ca36225be7e7979200c87993a0be1e15fb158b23d614ae7",
+      "size_mm": [
+        38.0,
+        19.1000000000002,
+        1.7000000000004885
+      ],
+      "fits_256_bed": true,
+      "orientation": "flat front on plate; trunnion front flat coplanar with six-layer panel",
+      "native_valid": true,
+      "native_solids": 1
+    },
+    {
+      "id": "FH_20_panel",
+      "stl": "STL/parts/FH_20_panel.stl",
+      "step": "STEP/parts/FH_20_panel.step",
+      "stl_sha256": "7b19b7db19e41113624ad6b2d5bca42a214181d0a4757428c34cb7ed5625932f",
+      "size_mm": [
+        38.0,
+        19.100000000000094,
+        1.700000000007017
+      ],
+      "fits_256_bed": true,
+      "orientation": "flat front on plate; trunnion front flat coplanar with six-layer panel",
+      "native_valid": true,
+      "native_solids": 1
+    },
+    {
+      "id": "FH_21_panel",
+      "stl": "STL/parts/FH_21_panel.stl",
+      "step": "STEP/parts/FH_21_panel.step",
+      "stl_sha256": "8c55c8cf1c3b7b9ab4b70573d9045cde3eea372c5d89d22ce33d04c7a6be8d23",
+      "size_mm": [
+        38.0,
+        19.10000000000005,
+        1.7000000000038802
+      ],
+      "fits_256_bed": true,
+      "orientation": "flat front on plate; trunnion front flat coplanar with six-layer panel",
+      "native_valid": true,
+      "native_solids": 1
+    },
+    {
+      "id": "FH_22_panel",
+      "stl": "STL/parts/FH_22_panel.stl",
+      "step": "STEP/parts/FH_22_panel.step",
+      "stl_sha256": "cd114926ba7bbdb69e7538e2a1006721a2f9b41d0d2a328e44356bf35141baff",
+      "size_mm": [
+        38.0,
+        19.100000000000023,
+        1.7000000000002333
+      ],
+      "fits_256_bed": true,
+      "orientation": "flat front on plate; trunnion front flat coplanar with six-layer panel",
+      "native_valid": true,
+      "native_solids": 1
+    },
+    {
+      "id": "FH_23_panel",
+      "stl": "STL/parts/FH_23_panel.stl",
+      "step": "STEP/parts/FH_23_panel.step",
+      "stl_sha256": "678c0e2bec2664c7c1218f5729092c7180b2dc218fed62e7403636ceae895867",
+      "size_mm": [
+        38.0,
+        19.1000000000001,
+        1.700000000000352
+      ],
+      "fits_256_bed": true,
+      "orientation": "flat front on plate; trunnion front flat coplanar with six-layer panel",
+      "native_valid": true,
+      "native_solids": 1
+    },
+    {
+      "id": "DEM_cam",
+      "stl": "STL/parts/DEM_cam.stl",
+      "step": "STEP/parts/DEM_cam.step",
+      "stl_sha256": "a9b26a9fb6b554f1188da2998a1bf1c30117b6b1b00996cd9c1a03fffc6541bd",
+      "size_mm": [
+        59.909183723108,
+        59.909183773269,
+        5.400000200000118
+      ],
+      "fits_256_bed": true,
+      "orientation": "cam/arm broad face on plate",
+      "native_valid": true,
+      "native_solids": 1
+    },
+    {
+      "id": "DEM_arm",
+      "stl": "STL/parts/DEM_arm.stl",
+      "step": "STEP/parts/DEM_arm.step",
+      "stl_sha256": "847b962acb7a272f2e8496b2bdfe05249edeb58ba284f82f6b65071cca032274",
+      "size_mm": [
+        8.0,
+        23.0,
+        2.799999999999997
+      ],
+      "fits_256_bed": true,
+      "orientation": "cam/arm broad face on plate",
+      "native_valid": true,
+      "native_solids": 1
+    },
+    {
+      "id": "DEM_bracket",
+      "stl": "STL/parts/DEM_bracket.stl",
+      "step": "STEP/parts/DEM_bracket.step",
+      "stl_sha256": "b1dcb5be30cc7fe1340817bf858b1ee402898f6f4091e2b8c1e56d433ac4b757",
+      "size_mm": [
+        20.0,
+        32.0,
+        25.709831695864
+      ],
+      "fits_256_bed": true,
+      "orientation": "designed base on plate",
+      "native_valid": true,
+      "native_solids": 1
+    },
+    {
+      "id": "KM_service_knob",
+      "stl": "STL/parts/KM_service_knob.stl",
+      "step": "STEP/parts/KM_service_knob.step",
+      "stl_sha256": "014bd88c0658589414e7f1462bb6e993d6adbc30007316e157ad3553984e4d17",
+      "size_mm": [
+        26.0000002,
+        26.00000023677268,
+        5.6000002
+      ],
+      "fits_256_bed": true,
+      "orientation": "knob broad outer face on plate; axle vertical",
+      "native_valid": true,
+      "native_solids": 1
+    },
+    {
+      "id": "DEH_cam",
+      "stl": "STL/parts/DEH_cam.stl",
+      "step": "STEP/parts/DEH_cam.step",
+      "stl_sha256": "8480b0edefcb0cd5ea3aed5881d4e07bf7f333eee12038238df169e9ffdd7924",
+      "size_mm": [
+        59.53880720273443,
+        59.53880720273443,
+        5.400000200000118
+      ],
+      "fits_256_bed": true,
+      "orientation": "cam/arm broad face on plate",
+      "native_valid": true,
+      "native_solids": 1
+    },
+    {
+      "id": "DEH_arm",
+      "stl": "STL/parts/DEH_arm.stl",
+      "step": "STEP/parts/DEH_arm.step",
+      "stl_sha256": "6723ad1b3dcc758ce0095d43e46b230f70a7c7d7baf306a96433e16b62793789",
+      "size_mm": [
+        8.000000000000004,
+        23.0,
+        2.799999999999997
+      ],
+      "fits_256_bed": true,
+      "orientation": "cam/arm broad face on plate",
+      "native_valid": true,
+      "native_solids": 1
+    },
+    {
+      "id": "DEH_bracket",
+      "stl": "STL/parts/DEH_bracket.stl",
+      "step": "STEP/parts/DEH_bracket.step",
+      "stl_sha256": "536f9db4224794f7b9d3067754f9673fdf3d8180c82a8024ded03ae0c98e4cc8",
+      "size_mm": [
+        20.0,
+        32.0,
+        26.075908767791
+      ],
+      "fits_256_bed": true,
+      "orientation": "designed base on plate",
+      "native_valid": true,
+      "native_solids": 1
+    },
+    {
+      "id": "KH_service_knob",
+      "stl": "STL/parts/KH_service_knob.stl",
+      "step": "STEP/parts/KH_service_knob.step",
+      "stl_sha256": "02e72cd4b8747f55a60eb185c25903918bfe3123202fe46e7c9a0f5ce8781750",
+      "size_mm": [
+        26.0000002,
+        26.000000236772685,
+        5.6000002
+      ],
+      "fits_256_bed": true,
+      "orientation": "knob broad outer face on plate; axle vertical",
+      "native_valid": true,
+      "native_solids": 1
+    },
+    {
+      "id": "SM_encoder_holder",
+      "stl": "STL/parts/SM_encoder_holder.stl",
+      "step": "STEP/parts/SM_encoder_holder.step",
+      "stl_sha256": "34129f6b9110056f20bad17a7316e97700b5f186b4dc63be7be44f4e827de3ff",
+      "size_mm": [
+        12.0,
+        30.0,
+        56.2
+      ],
+      "fits_256_bed": true,
+      "orientation": "designed base on plate",
+      "native_valid": true,
+      "native_solids": 1
+    },
+    {
+      "id": "SM_magnet_cap",
+      "stl": "STL/parts/SM_magnet_cap.stl",
+      "step": "STEP/parts/SM_magnet_cap.step",
+      "stl_sha256": "cc10f0e3f5a1c8995be5c304d8966e36c5f55fc6af82bf949de330ff0e1094ec",
+      "size_mm": [
+        14.0,
+        14.0,
+        6.000000000000002
+      ],
+      "fits_256_bed": true,
+      "orientation": "axle vertical; open end upwards if possible",
+      "native_valid": true,
+      "native_solids": 1
+    },
+    {
+      "id": "SH_encoder_holder",
+      "stl": "STL/parts/SH_encoder_holder.stl",
+      "step": "STEP/parts/SH_encoder_holder.step",
+      "stl_sha256": "2e04fe33c9304e7f129aa038827c9367ece63986d6630d6b29a141cc88150e0c",
+      "size_mm": [
+        12.0,
+        30.0,
+        56.2
+      ],
+      "fits_256_bed": true,
+      "orientation": "designed base on plate",
+      "native_valid": true,
+      "native_solids": 1
+    },
+    {
+      "id": "SH_magnet_cap",
+      "stl": "STL/parts/SH_magnet_cap.stl",
+      "step": "STEP/parts/SH_magnet_cap.step",
+      "stl_sha256": "7530cbb85a4f21428caa1d3ad24bd017adc45e3b5776b1d7cd67488e0ab53284",
+      "size_mm": [
+        14.0,
+        14.0,
+        6.0
+      ],
+      "fits_256_bed": true,
+      "orientation": "axle vertical; open end upwards if possible",
+      "native_valid": true,
+      "native_solids": 1
+    },
+    {
+      "id": "A01_inverted_print_hood",
+      "stl": "STL/parts/A01_inverted_print_hood.stl",
+      "step": "STEP/parts/A01_inverted_print_hood.step",
+      "stl_sha256": "76946a7f05dc40e9a7b7a25d77645f3f59091446d9eba1b0ff2ec45d6abced91",
+      "size_mm": [
+        190.0,
+        174.00000000000202,
+        115.20000000000003
+      ],
+      "fits_256_bed": true,
+      "orientation": "roof outside on plate; walls grow upward",
+      "native_valid": true,
+      "native_solids": 1
+    },
+    {
+      "id": "A02_front_panel",
+      "stl": "STL/parts/A02_front_panel.stl",
+      "step": "STEP/parts/A02_front_panel.step",
+      "stl_sha256": "65e61b9d7c97f1ed61cf1d9a7c2fd39f4446805b90c4d3a68b1ff7debfcfcf6d",
+      "size_mm": [
+        165.2,
+        112.00000000000699,
+        12.399999999999999
+      ],
+      "fits_256_bed": true,
+      "orientation": "outer face on textured plate",
+      "native_valid": true,
+      "native_solids": 1
+    },
+    {
+      "id": "A03_rear_panel",
+      "stl": "STL/parts/A03_rear_panel.stl",
+      "step": "STEP/parts/A03_rear_panel.step",
+      "stl_sha256": "b94562c31ac53e7de1f7f0cb817bcdaf428d47cdb5bebe9ddacbf361eb92da3c",
+      "size_mm": [
+        165.2,
+        112.00000000000699,
+        2.3999999999999915
+      ],
+      "fits_256_bed": true,
+      "orientation": "outer face on textured plate",
+      "native_valid": true,
+      "native_solids": 1
+    },
+    {
+      "id": "A04_display_bezel",
+      "stl": "STL/parts/A04_display_bezel.stl",
+      "step": "STEP/parts/A04_display_bezel.step",
+      "stl_sha256": "a400319a5fa84eb11cf021c2cb8e4452463a260df197cff418b3e53fdbd106de",
+      "size_mm": [
+        94.0,
+        46.0,
+        1.8
+      ],
+      "fits_256_bed": true,
+      "orientation": "outer face on textured plate",
+      "native_valid": true,
+      "native_solids": 1
+    },
+    {
+      "id": "A05_colon_0",
+      "stl": "STL/parts/A05_colon_0.stl",
+      "step": "STEP/parts/A05_colon_0.step",
+      "stl_sha256": "0cdffc95ee005a4fac7c9c59fc5bda56230e6767861f4df50a35ecd450d5434c",
+      "size_mm": [
+        2.8,
+        2.8,
+        1.7999999999999998
+      ],
+      "fits_256_bed": true,
+      "orientation": "outer face on textured plate",
+      "native_valid": true,
+      "native_solids": 1
+    },
+    {
+      "id": "A05_colon_1",
+      "stl": "STL/parts/A05_colon_1.stl",
+      "step": "STEP/parts/A05_colon_1.step",
+      "stl_sha256": "0cdffc95ee005a4fac7c9c59fc5bda56230e6767861f4df50a35ecd450d5434c",
+      "size_mm": [
+        2.8,
+        2.8,
+        1.7999999999999998
+      ],
+      "fits_256_bed": true,
+      "orientation": "outer face on textured plate",
+      "native_valid": true,
+      "native_solids": 1
+    }
+  ]
+}

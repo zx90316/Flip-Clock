@@ -1,0 +1,51 @@
+{
+  "file": "D:\\Project\\Flip-Clock\\cad\\r2\\STL\\parts\\TH_idler_bridge.stl",
+  "scale": {
+    "bbox_diagonal_mm": 96.8048,
+    "units_suspect": false,
+    "note": "bbox consistent with millimetre units"
+  },
+  "orientations": {
+    "angle_limit_used_deg": 45.0,
+    "pct_denominator": "total surface area",
+    "candidates": [
+      {
+        "orientation": "current_plus_z",
+        "support_area_mm2": 25.39,
+        "support_area_pct": 0.4,
+        "build_height_mm": 6.0
+      },
+      {
+        "orientation": "flip_180_x",
+        "support_area_mm2": 25.39,
+        "support_area_pct": 0.4,
+        "build_height_mm": 6.0
+      },
+      {
+        "orientation": "rot_plus_90_x",
+        "support_area_mm2": 941.79,
+        "support_area_pct": 13.8,
+        "build_height_mm": 45.26
+      },
+      {
+        "orientation": "rot_minus_90_x",
+        "support_area_mm2": 494.41,
+        "support_area_pct": 7.3,
+        "build_height_mm": 45.26
+      },
+      {
+        "orientation": "rot_plus_90_y",
+        "support_area_mm2": 96.19,
+        "support_area_pct": 1.4,
+        "build_height_mm": 85.36
+      },
+      {
+        "orientation": "rot_minus_90_y",
+        "support_area_mm2": 199.51,
+        "support_area_pct": 2.9,
+        "build_height_mm": 85.36
+      }
+    ]
+  },
+  "partial": false
+}

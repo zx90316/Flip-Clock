@@ -1,0 +1,186 @@
+{
+  "file": "D:\\Project\\Flip-Clock\\cad\\r2\\STL\\parts\\SM_magnet_cap.stl",
+  "mesh": {
+    "bbox_mm": [
+      14.0,
+      14.0,
+      6.0
+    ],
+    "volume_mm3": 728.9,
+    "surface_area_mm2": 672.4,
+    "triangle_count": 2516,
+    "watertight": true,
+    "euler_number": 2,
+    "body_count": 1
+  },
+  "scale": {
+    "bbox_diagonal_mm": 20.6871,
+    "units_suspect": false,
+    "note": "bbox consistent with millimetre units"
+  },
+  "overhangs": {
+    "angle_limit_used_deg": 45.0,
+    "down_facing_area_below_limit_mm2": 30.19,
+    "down_facing_area_below_limit_pct": 4.5,
+    "face_count_below_limit": 208,
+    "down_facing_angle_histogram_mm2": {
+      "0-10deg": 30.19
+    },
+    "largest_faces_below_limit": [
+      {
+        "location_xyz": [
+          0.86,
+          0.67,
+          1.2
+        ],
+        "surface_angle_deg": 0.0,
+        "area_mm2": 7.57
+      },
+      {
+        "location_xyz": [
+          0.74,
+          -1.33,
+          1.2
+        ],
+        "surface_angle_deg": 0.0,
+        "area_mm2": 3.74
+      },
+      {
+        "location_xyz": [
+          -0.85,
+          -1.87,
+          1.2
+        ],
+        "surface_angle_deg": 0.0,
+        "area_mm2": 3.45
+      },
+      {
+        "location_xyz": [
+          -1.01,
+          0.15,
+          1.2
+        ],
+        "surface_angle_deg": 0.0,
+        "area_mm2": 2.56
+      },
+      {
+        "location_xyz": [
+          -1.06,
+          -0.4,
+          1.2
+        ],
+        "surface_angle_deg": 0.0,
+        "area_mm2": 2.49
+      },
+      {
+        "location_xyz": [
+          0.43,
+          -2.56,
+          1.2
+        ],
+        "surface_angle_deg": 0.0,
+        "area_mm2": 1.36
+      },
+      {
+        "location_xyz": [
+          0.36,
+          2.58,
+          1.2
+        ],
+        "surface_angle_deg": 0.0,
+        "area_mm2": 1.12
+      },
+      {
+        "location_xyz": [
+          -0.79,
+          1.87,
+          1.2
+        ],
+        "surface_angle_deg": 0.0,
+        "area_mm2": 1.1
+      }
+    ]
+  },
+  "wall_thickness": {
+    "samples_valid": 2000,
+    "min_mm": 1.8,
+    "p05_mm": 1.8,
+    "p25_mm": 2.9,
+    "median_mm": 6.0,
+    "max_mm": 13.998,
+    "thinnest_samples": [
+      {
+        "location_xyz": [
+          0.96,
+          -1.33,
+          3.0
+        ],
+        "thickness_mm": 1.8
+      },
+      {
+        "location_xyz": [
+          0.96,
+          -1.33,
+          3.0
+        ],
+        "thickness_mm": 1.8
+      },
+      {
+        "location_xyz": [
+          0.96,
+          -1.33,
+          3.0
+        ],
+        "thickness_mm": 1.8
+      },
+      {
+        "location_xyz": [
+          0.96,
+          -1.33,
+          3.0
+        ],
+        "thickness_mm": 1.8
+      },
+      {
+        "location_xyz": [
+          0.96,
+          -1.33,
+          3.0
+        ],
+        "thickness_mm": 1.8
+      },
+      {
+        "location_xyz": [
+          0.96,
+          -1.33,
+          3.0
+        ],
+        "thickness_mm": 1.8
+      },
+      {
+        "location_xyz": [
+          1.14,
+          2.07,
+          3.0
+        ],
+        "thickness_mm": 1.8
+      },
+      {
+        "location_xyz": [
+          1.14,
+          2.07,
+          3.0
+        ],
+        "thickness_mm": 1.8
+      }
+    ]
+  },
+  "support_volume": {
+    "angle_limit_used_deg": 45.0,
+    "estimated_support_volume_mm3": 36.2,
+    "part_volume_mm3": 728.9,
+    "support_to_part_ratio_pct": 5.0,
+    "method": "prism from face centroid to build plate; coarse upper-bound estimate"
+  },
+  "partial": false
+}

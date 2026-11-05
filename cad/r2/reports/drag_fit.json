@@ -1,0 +1,42 @@
+{
+  "status": "PASS_NOMINAL_GEOMETRY_ONLY",
+  "rows": [
+    {
+      "branch": "M",
+      "valid_native_solid": true,
+      "x_bounds_mm": [
+        -73.6,
+        -72.5
+      ],
+      "nominal_axial_space_mm": 1.1,
+      "overlap_mm3": {
+        "bearing": 0.0,
+        "knob": 0.0
+      },
+      "target_drag_Nm": 0.005,
+      "assumed_uniform_pressure_mean_radius_m": 0.009083241252302027,
+      "normal_force_proposal_N": 2.752321479258748,
+      "tangential_force_at_knob_13mm_N": 0.38461538461538464
+    },
+    {
+      "branch": "H",
+      "valid_native_solid": true,
+      "x_bounds_mm": [
+        72.5,
+        73.6
+      ],
+      "nominal_axial_space_mm": 1.1,
+      "overlap_mm3": {
+        "bearing": 0.0,
+        "knob": 0.0
+      },
+      "target_drag_Nm": 0.015,
+      "assumed_uniform_pressure_mean_radius_m": 0.009083241252302027,
+      "normal_force_proposal_N": 8.256964437776244,
+      "tangential_force_at_knob_13mm_N": 1.153846153846154
+    }
+  ],
+  "candidate_step_sha256": "adf2ef36ecf7c1349eb1a24099088cf2f1b87dfb7c7ef1876f79d36c66617d46",
+  "scope": "Saved STEP envelopes; no felt constitutive law, preload measurement, bearing-load or material validation",
+  "hardware_verified": false
+}

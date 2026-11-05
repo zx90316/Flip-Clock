@@ -1,0 +1,1276 @@
+{
+  "status": "PASS",
+  "parts": [
+    {
+      "id": "A00_single_base",
+      "status": "PASS",
+      "triangles": 42960,
+      "nonmanifold_edges": 0,
+      "degenerate_triangles": 0,
+      "signed_volume_mm3": 155504.33670016352,
+      "vertex_matching_mm": 1e-05
+    },
+    {
+      "id": "A10_M_internal_frame",
+      "status": "PASS",
+      "triangles": 4200,
+      "nonmanifold_edges": 0,
+      "degenerate_triangles": 0,
+      "signed_volume_mm3": 24652.80852506635,
+      "vertex_matching_mm": 1e-05
+    },
+    {
+      "id": "A10_H_internal_frame",
+      "status": "PASS",
+      "triangles": 4200,
+      "nonmanifold_edges": 0,
+      "degenerate_triangles": 0,
+      "signed_volume_mm3": 27264.00885318492,
+      "vertex_matching_mm": 1e-05
+    },
+    {
+      "id": "A11_center_plain_bearing_pedestal",
+      "status": "PASS",
+      "triangles": 5120,
+      "nonmanifold_edges": 0,
+      "degenerate_triangles": 0,
+      "signed_volume_mm3": 11417.09289205092,
+      "vertex_matching_mm": 1e-05
+    },
+    {
+      "id": "TM_output_gear",
+      "status": "PASS",
+      "triangles": 71880,
+      "nonmanifold_edges": 0,
+      "degenerate_triangles": 0,
+      "signed_volume_mm3": 10381.492363213998,
+      "vertex_matching_mm": 1e-05
+    },
+    {
+      "id": "TH_output_gear",
+      "status": "PASS",
+      "triangles": 71856,
+      "nonmanifold_edges": 0,
+      "degenerate_triangles": 0,
+      "signed_volume_mm3": 10381.491641944422,
+      "vertex_matching_mm": 1e-05
+    },
+    {
+      "id": "T_idler",
+      "status": "PASS",
+      "triangles": 58400,
+      "nonmanifold_edges": 0,
+      "degenerate_triangles": 0,
+      "signed_volume_mm3": 2489.594933017628,
+      "vertex_matching_mm": 1e-05
+    },
+    {
+      "id": "T_idler_pedestal",
+      "status": "PASS",
+      "triangles": 2140,
+      "nonmanifold_edges": 0,
+      "degenerate_triangles": 0,
+      "signed_volume_mm3": 4704.8078264473625,
+      "vertex_matching_mm": 1e-05
+    },
+    {
+      "id": "TH_idler_0",
+      "status": "PASS",
+      "triangles": 58400,
+      "nonmanifold_edges": 0,
+      "degenerate_triangles": 0,
+      "signed_volume_mm3": 2489.5949544633736,
+      "vertex_matching_mm": 1e-05
+    },
+    {
+      "id": "TH_idler_1",
+      "status": "PASS",
+      "triangles": 58400,
+      "nonmanifold_edges": 0,
+      "degenerate_triangles": 0,
+      "signed_volume_mm3": 2489.5947723017584,
+      "vertex_matching_mm": 1e-05
+    },
+    {
+      "id": "TH_idler_bridge",
+      "status": "PASS",
+      "triangles": 3008,
+      "nonmanifold_edges": 0,
+      "degenerate_triangles": 0,
+      "signed_volume_mm3": 12279.206117713778,
+      "vertex_matching_mm": 1e-05
+    },
+    {
+      "id": "E_slotted_motor_saddle",
+      "status": "PASS",
+      "triangles": 4508,
+      "nonmanifold_edges": 0,
+      "degenerate_triangles": 0,
+      "signed_volume_mm3": 8361.805834874016,
+      "vertex_matching_mm": 1e-05
+    },
+    {
+      "id": "E_motor_top_clamp",
+      "status": "PASS",
+      "triangles": 2724,
+      "nonmanifold_edges": 0,
+      "degenerate_triangles": 0,
+      "signed_volume_mm3": 2260.360166472786,
+      "vertex_matching_mm": 1e-05
+    },
+    {
+      "id": "BM_center_bush",
+      "status": "PASS",
+      "triangles": 1680,
+      "nonmanifold_edges": 0,
+      "degenerate_triangles": 0,
+      "signed_volume_mm3": 149.94464093648088,
+      "vertex_matching_mm": 1e-05
+    },
+    {
+      "id": "BH_center_bush",
+      "status": "PASS",
+      "triangles": 1680,
+      "nonmanifold_edges": 0,
+      "degenerate_triangles": 0,
+      "signed_volume_mm3": 149.94464093648088,
+      "vertex_matching_mm": 1e-05
+    },
+    {
+      "id": "CM_output",
+      "status": "PASS",
+      "triangles": 91044,
+      "nonmanifold_edges": 0,
+      "degenerate_triangles": 0,
+      "signed_volume_mm3": 6959.115260671271,
+      "vertex_matching_mm": 1e-05
+    },
+    {
+      "id": "CM_backplate",
+      "status": "PASS",
+      "triangles": 5052,
+      "nonmanifold_edges": 0,
+      "degenerate_triangles": 0,
+      "signed_volume_mm3": 3499.039334231179,
+      "vertex_matching_mm": 1e-05
+    },
+    {
+      "id": "CM_carrier",
+      "status": "PASS",
+      "triangles": 5572,
+      "nonmanifold_edges": 0,
+      "degenerate_triangles": 0,
+      "signed_volume_mm3": 1696.6335871918354,
+      "vertex_matching_mm": 1e-05
+    },
+    {
+      "id": "CM_pawl",
+      "status": "PASS",
+      "triangles": 2152,
+      "nonmanifold_edges": 0,
+      "degenerate_triangles": 0,
+      "signed_volume_mm3": 64.34072438780017,
+      "vertex_matching_mm": 1e-05
+    },
+    {
+      "id": "CM_cover",
+      "status": "PASS",
+      "triangles": 4212,
+      "nonmanifold_edges": 0,
+      "degenerate_triangles": 0,
+      "signed_volume_mm3": 2357.4134705056085,
+      "vertex_matching_mm": 1e-05
+    },
+    {
+      "id": "CM_bushing",
+      "status": "PASS",
+      "triangles": 1680,
+      "nonmanifold_edges": 0,
+      "degenerate_triangles": 0,
+      "signed_volume_mm3": 348.83907935552133,
+      "vertex_matching_mm": 1e-05
+    },
+    {
+      "id": "CM_post_0",
+      "status": "PASS",
+      "triangles": 1680,
+      "nonmanifold_edges": 0,
+      "degenerate_triangles": 0,
+      "signed_volume_mm3": 64.93330966903974,
+      "vertex_matching_mm": 1e-05
+    },
+    {
+      "id": "CM_post_1",
+      "status": "PASS",
+      "triangles": 1680,
+      "nonmanifold_edges": 0,
+      "degenerate_triangles": 0,
+      "signed_volume_mm3": 64.93330966903974,
+      "vertex_matching_mm": 1e-05
+    },
+    {
+      "id": "CM_post_2",
+      "status": "PASS",
+      "triangles": 1680,
+      "nonmanifold_edges": 0,
+      "degenerate_triangles": 0,
+      "signed_volume_mm3": 64.93330966903974,
+      "vertex_matching_mm": 1e-05
+    },
+    {
+      "id": "CH_output",
+      "status": "PASS",
+      "triangles": 120084,
+      "nonmanifold_edges": 0,
+      "degenerate_triangles": 0,
+      "signed_volume_mm3": 20466.370512016987,
+      "vertex_matching_mm": 1e-05
+    },
+    {
+      "id": "CH_backplate",
+      "status": "PASS",
+      "triangles": 5052,
+      "nonmanifold_edges": 0,
+      "degenerate_triangles": 0,
+      "signed_volume_mm3": 7765.942215976748,
+      "vertex_matching_mm": 1e-05
+    },
+    {
+      "id": "CH_carrier",
+      "status": "PASS",
+      "triangles": 5572,
+      "nonmanifold_edges": 0,
+      "degenerate_triangles": 0,
+      "signed_volume_mm3": 1696.6335871918373,
+      "vertex_matching_mm": 1e-05
+    },
+    {
+      "id": "CH_pawl",
+      "status": "PASS",
+      "triangles": 2152,
+      "nonmanifold_edges": 0,
+      "degenerate_triangles": 0,
+      "signed_volume_mm3": 64.34072438780004,
+      "vertex_matching_mm": 1e-05
+    },
+    {
+      "id": "CH_cover",
+      "status": "PASS",
+      "triangles": 4212,
+      "nonmanifold_edges": 0,
+      "degenerate_triangles": 0,
+      "signed_volume_mm3": 2357.4134705056085,
+      "vertex_matching_mm": 1e-05
+    },
+    {
+      "id": "CH_bushing",
+      "status": "PASS",
+      "triangles": 1680,
+      "nonmanifold_edges": 0,
+      "degenerate_triangles": 0,
+      "signed_volume_mm3": 348.83907935552133,
+      "vertex_matching_mm": 1e-05
+    },
+    {
+      "id": "CH_post_0",
+      "status": "PASS",
+      "triangles": 1680,
+      "nonmanifold_edges": 0,
+      "degenerate_triangles": 0,
+      "signed_volume_mm3": 64.93330966903974,
+      "vertex_matching_mm": 1e-05
+    },
+    {
+      "id": "CH_post_1",
+      "status": "PASS",
+      "triangles": 1680,
+      "nonmanifold_edges": 0,
+      "degenerate_triangles": 0,
+      "signed_volume_mm3": 64.93330966903974,
+      "vertex_matching_mm": 1e-05
+    },
+    {
+      "id": "CH_post_2",
+      "status": "PASS",
+      "triangles": 1680,
+      "nonmanifold_edges": 0,
+      "degenerate_triangles": 0,
+      "signed_volume_mm3": 64.93330966903974,
+      "vertex_matching_mm": 1e-05
+    },
+    {
+      "id": "DM_core",
+      "status": "PASS",
+      "triangles": 10600,
+      "nonmanifold_edges": 0,
+      "degenerate_triangles": 0,
+      "signed_volume_mm3": 12378.802363652232,
+      "vertex_matching_mm": 1e-05
+    },
+    {
+      "id": "DM_flange_-1",
+      "status": "PASS",
+      "triangles": 56324,
+      "nonmanifold_edges": 0,
+      "degenerate_triangles": 0,
+      "signed_volume_mm3": 6127.397486939477,
+      "vertex_matching_mm": 1e-05
+    },
+    {
+      "id": "DM_flange_1",
+      "status": "PASS",
+      "triangles": 56324,
+      "nonmanifold_edges": 0,
+      "degenerate_triangles": 0,
+      "signed_volume_mm3": 6127.397486939477,
+      "vertex_matching_mm": 1e-05
+    },
+    {
+      "id": "FM_00_panel",
+      "status": "PASS",
+      "triangles": 668,
+      "nonmanifold_edges": 0,
+      "degenerate_triangles": 0,
+      "signed_volume_mm3": 820.1035359610996,
+      "vertex_matching_mm": 1e-05
+    },
+    {
+      "id": "FM_01_panel",
+      "status": "PASS",
+      "triangles": 668,
+      "nonmanifold_edges": 0,
+      "degenerate_triangles": 0,
+      "signed_volume_mm3": 820.1035359610996,
+      "vertex_matching_mm": 1e-05
+    },
+    {
+      "id": "FM_02_panel",
+      "status": "PASS",
+      "triangles": 668,
+      "nonmanifold_edges": 0,
+      "degenerate_triangles": 0,
+      "signed_volume_mm3": 820.1035359610996,
+      "vertex_matching_mm": 1e-05
+    },
+    {
+      "id": "FM_03_panel",
+      "status": "PASS",
+      "triangles": 668,
+      "nonmanifold_edges": 0,
+      "degenerate_triangles": 0,
+      "signed_volume_mm3": 820.1035359610995,
+      "vertex_matching_mm": 1e-05
+    },
+    {
+      "id": "FM_04_panel",
+      "status": "PASS",
+      "triangles": 668,
+      "nonmanifold_edges": 0,
+      "degenerate_triangles": 0,
+      "signed_volume_mm3": 820.1035359610995,
+      "vertex_matching_mm": 1e-05
+    },
+    {
+      "id": "FM_05_panel",
+      "status": "PASS",
+      "triangles": 668,
+      "nonmanifold_edges": 0,
+      "degenerate_triangles": 0,
+      "signed_volume_mm3": 820.1035359610996,
+      "vertex_matching_mm": 1e-05
+    },
+    {
+      "id": "FM_06_panel",
+      "status": "PASS",
+      "triangles": 668,
+      "nonmanifold_edges": 0,
+      "degenerate_triangles": 0,
+      "signed_volume_mm3": 820.1035359610996,
+      "vertex_matching_mm": 1e-05
+    },
+    {
+      "id": "FM_07_panel",
+      "status": "PASS",
+      "triangles": 668,
+      "nonmanifold_edges": 0,
+      "degenerate_triangles": 0,
+      "signed_volume_mm3": 820.1035359610996,
+      "vertex_matching_mm": 1e-05
+    },
+    {
+      "id": "FM_08_panel",
+      "status": "PASS",
+      "triangles": 668,
+      "nonmanifold_edges": 0,
+      "degenerate_triangles": 0,
+      "signed_volume_mm3": 820.1035359610995,
+      "vertex_matching_mm": 1e-05
+    },
+    {
+      "id": "FM_09_panel",
+      "status": "PASS",
+      "triangles": 668,
+      "nonmanifold_edges": 0,
+      "degenerate_triangles": 0,
+      "signed_volume_mm3": 820.1035359610995,
+      "vertex_matching_mm": 1e-05
+    },
+    {
+      "id": "FM_10_panel",
+      "status": "PASS",
+      "triangles": 668,
+      "nonmanifold_edges": 0,
+      "degenerate_triangles": 0,
+      "signed_volume_mm3": 820.1035359610996,
+      "vertex_matching_mm": 1e-05
+    },
+    {
+      "id": "FM_11_panel",
+      "status": "PASS",
+      "triangles": 668,
+      "nonmanifold_edges": 0,
+      "degenerate_triangles": 0,
+      "signed_volume_mm3": 820.1035359610996,
+      "vertex_matching_mm": 1e-05
+    },
+    {
+      "id": "FM_12_panel",
+      "status": "PASS",
+      "triangles": 668,
+      "nonmanifold_edges": 0,
+      "degenerate_triangles": 0,
+      "signed_volume_mm3": 820.1035359610996,
+      "vertex_matching_mm": 1e-05
+    },
+    {
+      "id": "FM_13_panel",
+      "status": "PASS",
+      "triangles": 668,
+      "nonmanifold_edges": 0,
+      "degenerate_triangles": 0,
+      "signed_volume_mm3": 820.1035359610996,
+      "vertex_matching_mm": 1e-05
+    },
+    {
+      "id": "FM_14_panel",
+      "status": "PASS",
+      "triangles": 668,
+      "nonmanifold_edges": 0,
+      "degenerate_triangles": 0,
+      "signed_volume_mm3": 820.1035359610996,
+      "vertex_matching_mm": 1e-05
+    },
+    {
+      "id": "FM_15_panel",
+      "status": "PASS",
+      "triangles": 668,
+      "nonmanifold_edges": 0,
+      "degenerate_triangles": 0,
+      "signed_volume_mm3": 820.1035359610996,
+      "vertex_matching_mm": 1e-05
+    },
+    {
+      "id": "FM_16_panel",
+      "status": "PASS",
+      "triangles": 668,
+      "nonmanifold_edges": 0,
+      "degenerate_triangles": 0,
+      "signed_volume_mm3": 820.1035359610996,
+      "vertex_matching_mm": 1e-05
+    },
+    {
+      "id": "FM_17_panel",
+      "status": "PASS",
+      "triangles": 668,
+      "nonmanifold_edges": 0,
+      "degenerate_triangles": 0,
+      "signed_volume_mm3": 820.1035359610996,
+      "vertex_matching_mm": 1e-05
+    },
+    {
+      "id": "FM_18_panel",
+      "status": "PASS",
+      "triangles": 668,
+      "nonmanifold_edges": 0,
+      "degenerate_triangles": 0,
+      "signed_volume_mm3": 820.1035359610996,
+      "vertex_matching_mm": 1e-05
+    },
+    {
+      "id": "FM_19_panel",
+      "status": "PASS",
+      "triangles": 668,
+      "nonmanifold_edges": 0,
+      "degenerate_triangles": 0,
+      "signed_volume_mm3": 820.1035359610996,
+      "vertex_matching_mm": 1e-05
+    },
+    {
+      "id": "FM_20_panel",
+      "status": "PASS",
+      "triangles": 668,
+      "nonmanifold_edges": 0,
+      "degenerate_triangles": 0,
+      "signed_volume_mm3": 820.1035359610996,
+      "vertex_matching_mm": 1e-05
+    },
+    {
+      "id": "FM_21_panel",
+      "status": "PASS",
+      "triangles": 668,
+      "nonmanifold_edges": 0,
+      "degenerate_triangles": 0,
+      "signed_volume_mm3": 820.1035359610996,
+      "vertex_matching_mm": 1e-05
+    },
+    {
+      "id": "FM_22_panel",
+      "status": "PASS",
+      "triangles": 668,
+      "nonmanifold_edges": 0,
+      "degenerate_triangles": 0,
+      "signed_volume_mm3": 820.1035359610996,
+      "vertex_matching_mm": 1e-05
+    },
+    {
+      "id": "FM_23_panel",
+      "status": "PASS",
+      "triangles": 668,
+      "nonmanifold_edges": 0,
+      "degenerate_triangles": 0,
+      "signed_volume_mm3": 820.1035359610995,
+      "vertex_matching_mm": 1e-05
+    },
+    {
+      "id": "FM_24_panel",
+      "status": "PASS",
+      "triangles": 668,
+      "nonmanifold_edges": 0,
+      "degenerate_triangles": 0,
+      "signed_volume_mm3": 820.1035359610995,
+      "vertex_matching_mm": 1e-05
+    },
+    {
+      "id": "FM_25_panel",
+      "status": "PASS",
+      "triangles": 668,
+      "nonmanifold_edges": 0,
+      "degenerate_triangles": 0,
+      "signed_volume_mm3": 820.1035359610996,
+      "vertex_matching_mm": 1e-05
+    },
+    {
+      "id": "FM_26_panel",
+      "status": "PASS",
+      "triangles": 668,
+      "nonmanifold_edges": 0,
+      "degenerate_triangles": 0,
+      "signed_volume_mm3": 820.1035359610996,
+      "vertex_matching_mm": 1e-05
+    },
+    {
+      "id": "FM_27_panel",
+      "status": "PASS",
+      "triangles": 668,
+      "nonmanifold_edges": 0,
+      "degenerate_triangles": 0,
+      "signed_volume_mm3": 820.1035359610995,
+      "vertex_matching_mm": 1e-05
+    },
+    {
+      "id": "FM_28_panel",
+      "status": "PASS",
+      "triangles": 668,
+      "nonmanifold_edges": 0,
+      "degenerate_triangles": 0,
+      "signed_volume_mm3": 820.1035359610995,
+      "vertex_matching_mm": 1e-05
+    },
+    {
+      "id": "FM_29_panel",
+      "status": "PASS",
+      "triangles": 668,
+      "nonmanifold_edges": 0,
+      "degenerate_triangles": 0,
+      "signed_volume_mm3": 820.1035359610996,
+      "vertex_matching_mm": 1e-05
+    },
+    {
+      "id": "FM_30_panel",
+      "status": "PASS",
+      "triangles": 668,
+      "nonmanifold_edges": 0,
+      "degenerate_triangles": 0,
+      "signed_volume_mm3": 820.1035359610996,
+      "vertex_matching_mm": 1e-05
+    },
+    {
+      "id": "FM_31_panel",
+      "status": "PASS",
+      "triangles": 668,
+      "nonmanifold_edges": 0,
+      "degenerate_triangles": 0,
+      "signed_volume_mm3": 820.1035359610996,
+      "vertex_matching_mm": 1e-05
+    },
+    {
+      "id": "FM_32_panel",
+      "status": "PASS",
+      "triangles": 668,
+      "nonmanifold_edges": 0,
+      "degenerate_triangles": 0,
+      "signed_volume_mm3": 820.1035359610996,
+      "vertex_matching_mm": 1e-05
+    },
+    {
+      "id": "FM_33_panel",
+      "status": "PASS",
+      "triangles": 668,
+      "nonmanifold_edges": 0,
+      "degenerate_triangles": 0,
+      "signed_volume_mm3": 820.1035359610996,
+      "vertex_matching_mm": 1e-05
+    },
+    {
+      "id": "FM_34_panel",
+      "status": "PASS",
+      "triangles": 668,
+      "nonmanifold_edges": 0,
+      "degenerate_triangles": 0,
+      "signed_volume_mm3": 820.1035359610995,
+      "vertex_matching_mm": 1e-05
+    },
+    {
+      "id": "FM_35_panel",
+      "status": "PASS",
+      "triangles": 668,
+      "nonmanifold_edges": 0,
+      "degenerate_triangles": 0,
+      "signed_volume_mm3": 820.1035359610996,
+      "vertex_matching_mm": 1e-05
+    },
+    {
+      "id": "FM_36_panel",
+      "status": "PASS",
+      "triangles": 668,
+      "nonmanifold_edges": 0,
+      "degenerate_triangles": 0,
+      "signed_volume_mm3": 820.1035359610996,
+      "vertex_matching_mm": 1e-05
+    },
+    {
+      "id": "FM_37_panel",
+      "status": "PASS",
+      "triangles": 668,
+      "nonmanifold_edges": 0,
+      "degenerate_triangles": 0,
+      "signed_volume_mm3": 820.1035359610995,
+      "vertex_matching_mm": 1e-05
+    },
+    {
+      "id": "FM_38_panel",
+      "status": "PASS",
+      "triangles": 668,
+      "nonmanifold_edges": 0,
+      "degenerate_triangles": 0,
+      "signed_volume_mm3": 820.1035359610996,
+      "vertex_matching_mm": 1e-05
+    },
+    {
+      "id": "FM_39_panel",
+      "status": "PASS",
+      "triangles": 668,
+      "nonmanifold_edges": 0,
+      "degenerate_triangles": 0,
+      "signed_volume_mm3": 820.1035359610995,
+      "vertex_matching_mm": 1e-05
+    },
+    {
+      "id": "FM_40_panel",
+      "status": "PASS",
+      "triangles": 668,
+      "nonmanifold_edges": 0,
+      "degenerate_triangles": 0,
+      "signed_volume_mm3": 820.1035359610996,
+      "vertex_matching_mm": 1e-05
+    },
+    {
+      "id": "FM_41_panel",
+      "status": "PASS",
+      "triangles": 668,
+      "nonmanifold_edges": 0,
+      "degenerate_triangles": 0,
+      "signed_volume_mm3": 820.1035359610995,
+      "vertex_matching_mm": 1e-05
+    },
+    {
+      "id": "FM_42_panel",
+      "status": "PASS",
+      "triangles": 668,
+      "nonmanifold_edges": 0,
+      "degenerate_triangles": 0,
+      "signed_volume_mm3": 820.1035359610997,
+      "vertex_matching_mm": 1e-05
+    },
+    {
+      "id": "FM_43_panel",
+      "status": "PASS",
+      "triangles": 668,
+      "nonmanifold_edges": 0,
+      "degenerate_triangles": 0,
+      "signed_volume_mm3": 820.1035359610996,
+      "vertex_matching_mm": 1e-05
+    },
+    {
+      "id": "FM_44_panel",
+      "status": "PASS",
+      "triangles": 668,
+      "nonmanifold_edges": 0,
+      "degenerate_triangles": 0,
+      "signed_volume_mm3": 820.1035359610997,
+      "vertex_matching_mm": 1e-05
+    },
+    {
+      "id": "FM_45_panel",
+      "status": "PASS",
+      "triangles": 668,
+      "nonmanifold_edges": 0,
+      "degenerate_triangles": 0,
+      "signed_volume_mm3": 820.1035359610996,
+      "vertex_matching_mm": 1e-05
+    },
+    {
+      "id": "FM_46_panel",
+      "status": "PASS",
+      "triangles": 668,
+      "nonmanifold_edges": 0,
+      "degenerate_triangles": 0,
+      "signed_volume_mm3": 820.1035359610995,
+      "vertex_matching_mm": 1e-05
+    },
+    {
+      "id": "FM_47_panel",
+      "status": "PASS",
+      "triangles": 668,
+      "nonmanifold_edges": 0,
+      "degenerate_triangles": 0,
+      "signed_volume_mm3": 820.1035359610996,
+      "vertex_matching_mm": 1e-05
+    },
+    {
+      "id": "FM_48_panel",
+      "status": "PASS",
+      "triangles": 668,
+      "nonmanifold_edges": 0,
+      "degenerate_triangles": 0,
+      "signed_volume_mm3": 820.1035359610995,
+      "vertex_matching_mm": 1e-05
+    },
+    {
+      "id": "FM_49_panel",
+      "status": "PASS",
+      "triangles": 668,
+      "nonmanifold_edges": 0,
+      "degenerate_triangles": 0,
+      "signed_volume_mm3": 820.1035359610996,
+      "vertex_matching_mm": 1e-05
+    },
+    {
+      "id": "FM_50_panel",
+      "status": "PASS",
+      "triangles": 668,
+      "nonmanifold_edges": 0,
+      "degenerate_triangles": 0,
+      "signed_volume_mm3": 820.1035359610996,
+      "vertex_matching_mm": 1e-05
+    },
+    {
+      "id": "FM_51_panel",
+      "status": "PASS",
+      "triangles": 668,
+      "nonmanifold_edges": 0,
+      "degenerate_triangles": 0,
+      "signed_volume_mm3": 820.1035359610996,
+      "vertex_matching_mm": 1e-05
+    },
+    {
+      "id": "FM_52_panel",
+      "status": "PASS",
+      "triangles": 668,
+      "nonmanifold_edges": 0,
+      "degenerate_triangles": 0,
+      "signed_volume_mm3": 820.1035359610996,
+      "vertex_matching_mm": 1e-05
+    },
+    {
+      "id": "FM_53_panel",
+      "status": "PASS",
+      "triangles": 668,
+      "nonmanifold_edges": 0,
+      "degenerate_triangles": 0,
+      "signed_volume_mm3": 820.1035359610996,
+      "vertex_matching_mm": 1e-05
+    },
+    {
+      "id": "FM_54_panel",
+      "status": "PASS",
+      "triangles": 668,
+      "nonmanifold_edges": 0,
+      "degenerate_triangles": 0,
+      "signed_volume_mm3": 820.1035359610996,
+      "vertex_matching_mm": 1e-05
+    },
+    {
+      "id": "FM_55_panel",
+      "status": "PASS",
+      "triangles": 668,
+      "nonmanifold_edges": 0,
+      "degenerate_triangles": 0,
+      "signed_volume_mm3": 820.1035359610996,
+      "vertex_matching_mm": 1e-05
+    },
+    {
+      "id": "FM_56_panel",
+      "status": "PASS",
+      "triangles": 668,
+      "nonmanifold_edges": 0,
+      "degenerate_triangles": 0,
+      "signed_volume_mm3": 820.1035359610996,
+      "vertex_matching_mm": 1e-05
+    },
+    {
+      "id": "FM_57_panel",
+      "status": "PASS",
+      "triangles": 668,
+      "nonmanifold_edges": 0,
+      "degenerate_triangles": 0,
+      "signed_volume_mm3": 820.1035359610996,
+      "vertex_matching_mm": 1e-05
+    },
+    {
+      "id": "FM_58_panel",
+      "status": "PASS",
+      "triangles": 668,
+      "nonmanifold_edges": 0,
+      "degenerate_triangles": 0,
+      "signed_volume_mm3": 820.1035359610996,
+      "vertex_matching_mm": 1e-05
+    },
+    {
+      "id": "FM_59_panel",
+      "status": "PASS",
+      "triangles": 668,
+      "nonmanifold_edges": 0,
+      "degenerate_triangles": 0,
+      "signed_volume_mm3": 820.1035359610996,
+      "vertex_matching_mm": 1e-05
+    },
+    {
+      "id": "DH_core",
+      "status": "PASS",
+      "triangles": 10604,
+      "nonmanifold_edges": 0,
+      "degenerate_triangles": 0,
+      "signed_volume_mm3": 7309.858275459332,
+      "vertex_matching_mm": 1e-05
+    },
+    {
+      "id": "DH_flange_-1",
+      "status": "PASS",
+      "triangles": 24468,
+      "nonmanifold_edges": 0,
+      "degenerate_triangles": 0,
+      "signed_volume_mm3": 2051.9768763203983,
+      "vertex_matching_mm": 1e-05
+    },
+    {
+      "id": "DH_flange_1",
+      "status": "PASS",
+      "triangles": 24468,
+      "nonmanifold_edges": 0,
+      "degenerate_triangles": 0,
+      "signed_volume_mm3": 2051.9768763203983,
+      "vertex_matching_mm": 1e-05
+    },
+    {
+      "id": "FH_00_panel",
+      "status": "PASS",
+      "triangles": 668,
+      "nonmanifold_edges": 0,
+      "degenerate_triangles": 0,
+      "signed_volume_mm3": 820.1035359610996,
+      "vertex_matching_mm": 1e-05
+    },
+    {
+      "id": "FH_01_panel",
+      "status": "PASS",
+      "triangles": 668,
+      "nonmanifold_edges": 0,
+      "degenerate_triangles": 0,
+      "signed_volume_mm3": 820.1035359610996,
+      "vertex_matching_mm": 1e-05
+    },
+    {
+      "id": "FH_02_panel",
+      "status": "PASS",
+      "triangles": 668,
+      "nonmanifold_edges": 0,
+      "degenerate_triangles": 0,
+      "signed_volume_mm3": 820.1035359610996,
+      "vertex_matching_mm": 1e-05
+    },
+    {
+      "id": "FH_03_panel",
+      "status": "PASS",
+      "triangles": 668,
+      "nonmanifold_edges": 0,
+      "degenerate_triangles": 0,
+      "signed_volume_mm3": 820.1035359610996,
+      "vertex_matching_mm": 1e-05
+    },
+    {
+      "id": "FH_04_panel",
+      "status": "PASS",
+      "triangles": 668,
+      "nonmanifold_edges": 0,
+      "degenerate_triangles": 0,
+      "signed_volume_mm3": 820.1035359610996,
+      "vertex_matching_mm": 1e-05
+    },
+    {
+      "id": "FH_05_panel",
+      "status": "PASS",
+      "triangles": 668,
+      "nonmanifold_edges": 0,
+      "degenerate_triangles": 0,
+      "signed_volume_mm3": 820.1035359610997,
+      "vertex_matching_mm": 1e-05
+    },
+    {
+      "id": "FH_06_panel",
+      "status": "PASS",
+      "triangles": 668,
+      "nonmanifold_edges": 0,
+      "degenerate_triangles": 0,
+      "signed_volume_mm3": 820.1035359610996,
+      "vertex_matching_mm": 1e-05
+    },
+    {
+      "id": "FH_07_panel",
+      "status": "PASS",
+      "triangles": 668,
+      "nonmanifold_edges": 0,
+      "degenerate_triangles": 0,
+      "signed_volume_mm3": 820.1035359610996,
+      "vertex_matching_mm": 1e-05
+    },
+    {
+      "id": "FH_08_panel",
+      "status": "PASS",
+      "triangles": 668,
+      "nonmanifold_edges": 0,
+      "degenerate_triangles": 0,
+      "signed_volume_mm3": 820.1035359610996,
+      "vertex_matching_mm": 1e-05
+    },
+    {
+      "id": "FH_09_panel",
+      "status": "PASS",
+      "triangles": 668,
+      "nonmanifold_edges": 0,
+      "degenerate_triangles": 0,
+      "signed_volume_mm3": 820.1035359610996,
+      "vertex_matching_mm": 1e-05
+    },
+    {
+      "id": "FH_10_panel",
+      "status": "PASS",
+      "triangles": 668,
+      "nonmanifold_edges": 0,
+      "degenerate_triangles": 0,
+      "signed_volume_mm3": 820.1035359610996,
+      "vertex_matching_mm": 1e-05
+    },
+    {
+      "id": "FH_11_panel",
+      "status": "PASS",
+      "triangles": 668,
+      "nonmanifold_edges": 0,
+      "degenerate_triangles": 0,
+      "signed_volume_mm3": 820.1035359610995,
+      "vertex_matching_mm": 1e-05
+    },
+    {
+      "id": "FH_12_panel",
+      "status": "PASS",
+      "triangles": 668,
+      "nonmanifold_edges": 0,
+      "degenerate_triangles": 0,
+      "signed_volume_mm3": 820.1035359610996,
+      "vertex_matching_mm": 1e-05
+    },
+    {
+      "id": "FH_13_panel",
+      "status": "PASS",
+      "triangles": 668,
+      "nonmanifold_edges": 0,
+      "degenerate_triangles": 0,
+      "signed_volume_mm3": 820.1035359610996,
+      "vertex_matching_mm": 1e-05
+    },
+    {
+      "id": "FH_14_panel",
+      "status": "PASS",
+      "triangles": 668,
+      "nonmanifold_edges": 0,
+      "degenerate_triangles": 0,
+      "signed_volume_mm3": 820.1035359610996,
+      "vertex_matching_mm": 1e-05
+    },
+    {
+      "id": "FH_15_panel",
+      "status": "PASS",
+      "triangles": 668,
+      "nonmanifold_edges": 0,
+      "degenerate_triangles": 0,
+      "signed_volume_mm3": 820.1035359610996,
+      "vertex_matching_mm": 1e-05
+    },
+    {
+      "id": "FH_16_panel",
+      "status": "PASS",
+      "triangles": 668,
+      "nonmanifold_edges": 0,
+      "degenerate_triangles": 0,
+      "signed_volume_mm3": 820.1035359610996,
+      "vertex_matching_mm": 1e-05
+    },
+    {
+      "id": "FH_17_panel",
+      "status": "PASS",
+      "triangles": 668,
+      "nonmanifold_edges": 0,
+      "degenerate_triangles": 0,
+      "signed_volume_mm3": 820.1035359610995,
+      "vertex_matching_mm": 1e-05
+    },
+    {
+      "id": "FH_18_panel",
+      "status": "PASS",
+      "triangles": 668,
+      "nonmanifold_edges": 0,
+      "degenerate_triangles": 0,
+      "signed_volume_mm3": 820.1035359610996,
+      "vertex_matching_mm": 1e-05
+    },
+    {
+      "id": "FH_19_panel",
+      "status": "PASS",
+      "triangles": 668,
+      "nonmanifold_edges": 0,
+      "degenerate_triangles": 0,
+      "signed_volume_mm3": 820.1035359610996,
+      "vertex_matching_mm": 1e-05
+    },
+    {
+      "id": "FH_20_panel",
+      "status": "PASS",
+      "triangles": 668,
+      "nonmanifold_edges": 0,
+      "degenerate_triangles": 0,
+      "signed_volume_mm3": 820.1035359610996,
+      "vertex_matching_mm": 1e-05
+    },
+    {
+      "id": "FH_21_panel",
+      "status": "PASS",
+      "triangles": 668,
+      "nonmanifold_edges": 0,
+      "degenerate_triangles": 0,
+      "signed_volume_mm3": 820.1035359610996,
+      "vertex_matching_mm": 1e-05
+    },
+    {
+      "id": "FH_22_panel",
+      "status": "PASS",
+      "triangles": 668,
+      "nonmanifold_edges": 0,
+      "degenerate_triangles": 0,
+      "signed_volume_mm3": 820.1035359610996,
+      "vertex_matching_mm": 1e-05
+    },
+    {
+      "id": "FH_23_panel",
+      "status": "PASS",
+      "triangles": 668,
+      "nonmanifold_edges": 0,
+      "degenerate_triangles": 0,
+      "signed_volume_mm3": 820.1035359610996,
+      "vertex_matching_mm": 1e-05
+    },
+    {
+      "id": "DEM_cam",
+      "status": "PASS",
+      "triangles": 18412,
+      "nonmanifold_edges": 0,
+      "degenerate_triangles": 0,
+      "signed_volume_mm3": 6797.444718933744,
+      "vertex_matching_mm": 1e-05
+    },
+    {
+      "id": "DEM_arm",
+      "status": "PASS",
+      "triangles": 1700,
+      "nonmanifold_edges": 0,
+      "degenerate_triangles": 0,
+      "signed_volume_mm3": 491.93685402343897,
+      "vertex_matching_mm": 1e-05
+    },
+    {
+      "id": "DEM_bracket",
+      "status": "PASS",
+      "triangles": 3024,
+      "nonmanifold_edges": 0,
+      "degenerate_triangles": 0,
+      "signed_volume_mm3": 3287.045266175207,
+      "vertex_matching_mm": 1e-05
+    },
+    {
+      "id": "KM_service_knob",
+      "status": "PASS",
+      "triangles": 3852,
+      "nonmanifold_edges": 0,
+      "degenerate_triangles": 0,
+      "signed_volume_mm3": 2589.381326032958,
+      "vertex_matching_mm": 1e-05
+    },
+    {
+      "id": "DEH_cam",
+      "status": "PASS",
+      "triangles": 11404,
+      "nonmanifold_edges": 0,
+      "degenerate_triangles": 0,
+      "signed_volume_mm3": 6797.136548944554,
+      "vertex_matching_mm": 1e-05
+    },
+    {
+      "id": "DEH_arm",
+      "status": "PASS",
+      "triangles": 1700,
+      "nonmanifold_edges": 0,
+      "degenerate_triangles": 0,
+      "signed_volume_mm3": 491.93685402343897,
+      "vertex_matching_mm": 1e-05
+    },
+    {
+      "id": "DEH_bracket",
+      "status": "PASS",
+      "triangles": 3024,
+      "nonmanifold_edges": 0,
+      "degenerate_triangles": 0,
+      "signed_volume_mm3": 3301.6883887668087,
+      "vertex_matching_mm": 1e-05
+    },
+    {
+      "id": "KH_service_knob",
+      "status": "PASS",
+      "triangles": 3852,
+      "nonmanifold_edges": 0,
+      "degenerate_triangles": 0,
+      "signed_volume_mm3": 2589.3813210372314,
+      "vertex_matching_mm": 1e-05
+    },
+    {
+      "id": "SM_encoder_holder",
+      "status": "PASS",
+      "triangles": 2140,
+      "nonmanifold_edges": 0,
+      "degenerate_triangles": 0,
+      "signed_volume_mm3": 4260.538892295828,
+      "vertex_matching_mm": 1e-05
+    },
+    {
+      "id": "SM_magnet_cap",
+      "status": "PASS",
+      "triangles": 2516,
+      "nonmanifold_edges": 0,
+      "degenerate_triangles": 0,
+      "signed_volume_mm3": 728.8602562808423,
+      "vertex_matching_mm": 1e-05
+    },
+    {
+      "id": "SH_encoder_holder",
+      "status": "PASS",
+      "triangles": 2140,
+      "nonmanifold_edges": 0,
+      "degenerate_triangles": 0,
+      "signed_volume_mm3": 4260.538892295827,
+      "vertex_matching_mm": 1e-05
+    },
+    {
+      "id": "SH_magnet_cap",
+      "status": "PASS",
+      "triangles": 2516,
+      "nonmanifold_edges": 0,
+      "degenerate_triangles": 0,
+      "signed_volume_mm3": 728.8602562808449,
+      "vertex_matching_mm": 1e-05
+    },
+    {
+      "id": "A01_inverted_print_hood",
+      "status": "PASS",
+      "triangles": 12852,
+      "nonmanifold_edges": 0,
+      "degenerate_triangles": 0,
+      "signed_volume_mm3": 198429.65049855987,
+      "vertex_matching_mm": 1e-05
+    },
+    {
+      "id": "A02_front_panel",
+      "status": "PASS",
+      "triangles": 12940,
+      "nonmanifold_edges": 0,
+      "degenerate_triangles": 0,
+      "signed_volume_mm3": 40327.14314940453,
+      "vertex_matching_mm": 1e-05
+    },
+    {
+      "id": "A03_rear_panel",
+      "status": "PASS",
+      "triangles": 4396,
+      "nonmanifold_edges": 0,
+      "degenerate_triangles": 0,
+      "signed_volume_mm3": 43320.861094381966,
+      "vertex_matching_mm": 1e-05
+    },
+    {
+      "id": "A04_display_bezel",
+      "status": "PASS",
+      "triangles": 4284,
+      "nonmanifold_edges": 0,
+      "degenerate_triangles": 0,
+      "signed_volume_mm3": 2704.9813775381185,
+      "vertex_matching_mm": 1e-05
+    },
+    {
+      "id": "A05_colon_0",
+      "status": "PASS",
+      "triangles": 836,
+      "nonmanifold_edges": 0,
+      "degenerate_triangles": 0,
+      "signed_volume_mm3": 11.081885415839992,
+      "vertex_matching_mm": 1e-05
+    },
+    {
+      "id": "A05_colon_1",
+      "status": "PASS",
+      "triangles": 836,
+      "nonmanifold_edges": 0,
+      "degenerate_triangles": 0,
+      "signed_volume_mm3": 11.081885415839992,
+      "vertex_matching_mm": 1e-05
+    }
+  ],
+  "scope": "All manifest-listed printed STL files; binary edge topology, positive signed volume, nondegenerate triangles",
+  "manufacturing_ready": false
+}

@@ -1,0 +1,85 @@
+{
+  "status": "NOT_DEMONSTRATED",
+  "controlled_same_candidate": true,
+  "changed_config_fields": {
+    "dt": [
+      0.0001,
+      5e-05
+    ]
+  },
+  "run_ids": [
+    "20261105T033059_487575Z_drive",
+    "20261105T034108_831686Z_drive"
+  ],
+  "dt_s": [
+    0.0001,
+    5e-05
+  ],
+  "peak_penetration_mm": [
+    0.30404656928221985,
+    0.40785483077547413
+  ],
+  "second_cycle": [
+    {
+      "branch": "M",
+      "coarse": {
+        "branch": "M",
+        "cycle": 2,
+        "target_deg": -12.000000000000002,
+        "final_deg": -12.00720650039375,
+        "travel_deg": -5.999746042897274,
+        "step_error_deg": 0.0002539571027257992,
+        "error_deg": -0.007206500393749425,
+        "inactive_drift_deg": 0.11647565433876973,
+        "coast_seconds": 1,
+        "drive_end_reason": "capture_basin"
+      },
+      "fine": {
+        "branch": "M",
+        "cycle": 2,
+        "target_deg": -12.000000000000002,
+        "final_deg": -10.795874576093155,
+        "travel_deg": -4.788650124161313,
+        "step_error_deg": 1.2113498758386871,
+        "error_deg": 1.2041254239068457,
+        "inactive_drift_deg": 0.0003487093407226332,
+        "coast_seconds": 1,
+        "drive_end_reason": "timeout"
+      },
+      "final_position_difference_deg": 1.2113319243005947,
+      "both_meet_position_criteria": false
+    },
+    {
+      "branch": "H",
+      "coarse": {
+        "branch": "H",
+        "cycle": 2,
+        "target_deg": -29.999999999999996,
+        "final_deg": -29.99918848818619,
+        "travel_deg": -15.104084228899024,
+        "step_error_deg": -0.10408422889902447,
+        "error_deg": 0.0008115118138104557,
+        "inactive_drift_deg": -2.8212437937433296e-05,
+        "coast_seconds": 1,
+        "drive_end_reason": "capture_basin"
+      },
+      "fine": {
+        "branch": "H",
+        "cycle": 2,
+        "target_deg": -29.999999999999996,
+        "final_deg": -31.655977374436773,
+        "travel_deg": -16.76088785477476,
+        "step_error_deg": -1.7608878547747615,
+        "error_deg": -1.6559773744367736,
+        "inactive_drift_deg": -1.2113362374302794,
+        "coast_seconds": 1,
+        "drive_end_reason": "capture_basin"
+      },
+      "final_position_difference_deg": -1.6567888862505846,
+      "both_meet_position_criteria": false
+    }
+  ],
+  "reason": "Two step sizes alone do not establish predictive validation. Failed positioning, timeout or penetration remains a failed criterion.",
+  "physics_predictive_validation": false,
+  "hardware_verified": false
+}

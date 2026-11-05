@@ -1,0 +1,234 @@
+[
+  {
+    "query": "28BYJ",
+    "url": "https://api.step.parts/v1/parts?q=28BYJ&pageSize=3",
+    "total": 0,
+    "items": []
+  },
+  {
+    "query": "28BYJ-48",
+    "url": "https://api.step.parts/v1/parts?q=28BYJ-48&pageSize=3",
+    "total": 0,
+    "items": []
+  },
+  {
+    "query": "GT2 32",
+    "url": "https://api.step.parts/v1/parts?q=GT2+32&pageSize=3",
+    "total": 2,
+    "items": [
+      {
+        "id": "gt2_pulley",
+        "name": "GT2 pulley",
+        "description": "GT2 timing belt pulley.",
+        "category": "power-transmission",
+        "family": "timing-pulley",
+        "tags": [
+          "pulley",
+          "timing-belt",
+          "belt"
+        ],
+        "aliases": [],
+        "stepSource": "https://raw.githubusercontent.com/FreeCAD/FreeCAD-library/2e36ae32ba3b360592de93ab0630b1dfe163c3f3/Mechanical%20Parts/Pulleys/GT2Pulley.stp",
+        "attributes": {
+          "model": "GT2Pulley",
+          "beltProfile": "GT2"
+        },
+        "stepUrl": "https://media.githubusercontent.com/media/earthtojake/step.parts/c6113328a5695b976a010a203a90fe86191769bf/catalog/step/gt2_pulley.step",
+        "glbUrl": "https://8ljrorjug0ps5al0.public.blob.vercel-storage.com/preview/glb/gt2_pulley-7138685e0d386a59a0bd82832b3c9bd8a5e40c7e1287cb25fce102e9c5e5245f.glb",
+        "pngUrl": "https://8ljrorjug0ps5al0.public.blob.vercel-storage.com/preview/png/gt2_pulley-7138685e0d386a59a0bd82832b3c9bd8a5e40c7e1287cb25fce102e9c5e5245f.png",
+        "byteSize": 267790,
+        "sha256": "7138685e0d386a59a0bd82832b3c9bd8a5e40c7e1287cb25fce102e9c5e5245f",
+        "pageUrl": "https://www.step.parts/parts/gt2_pulley",
+        "apiUrl": "https://api.step.parts/v1/parts/gt2_pulley"
+      },
+      {
+        "id": "gt2_pulley_v3",
+        "name": "GT2 pulley V3",
+        "description": "GT2 timing belt pulley V3.",
+        "category": "power-transmission",
+        "family": "timing-pulley",
+        "tags": [
+          "pulley",
+          "timing-belt",
+          "belt"
+        ],
+        "aliases": [
+          "GT2Pulley-V3"
+        ],
+        "stepSource": "https://raw.githubusercontent.com/FreeCAD/FreeCAD-library/2e36ae32ba3b360592de93ab0630b1dfe163c3f3/Mechanical%20Parts/Pulleys/GT2Pulley-V3.stp",
+        "attributes": {
+          "model": "GT2Pulley V3",
+          "beltProfile": "GT2",
+          "variant": "V3"
+        },
+        "stepUrl": "https://media.githubusercontent.com/media/earthtojake/step.parts/c6113328a5695b976a010a203a90fe86191769bf/catalog/step/gt2_pulley_v3.step",
+        "glbUrl": "https://8ljrorjug0ps5al0.public.blob.vercel-storage.com/preview/glb/gt2_pulley_v3-dac2da485435460e9595a5424aa488142cbfcb6e4e8844d7d62e75d9723ea097.glb",
+        "pngUrl": "https://8ljrorjug0ps5al0.public.blob.vercel-storage.com/preview/png/gt2_pulley_v3-dac2da485435460e9595a5424aa488142cbfcb6e4e8844d7d62e75d9723ea097.png",
+        "byteSize": 186703,
+        "sha256": "dac2da485435460e9595a5424aa488142cbfcb6e4e8844d7d62e75d9723ea097",
+        "pageUrl": "https://www.step.parts/parts/gt2_pulley_v3",
+        "apiUrl": "https://api.step.parts/v1/parts/gt2_pulley_v3"
+      }
+    ]
+  },
+  {
+    "query": "GT2 150",
+    "url": "https://api.step.parts/v1/parts?q=GT2+150&pageSize=3",
+    "total": 1,
+    "items": [
+      {
+        "id": "gt2_belt_reference_straight_l0150",
+        "name": "gt2 belt reference straight L0150",
+        "description": "Straight belt reference segments, GT2 belt reference straight L0150.",
+        "category": "power-transmission",
+        "family": "belt-reference",
+        "tags": [
+          "belt"
+        ],
+        "aliases": [
+          "gt2_belt_reference_straight_L0150.",
+          "gt2_belt_reference_straight_L0150",
+          "GT2",
+          "belt profile=GT2; straight reference length=150 mm; simplified envelope"
+        ],
+        "attributes": {
+          "lengthMm": 150,
+          "beltProfile": "GT2"
+        },
+        "stepUrl": "https://media.githubusercontent.com/media/earthtojake/step.parts/c6113328a5695b976a010a203a90fe86191769bf/catalog/step/gt2_belt_reference_straight_l0150.step",
+        "glbUrl": "https://8ljrorjug0ps5al0.public.blob.vercel-storage.com/preview/glb/gt2_belt_reference_straight_l0150-e8eb0abce86da5b3c63b9388e2ae170b79d5b3485cd5c5b3e024c8e5017ef023.glb",
+        "pngUrl": "https://8ljrorjug0ps5al0.public.blob.vercel-storage.com/preview/png/gt2_belt_reference_straight_l0150-e8eb0abce86da5b3c63b9388e2ae170b79d5b3485cd5c5b3e024c8e5017ef023.png",
+        "byteSize": 15939,
+        "sha256": "e8eb0abce86da5b3c63b9388e2ae170b79d5b3485cd5c5b3e024c8e5017ef023",
+        "pageUrl": "https://www.step.parts/parts/gt2_belt_reference_straight_l0150",
+        "apiUrl": "https://api.step.parts/v1/parts/gt2_belt_reference_straight_l0150"
+      }
+    ]
+  },
+  {
+    "query": "608",
+    "url": "https://api.step.parts/v1/parts?q=608&pageSize=3",
+    "total": 24,
+    "items": [
+      {
+        "id": "bearing_608zz",
+        "name": "608ZZ ball bearing",
+        "description": "Deep groove ball bearing, 608ZZ.",
+        "category": "bearing",
+        "family": "deep-groove-ball-bearing",
+        "tags": [
+          "ball-bearing",
+          "shielded",
+          "metric"
+        ],
+        "aliases": [
+          "608ZZ",
+          "608ZZ bearing"
+        ],
+        "attributes": {
+          "bearingCode": "608ZZ",
+          "sealType": "ZZ",
+          "shielded": true,
+          "nominalSize": "608ZZ"
+        },
+        "stepUrl": "https://media.githubusercontent.com/media/earthtojake/step.parts/c6113328a5695b976a010a203a90fe86191769bf/catalog/step/bearing_608zz.step",
+        "glbUrl": "https://8ljrorjug0ps5al0.public.blob.vercel-storage.com/preview/glb/bearing_608zz-62d262cc91fb6e213ae85f182811201787e583d527d9a7718ea30a08e1f19fc9.glb",
+        "pngUrl": "https://8ljrorjug0ps5al0.public.blob.vercel-storage.com/preview/png/bearing_608zz-62d262cc91fb6e213ae85f182811201787e583d527d9a7718ea30a08e1f19fc9.png",
+        "byteSize": 39700,
+        "sha256": "62d262cc91fb6e213ae85f182811201787e583d527d9a7718ea30a08e1f19fc9",
+        "pageUrl": "https://www.step.parts/parts/bearing_608zz",
+        "apiUrl": "https://api.step.parts/v1/parts/bearing_608zz"
+      },
+      {
+        "id": "feetech_ft5325m",
+        "name": "Feetech FT5325M",
+        "description": "Feetech FT5325M servo motor.",
+        "category": "actuator",
+        "family": "feetech",
+        "tags": [
+          "servo"
+        ],
+        "aliases": [
+          "FEETECH FT5325M Servo Motor",
+          "FT5325M",
+          "FT5325M-20200608"
+        ],
+        "productPage": "https://aifitlab.com/products/feetech-ft5325m-servo-motor",
+        "attributes": {
+          "manufacturer": "Feetech",
+          "model": "FT5325M"
+        },
+        "stepUrl": "https://media.githubusercontent.com/media/earthtojake/step.parts/c6113328a5695b976a010a203a90fe86191769bf/catalog/step/feetech_ft5325m.step",
+        "glbUrl": "https://8ljrorjug0ps5al0.public.blob.vercel-storage.com/preview/glb/feetech_ft5325m-938d465d1942423d2439c4135f2e8499e6872d04940e1fc77ea13cacbc19bc16.glb",
+        "pngUrl": "https://8ljrorjug0ps5al0.public.blob.vercel-storage.com/preview/png/feetech_ft5325m-938d465d1942423d2439c4135f2e8499e6872d04940e1fc77ea13cacbc19bc16.png",
+        "byteSize": 3013874,
+        "sha256": "938d465d1942423d2439c4135f2e8499e6872d04940e1fc77ea13cacbc19bc16",
+        "pageUrl": "https://www.step.parts/parts/feetech_ft5325m",
+        "apiUrl": "https://api.step.parts/v1/parts/feetech_ft5325m"
+      },
+      {
+        "id": "feetech_ft5320m",
+        "name": "Feetech FT5320M",
+        "description": "Feetech FT5320M servo motor.",
+        "category": "actuator",
+        "family": "feetech",
+        "tags": [
+          "servo"
+        ],
+        "aliases": [
+          "FEETECH FT5320M Servo Motor",
+          "FT5320M",
+          "FT5320M-20200608"
+        ],
+        "productPage": "https://aifitlab.com/products/feetech-ft5320m-servo-motor",
+        "attributes": {
+          "manufacturer": "Feetech",
+          "model": "FT5320M"
+        },
+        "stepUrl": "https://media.githubusercontent.com/media/earthtojake/step.parts/c6113328a5695b976a010a203a90fe86191769bf/catalog/step/feetech_ft5320m.step",
+        "glbUrl": "https://8ljrorjug0ps5al0.public.blob.vercel-storage.com/preview/glb/feetech_ft5320m-82ad298e545e40c41dc9db0fe8312e20b363162b96dc85072669229dc5c2bde1.glb",
+        "pngUrl": "https://8ljrorjug0ps5al0.public.blob.vercel-storage.com/preview/png/feetech_ft5320m-82ad298e545e40c41dc9db0fe8312e20b363162b96dc85072669229dc5c2bde1.png",
+        "byteSize": 3013874,
+        "sha256": "82ad298e545e40c41dc9db0fe8312e20b363162b96dc85072669229dc5c2bde1",
+        "pageUrl": "https://www.step.parts/parts/feetech_ft5320m",
+        "apiUrl": "https://api.step.parts/v1/parts/feetech_ft5320m"
+      }
+    ]
+  },
+  {
+    "query": "608ZZ",
+    "url": "https://api.step.parts/v1/parts?q=608ZZ&pageSize=3",
+    "total": 1,
+    "items": [
+      {
+        "id": "bearing_608zz",
+        "name": "608ZZ ball bearing",
+        "description": "Deep groove ball bearing, 608ZZ.",
+        "category": "bearing",
+        "family": "deep-groove-ball-bearing",
+        "tags": [
+          "ball-bearing",
+          "shielded",
+          "metric"
+        ],
+        "aliases": [
+          "608ZZ",
+          "608ZZ bearing"
+        ],
+        "attributes": {
+          "bearingCode": "608ZZ",
+          "sealType": "ZZ",
+          "shielded": true,
+          "nominalSize": "608ZZ"
+        },
+        "stepUrl": "https://media.githubusercontent.com/media/earthtojake/step.parts/c6113328a5695b976a010a203a90fe86191769bf/catalog/step/bearing_608zz.step",
+        "glbUrl": "https://8ljrorjug0ps5al0.public.blob.vercel-storage.com/preview/glb/bearing_608zz-62d262cc91fb6e213ae85f182811201787e583d527d9a7718ea30a08e1f19fc9.glb",
+        "pngUrl": "https://8ljrorjug0ps5al0.public.blob.vercel-storage.com/preview/png/bearing_608zz-62d262cc91fb6e213ae85f182811201787e583d527d9a7718ea30a08e1f19fc9.png",
+        "byteSize": 39700,
+        "sha256": "62d262cc91fb6e213ae85f182811201787e583d527d9a7718ea30a08e1f19fc9",
+        "pageUrl": "https://www.step.parts/parts/bearing_608zz",
+        "apiUrl": "https://api.step.parts/v1/parts/bearing_608zz"
+      }
+    ]
+  }
+]

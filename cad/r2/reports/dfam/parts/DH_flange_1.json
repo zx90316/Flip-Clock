@@ -1,0 +1,111 @@
+{
+  "file": "D:\\Project\\Flip-Clock\\cad\\r2\\STL\\parts\\DH_flange_1.stl",
+  "mesh": {
+    "bbox_mm": [
+      36.8,
+      36.8,
+      2.4
+    ],
+    "volume_mm3": 2052.0,
+    "surface_area_mm2": 2595.9,
+    "triangle_count": 24468,
+    "watertight": true,
+    "euler_number": -54,
+    "body_count": 1
+  },
+  "scale": {
+    "bbox_diagonal_mm": 52.0955,
+    "units_suspect": false,
+    "note": "bbox consistent with millimetre units"
+  },
+  "overhangs": {
+    "angle_limit_used_deg": 45.0,
+    "down_facing_area_below_limit_mm2": 0.0,
+    "down_facing_area_below_limit_pct": 0.0,
+    "face_count_below_limit": 0,
+    "down_facing_angle_histogram_mm2": {},
+    "largest_faces_below_limit": []
+  },
+  "wall_thickness": {
+    "samples_valid": 2000,
+    "min_mm": 1.29,
+    "p05_mm": 2.198,
+    "p25_mm": 2.4,
+    "median_mm": 2.4,
+    "max_mm": 30.684,
+    "thinnest_samples": [
+      {
+        "location_xyz": [
+          2.57,
+          -14.56,
+          0.8
+        ],
+        "thickness_mm": 1.29
+      },
+      {
+        "location_xyz": [
+          1.29,
+          14.72,
+          1.6
+        ],
+        "thickness_mm": 1.29
+      },
+      {
+        "location_xyz": [
+          -8.49,
+          12.13,
+          0.8
+        ],
+        "thickness_mm": 1.291
+      },
+      {
+        "location_xyz": [
+          9.49,
+          11.31,
+          0.8
+        ],
+        "thickness_mm": 1.291
+      },
+      {
+        "location_xyz": [
+          -9.52,
+          -11.35,
+          1.6
+        ],
+        "thickness_mm": 1.292
+      },
+      {
+        "location_xyz": [
+          6.24,
+          -13.37,
+          0.8
+        ],
+        "thickness_mm": 1.292
+      },
+      {
+        "location_xyz": [
+          -14.7,
+          1.28,
+          1.6
+        ],
+        "thickness_mm": 1.292
+      },
+      {
+        "location_xyz": [
+          -5.07,
+          13.92,
+          0.8
+        ],
+        "thickness_mm": 1.292
+      }
+    ]
+  },
+  "support_volume": {
+    "angle_limit_used_deg": 45.0,
+    "estimated_support_volume_mm3": 0.0,
+    "part_volume_mm3": 2052.0,
+    "support_to_part_ratio_pct": 0.0,
+    "method": "prism from face centroid to build plate; coarse upper-bound estimate"
+  },
+  "partial": false
+}

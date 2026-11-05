@@ -1,0 +1,51 @@
+{
+  "file": "D:\\Project\\Flip-Clock\\cad\\r2\\STL\\parts\\A01_inverted_print_hood.stl",
+  "scale": {
+    "bbox_diagonal_mm": 282.2181,
+    "units_suspect": false,
+    "note": "bbox consistent with millimetre units"
+  },
+  "orientations": {
+    "angle_limit_used_deg": 45.0,
+    "pct_denominator": "total surface area",
+    "candidates": [
+      {
+        "orientation": "current_plus_z",
+        "support_area_mm2": 570.0,
+        "support_area_pct": 0.4,
+        "build_height_mm": 115.2
+      },
+      {
+        "orientation": "flip_180_x",
+        "support_area_mm2": 33096.23,
+        "support_area_pct": 20.7,
+        "build_height_mm": 115.2
+      },
+      {
+        "orientation": "rot_plus_90_x",
+        "support_area_mm2": 6508.97,
+        "support_area_pct": 4.1,
+        "build_height_mm": 174.0
+      },
+      {
+        "orientation": "rot_minus_90_x",
+        "support_area_mm2": 6330.61,
+        "support_area_pct": 4.0,
+        "build_height_mm": 174.0
+      },
+      {
+        "orientation": "rot_plus_90_y",
+        "support_area_mm2": 20922.07,
+        "support_area_pct": 13.1,
+        "build_height_mm": 190.0
+      },
+      {
+        "orientation": "rot_minus_90_y",
+        "support_area_mm2": 20927.96,
+        "support_area_pct": 13.1,
+        "build_height_mm": 190.0
+      }
+    ]
+  },
+  "partial": false
+}

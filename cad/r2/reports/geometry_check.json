@@ -1,0 +1,135 @@
+{
+  "source_sha256": "ec0d7a9e4a157a168a438d842924a64c1c5f9304a83f0ba01d714045f94919e2",
+  "status": "PASS",
+  "checks": [
+    {
+      "id": "saved_native_solids",
+      "status": "PASS",
+      "measured": {
+        "leaf_occurrences": 1054,
+        "invalid": []
+      },
+      "threshold": "valid positive volume solids"
+    },
+    {
+      "id": "desktop_envelope",
+      "status": "PASS",
+      "measured": [
+        190.0,
+        175.4,
+        120.0
+      ],
+      "threshold": "W190 x D<=176 including bezel x H120 mm"
+    },
+    {
+      "id": "M_flap_count",
+      "status": "PASS",
+      "measured": 60,
+      "threshold": 60
+    },
+    {
+      "id": "M_hole_ligament",
+      "status": "PASS",
+      "measured": 1.2205248057348994,
+      "threshold": ">=1.2 mm analytic chord between authored bore centres"
+    },
+    {
+      "id": "M_shaft_flange_axial_fit",
+      "status": "PASS",
+      "measured": 83.1,
+      "threshold": "independent shaft, nominal 83.1 mm"
+    },
+    {
+      "id": "M_saved_axis_matches_parameters",
+      "status": "PASS",
+      "measured": -1.50944948617106e-16,
+      "threshold": 0
+    },
+    {
+      "id": "M_saved_initial_leaf_pose",
+      "status": "PASS",
+      "measured": 5.7980287238024175e-12,
+      "threshold": "bbox error <0.0001 mm vs declared initial pose"
+    },
+    {
+      "id": "H_flap_count",
+      "status": "PASS",
+      "measured": 24,
+      "threshold": 24
+    },
+    {
+      "id": "H_hole_ligament",
+      "status": "PASS",
+      "measured": 1.289680528157537,
+      "threshold": ">=1.2 mm analytic chord between authored bore centres"
+    },
+    {
+      "id": "H_shaft_flange_axial_fit",
+      "status": "PASS",
+      "measured": 83.1,
+      "threshold": "independent shaft, nominal 83.1 mm"
+    },
+    {
+      "id": "H_saved_axis_matches_parameters",
+      "status": "PASS",
+      "measured": 21.6,
+      "threshold": 21.6
+    },
+    {
+      "id": "H_saved_initial_leaf_pose",
+      "status": "PASS",
+      "measured": 5.7980287238024175e-12,
+      "threshold": "bbox error <0.0001 mm vs declared initial pose"
+    },
+    {
+      "id": "independent_output_gap",
+      "status": "PASS",
+      "measured": 0.8000000000000114,
+      "threshold": ">=0.79 mm"
+    },
+    {
+      "id": "clear_A01_inverted_print_hood_SM_PCB_ENVELOPE",
+      "status": "PASS",
+      "measured": 0.0,
+      "threshold": "overlap <1e-5 mm3 at source pose"
+    },
+    {
+      "id": "clear_A01_inverted_print_hood_SH_PCB_ENVELOPE",
+      "status": "PASS",
+      "measured": 0.0,
+      "threshold": "overlap <1e-5 mm3 at source pose"
+    },
+    {
+      "id": "clear_A00_single_base_DEM_cam",
+      "status": "PASS",
+      "measured": 0.0,
+      "threshold": "overlap <1e-5 mm3 at source pose"
+    },
+    {
+      "id": "clear_A00_single_base_DEH_cam",
+      "status": "PASS",
+      "measured": 0.0,
+      "threshold": "overlap <1e-5 mm3 at source pose"
+    },
+    {
+      "id": "all_part_bed_envelopes",
+      "status": "PASS",
+      "measured": {
+        "parts": 141,
+        "oversize": []
+      },
+      "threshold": "XY <=256 mm in declared print pose"
+    },
+    {
+      "id": "single_connected_print_parts",
+      "status": "PASS",
+      "measured": [],
+      "threshold": "one connected solid per fabrication part"
+    }
+  ],
+  "limitations": [
+    "Selected static mates, not an exhaustive swept collision check.",
+    "Printer envelopes do not prove slicing or material fit.",
+    "Named purchased parts are envelopes unless separately vendor verified."
+  ]
+}

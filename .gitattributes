@@ -1,3 +1,5 @@
 # Recorded physics files are hash-bound evidence. Preserve exact bytes and
 # historical source formatting, including Windows line endings and EOF spacing.
 cad/review/physics/** -text whitespace=blank-at-eol,-blank-at-eof,space-before-tab,cr-at-eol
+# R2 source snapshots, CAD inputs and reports share byte-level provenance hashes.
+cad/r2/** -text whitespace=blank-at-eol,-blank-at-eof,space-before-tab,cr-at-eol

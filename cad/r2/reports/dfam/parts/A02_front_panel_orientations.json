@@ -1,0 +1,51 @@
+{
+  "file": "D:\\Project\\Flip-Clock\\cad\\r2\\STL\\parts\\A02_front_panel.stl",
+  "scale": {
+    "bbox_diagonal_mm": 199.972,
+    "units_suspect": false,
+    "note": "bbox consistent with millimetre units"
+  },
+  "orientations": {
+    "angle_limit_used_deg": 45.0,
+    "pct_denominator": "total surface area",
+    "candidates": [
+      {
+        "orientation": "current_plus_z",
+        "support_area_mm2": 205.44,
+        "support_area_pct": 0.6,
+        "build_height_mm": 12.4
+      },
+      {
+        "orientation": "flip_180_x",
+        "support_area_mm2": 15842.48,
+        "support_area_pct": 44.2,
+        "build_height_mm": 12.4
+      },
+      {
+        "orientation": "rot_plus_90_x",
+        "support_area_mm2": 558.14,
+        "support_area_pct": 1.6,
+        "build_height_mm": 112.0
+      },
+      {
+        "orientation": "rot_minus_90_x",
+        "support_area_mm2": 523.91,
+        "support_area_pct": 1.5,
+        "build_height_mm": 112.0
+      },
+      {
+        "orientation": "rot_plus_90_y",
+        "support_area_mm2": 697.19,
+        "support_area_pct": 1.9,
+        "build_height_mm": 165.2
+      },
+      {
+        "orientation": "rot_minus_90_y",
+        "support_area_mm2": 697.19,
+        "support_area_pct": 1.9,
+        "build_height_mm": 165.2
+      }
+    ]
+  },
+  "partial": false
+}

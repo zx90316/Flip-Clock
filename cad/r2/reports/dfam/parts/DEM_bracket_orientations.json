@@ -1,0 +1,51 @@
+{
+  "file": "D:\\Project\\Flip-Clock\\cad\\r2\\STL\\parts\\DEM_bracket.stl",
+  "scale": {
+    "bbox_diagonal_mm": 45.6615,
+    "units_suspect": false,
+    "note": "bbox consistent with millimetre units"
+  },
+  "orientations": {
+    "angle_limit_used_deg": 45.0,
+    "pct_denominator": "total surface area",
+    "candidates": [
+      {
+        "orientation": "current_plus_z",
+        "support_area_mm2": 188.16,
+        "support_area_pct": 8.1,
+        "build_height_mm": 25.71
+      },
+      {
+        "orientation": "flip_180_x",
+        "support_area_mm2": 567.19,
+        "support_area_pct": 24.3,
+        "build_height_mm": 25.71
+      },
+      {
+        "orientation": "rot_plus_90_x",
+        "support_area_mm2": 92.87,
+        "support_area_pct": 4.0,
+        "build_height_mm": 32.0
+      },
+      {
+        "orientation": "rot_minus_90_x",
+        "support_area_mm2": 133.51,
+        "support_area_pct": 5.7,
+        "build_height_mm": 32.0
+      },
+      {
+        "orientation": "rot_plus_90_y",
+        "support_area_mm2": 252.66,
+        "support_area_pct": 10.8,
+        "build_height_mm": 20.0
+      },
+      {
+        "orientation": "rot_minus_90_y",
+        "support_area_mm2": 297.06,
+        "support_area_pct": 12.7,
+        "build_height_mm": 20.0
+      }
+    ]
+  },
+  "partial": false
+}

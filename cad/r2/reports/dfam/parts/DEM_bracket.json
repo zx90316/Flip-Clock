@@ -1,0 +1,194 @@
+{
+  "file": "D:\\Project\\Flip-Clock\\cad\\r2\\STL\\parts\\DEM_bracket.stl",
+  "mesh": {
+    "bbox_mm": [
+      20.0,
+      32.0,
+      25.71
+    ],
+    "volume_mm3": 3287.0,
+    "surface_area_mm2": 2330.9,
+    "triangle_count": 3024,
+    "watertight": true,
+    "euler_number": -4,
+    "body_count": 1
+  },
+  "scale": {
+    "bbox_diagonal_mm": 45.6615,
+    "units_suspect": false,
+    "note": "bbox consistent with millimetre units"
+  },
+  "overhangs": {
+    "angle_limit_used_deg": 45.0,
+    "down_facing_area_below_limit_mm2": 188.16,
+    "down_facing_area_below_limit_pct": 8.1,
+    "face_count_below_limit": 110,
+    "down_facing_angle_histogram_mm2": {
+      "0-10deg": 182.65,
+      "10-20deg": 1.65,
+      "20-30deg": 1.65,
+      "30-40deg": 1.38,
+      "40-50deg": 1.65,
+      "50-60deg": 1.65,
+      "60-70deg": 1.65,
+      "70-80deg": 1.65,
+      "80-90deg": 1.38
+    },
+    "largest_faces_below_limit": [
+      {
+        "location_xyz": [
+          -8.17,
+          -2.67,
+          2.7
+        ],
+        "surface_angle_deg": 0.0,
+        "area_mm2": 82.5
+      },
+      {
+        "location_xyz": [
+          -6.17,
+          7.33,
+          2.7
+        ],
+        "surface_angle_deg": 0.0,
+        "area_mm2": 60.0
+      },
+      {
+        "location_xyz": [
+          -6.33,
+          -12.67,
+          2.7
+        ],
+        "surface_angle_deg": 0.0,
+        "area_mm2": 27.5
+      },
+      {
+        "location_xyz": [
+          -4.17,
+          0.67,
+          2.7
+        ],
+        "surface_angle_deg": 0.0,
+        "area_mm2": 5.0
+      },
+      {
+        "location_xyz": [
+          0.5,
+          -14.67,
+          2.7
+        ],
+        "surface_angle_deg": 0.0,
+        "area_mm2": 3.0
+      },
+      {
+        "location_xyz": [
+          0.0,
+          -13.33,
+          2.7
+        ],
+        "surface_angle_deg": 0.0,
+        "area_mm2": 3.0
+      },
+      {
+        "location_xyz": [
+          -1.83,
+          -10.61,
+          22.79
+        ],
+        "surface_angle_deg": 19.7,
+        "area_mm2": 0.07
+      },
+      {
+        "location_xyz": [
+          -3.17,
+          -10.62,
+          22.79
+        ],
+        "surface_angle_deg": 19.7,
+        "area_mm2": 0.07
+      }
+    ]
+  },
+  "wall_thickness": {
+    "samples_valid": 2000,
+    "min_mm": 2.302,
+    "p05_mm": 3.0,
+    "p25_mm": 4.0,
+    "median_mm": 4.8,
+    "max_mm": 32.0,
+    "thinnest_samples": [
+      {
+        "location_xyz": [
+          3.04,
+          13.7,
+          1.6
+        ],
+        "thickness_mm": 2.302
+      },
+      {
+        "location_xyz": [
+          2.91,
+          -9.7,
+          1.6
+        ],
+        "thickness_mm": 2.307
+      },
+      {
+        "location_xyz": [
+          3.24,
+          13.68,
+          1.6
+        ],
+        "thickness_mm": 2.344
+      },
+      {
+        "location_xyz": [
+          2.69,
+          -9.67,
+          1.6
+        ],
+        "thickness_mm": 2.367
+      },
+      {
+        "location_xyz": [
+          3.5,
+          -12.0,
+          0.9
+        ],
+        "thickness_mm": 2.375
+      },
+      {
+        "location_xyz": [
+          3.5,
+          -12.0,
+          0.9
+        ],
+        "thickness_mm": 2.375
+      },
+      {
+        "location_xyz": [
+          3.5,
+          -12.0,
+          0.9
+        ],
+        "thickness_mm": 2.375
+      },
+      {
+        "location_xyz": [
+          3.5,
+          -12.0,
+          0.9
+        ],
+        "thickness_mm": 2.375
+      }
+    ]
+  },
+  "support_volume": {
+    "angle_limit_used_deg": 45.0,
+    "estimated_support_volume_mm3": 635.6,
+    "part_volume_mm3": 3287.0,
+    "support_to_part_ratio_pct": 19.3,
+    "method": "prism from face centroid to build plate; coarse upper-bound estimate"
+  },
+  "partial": false
+}

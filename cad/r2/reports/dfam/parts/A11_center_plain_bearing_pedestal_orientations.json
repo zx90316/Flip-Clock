@@ -1,0 +1,51 @@
+{
+  "file": "D:\\Project\\Flip-Clock\\cad\\r2\\STL\\parts\\A11_center_plain_bearing_pedestal.stl",
+  "scale": {
+    "bbox_diagonal_mm": 78.974,
+    "units_suspect": false,
+    "note": "bbox consistent with millimetre units"
+  },
+  "orientations": {
+    "angle_limit_used_deg": 45.0,
+    "pct_denominator": "total surface area",
+    "candidates": [
+      {
+        "orientation": "current_plus_z",
+        "support_area_mm2": 54.18,
+        "support_area_pct": 0.8,
+        "build_height_mm": 6.0
+      },
+      {
+        "orientation": "flip_180_x",
+        "support_area_mm2": 54.19,
+        "support_area_pct": 0.8,
+        "build_height_mm": 6.0
+      },
+      {
+        "orientation": "rot_plus_90_x",
+        "support_area_mm2": 843.93,
+        "support_area_pct": 13.1,
+        "build_height_mm": 45.6
+      },
+      {
+        "orientation": "rot_minus_90_x",
+        "support_area_mm2": 843.93,
+        "support_area_pct": 13.1,
+        "build_height_mm": 45.6
+      },
+      {
+        "orientation": "rot_plus_90_y",
+        "support_area_mm2": 126.31,
+        "support_area_pct": 2.0,
+        "build_height_mm": 64.2
+      },
+      {
+        "orientation": "rot_minus_90_y",
+        "support_area_mm2": 301.31,
+        "support_area_pct": 4.7,
+        "build_height_mm": 64.2
+      }
+    ]
+  },
+  "partial": false
+}

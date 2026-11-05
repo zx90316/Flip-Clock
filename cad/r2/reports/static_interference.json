@@ -1,0 +1,26 @@
+{
+  "status": "PASS",
+  "selected_parts": [
+    "A00_single_base",
+    "A01_inverted_print_hood",
+    "A02_front_panel",
+    "A03_rear_panel",
+    "A04_display_bezel",
+    "A10_H_internal_frame",
+    "A10_M_internal_frame",
+    "A11_center_plain_bearing_pedestal",
+    "DEH_bracket",
+    "DEM_bracket",
+    "E_motor_top_clamp",
+    "E_slotted_motor_saddle",
+    "SH_encoder_holder",
+    "SM_encoder_holder",
+    "TH_idler_bridge",
+    "T_idler_pedestal"
+  ],
+  "missing_parts": [],
+  "native_pair_queries": 28,
+  "overlap_threshold_mm3": 0.0001,
+  "overlaps": [],
+  "scope": "stationary printed solids only; touching mates allowed; no swept-motion or purchased-component validation"
+}
