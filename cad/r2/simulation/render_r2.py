@@ -14,6 +14,7 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT.parent / "simulation"))
 from render import contact_overlay
 from calibrate import load
+from runtime import apply_solver_parameters
 
 
 def font(size):
@@ -21,11 +22,13 @@ def font(size):
 
 
 def render(run, snapshot=False):
+    source = Path(__file__).read_bytes(); runtime_source = Path(__file__).with_name("runtime.py").read_bytes()
     run = Path(run).resolve(); states = np.load(run / "states.npz", allow_pickle=False)
     summary = json.loads((run / "summary.json").read_text()); cfg = json.loads((run / "run_config.json").read_text())
     points = json.loads((run / "contact_points.json").read_text())
     measured = [r for r in summary.get("results", []) if r.get("cycle") == 2]
     passed = len(measured) == 2 and all(abs(r["error_deg"]) < (.25 if r["branch"] == "M" else .4) and abs(r["inactive_drift_deg"]) < .25 and r.get("drive_end_reason") != "timeout" for r in measured) and summary["peak_penetration_mm"] < .2
+    if (run / "validation.json").is_file(): passed = passed and json.loads((run / "validation.json").read_text())["status"] == "PASS_NOMINAL_SIMULATION"
     model, data, dyn, manifest = load(run / "model")
     # Restore the runtime assumptions before forwarding recorded states. These
     # parameters were applied after XML loading during the actual integration.
@@ -40,6 +43,7 @@ def render(run, snapshot=False):
             model.dof_frictionloss[model.jnt_dofadr[joint]] = value
     for spec, _, _, _ in dyn.springs:
         spec["stiffness_N_m"] *= cfg["spring_scale"]
+    apply_solver_parameters(model, cfg.get("solver_parameters"))
     opt = mj.MjvOption(); mj.mjv_defaultOption(opt); opt.geomgroup[:] = [1, 1, 1, 0, 1, 0]
     opt.flags[mj.mjtVisFlag.mjVIS_CONTACTPOINT] = False
     names = summary["joints"]; adr = {name: int(model.jnt_qposadr[i]) for i, name in enumerate(names)}
@@ -80,9 +84,9 @@ def render(run, snapshot=False):
             finally:
                 if writer is not None: writer.close()
             print("rendered", kind, flush=True)
-    source = Path(__file__).read_bytes()
     (run / "source" / "render_r2.py").write_bytes(source)
-    (run / "render_provenance.json").write_text(json.dumps({"source_sha256": hashlib.sha256(source).hexdigest(), "input_states_sha256": hashlib.sha256((run / "states.npz").read_bytes()).hexdigest(), "runtime_parameters_restored_from": "run_config.json", "source_timebase": "60 Hz recorded solver states, played 30 fps", "snapshot_only": snapshot, "engine": mj.__version__}, indent=2))
+    (run / "source/render_runtime.py").write_bytes(runtime_source)
+    (run / "render_provenance.json").write_text(json.dumps({"source_sha256": hashlib.sha256(source).hexdigest(), "runtime_sha256": hashlib.sha256(runtime_source).hexdigest(), "input_states_sha256": hashlib.sha256((run / "states.npz").read_bytes()).hexdigest(), "runtime_parameters_restored_from": "run_config.json", "source_timebase": "60 Hz recorded solver states plus actual terminal state when recorded, played 30 fps", "snapshot_only": snapshot, "engine": mj.__version__}, indent=2))
 
 
 if __name__ == "__main__":

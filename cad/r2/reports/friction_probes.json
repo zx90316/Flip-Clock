@@ -1,0 +1,164 @@
+{
+  "source_run": "20261105T082145_662026Z_drive",
+  "sample_time_s": 5.000000000001686,
+  "stage": "H_coast",
+  "cases": [
+    {
+      "label": "baseline_default_joint_friction",
+      "duration_s": 0.3499999999999778,
+      "input_torque_Nm": 0,
+      "settings": null,
+      "start_angles_deg": {
+        "I": 5.415077626855102,
+        "M": -6.007230029639951,
+        "H": -18.06710487874139
+      },
+      "start_velocity_deg_s": {
+        "I": 77.27477840839394,
+        "M": -0.010832523171567413,
+        "H": -2140.2169233231316
+      },
+      "end_angles_deg": {
+        "I": 9.918146203388549,
+        "M": -6.007220421487673,
+        "H": -60.655432423172314
+      },
+      "end_velocity_deg_s": {
+        "I": -6.0732797432270305,
+        "M": -0.0009939562331239917,
+        "H": 23.542260877633034
+      },
+      "friction_work_J": {
+        "M": 2.6682147840432583e-08,
+        "H": -0.011434138444545995
+      },
+      "friction_positive_work_J": {
+        "M": 1.282416491483874e-06,
+        "H": 0.00039209805333015676
+      },
+      "peak_penetration_mm": 0.6027074325114398,
+      "initial_mechanical_energy_J": 0.26446666331924945,
+      "final_mechanical_energy_J": 0.2411860067585325,
+      "warnings": {}
+    },
+    {
+      "label": "tight_joint_friction_only",
+      "duration_s": 0.3499999999999778,
+      "input_torque_Nm": 0,
+      "settings": {
+        "status": "numerical_resolution_trial_not_measured_material_properties",
+        "contact": {
+          "time_constant_s": 0.0006,
+          "impedance_min": 0.9,
+          "impedance_max": 0.95,
+          "width_m": 0.0001,
+          "cone": "pyramidal"
+        },
+        "joint_friction": {
+          "time_constant_s": 0.0002,
+          "impedance": 0.999
+        },
+        "notes": [
+          "Tighten rigid-contact and dry-friction numerical enforcement; preserve physical friction coefficients and torque budgets.",
+          "Compare at 0.00005 s and 0.000025 s. These are numerical assumptions, not measured PETG stiffness or felt laws."
+        ]
+      },
+      "start_angles_deg": {
+        "I": 5.415077626855102,
+        "M": -6.007230029639951,
+        "H": -18.06710487874139
+      },
+      "start_velocity_deg_s": {
+        "I": 77.27477840839394,
+        "M": -0.010832523171567413,
+        "H": -2140.2169233231316
+      },
+      "end_angles_deg": {
+        "I": 9.969101090240851,
+        "M": -5.985110836749898,
+        "H": -62.43123155966124
+      },
+      "end_velocity_deg_s": {
+        "I": 7.136362662195071,
+        "M": -0.00029827909135451866,
+        "H": 0.0035134882646227893
+      },
+      "friction_work_J": {
+        "M": -7.948588064390588e-06,
+        "H": -0.011671616609762611
+      },
+      "friction_positive_work_J": {
+        "M": 4.569941262202682e-14,
+        "H": 2.127321517929616e-11
+      },
+      "peak_penetration_mm": 0.33767767810446625,
+      "initial_mechanical_energy_J": 0.26446666331924945,
+      "final_mechanical_energy_J": 0.24137786153525345,
+      "warnings": {}
+    },
+    {
+      "label": "tight_contact_and_joint_friction",
+      "duration_s": 0.3499999999999778,
+      "input_torque_Nm": 0,
+      "settings": {
+        "status": "numerical_resolution_trial_not_measured_material_properties",
+        "contact": {
+          "time_constant_s": 0.0002,
+          "impedance_min": 0.99,
+          "impedance_max": 0.999,
+          "width_m": 5e-05,
+          "cone": "elliptic"
+        },
+        "joint_friction": {
+          "time_constant_s": 0.0002,
+          "impedance": 0.999
+        },
+        "notes": [
+          "Tighten rigid-contact and dry-friction numerical enforcement; preserve physical friction coefficients and torque budgets.",
+          "Compare at 0.00005 s and 0.000025 s. These are numerical assumptions, not measured PETG stiffness or felt laws."
+        ]
+      },
+      "start_angles_deg": {
+        "I": 5.415077626855102,
+        "M": -6.007230029639951,
+        "H": -18.06710487874139
+      },
+      "start_velocity_deg_s": {
+        "I": 77.27477840839394,
+        "M": -0.010832523171567413,
+        "H": -2140.2169233231316
+      },
+      "end_angles_deg": {
+        "I": 22.93448666156657,
+        "M": -35.37222713914111,
+        "H": -212.20081831846764
+      },
+      "end_velocity_deg_s": {
+        "I": 0.036926804984027825,
+        "M": 30.41551987818418,
+        "H": 0.0030892043581948188
+      },
+      "friction_work_J": {
+        "M": -0.0029585529014922152,
+        "H": -0.0508605618732441
+      },
+      "friction_positive_work_J": {
+        "M": 2.165955002051782e-11,
+        "H": 4.575320321235602e-10
+      },
+      "peak_penetration_mm": 0.28838875546968246,
+      "initial_mechanical_energy_J": 0.26446666331924945,
+      "final_mechanical_energy_J": 0.2417322785073568,
+      "warnings": {}
+    }
+  ],
+  "diagnostic_only": true,
+  "hardware_verified": false,
+  "limits": "Mechanical energy excludes solver soft-contact storage. Parameter changes at the copied state are not a from-rest validation.",
+  "model_sha256": "8de03d4cb74341ef8c86849484f56aeb109db4f90b552d984896a753493551cf",
+  "source_sha256": {
+    "diagnose_contact_balance.py": "2087c44b1c7c014f29d9082af7d94c56b6e33ae5a5e39df0af0866dcfa52901b",
+    "probe_friction.py": "edb53dcc4e7d19140d5e85081f08c31a1bbc0b54ba1352941567dcfdd31827aa",
+    "runtime.py": "6665d3c710e9a647551d0c4bf387f83ec7368d734d94f510a1f3a4a82b0f3437"
+  }
+}

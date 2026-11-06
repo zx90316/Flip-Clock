@@ -1,0 +1,99 @@
+{
+  "status": "PASS_TWO_TIMESTEP_CHECK",
+  "timestep_consistency_passed": true,
+  "final_position_difference_limit_deg": 0.05,
+  "controlled_same_candidate": true,
+  "changed_config_fields": {
+    "dt": [
+      0.0001,
+      5e-05
+    ]
+  },
+  "run_ids": [
+    "20261106T002445_744339Z_drive",
+    "20261106T002445_741614Z_drive"
+  ],
+  "dt_s": [
+    0.0001,
+    5e-05
+  ],
+  "peak_penetration_mm": [
+    0.19618280188749715,
+    0.19488078642677462
+  ],
+  "second_cycle": [
+    {
+      "branch": "M",
+      "coarse": {
+        "branch": "M",
+        "cycle": 2,
+        "target_deg": -12.000000000000002,
+        "final_deg": -12.007139989559716,
+        "travel_deg": -5.999907364196809,
+        "step_error_deg": 9.263580319096576e-05,
+        "error_deg": -0.007139989559715739,
+        "inactive_drift_deg": -0.044522198724917306,
+        "inactive_reference_deg": -14.999999999999998,
+        "inactive_peak_excursion_deg": 0.18537296175582127,
+        "coast_seconds": 1,
+        "drive_end_reason": "capture_basin"
+      },
+      "fine": {
+        "branch": "M",
+        "cycle": 2,
+        "target_deg": -12.000000000000002,
+        "final_deg": -12.007144987633641,
+        "travel_deg": -6.0002020523400965,
+        "step_error_deg": -0.00020205234009651463,
+        "error_deg": -0.007144987633639302,
+        "inactive_drift_deg": -0.0020255940204884555,
+        "inactive_reference_deg": -14.999999999999998,
+        "inactive_peak_excursion_deg": 0.18625507133145938,
+        "coast_seconds": 1,
+        "drive_end_reason": "capture_basin"
+      },
+      "final_position_difference_deg": -4.998073924511459e-06,
+      "both_meet_position_criteria": true
+    },
+    {
+      "branch": "H",
+      "coarse": {
+        "branch": "H",
+        "cycle": 2,
+        "target_deg": -29.999999999999996,
+        "final_deg": -29.80439125991958,
+        "travel_deg": -14.945242049651863,
+        "step_error_deg": 0.054757950348136575,
+        "error_deg": 0.19560874008041917,
+        "inactive_drift_deg": 0.0032467188361723813,
+        "inactive_reference_deg": -12.000000000000002,
+        "inactive_peak_excursion_deg": 0.019978270577640365,
+        "coast_seconds": 1,
+        "drive_end_reason": "capture_basin"
+      },
+      "fine": {
+        "branch": "H",
+        "cycle": 2,
+        "target_deg": -29.999999999999996,
+        "final_deg": -29.804728157160756,
+        "travel_deg": -14.98895764780264,
+        "step_error_deg": 0.011042352197360827,
+        "error_deg": 0.19527184283923985,
+        "inactive_drift_deg": 0.002394184895537302,
+        "inactive_reference_deg": -12.000000000000002,
+        "inactive_peak_excursion_deg": 0.007144983799722356,
+        "coast_seconds": 1,
+        "drive_end_reason": "capture_basin"
+      },
+      "final_position_difference_deg": -0.00033689724117635933,
+      "both_meet_position_criteria": true
+    }
+  ],
+  "run_validation_statuses": [
+    "PASS_NOMINAL_SIMULATION",
+    "PASS_NOMINAL_SIMULATION"
+  ],
+  "reason": "Both runs must pass every commanded step, idle excursion, settling and penetration; second-cycle position difference must be <=0.05 deg. Two sizes do not establish hardware prediction.",
+  "physics_predictive_validation": false,
+  "hardware_verified": false
+}

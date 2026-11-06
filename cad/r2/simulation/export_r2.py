@@ -33,7 +33,7 @@ class Exporter(Utilities):
         self.root = ET.Element("mujoco", model="FC-R2_Desktop_real_contacts")
         ET.SubElement(self.root, "compiler", angle="radian", inertiafromgeom="false", meshdir="assets", autolimits="true")
         opt = ET.SubElement(self.root, "option", timestep=".00005", gravity="0 0 -9.81", integrator="implicitfast", solver="Newton", cone="pyramidal", jacobian="dense", iterations="100", tolerance="1e-10")
-        ET.SubElement(opt, "flag", filterparent="disable", energy="enable", autoreset="disable", multiccd="enable", nativeccd="disable")
+        ET.SubElement(opt, "flag", filterparent="disable", energy="enable", autoreset="disable", multiccd="enable", nativeccd="enable")
         ET.SubElement(self.root, "size", memory="256M")
         defaults = ET.SubElement(self.root, "default")
         ET.SubElement(defaults, "geom", condim="3", friction=".25 .001 .00001", solref=".0006 1", solimp=".9 .95 .0001", margin="0", density="0")
@@ -162,8 +162,7 @@ class Exporter(Utilities):
             self.prisms("ring_" + b, "cover", bd.Circle(21.2) - bd.Circle(8.4), 2, [x + 7.4, y, z])
             self.cylinder("input", "carrier_disc_" + b, [x - 1.3, y, z], 12.6, 2.4)
             self.cylinder("input", "carrier_hub_" + b, [x + 2.2, y, z], 6.8, 9.4)
-            stop = RY @ np.array([9.2, -6.8 * d, 1.4]) + np.array([x, y, z])
-            self.box("input", "stop_" + b, stop, [3.8, 2, 2])
+            self.prisms("input", "heel_stop_" + b, g.engagement_stop_profile(b), 3.8, [x, y, z], z_mm=1.4)
             self.prisms("pawl_" + b, "pawl_" + b, g.pawl_profile(b), 2.8, [x, y, z], z_mm=1.9)
         self.prisms("idler", "idler", g.gear_profile(20, 1.2, .22), 6, [-50, -36, z], rotation=RY @ rz(9))
         ht = g.hour_train()
@@ -257,7 +256,7 @@ class Exporter(Utilities):
         ET.SubElement(actuator, "motor", name="single_finite_input_torque", joint="I", gear="1", ctrlrange=fmt([-limit, limit]), forcerange=fmt([-limit, limit]))
         ET.indent(self.root, space="  "); path = self.out / "model.xml"; ET.ElementTree(self.root).write(path, encoding="utf-8", xml_declaration=True)
         sources = {str(p.relative_to(ROOT)).replace("\\", "/"): sha(p) for p in (ROOT / "src" / "r2_geometry.py", ROOT / "parameters.json", ROOT / "STEP" / "assembly.step", ROOT / "reports" / "mass_properties.json", Path(__file__))}
-        manifest = {"design": "FC-R2", "units": "SI", "sources_sha256": sources, "bodies": self.bodies, "compression_springs": self.spring_sites, "motor": self.p["motor"], "profiles": self.profile_reports,
+        manifest = {"design": "FC-R2", "units": "SI", "collision_pipeline": "native", "sources_sha256": sources, "bodies": self.bodies, "compression_springs": self.spring_sites, "motor": self.p["motor"], "profiles": self.profile_reports,
                     "collision_geoms": self.registry, "model_sha256": sha(path), "assumptions": ["Only one finite input torque actuator; no equality constraints, ideal clutches or output actuation.",
                     "Bearing and pin interiors use hinge joints; exposed flap spine and plates, working teeth and retainers collide.",
                     "Nonworking lightening holes and glyph pockets are filled in collision proxies; masses use the saved CAD solids.",

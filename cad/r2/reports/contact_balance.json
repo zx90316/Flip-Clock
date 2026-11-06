@@ -1,0 +1,1065 @@
+{
+  "source_run": "20261105T034108_831686Z_drive",
+  "recorded_time_s": 9.49999999998453,
+  "stage": "M_drive",
+  "angles_deg": {
+    "I": 2.840213179974782,
+    "M": -10.741561599558484,
+    "H": -14.895098186884022,
+    "OM": -10.741932621154458,
+    "OH": 9.398145722901202,
+    "PM": 4.64287588473081,
+    "PH": 15.108886047522212
+  },
+  "velocity_rad_s": {
+    "I": 0.040851560784361085,
+    "M": -0.02683200543725637,
+    "H": 2.667872295963527e-05,
+    "OM": -0.012001710005204069,
+    "OH": -2.9618935371177723e-05,
+    "PM": -0.03507013464714806,
+    "PH": -0.09783904139239553
+  },
+  "input_command_Nm": -0.04187000335143305,
+  "generalized_forces": {
+    "qfrc_actuator": {
+      "I": -0.04187000335143305,
+      "M": 0.0,
+      "H": 0.0,
+      "OM": 0.0,
+      "OH": 0.0,
+      "PM": 0.0,
+      "PH": 0.0
+    },
+    "qfrc_passive": {
+      "I": -4.085156078436109e-06,
+      "M": 5.366401087451275e-07,
+      "H": -5.335744591927055e-10,
+      "OM": 6.000855002602035e-08,
+      "OH": 1.4809467685588863e-10,
+      "PM": 1.914187972323839e-05,
+      "PH": -0.00036321061263093306
+    },
+    "qfrc_bias": {
+      "I": 2.2167174237521607e-06,
+      "M": -0.0011870533479657506,
+      "H": -0.0004255580470794841,
+      "OM": -7.795352578227029e-13,
+      "OH": 6.932187235128935e-12,
+      "PM": -5.795833336108907e-07,
+      "PH": 8.933449617966541e-07
+    },
+    "qfrc_constraint": {
+      "I": 0.044259645647564815,
+      "M": 0.004602940410130955,
+      "H": -0.0004016574166585907,
+      "OM": -9.928864741718204e-05,
+      "OH": -3.953714883326017e-05,
+      "PM": -1.8240134954465017e-05,
+      "PH": 0.0003640295231343326
+    }
+  },
+  "contacts_generalized_Nm": {
+    "I": 0.044259645647564815,
+    "M": 0.009602940410130958,
+    "H": -0.00022920125331609244,
+    "OM": -0.00010128864741719076,
+    "OH": -4.15371488332603e-05,
+    "PM": -1.82401349544635e-05,
+    "PH": 0.00036402952313433255
+  },
+  "noncontact_constraint_Nm": {
+    "I": 0.0,
+    "M": -0.005000000000000003,
+    "H": -0.00017245616334249825,
+    "OM": 2.0000000000087222e-06,
+    "OH": 2.00000000000013e-06,
+    "PM": -1.5178830414797062e-18,
+    "PH": 5.421010862427522e-20
+  },
+  "acceleration_rad_s2": {
+    "I": 193.25254753918475,
+    "M": 57.27266293173469,
+    "H": 1.376054025426991,
+    "OM": -18.719596008297078,
+    "OH": -1.5348019115923808,
+    "PM": 1780.0051486562472,
+    "PH": -376.58646694536986
+  },
+  "contact_pairs": [
+    {
+      "pair": "pawl_M / ring_M",
+      "contacts": 9,
+      "penetration_mm": 0.03660055791167765,
+      "generalized_Nm": {
+        "I": 0.043412899883951986,
+        "M": 0.0,
+        "H": 0.0,
+        "OM": -0.043412899883951986,
+        "OH": 0.0,
+        "PM": -1.82401349544635e-05,
+        "PH": 0.0
+      },
+      "geom_pairs": [
+        "c_compact_pawl_M_pawl_M_0 / c_compact_ring_M_clutch_M_15",
+        "c_compact_pawl_M_pawl_M_0 / c_compact_ring_M_clutch_M_363",
+        "c_compact_pawl_M_pawl_M_44 / c_compact_ring_M_clutch_M_15"
+      ]
+    },
+    {
+      "pair": "idler / ring_M",
+      "contacts": 3,
+      "penetration_mm": 0.0008352936485549642,
+      "generalized_Nm": {
+        "I": 0.0,
+        "M": 0.0,
+        "H": 0.0,
+        "OM": 0.04331161123653479,
+        "OH": 0.0,
+        "PM": 0.0,
+        "PH": 0.0
+      },
+      "geom_pairs": [
+        "c_compact_ring_M_clutch_M_49 / c_compact_idler_idler_7"
+      ]
+    },
+    {
+      "pair": "drum_M / idler",
+      "contacts": 5,
+      "penetration_mm": 6.593326833946864e-05,
+      "generalized_Nm": {
+        "I": 0.0,
+        "M": 0.014392389891708723,
+        "H": 0.0,
+        "OM": 0.0,
+        "OH": 0.0,
+        "PM": 0.0,
+        "PH": 0.0
+      },
+      "geom_pairs": [
+        "c_compact_idler_idler_20 / c_compact_drum_M_gear_M_2"
+      ]
+    },
+    {
+      "pair": "drum_M / roller_M",
+      "contacts": 4,
+      "penetration_mm": 0.0006371128912236852,
+      "generalized_Nm": {
+        "I": 0.0,
+        "M": -0.006141057374624295,
+        "H": 0.0,
+        "OM": 0.0,
+        "OH": 0.0,
+        "PM": 0.0,
+        "PH": 0.0
+      },
+      "geom_pairs": [
+        "roller_M / c_compact_drum_M_detent_M_58"
+      ]
+    },
+    {
+      "pair": "FM_02 / world",
+      "contacts": 3,
+      "penetration_mm": 4.4307419686959e-05,
+      "generalized_Nm": {
+        "I": 0.0,
+        "M": 0.0013516078930465299,
+        "H": 0.0,
+        "OM": 0.0,
+        "OH": 0.0,
+        "PM": 0.0,
+        "PH": 0.0
+      },
+      "geom_pairs": [
+        "retainer_M / FM_02_plate"
+      ]
+    },
+    {
+      "pair": "drum_H / roller_H",
+      "contacts": 5,
+      "penetration_mm": 0.0005696200206118184,
+      "generalized_Nm": {
+        "I": 0.0,
+        "M": 0.0,
+        "H": -0.001069272789852717,
+        "OM": 0.0,
+        "OH": 0.0,
+        "PM": 0.0,
+        "PH": 0.0
+      },
+      "geom_pairs": [
+        "roller_H / c_compact_drum_H_detent_H_82"
+      ]
+    },
+    {
+      "pair": "pawl_H / ring_H",
+      "contacts": 3,
+      "penetration_mm": 0.0011302839635721322,
+      "generalized_Nm": {
+        "I": 0.0008467457636128283,
+        "M": 0.0,
+        "H": 0.0,
+        "OM": 0.0,
+        "OH": -0.0008467457636128283,
+        "PM": 0.0,
+        "PH": 0.00036402952313433255
+      },
+      "geom_pairs": [
+        "c_compact_pawl_H_pawl_H_21 / c_compact_ring_H_clutch_H_28"
+      ]
+    },
+    {
+      "pair": "h_idler_0 / ring_H",
+      "contacts": 3,
+      "penetration_mm": 2.3616660366497302e-07,
+      "generalized_Nm": {
+        "I": 0.0,
+        "M": 0.0,
+        "H": 0.0,
+        "OM": 0.0,
+        "OH": 0.0008052086147795679,
+        "PM": 0.0,
+        "PH": 0.0
+      },
+      "geom_pairs": [
+        "c_compact_ring_H_clutch_H_69 / c_compact_h_idler_0_hour_idler_0_25"
+      ]
+    },
+    {
+      "pair": "drum_H / h_idler_1",
+      "contacts": 4,
+      "penetration_mm": 2.515718511319544e-06,
+      "generalized_Nm": {
+        "I": 0.0,
+        "M": 0.0,
+        "H": 0.0005256344471145258,
+        "OM": 0.0,
+        "OH": 0.0,
+        "PM": 0.0,
+        "PH": 0.0
+      },
+      "geom_pairs": [
+        "c_compact_h_idler_1_hour_idler_1_23 / c_compact_drum_H_gear_H_5"
+      ]
+    },
+    {
+      "pair": "FH_01 / world",
+      "contacts": 3,
+      "penetration_mm": 1.3830796055491728e-05,
+      "generalized_Nm": {
+        "I": 0.0,
+        "M": 0.0,
+        "H": 0.0003144370894220987,
+        "OM": 0.0,
+        "OH": 0.0,
+        "PM": 0.0,
+        "PH": 0.0
+      },
+      "geom_pairs": [
+        "retainer_H / FH_01_plate"
+      ]
+    },
+    {
+      "pair": "h_idler_0 / h_idler_1",
+      "contacts": 5,
+      "penetration_mm": 3.427323737758713e-06,
+      "generalized_Nm": {
+        "I": 0.0,
+        "M": 0.0,
+        "H": 0.0,
+        "OM": 0.0,
+        "OH": 0.0,
+        "PM": 0.0,
+        "PH": 0.0
+      },
+      "geom_pairs": [
+        "c_compact_h_idler_0_hour_idler_0_15 / c_compact_h_idler_1_hour_idler_1_7"
+      ]
+    },
+    {
+      "pair": "FM_00 / FM_01",
+      "contacts": 3,
+      "penetration_mm": 2.4881625802906234e-07,
+      "generalized_Nm": {
+        "I": 0.0,
+        "M": 0.0,
+        "H": 0.0,
+        "OM": 0.0,
+        "OH": 0.0,
+        "PM": 0.0,
+        "PH": 0.0
+      },
+      "geom_pairs": [
+        "FM_01_plate / c_FM_00_D_spine"
+      ]
+    },
+    {
+      "pair": "FM_00 / FM_59",
+      "contacts": 3,
+      "penetration_mm": 1.1415086780251168e-06,
+      "generalized_Nm": {
+        "I": 0.0,
+        "M": 0.0,
+        "H": 0.0,
+        "OM": 0.0,
+        "OH": 0.0,
+        "PM": 0.0,
+        "PH": 0.0
+      },
+      "geom_pairs": [
+        "FM_00_plate / c_FM_59_D_spine"
+      ]
+    },
+    {
+      "pair": "FM_02 / FM_03",
+      "contacts": 2,
+      "penetration_mm": 6.802514191652995e-05,
+      "generalized_Nm": {
+        "I": 0.0,
+        "M": 0.0,
+        "H": 0.0,
+        "OM": 0.0,
+        "OH": 0.0,
+        "PM": 0.0,
+        "PH": 0.0
+      },
+      "geom_pairs": [
+        "FM_02_plate / FM_03_plate"
+      ]
+    },
+    {
+      "pair": "FM_03 / FM_04",
+      "contacts": 2,
+      "penetration_mm": 3.095523029399139e-05,
+      "generalized_Nm": {
+        "I": 0.0,
+        "M": 0.0,
+        "H": 0.0,
+        "OM": 0.0,
+        "OH": 0.0,
+        "PM": 0.0,
+        "PH": 0.0
+      },
+      "geom_pairs": [
+        "FM_03_plate / FM_04_plate"
+      ]
+    },
+    {
+      "pair": "FM_04 / FM_05",
+      "contacts": 2,
+      "penetration_mm": 0.00014129444547532344,
+      "generalized_Nm": {
+        "I": 0.0,
+        "M": 0.0,
+        "H": 0.0,
+        "OM": 0.0,
+        "OH": 0.0,
+        "PM": 0.0,
+        "PH": 0.0
+      },
+      "geom_pairs": [
+        "FM_04_plate / FM_05_plate"
+      ]
+    },
+    {
+      "pair": "FM_05 / FM_06",
+      "contacts": 2,
+      "penetration_mm": 0.0001442948567010032,
+      "generalized_Nm": {
+        "I": 0.0,
+        "M": 0.0,
+        "H": 0.0,
+        "OM": 0.0,
+        "OH": 0.0,
+        "PM": 0.0,
+        "PH": 0.0
+      },
+      "geom_pairs": [
+        "FM_05_plate / FM_06_plate"
+      ]
+    },
+    {
+      "pair": "FM_07 / FM_08",
+      "contacts": 3,
+      "penetration_mm": 1.8300034671824744e-06,
+      "generalized_Nm": {
+        "I": 0.0,
+        "M": 0.0,
+        "H": 0.0,
+        "OM": 0.0,
+        "OH": 0.0,
+        "PM": 0.0,
+        "PH": 0.0
+      },
+      "geom_pairs": [
+        "FM_07_plate / c_FM_08_D_spine"
+      ]
+    },
+    {
+      "pair": "FM_08 / FM_09",
+      "contacts": 3,
+      "penetration_mm": 1.977682693749342e-06,
+      "generalized_Nm": {
+        "I": 0.0,
+        "M": 0.0,
+        "H": 0.0,
+        "OM": 0.0,
+        "OH": 0.0,
+        "PM": 0.0,
+        "PH": 0.0
+      },
+      "geom_pairs": [
+        "FM_08_plate / c_FM_09_D_spine"
+      ]
+    },
+    {
+      "pair": "FM_09 / FM_10",
+      "contacts": 3,
+      "penetration_mm": 2.2435972332653026e-06,
+      "generalized_Nm": {
+        "I": 0.0,
+        "M": 0.0,
+        "H": 0.0,
+        "OM": 0.0,
+        "OH": 0.0,
+        "PM": 0.0,
+        "PH": 0.0
+      },
+      "geom_pairs": [
+        "FM_09_plate / c_FM_10_D_spine"
+      ]
+    },
+    {
+      "pair": "FM_10 / FM_11",
+      "contacts": 5,
+      "penetration_mm": 2.472256698397752e-06,
+      "generalized_Nm": {
+        "I": 0.0,
+        "M": 0.0,
+        "H": 0.0,
+        "OM": 0.0,
+        "OH": 0.0,
+        "PM": 0.0,
+        "PH": 0.0
+      },
+      "geom_pairs": [
+        "FM_10_plate / c_FM_11_D_spine"
+      ]
+    },
+    {
+      "pair": "FM_11 / FM_12",
+      "contacts": 5,
+      "penetration_mm": 2.663823092657311e-06,
+      "generalized_Nm": {
+        "I": 0.0,
+        "M": 0.0,
+        "H": 0.0,
+        "OM": 0.0,
+        "OH": 0.0,
+        "PM": 0.0,
+        "PH": 0.0
+      },
+      "geom_pairs": [
+        "FM_11_plate / c_FM_12_D_spine"
+      ]
+    },
+    {
+      "pair": "FM_12 / FM_13",
+      "contacts": 5,
+      "penetration_mm": 2.7166071375215456e-06,
+      "generalized_Nm": {
+        "I": 0.0,
+        "M": 0.0,
+        "H": 0.0,
+        "OM": 0.0,
+        "OH": 0.0,
+        "PM": 0.0,
+        "PH": 0.0
+      },
+      "geom_pairs": [
+        "FM_12_plate / c_FM_13_D_spine"
+      ]
+    },
+    {
+      "pair": "FM_13 / FM_14",
+      "contacts": 5,
+      "penetration_mm": 2.7974084943333263e-06,
+      "generalized_Nm": {
+        "I": 0.0,
+        "M": 0.0,
+        "H": 0.0,
+        "OM": 0.0,
+        "OH": 0.0,
+        "PM": 0.0,
+        "PH": 0.0
+      },
+      "geom_pairs": [
+        "FM_13_plate / c_FM_14_D_spine"
+      ]
+    },
+    {
+      "pair": "FM_14 / FM_15",
+      "contacts": 5,
+      "penetration_mm": 2.78098664449667e-06,
+      "generalized_Nm": {
+        "I": 0.0,
+        "M": 0.0,
+        "H": 0.0,
+        "OM": 0.0,
+        "OH": 0.0,
+        "PM": 0.0,
+        "PH": 0.0
+      },
+      "geom_pairs": [
+        "FM_14_plate / c_FM_15_D_spine"
+      ]
+    },
+    {
+      "pair": "FM_15 / FM_16",
+      "contacts": 3,
+      "penetration_mm": 3.025767782473984e-06,
+      "generalized_Nm": {
+        "I": 0.0,
+        "M": 0.0,
+        "H": 0.0,
+        "OM": 0.0,
+        "OH": 0.0,
+        "PM": 0.0,
+        "PH": 0.0
+      },
+      "geom_pairs": [
+        "FM_15_plate / c_FM_16_D_spine"
+      ]
+    },
+    {
+      "pair": "FM_16 / FM_17",
+      "contacts": 3,
+      "penetration_mm": 2.8429539745649255e-06,
+      "generalized_Nm": {
+        "I": 0.0,
+        "M": 0.0,
+        "H": 0.0,
+        "OM": 0.0,
+        "OH": 0.0,
+        "PM": 0.0,
+        "PH": 0.0
+      },
+      "geom_pairs": [
+        "FM_16_plate / c_FM_17_D_spine"
+      ]
+    },
+    {
+      "pair": "FM_17 / FM_18",
+      "contacts": 3,
+      "penetration_mm": 2.65879934562822e-06,
+      "generalized_Nm": {
+        "I": 0.0,
+        "M": 0.0,
+        "H": 0.0,
+        "OM": 0.0,
+        "OH": 0.0,
+        "PM": 0.0,
+        "PH": 0.0
+      },
+      "geom_pairs": [
+        "FM_17_plate / c_FM_18_D_spine"
+      ]
+    },
+    {
+      "pair": "FM_18 / FM_19",
+      "contacts": 3,
+      "penetration_mm": 2.4651907162148663e-06,
+      "generalized_Nm": {
+        "I": 0.0,
+        "M": 0.0,
+        "H": 0.0,
+        "OM": 0.0,
+        "OH": 0.0,
+        "PM": 0.0,
+        "PH": 0.0
+      },
+      "geom_pairs": [
+        "FM_18_plate / c_FM_19_D_spine"
+      ]
+    },
+    {
+      "pair": "FM_19 / FM_20",
+      "contacts": 3,
+      "penetration_mm": 2.289591341650519e-06,
+      "generalized_Nm": {
+        "I": 0.0,
+        "M": 0.0,
+        "H": 0.0,
+        "OM": 0.0,
+        "OH": 0.0,
+        "PM": 0.0,
+        "PH": 0.0
+      },
+      "geom_pairs": [
+        "FM_19_plate / c_FM_20_D_spine"
+      ]
+    },
+    {
+      "pair": "FM_20 / FM_21",
+      "contacts": 3,
+      "penetration_mm": 2.0451645439229285e-06,
+      "generalized_Nm": {
+        "I": 0.0,
+        "M": 0.0,
+        "H": 0.0,
+        "OM": 0.0,
+        "OH": 0.0,
+        "PM": 0.0,
+        "PH": 0.0
+      },
+      "geom_pairs": [
+        "FM_20_plate / c_FM_21_D_spine"
+      ]
+    },
+    {
+      "pair": "FM_21 / FM_22",
+      "contacts": 3,
+      "penetration_mm": 1.8300261811909685e-06,
+      "generalized_Nm": {
+        "I": 0.0,
+        "M": 0.0,
+        "H": 0.0,
+        "OM": 0.0,
+        "OH": 0.0,
+        "PM": 0.0,
+        "PH": 0.0
+      },
+      "geom_pairs": [
+        "FM_21_plate / c_FM_22_D_spine"
+      ]
+    },
+    {
+      "pair": "FM_22 / FM_23",
+      "contacts": 3,
+      "penetration_mm": 1.6395525210300557e-06,
+      "generalized_Nm": {
+        "I": 0.0,
+        "M": 0.0,
+        "H": 0.0,
+        "OM": 0.0,
+        "OH": 0.0,
+        "PM": 0.0,
+        "PH": 0.0
+      },
+      "geom_pairs": [
+        "FM_22_plate / c_FM_23_D_spine"
+      ]
+    },
+    {
+      "pair": "FM_23 / FM_24",
+      "contacts": 3,
+      "penetration_mm": 1.4673829643660147e-06,
+      "generalized_Nm": {
+        "I": 0.0,
+        "M": 0.0,
+        "H": 0.0,
+        "OM": 0.0,
+        "OH": 0.0,
+        "PM": 0.0,
+        "PH": 0.0
+      },
+      "geom_pairs": [
+        "FM_23_plate / c_FM_24_D_spine"
+      ]
+    },
+    {
+      "pair": "FM_24 / FM_25",
+      "contacts": 5,
+      "penetration_mm": 1.0976428437820435e-06,
+      "generalized_Nm": {
+        "I": 0.0,
+        "M": 0.0,
+        "H": 0.0,
+        "OM": 0.0,
+        "OH": 0.0,
+        "PM": 0.0,
+        "PH": 0.0
+      },
+      "geom_pairs": [
+        "FM_24_plate / c_FM_25_D_spine"
+      ]
+    },
+    {
+      "pair": "FM_25 / FM_26",
+      "contacts": 3,
+      "penetration_mm": 1.1857717968600496e-06,
+      "generalized_Nm": {
+        "I": 0.0,
+        "M": 0.0,
+        "H": 0.0,
+        "OM": 0.0,
+        "OH": 0.0,
+        "PM": 0.0,
+        "PH": 0.0
+      },
+      "geom_pairs": [
+        "FM_25_plate / c_FM_26_D_spine"
+      ]
+    },
+    {
+      "pair": "FM_26 / FM_27",
+      "contacts": 3,
+      "penetration_mm": 1.0455227155379092e-06,
+      "generalized_Nm": {
+        "I": 0.0,
+        "M": 0.0,
+        "H": 0.0,
+        "OM": 0.0,
+        "OH": 0.0,
+        "PM": 0.0,
+        "PH": 0.0
+      },
+      "geom_pairs": [
+        "FM_26_plate / c_FM_27_D_spine"
+      ]
+    },
+    {
+      "pair": "FM_27 / FM_28",
+      "contacts": 3,
+      "penetration_mm": 9.169094494826743e-07,
+      "generalized_Nm": {
+        "I": 0.0,
+        "M": 0.0,
+        "H": 0.0,
+        "OM": 0.0,
+        "OH": 0.0,
+        "PM": 0.0,
+        "PH": 0.0
+      },
+      "geom_pairs": [
+        "FM_27_plate / c_FM_28_D_spine"
+      ]
+    },
+    {
+      "pair": "FM_28 / FM_29",
+      "contacts": 3,
+      "penetration_mm": 7.844985189080103e-07,
+      "generalized_Nm": {
+        "I": 0.0,
+        "M": 0.0,
+        "H": 0.0,
+        "OM": 0.0,
+        "OH": 0.0,
+        "PM": 0.0,
+        "PH": 0.0
+      },
+      "geom_pairs": [
+        "FM_28_plate / c_FM_29_D_spine"
+      ]
+    },
+    {
+      "pair": "FM_29 / FM_30",
+      "contacts": 3,
+      "penetration_mm": 6.603111435255678e-07,
+      "generalized_Nm": {
+        "I": 0.0,
+        "M": 0.0,
+        "H": 0.0,
+        "OM": 0.0,
+        "OH": 0.0,
+        "PM": 0.0,
+        "PH": 0.0
+      },
+      "geom_pairs": [
+        "FM_29_plate / c_FM_30_D_spine"
+      ]
+    },
+    {
+      "pair": "FM_30 / FM_31",
+      "contacts": 3,
+      "penetration_mm": 5.410826892840793e-07,
+      "generalized_Nm": {
+        "I": 0.0,
+        "M": 0.0,
+        "H": 0.0,
+        "OM": 0.0,
+        "OH": 0.0,
+        "PM": 0.0,
+        "PH": 0.0
+      },
+      "geom_pairs": [
+        "FM_30_plate / c_FM_31_D_spine"
+      ]
+    },
+    {
+      "pair": "FM_31 / FM_32",
+      "contacts": 3,
+      "penetration_mm": 4.085661563926179e-07,
+      "generalized_Nm": {
+        "I": 0.0,
+        "M": 0.0,
+        "H": 0.0,
+        "OM": 0.0,
+        "OH": 0.0,
+        "PM": 0.0,
+        "PH": 0.0
+      },
+      "geom_pairs": [
+        "FM_31_plate / c_FM_32_D_spine"
+      ]
+    },
+    {
+      "pair": "FM_32 / FM_33",
+      "contacts": 3,
+      "penetration_mm": 1.7940813570412115e-07,
+      "generalized_Nm": {
+        "I": 0.0,
+        "M": 0.0,
+        "H": 0.0,
+        "OM": 0.0,
+        "OH": 0.0,
+        "PM": 0.0,
+        "PH": 0.0
+      },
+      "geom_pairs": [
+        "FM_32_plate / c_FM_33_D_spine"
+      ]
+    },
+    {
+      "pair": "FM_58 / FM_59",
+      "contacts": 3,
+      "penetration_mm": 8.04922586020957e-08,
+      "generalized_Nm": {
+        "I": 0.0,
+        "M": 0.0,
+        "H": 0.0,
+        "OM": 0.0,
+        "OH": 0.0,
+        "PM": 0.0,
+        "PH": 0.0
+      },
+      "geom_pairs": [
+        "FM_59_plate / c_FM_58_D_spine"
+      ]
+    },
+    {
+      "pair": "FH_00 / FH_23",
+      "contacts": 5,
+      "penetration_mm": 2.546859272066717e-08,
+      "generalized_Nm": {
+        "I": 0.0,
+        "M": 0.0,
+        "H": 0.0,
+        "OM": 0.0,
+        "OH": 0.0,
+        "PM": 0.0,
+        "PH": 0.0
+      },
+      "geom_pairs": [
+        "FH_00_plate / c_FH_23_D_spine"
+      ]
+    },
+    {
+      "pair": "FH_01 / FH_02",
+      "contacts": 2,
+      "penetration_mm": 2.8278379651260586e-05,
+      "generalized_Nm": {
+        "I": 0.0,
+        "M": 0.0,
+        "H": 0.0,
+        "OM": 0.0,
+        "OH": 0.0,
+        "PM": 0.0,
+        "PH": 0.0
+      },
+      "geom_pairs": [
+        "FH_01_plate / FH_02_plate"
+      ]
+    },
+    {
+      "pair": "FH_02 / FH_03",
+      "contacts": 2,
+      "penetration_mm": 1.4160671490221974e-05,
+      "generalized_Nm": {
+        "I": 0.0,
+        "M": 0.0,
+        "H": 0.0,
+        "OM": 0.0,
+        "OH": 0.0,
+        "PM": 0.0,
+        "PH": 0.0
+      },
+      "geom_pairs": [
+        "FH_02_plate / FH_03_plate"
+      ]
+    },
+    {
+      "pair": "FH_04 / FH_05",
+      "contacts": 3,
+      "penetration_mm": 4.796541935008707e-07,
+      "generalized_Nm": {
+        "I": 0.0,
+        "M": 0.0,
+        "H": 0.0,
+        "OM": 0.0,
+        "OH": 0.0,
+        "PM": 0.0,
+        "PH": 0.0
+      },
+      "geom_pairs": [
+        "FH_04_plate / c_FH_05_D_spine"
+      ]
+    },
+    {
+      "pair": "FH_05 / FH_06",
+      "contacts": 5,
+      "penetration_mm": 6.330637204268954e-07,
+      "generalized_Nm": {
+        "I": 0.0,
+        "M": 0.0,
+        "H": 0.0,
+        "OM": 0.0,
+        "OH": 0.0,
+        "PM": 0.0,
+        "PH": 0.0
+      },
+      "geom_pairs": [
+        "FH_05_plate / c_FH_06_D_spine"
+      ]
+    },
+    {
+      "pair": "FH_06 / FH_07",
+      "contacts": 3,
+      "penetration_mm": 1.0124181115566268e-06,
+      "generalized_Nm": {
+        "I": 0.0,
+        "M": 0.0,
+        "H": 0.0,
+        "OM": 0.0,
+        "OH": 0.0,
+        "PM": 0.0,
+        "PH": 0.0
+      },
+      "geom_pairs": [
+        "FH_06_plate / c_FH_07_D_spine"
+      ]
+    },
+    {
+      "pair": "FH_07 / FH_08",
+      "contacts": 3,
+      "penetration_mm": 1.1186449133700263e-06,
+      "generalized_Nm": {
+        "I": 0.0,
+        "M": 0.0,
+        "H": 0.0,
+        "OM": 0.0,
+        "OH": 0.0,
+        "PM": 0.0,
+        "PH": 0.0
+      },
+      "geom_pairs": [
+        "FH_07_plate / c_FH_08_D_spine"
+      ]
+    },
+    {
+      "pair": "FH_08 / FH_09",
+      "contacts": 3,
+      "penetration_mm": 1.1480812441835084e-06,
+      "generalized_Nm": {
+        "I": 0.0,
+        "M": 0.0,
+        "H": 0.0,
+        "OM": 0.0,
+        "OH": 0.0,
+        "PM": 0.0,
+        "PH": 0.0
+      },
+      "geom_pairs": [
+        "FH_08_plate / c_FH_09_D_spine"
+      ]
+    },
+    {
+      "pair": "FH_09 / FH_10",
+      "contacts": 3,
+      "penetration_mm": 9.7329219627733e-07,
+      "generalized_Nm": {
+        "I": 0.0,
+        "M": 0.0,
+        "H": 0.0,
+        "OM": 0.0,
+        "OH": 0.0,
+        "PM": 0.0,
+        "PH": 0.0
+      },
+      "geom_pairs": [
+        "FH_09_plate / c_FH_10_D_spine"
+      ]
+    },
+    {
+      "pair": "FH_10 / FH_11",
+      "contacts": 3,
+      "penetration_mm": 9.750538354421403e-07,
+      "generalized_Nm": {
+        "I": 0.0,
+        "M": 0.0,
+        "H": 0.0,
+        "OM": 0.0,
+        "OH": 0.0,
+        "PM": 0.0,
+        "PH": 0.0
+      },
+      "geom_pairs": [
+        "FH_10_plate / c_FH_11_D_spine"
+      ]
+    },
+    {
+      "pair": "FH_11 / FH_12",
+      "contacts": 3,
+      "penetration_mm": 7.850461038127384e-07,
+      "generalized_Nm": {
+        "I": 0.0,
+        "M": 0.0,
+        "H": 0.0,
+        "OM": 0.0,
+        "OH": 0.0,
+        "PM": 0.0,
+        "PH": 0.0
+      },
+      "geom_pairs": [
+        "FH_11_plate / c_FH_12_D_spine"
+      ]
+    },
+    {
+      "pair": "FH_12 / FH_13",
+      "contacts": 3,
+      "penetration_mm": 5.124447437924291e-07,
+      "generalized_Nm": {
+        "I": 0.0,
+        "M": 0.0,
+        "H": 0.0,
+        "OM": 0.0,
+        "OH": 0.0,
+        "PM": 0.0,
+        "PH": 0.0
+      },
+      "geom_pairs": [
+        "FH_12_plate / c_FH_13_D_spine"
+      ]
+    },
+    {
+      "pair": "FH_13 / FH_14",
+      "contacts": 3,
+      "penetration_mm": 2.588684746755405e-07,
+      "generalized_Nm": {
+        "I": 0.0,
+        "M": 0.0,
+        "H": 0.0,
+        "OM": 0.0,
+        "OH": 0.0,
+        "PM": 0.0,
+        "PH": 0.0
+      },
+      "geom_pairs": [
+        "FH_13_plate / c_FH_14_D_spine"
+      ]
+    }
+  ],
+  "limitations": "Recomputed forward dynamics at a saved solver sample, without the original warm-start vector; not a measured force balance.",
+  "source_sha256": "2087c44b1c7c014f29d9082af7d94c56b6e33ae5a5e39df0af0866dcfa52901b",
+  "hardware_verified": false
+}

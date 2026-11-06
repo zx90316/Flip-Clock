@@ -231,8 +231,23 @@ def pawl_profile(b):
     pts = [(8, -4.9), (10.2, -5), (12, -1.1), (14.35, -.7), (14.35, .7), (13.15, 1.1), (9.4, -.5), (8, -1.3)]
     outline = rounded_polygon([(u, v * d) for u, v in pts], .25)
     outline += bd.Pos(9.2, -3 * d) * bd.Circle(2.5)
+    r = config()["ratchet"]
+    # A heel outside the circular pivot lug gives the carrier a real contact
+    # surface. A stop aimed only at the round lug cannot limit its rotation.
+    u, v = r["heel_tab_u"], -r["heel_tab_v_abs"] * d
+    w, h = r["heel_tab_width"], r["heel_tab_height"]
+    outline += rounded_polygon([(u - w / 2, v - h / 2), (u + w / 2, v - h / 2),
+                                (u + w / 2, v + h / 2), (u - w / 2, v + h / 2)], .2)
     outline -= bd.Pos(9.2, -3 * d) * bd.Circle(1.1)
     return outline
+
+
+def engagement_stop_profile(b):
+    r = config()["ratchet"]; d = direction(b)
+    face = bd.Pos(r["heel_stop_u"], -r["heel_stop_v_abs"] * d) * bd.Rectangle(r["heel_stop_width"], r["heel_stop_height"])
+    # The circular lug always has radial clearance; only the new heel contacts.
+    face -= bd.Pos(9.2, -3 * d) * bd.Circle(r["pivot_relief_d"] / 2)
+    return face
 
 
 @lru_cache(maxsize=2)
@@ -248,7 +263,7 @@ def clutch_parts(b):
     backplate -= bd.Compound(children=circle_holes(18.5, 1.1, 3, 22, 30))
     carrier = bd.Pos(0, 0, -1.3) * ring(12.6, 4.1, 2.4)
     carrier += bd.Pos(0, 0, 2.2) * ring(6.8, 4.1, 9.4)
-    carrier += bd.Pos(9.2, -6.8 * d, 1.4) * bd.Box(2, 2, 3.8)
+    carrier += bd.Pos(0, 0, 1.4) * bd.extrude(engagement_stop_profile(b), amount=1.9, both=True)
     carrier -= bd.Pos(9.2, -3 * d, -1) * bd.Cylinder(1.0, 8)
     carrier -= bd.Pos(0, 0, 4.4) * bd.Rot(90, 0, 0) * bd.Cylinder(1.25, 20)
     pawn = bd.Pos(0, 0, 1.9) * bd.extrude(pawl_profile(b), amount=1.4, both=True)

@@ -1,0 +1,16 @@
+{
+  "status": "collision_pipeline_diagnostic",
+  "collision_pipeline": "native",
+  "contact": {
+    "time_constant_s": 0.0006,
+    "impedance_min": 0.9,
+    "impedance_max": 0.95,
+    "width_m": 0.0001,
+    "cone": "pyramidal"
+  },
+  "joint_friction": null,
+  "notes": [
+    "Change only the convex collision pipeline from legacy MPR/libccd to native GJK/EPA; retain baseline numerical contact and joint-friction parameters.",
+    "This is a numerical diagnostic, not a hardware validation."
+  ]
+}

@@ -2,19 +2,19 @@
   "file": "D:\\Project\\Flip-Clock\\cad\\r2\\STL\\parts\\CH_pawl.stl",
   "mesh": {
     "bbox_mm": [
-      7.65,
-      6.58,
+      8.75,
+      7.18,
       2.8
     ],
-    "volume_mm3": 64.3,
-    "surface_area_mm2": 129.7,
-    "triangle_count": 2152,
+    "volume_mm3": 74.1,
+    "surface_area_mm2": 151.2,
+    "triangle_count": 2752,
     "watertight": true,
     "euler_number": 0,
     "body_count": 1
   },
   "scale": {
-    "bbox_diagonal_mm": 10.4735,
+    "bbox_diagonal_mm": 11.6617,
     "units_suspect": false,
     "note": "bbox consistent with millimetre units"
   },
@@ -31,69 +31,69 @@
     "min_mm": 1.4,
     "p05_mm": 1.4,
     "p25_mm": 1.4,
-    "median_mm": 1.959,
-    "max_mm": 8.393,
+    "median_mm": 2.188,
+    "max_mm": 8.255,
     "thinnest_samples": [
       {
         "location_xyz": [
-          -1.53,
-          -3.28,
-          0.93
-        ],
-        "thickness_mm": 1.4
-      },
-      {
-        "location_xyz": [
-          -1.45,
-          -3.29,
-          0.93
-        ],
-        "thickness_mm": 1.4
-      },
-      {
-        "location_xyz": [
-          -1.45,
-          -3.29,
-          0.93
-        ],
-        "thickness_mm": 1.4
-      },
-      {
-        "location_xyz": [
-          -1.6,
-          -3.28,
+          -1.84,
+          1.77,
           1.87
         ],
         "thickness_mm": 1.4
       },
       {
         "location_xyz": [
-          -1.6,
-          -3.28,
+          -1.84,
+          1.77,
           1.87
         ],
         "thickness_mm": 1.4
       },
       {
         "location_xyz": [
-          -1.38,
-          -3.29,
+          -1.77,
+          1.8,
           0.93
         ],
         "thickness_mm": 1.4
       },
       {
         "location_xyz": [
-          -1.68,
-          -3.27,
+          -1.77,
+          1.8,
+          0.93
+        ],
+        "thickness_mm": 1.4
+      },
+      {
+        "location_xyz": [
+          -1.97,
+          1.7,
           1.87
         ],
         "thickness_mm": 1.4
       },
       {
         "location_xyz": [
-          -1.68,
-          -3.27,
+          -1.97,
+          1.7,
+          1.87
+        ],
+        "thickness_mm": 1.4
+      },
+      {
+        "location_xyz": [
+          -1.7,
+          1.83,
+          1.87
+        ],
+        "thickness_mm": 1.4
+      },
+      {
+        "location_xyz": [
+          -1.63,
+          1.86,
           1.87
         ],
         "thickness_mm": 1.4
@@ -103,7 +103,7 @@
   "support_volume": {
     "angle_limit_used_deg": 45.0,
     "estimated_support_volume_mm3": 0.0,
-    "part_volume_mm3": 64.3,
+    "part_volume_mm3": 74.1,
     "support_to_part_ratio_pct": 0.0,
     "method": "prism from face centroid to build plate; coarse upper-bound estimate"
   },

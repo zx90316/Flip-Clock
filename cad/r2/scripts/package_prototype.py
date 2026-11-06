@@ -1,5 +1,6 @@
 """Package only manifest-listed current CAD/meshes, never stale outputs or inputs."""
 from __future__ import annotations
+import argparse
 import hashlib
 import json
 from pathlib import Path
@@ -15,7 +16,7 @@ from export_parts import stl_quality
 def sha(path): return hashlib.sha256(path.read_bytes()).hexdigest()
 
 
-def main():
+def main(prepare=False):
     geometry = json.loads((ROOT / "reports" / "geometry_check.json").read_text())
     stationary = json.loads((ROOT / "reports" / "static_interference.json").read_text())
     if geometry["status"] != "PASS" or stationary["status"] != "PASS": raise RuntimeError("Native CAD checks must pass before packaging")
@@ -46,11 +47,12 @@ def main():
               "cad/simulation/dynamics.py", "cad/simulation/render.py"]
     files.extend(REPO / name for name in shared)
     rebuild = ROOT / "reports/package_rebuild.json"
+    rebuild_matches = False
     if rebuild.is_file():
         check = json.loads(rebuild.read_text())
-        if check["status"] != "PASS": raise ValueError("Extracted-source rebuild failed")
-        for rel, value in check["sources_sha256"].items():
-            if sha(REPO / rel) != value: raise ValueError("Changed source after rebuild smoke: " + rel)
+        rebuild_matches = check["status"] == "PASS" and all(sha(REPO / rel) == value for rel, value in check["sources_sha256"].items())
+    if not rebuild_matches and not prepare:
+        raise ValueError("Run package_prototype.py --prepare, check_package_rebuild.py, then package_prototype.py to verify changed source")
     files = sorted(set(files))
     manifest = {str(path.relative_to(REPO)).replace("\\", "/"): sha(path) for path in files}
     for path in files:
@@ -60,13 +62,15 @@ def main():
     with zipfile.ZipFile(file, "w", zipfile.ZIP_DEFLATED, compresslevel=9) as archive:
         for path in files: archive.write(path, "Flip-Clock/" + str(path.relative_to(REPO)).replace("\\", "/"))
         archive.writestr("Flip-Clock/PACKAGE_MANIFEST.json", json.dumps(manifest, indent=2))
-        archive.writestr("Flip-Clock/README.txt", "FC-R2 prototype: see cad/r2/README.md and RESULTS.md.\nRun cad/r2/build.ps1 from this extracted Flip-Clock directory.\nThis package includes original project helper source, not third-party archive geometry.\nPhysics videos and raw solver evidence are published separately in cad/r2/review on the GitHub branch.\n")
+        archive.writestr("Flip-Clock/README.txt", "FC-R2 prototype: see cad/r2/README.md and RESULTS.md.\nRun cad/r2/build.ps1 from this extracted Flip-Clock directory.\nThis package includes independently authored project helper source, not third-party archive geometry.\nCurrent physics videos and raw solver evidence are in cad/r2/review_native on the GitHub branch; cad/r2/review preserves the failed historical baseline.\n")
     with zipfile.ZipFile(file) as archive:
         if archive.testzip() is not None: raise RuntimeError("ZIP CRC failure")
         for relative, value in manifest.items():
             if hashlib.sha256(archive.read("Flip-Clock/" + relative)).hexdigest() != value: raise RuntimeError("ZIP hash mismatch " + relative)
-    (out / "manifest.json").write_text(json.dumps({"file": file.name, "sha256": sha(file), "bytes": file.stat().st_size, "payload_files": len(files), "parts": len(mesh_rows), "prototype_only": True, "model_sources_match_rebuild_test": rebuild.is_file(), "physics_and_hardware_acceptance": "See RESULTS.md; packaging success is not motion acceptance"}, indent=2), encoding="utf-8")
+    (out / "manifest.json").write_text(json.dumps({"file": file.name, "sha256": sha(file), "bytes": file.stat().st_size, "payload_files": len(files), "parts": len(mesh_rows), "prototype_only": True, "model_sources_match_rebuild_test": rebuild_matches, "physics_and_hardware_acceptance": "See RESULTS.md; packaging success is not motion acceptance"}, indent=2), encoding="utf-8")
     print(json.dumps({"file": str(file), "MiB": file.stat().st_size / 2**20, "files": len(files), "meshes_checked": len(mesh_rows)}, indent=2), flush=True)
 
 
-if __name__ == "__main__": main()
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser(); parser.add_argument("--prepare", action="store_true")
+    main(parser.parse_args().prepare)

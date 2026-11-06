@@ -15,6 +15,7 @@ import sys
 import time
 import numpy as np
 import mujoco as mj
+from runtime import apply_solver_parameters, friction_rows
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT.parent / "simulation"))
@@ -38,6 +39,9 @@ def load(directory):
         model = mj.MjModel.from_xml_path(str(directory / "model.xml"))
         mj.mj_saveModel(model, str(cache), None); stampfile.write_text(json.dumps(stamp))
     contact_settings(model); solver_settings(model)
+    # R1's shared helper selects legacy MPR. R2 uses its own recorded pipeline.
+    if manifest.get("collision_pipeline") == "native":
+        model.opt.disableflags &= ~int(mj.mjtDisableBit.mjDSBL_NATIVECCD)
     dynamics = Dynamics(model, manifest)
     # Torque is directly limited by the one input motor. No user gain callback:
     # this is a current/torque-controlled motor envelope, not a 28BYJ phase model.
@@ -54,22 +58,29 @@ class Controller:
         self.baseline = None; self.target = None; self.completed = 0
         self.results = []
         self.cycle = 1
+        self.expected = None; self.inactive_peak = 0.
 
     def q(self, data, b): return float(data.qpos[self.adr[b][0]])
     def v(self, data, b): return float(data.qvel[self.adr[b][1]])
     def switch(self, stage, data):
         self.stage = stage; self.phase_start = float(data.time); self.ierror = 0.; self.command_v = 0.
+        if stage.endswith("_drive"): self.inactive_peak = 0.
         self.events.append({"time_s": float(data.time), "stage": stage, "I_deg": float(np.rad2deg(self.q(data, "I"))), "M_deg": float(np.rad2deg(self.q(data, "M"))), "H_deg": float(np.rad2deg(self.q(data, "H")))})
         print("stage", self.events[-1], flush=True)
 
     def __call__(self, data):
         args = self.args; now = float(data.time)
         if args.case == "gravity": return 0.
+        if self.expected is not None and self.stage.endswith(("_drive", "_coast")):
+            inactive = "H" if self.stage[0] == "M" else "M"
+            self.inactive_peak = max(self.inactive_peak, abs(self.q(data, inactive) - self.expected[inactive]))
         if self.stage == "settle":
             if now >= args.settle:
                 self.baseline = {b: self.q(data, b) for b in ("M", "H")}
-                self.target = np.deg2rad(6 * (round(np.rad2deg(self.baseline["M"]) / 6) - args.minute_steps))
-                self.switch("M_drive", data)
+                self.expected = {b: np.deg2rad(pitch * round(np.rad2deg(self.baseline[b]) / pitch)) for b, pitch in (("M", 6), ("H", 15))}
+                branch = "H" if args.case == "hour" else "M"
+                self.target = self.expected[branch] - np.deg2rad(15 * args.hour_steps if branch == "H" else 6 * args.minute_steps)
+                self.switch(branch + "_drive", data)
             return 0.
         if self.stage.endswith("_drive"):
             b = self.stage[0]; err = self.target - self.q(data, b)
@@ -88,7 +99,7 @@ class Controller:
             torque = args.velocity_kp * velocity_error + args.velocity_ki * candidate
             if abs(torque) <= args.torque_limit: self.ierror = candidate
             # Finite torque-speed envelope: zero motoring torque at no-load
-            # speed. Regenerative braking remains limited by the same 25mNm.
+            # speed. Regenerative braking uses the same configured torque limit.
             if torque * self.v(data, "I") > 0:
                 limit = args.torque_limit * max(0., 1 - abs(self.v(data, "I")) / 3)
                 return float(np.clip(torque, -limit, limit))
@@ -99,16 +110,20 @@ class Controller:
                 self.results.append({"branch": b, "cycle": self.cycle, "target_deg": float(np.rad2deg(self.target)), "final_deg": float(np.rad2deg(self.q(data, b))),
                                      "travel_deg": float(np.rad2deg(self.q(data, b) - self.baseline[b])),
                                      "step_error_deg": float(np.rad2deg(self.q(data, b) - self.baseline[b])) + (6 * args.minute_steps if b == "M" else 15 * args.hour_steps),
-                                     "error_deg": float(np.rad2deg(self.q(data, b) - self.target)), "inactive_drift_deg": float(np.rad2deg(self.q(data, inactive) - self.baseline[inactive])), "coast_seconds": args.coast, "drive_end_reason": self.stop_reason})
+                                     "error_deg": float(np.rad2deg(self.q(data, b) - self.target)), "inactive_drift_deg": float(np.rad2deg(self.q(data, inactive) - self.baseline[inactive])),
+                                     "inactive_reference_deg": float(np.rad2deg(self.expected[inactive])), "inactive_peak_excursion_deg": float(np.rad2deg(self.inactive_peak)),
+                                     "coast_seconds": args.coast, "drive_end_reason": self.stop_reason})
+                self.expected[b] = self.target
                 if b == "M" and args.case == "drive":
                     self.baseline = {b_: self.q(data, b_) for b_ in ("M", "H")}
-                    self.target = np.deg2rad(15 * (round(np.rad2deg(self.baseline["H"]) / 15) - args.hour_steps))
+                    self.target = self.expected["H"] - np.deg2rad(15 * args.hour_steps)
                     self.switch("H_drive", data)
-                elif b == "H" and self.cycle < args.cycles:
+                elif self.cycle < args.cycles:
                     self.cycle += 1
                     self.baseline = {b_: self.q(data, b_) for b_ in ("M", "H")}
-                    self.target = np.deg2rad(6 * (round(np.rad2deg(self.baseline["M"]) / 6) - args.minute_steps))
-                    self.switch("M_drive", data)
+                    branch = "H" if args.case == "hour" else "M"
+                    self.target = self.expected[branch] - np.deg2rad(15 * args.hour_steps if branch == "H" else 6 * args.minute_steps)
+                    self.switch(branch + "_drive", data)
                 else:
                     self.switch("done", data)
             return 0.
@@ -116,6 +131,11 @@ class Controller:
 
 
 def run(args):
+    args.solver_parameters = None
+    if args.solver_config:
+        path = Path(args.solver_config).resolve()
+        args.solver_parameters = json.loads(path.read_text())
+        args.solver_config_sha256 = sha(path)
     if args.drag_config:
         path = Path(args.drag_config).resolve(); candidate = json.loads(path.read_text())
         args.output_drag = candidate["target_drag_Nm"]["M"]; args.hour_output_drag = candidate["target_drag_Nm"]["H"]
@@ -149,8 +169,13 @@ def run(args):
                 model.geom_size[geom, 1] = args.trial_plate_thickness * .0005
     for spec, _, _, _ in dynamics.springs:
         spec["stiffness_N_m"] *= args.spring_scale
+    apply_solver_parameters(model, args.solver_parameters)
     if args.checkpoint:
         state = np.load(args.checkpoint, allow_pickle=False)
+        if "model_sha256" not in state.files or str(state["model_sha256"]) != sha(directory / "model.xml"):
+            raise ValueError("Checkpoint belongs to a different physics model")
+        if state["qpos"].shape != (model.nq,) or state["qvel"].shape != (model.nv,):
+            raise ValueError("Checkpoint state dimensions do not match the model")
         data.qpos[:] = state["qpos"]; data.qvel[:] = state["qvel"]
         mj.mj_forward(model, data)
     else:
@@ -168,23 +193,42 @@ def run(args):
     # Snapshot model/source once; each run is self-contained and reproducible.
     shutil.copytree(directory, output / "model", ignore=shutil.ignore_patterns("*.mjb", "compiled.json", "model_full.xml"))
     (output / "source").mkdir()
-    for path in (Path(__file__), ROOT / "simulation" / "export_r2.py", ROOT / "src" / "r2_geometry.py", ROOT / "parameters.json", ROOT.parent / "simulation" / "dynamics.py", ROOT.parent / "simulation" / "collision.py", ROOT.parent / "simulation" / "export_model.py"):
+    for path in (Path(__file__), ROOT / "simulation/runtime.py", ROOT / "simulation" / "export_r2.py", ROOT / "src" / "r2_geometry.py", ROOT / "parameters.json", ROOT.parent / "simulation" / "dynamics.py", ROOT.parent / "simulation" / "collision.py", ROOT.parent / "simulation" / "export_model.py"):
         shutil.copy2(path, output / "source" / path.name)
+    for filename, path_value, digest in (("drag_candidate.json", args.drag_config, getattr(args, "drag_config_sha256", None)),
+                                         ("solver_config.json", args.solver_config, getattr(args, "solver_config_sha256", None))):
+        if path_value:
+            shutil.copy2(Path(path_value), output / "source" / filename)
+            if sha(output / "source" / filename) != digest: raise ValueError("Configuration changed during initialization")
     if args.model_dir and (directory.parent / "source").is_dir():
         for path in (directory.parent / "source").iterdir():
-            if path.is_file() and path.name != "calibrate.py": shutil.copy2(path, output / "source" / path.name)
+            if path.is_file() and path.name not in {"calibrate.py", "runtime.py", "dynamics.py", "drag_candidate.json", "solver_config.json"}:
+                shutil.copy2(path, output / "source" / path.name)
     controller = Controller(model, data, args)
     q0 = data.qpos.copy(); v0 = data.qvel.copy()
     times = [0.]; qs = [q0.copy()]; vs = [v0.copy()]; controls = [0.]; stages = ["settle"]; points = [[]]; contacts = [int(data.ncon)]
     frame_next = 1 / 60; sample_next = 0.; force = np.zeros(6); stats = defaultdict(lambda: {"sample_count": 0, "peak_force_N": 0., "peak_penetration_mm": 0.})
     initial_pen = max((-c.dist * 1000 for c in data.contact), default=0.); peak_pen = max(0., initial_pen); maxiter = 0; limits = 0
     trajectory = []; work = 0.; start = time.perf_counter(); last_progress = start; status = "COMPLETED"; failure = None
+    dry_work = {b: 0. for b in ("M", "H")}; dry_positive = dry_work.copy(); dry_rows = None; peak_contact = None
     nsteps = int(args.duration / args.dt)
     for step in range(nsteps):
         data.ctrl[0] = controller(data); old_q = controller.q(data, "I")
+        old_output = {b: controller.q(data, b) for b in ("M", "H")}
         mj.mj_step(model, data)
         work += float(data.actuator_force[0]) * (controller.q(data, "I") - old_q)
-        pen = max((-c.dist * 1000 for c in data.contact), default=0.); peak_pen = max(peak_pen, pen)
+        if dry_rows is None: dry_rows = friction_rows(data, {b: controller.adr[b][1] for b in ("M", "H")})
+        dry_torque = {b: float(data.efc_force[row]) if row is not None else 0. for b, row in dry_rows.items()}
+        for b in ("M", "H"):
+            increment = dry_torque[b] * (controller.q(data, b) - old_output[b])
+            dry_work[b] += increment; dry_positive[b] += max(0., increment)
+        worst = min(data.contact, key=lambda c: c.dist, default=None)
+        pen = max(0., -float(worst.dist) * 1000) if worst is not None else 0.
+        if pen > peak_pen:
+            peak_pen = pen
+            peak_contact = {"time_s": float(data.time), "stage": controller.stage, "penetration_mm": pen,
+                            "geoms": [mj.mj_id2name(model, mj.mjtObj.mjOBJ_GEOM, int(i)) for i in (worst.geom1, worst.geom2)],
+                            "bodies": [mj.mj_id2name(model, mj.mjtObj.mjOBJ_BODY, int(model.geom_bodyid[i])) for i in (worst.geom1, worst.geom2)]}
         niter = int(np.max(data.solver_niter)); maxiter = max(maxiter, niter); limits += int(niter >= model.opt.iterations)
         if not np.isfinite(data.qpos).all() or not np.isfinite(data.qvel).all(): status = "FAILED"; failure = "nonfinite_state"; break
         if any(data.warning[i].number for i in (int(mj.mjtWarning.mjWARN_BADQPOS), int(mj.mjtWarning.mjWARN_BADQVEL), int(mj.mjtWarning.mjWARN_BADQACC))): status = "FAILED"; failure = "engine_state_warning"; break
@@ -202,17 +246,22 @@ def run(args):
             print(f"t={data.time:.3f}s {controller.stage} I/M/H=" + str([round(np.rad2deg(controller.q(data, b)), 3) for b in ("I", "M", "H")]) + f" contacts={data.ncon} penetration={pen:.4f}mm", flush=True)
             last_progress = time.perf_counter()
         if controller.stage == "done": break
+    # Include the real terminal state even when it falls between 60-Hz samples.
+    if times[-1] < float(data.time) - args.dt / 2:
+        times.append(float(data.time)); qs.append(data.qpos.copy()); vs.append(data.qvel.copy()); controls.append(float(data.ctrl[0])); stages.append(controller.stage); contacts.append(int(data.ncon))
+        points.append([[*map(float, c.pos), -float(c.dist)] for c in data.contact])
     names = [mj.mj_id2name(model, mj.mjtObj.mjOBJ_JOINT, j) for j in range(model.njnt)]
     summary = {"status": status, "failure": failure, "run_id": run_id, "engine": "MuJoCo", "version": mj.__version__, "simulated_duration_s": float(data.time), "wall_seconds": time.perf_counter() - start,
                "steps": step + 1, "initial_penetration_mm": max(0., initial_pen), "peak_penetration_mm": peak_pen, "max_solver_iterations": maxiter, "iteration_limit_steps": limits,
                "warnings": {mj.mjtWarning(i).name: int(w.number) for i, w in enumerate(data.warning) if w.number}, "motor_work_J": work, "events": controller.events, "results": controller.results,
                "finished_controller": controller.stage == "done", "joints": names, "q0": q0.tolist(), "q_final": data.qpos.tolist(), "nbody": model.nbody, "nq": model.nq, "nu": model.nu, "neq": model.neq,
                "calibrated_hardware": False, "manufacturing_ready": False, "assumed_feedback": "Perfect simulated input and final-output encoders; no measured sensor noise or electronic latency"}
+    summary.update(peak_contact=peak_contact, axle_friction_work_J=dry_work, axle_friction_positive_work_J=dry_positive)
     summary["diagnostic_geometry_override"] = args.trial_plate_thickness is not None
     np.savez_compressed(output / "states.npz", time_s=times, qpos=np.asarray(qs), qvel=np.asarray(vs), input_torque_Nm=controls, stage=np.asarray(stages), contacts=contacts)
-    np.savez_compressed(output / "checkpoint.npz", qpos=data.qpos, qvel=data.qvel, model_sha256=sha(directory / "model.xml"))
+    np.savez_compressed(output / "checkpoint.npz", qpos=data.qpos, qvel=data.qvel, model_sha256=sha(output / "model/model.xml"))
     np.savetxt(output / "trajectory.csv", np.asarray(trajectory), delimiter=",", header="time_s,ctrl_Nm,actual_input_torque_Nm,contacts,penetration_mm,I_rad,M_rad,H_rad,I_rad_s,M_rad_s,H_rad_s", comments="")
-    for name, obj in (("summary.json", summary), ("contact_pairs.json", stats), ("contact_points.json", points), ("run_config.json", {**vars(args), "source_sha256": sha(output / "source" / "calibrate.py"), "model_sha256": sha(directory / "model.xml"), "controller_source": "source/calibrate.py", "units": "SI"})):
+    for name, obj in (("summary.json", summary), ("contact_pairs.json", stats), ("contact_points.json", points), ("run_config.json", {**vars(args), "source_sha256": sha(output / "source" / "calibrate.py"), "runtime_sha256": sha(output / "source/runtime.py"), "model_sha256": sha(output / "model/model.xml"), "controller_source": "source/calibrate.py", "units": "SI"})):
         (output / name).write_text(json.dumps(obj, indent=2), encoding="utf-8")
     (ROOT / "reports" / "latest_run.json").write_text(json.dumps({"directory": str(output.relative_to(ROOT)).replace("\\", "/"), "run_id": run_id}, indent=2))
     print(json.dumps({k: summary[k] for k in ("run_id", "status", "simulated_duration_s", "wall_seconds", "initial_penetration_mm", "peak_penetration_mm", "results", "finished_controller", "warnings")}, indent=2), flush=True)
@@ -221,7 +270,7 @@ def run(args):
 
 
 if __name__ == "__main__":
-    ap = argparse.ArgumentParser(); ap.add_argument("--case", choices=("drive", "minute", "gravity"), default="drive")
+    ap = argparse.ArgumentParser(); ap.add_argument("--case", choices=("drive", "minute", "hour", "gravity"), default="drive")
     ap.add_argument("--duration", type=float, default=6); ap.add_argument("--dt", type=float, default=.00005); ap.add_argument("--gravity", type=float, default=9.81)
     ap.add_argument("--friction", type=float, default=.25); ap.add_argument("--spring-scale", type=float, default=1)
     ap.add_argument("--speed", type=float, default=.22); ap.add_argument("--release-deg", type=float, default=.65)
@@ -236,4 +285,5 @@ if __name__ == "__main__":
     ap.add_argument("--output-drag", type=float)
     ap.add_argument("--hour-output-drag", type=float)
     ap.add_argument("--drag-config")
+    ap.add_argument("--solver-config")
     raise SystemExit(run(ap.parse_args()))

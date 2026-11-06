@@ -22,6 +22,7 @@ try {
     Invoke-R2Python -ModelArguments @((Join-Path $r2Root 'src/assembly_with_drag.py'))
     Invoke-R2Python -ModelArguments @((Join-Path $r2Root 'src/mechanism.py'))
     Invoke-R2Python -ModelArguments @((Join-Path $r2Root 'scripts/build_parts.py'))
+    Invoke-R2Python -ModelArguments @((Join-Path $r2Root 'scripts/check_pawl_stops.py'))
     Invoke-R2Python -ModelArguments @((Join-Path $r2Root 'src/coupons.py'))
     Invoke-R2Python -ModelArguments @((Join-Path $r2Root 'scripts/export_graphics.py'))
     Invoke-R2Python -ModelArguments @((Join-Path $r2Root 'scripts/check_static_interference.py'))
@@ -30,7 +31,9 @@ try {
     if ($Physics) {
         Invoke-R2Python -ModelArguments @((Join-Path $r2Root 'simulation/export_r2.py'))
         Invoke-R2Python -ModelArguments @((Join-Path $r2Root 'scripts/check_gear_mesh.py'))
-        Invoke-R2Python -ModelArguments @((Join-Path $r2Root 'simulation/calibrate.py'), '--duration', '22', '--cycles', '2', '--drag-config', (Join-Path $r2Root 'config/drag_candidate.json'))
+        Invoke-R2Python -ModelArguments @((Join-Path $r2Root 'simulation/calibrate.py'), '--duration', '22', '--cycles', '2', '--drag-config', (Join-Path $r2Root 'config/drag_candidate.json'), '--solver-config', (Join-Path $r2Root 'config/native_friction_trial.json'))
+        $latestRun = Get-Content -LiteralPath (Join-Path $r2Root 'reports/latest_run.json') -Raw | ConvertFrom-Json
+        Invoke-R2Python -ModelArguments @((Join-Path $r2Root 'scripts/evaluate_run.py'), (Join-Path $r2Root $latestRun.directory))
     }
 }
 finally { Pop-Location }

@@ -1,0 +1,107 @@
+{
+  "source_run": "20261105T034108_831686Z_drive",
+  "sample_time_s": 9.49999999998453,
+  "cases": [
+    {
+      "label": "recorded_effort",
+      "duration_s": 0.2999499999999751,
+      "finite_input_budget_Nm": 0.04187000335143305,
+      "time_constant_s": 0.0006,
+      "impedance_min_max": [
+        0.9,
+        0.95
+      ],
+      "cone": "pyramidal",
+      "peak_penetration_mm": 0.03732169549772275,
+      "start_angles_deg": {
+        "I": 2.840213179974782,
+        "M": -10.741561599558484,
+        "H": -14.895098186884022
+      },
+      "end_angles_deg": {
+        "I": 2.8345496720506422,
+        "M": -10.74112583218068,
+        "H": -14.895097418551321
+      },
+      "crossed_minus12_deg": false,
+      "warnings": {}
+    },
+    {
+      "label": "full_50mNm",
+      "duration_s": 0.2999499999999751,
+      "finite_input_budget_Nm": 0.05,
+      "time_constant_s": 0.0006,
+      "impedance_min_max": [
+        0.9,
+        0.95
+      ],
+      "cone": "pyramidal",
+      "peak_penetration_mm": 0.04223335408288295,
+      "start_angles_deg": {
+        "I": 2.840213179974782,
+        "M": -10.741561599558484,
+        "H": -14.895098186884022
+      },
+      "end_angles_deg": {
+        "I": 2.797229778712499,
+        "M": -10.729115472735826,
+        "H": -14.89509827677175
+      },
+      "crossed_minus12_deg": false,
+      "warnings": {}
+    },
+    {
+      "label": "elliptic_50mNm",
+      "duration_s": 0.2999499999999751,
+      "finite_input_budget_Nm": 0.05,
+      "time_constant_s": 0.0006,
+      "impedance_min_max": [
+        0.9,
+        0.95
+      ],
+      "cone": "elliptic",
+      "peak_penetration_mm": 0.13181335701855987,
+      "start_angles_deg": {
+        "I": 2.840213179974782,
+        "M": -10.741561599558484,
+        "H": -14.895098186884022
+      },
+      "end_angles_deg": {
+        "I": 2.131700395147396,
+        "M": -10.743520797398423,
+        "H": -14.891449033826207
+      },
+      "crossed_minus12_deg": false,
+      "warnings": {}
+    },
+    {
+      "label": "stiffer_elliptic_50mNm",
+      "duration_s": 0.2999499999999751,
+      "finite_input_budget_Nm": 0.05,
+      "time_constant_s": 0.0002,
+      "impedance_min_max": [
+        0.95,
+        0.995
+      ],
+      "cone": "elliptic",
+      "peak_penetration_mm": 0.03660730296325878,
+      "start_angles_deg": {
+        "I": 2.840213179974782,
+        "M": -10.741561599558484,
+        "H": -14.895098186884022
+      },
+      "end_angles_deg": {
+        "I": 2.8460090114595844,
+        "M": -10.733961617311051,
+        "H": -14.895127930848428
+      },
+      "crossed_minus12_deg": false,
+      "warnings": {}
+    }
+  ],
+  "source_sha256": "9bdcdb0b8c6775f7f6c172d4c8922bd8f32d06b6fffb7601bad2e705760a744f",
+  "recorded_state_sha256": "c437c1413c2f191293f05bae1d58ac10a7b14e0d8df24c019df47ffabf96bef1",
+  "diagnostic_only": true,
+  "complete_cycle_acceptance": false,
+  "hardware_verified": false
+}

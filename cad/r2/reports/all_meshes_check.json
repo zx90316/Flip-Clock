@@ -157,19 +157,19 @@
     {
       "id": "CM_carrier",
       "status": "PASS",
-      "triangles": 5572,
+      "triangles": 5642,
       "nonmanifold_edges": 0,
       "degenerate_triangles": 0,
-      "signed_volume_mm3": 1696.6335871918354,
+      "signed_volume_mm3": 1687.265935160387,
       "vertex_matching_mm": 1e-05
     },
     {
       "id": "CM_pawl",
       "status": "PASS",
-      "triangles": 2152,
+      "triangles": 2752,
       "nonmanifold_edges": 0,
       "degenerate_triangles": 0,
-      "signed_volume_mm3": 64.34072438780017,
+      "signed_volume_mm3": 74.13266721014008,
       "vertex_matching_mm": 1e-05
     },
     {
@@ -238,19 +238,19 @@
     {
       "id": "CH_carrier",
       "status": "PASS",
-      "triangles": 5572,
+      "triangles": 5642,
       "nonmanifold_edges": 0,
       "degenerate_triangles": 0,
-      "signed_volume_mm3": 1696.6335871918373,
+      "signed_volume_mm3": 1687.265935160392,
       "vertex_matching_mm": 1e-05
     },
     {
       "id": "CH_pawl",
       "status": "PASS",
-      "triangles": 2152,
+      "triangles": 2752,
       "nonmanifold_edges": 0,
       "degenerate_triangles": 0,
-      "signed_volume_mm3": 64.34072438780004,
+      "signed_volume_mm3": 74.13266521611999,
       "vertex_matching_mm": 1e-05
     },
     {

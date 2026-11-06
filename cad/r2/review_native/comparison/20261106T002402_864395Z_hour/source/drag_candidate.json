@@ -1,0 +1,17 @@
+{
+  "status": "simulation_candidate_not_measured",
+  "process": "custom cut felt rings; printed parts remain unchanged",
+  "outer_radius_mm": 10,
+  "inner_radius_mm": 8.1,
+  "installed_thickness_mm": 1.1,
+  "proposed_free_thickness_mm": 1.5,
+  "x_abs_mm": 73.05,
+  "friction_coefficient_assumed": 0.2,
+  "target_drag_Nm": {"M": 0.005, "H": 0.020},
+  "torque_limit_Nm": 0.05,
+  "release_deg": 0.2,
+  "coast_s": 1,
+  "drive_timeout_s": 4.5,
+  "hardware_verified": false,
+  "notes": ["Force-equivalent Coulomb drag; not a measured friction material law.", "Rings occupy the existing gap between stationary outer bearing face and rotating service knob.", "Axial preload must be adjusted and measured; nominal free thickness does not establish preload.", "Calibrate tangential force with detent roller lifted; do not include detent torque in the drag measurement."]
+}

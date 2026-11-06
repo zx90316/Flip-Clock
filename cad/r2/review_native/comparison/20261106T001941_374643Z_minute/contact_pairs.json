@@ -1,0 +1,542 @@
+{
+  "pawl_M / ring_M": {
+    "sample_count": 16524,
+    "peak_force_N": 0.6479620686921034,
+    "peak_penetration_mm": 0.03264665681111065
+  },
+  "pawl_H / ring_H": {
+    "sample_count": 14580,
+    "peak_force_N": 1.1794484648079107,
+    "peak_penetration_mm": 0.05471623318053028
+  },
+  "drum_M / roller_M": {
+    "sample_count": 21436,
+    "peak_force_N": 0.57990539323146,
+    "peak_penetration_mm": 0.15744304889744937
+  },
+  "drum_H / roller_H": {
+    "sample_count": 18246,
+    "peak_force_N": 0.2749472307299432,
+    "peak_penetration_mm": 0.0016245567258230311
+  },
+  "FM_00 / world": {
+    "sample_count": 562,
+    "peak_force_N": 0.2302808121591338,
+    "peak_penetration_mm": 0.004973850234283751
+  },
+  "FH_00 / world": {
+    "sample_count": 12846,
+    "peak_force_N": 0.013427059379163976,
+    "peak_penetration_mm": 0.0002935896770171718
+  },
+  "FM_16 / FM_17": {
+    "sample_count": 11818,
+    "peak_force_N": 0.5871591661749725,
+    "peak_penetration_mm": 0.03155943159953412
+  },
+  "FM_17 / FM_18": {
+    "sample_count": 11790,
+    "peak_force_N": 0.017056112383335074,
+    "peak_penetration_mm": 0.010077647533964175
+  },
+  "FM_18 / FM_19": {
+    "sample_count": 12396,
+    "peak_force_N": 0.1128019078525915,
+    "peak_penetration_mm": 0.006488074914048125
+  },
+  "FM_19 / FM_20": {
+    "sample_count": 12800,
+    "peak_force_N": 0.020103610264936598,
+    "peak_penetration_mm": 0.003098097363865569
+  },
+  "FM_20 / FM_21": {
+    "sample_count": 12812,
+    "peak_force_N": 0.018061922888286827,
+    "peak_penetration_mm": 0.002892805358341746
+  },
+  "FM_21 / FM_22": {
+    "sample_count": 12812,
+    "peak_force_N": 0.017505726075862132,
+    "peak_penetration_mm": 0.0026002807177459676
+  },
+  "FM_22 / FM_23": {
+    "sample_count": 12818,
+    "peak_force_N": 0.017542394154911586,
+    "peak_penetration_mm": 0.0026297880952636465
+  },
+  "FM_23 / FM_24": {
+    "sample_count": 12798,
+    "peak_force_N": 0.02157955025739314,
+    "peak_penetration_mm": 0.0036065235319367507
+  },
+  "FM_24 / FM_25": {
+    "sample_count": 12808,
+    "peak_force_N": 0.01720911563731751,
+    "peak_penetration_mm": 0.0064755194462982986
+  },
+  "FM_25 / FM_26": {
+    "sample_count": 12804,
+    "peak_force_N": 1.0135951085030457,
+    "peak_penetration_mm": 0.0011027771289692804
+  },
+  "input / pawl_M": {
+    "sample_count": 7780,
+    "peak_force_N": 1.2684387707047757,
+    "peak_penetration_mm": 0.012284166566413198
+  },
+  "h_idler_0 / ring_H": {
+    "sample_count": 11199,
+    "peak_force_N": 0.9859945443930277,
+    "peak_penetration_mm": 0.0017063276320337412
+  },
+  "FM_00 / FM_01": {
+    "sample_count": 2796,
+    "peak_force_N": 0.2666257364876859,
+    "peak_penetration_mm": 0.021745122217704804
+  },
+  "FM_13 / FM_14": {
+    "sample_count": 10918,
+    "peak_force_N": 0.39451887188933643,
+    "peak_penetration_mm": 0.05983399474539567
+  },
+  "FM_28 / FM_29": {
+    "sample_count": 12814,
+    "peak_force_N": 0.0479945730913438,
+    "peak_penetration_mm": 0.0059641611766042026
+  },
+  "FH_06 / FH_07": {
+    "sample_count": 12848,
+    "peak_force_N": 0.01543653393134015,
+    "peak_penetration_mm": 0.008041177418409234
+  },
+  "FH_10 / FH_11": {
+    "sample_count": 12848,
+    "peak_force_N": 0.011322679301532135,
+    "peak_penetration_mm": 0.00240882083769909
+  },
+  "FM_11 / FM_12": {
+    "sample_count": 10792,
+    "peak_force_N": 0.022753587891187643,
+    "peak_penetration_mm": 0.005662985086871725
+  },
+  "FM_15 / FM_16": {
+    "sample_count": 11888,
+    "peak_force_N": 0.30095718741365995,
+    "peak_penetration_mm": 0.041074077057035766
+  },
+  "FH_05 / FH_06": {
+    "sample_count": 12844,
+    "peak_force_N": 0.013726832826813556,
+    "peak_penetration_mm": 0.004361247289339686
+  },
+  "FH_07 / FH_08": {
+    "sample_count": 12848,
+    "peak_force_N": 0.052768325846948544,
+    "peak_penetration_mm": 0.0010403088253039053
+  },
+  "FM_10 / FM_11": {
+    "sample_count": 10236,
+    "peak_force_N": 0.35624388716529154,
+    "peak_penetration_mm": 0.023518519327514087
+  },
+  "FM_12 / FM_13": {
+    "sample_count": 10740,
+    "peak_force_N": 0.03242359907845978,
+    "peak_penetration_mm": 0.04173520586859603
+  },
+  "FM_14 / FM_15": {
+    "sample_count": 11302,
+    "peak_force_N": 0.3372757334031067,
+    "peak_penetration_mm": 0.024263451704879507
+  },
+  "FM_31 / FM_32": {
+    "sample_count": 12766,
+    "peak_force_N": 0.1406447031816496,
+    "peak_penetration_mm": 0.004578751169339245
+  },
+  "FH_08 / FH_09": {
+    "sample_count": 12840,
+    "peak_force_N": 0.030327944628141798,
+    "peak_penetration_mm": 6.701394024419666e-05
+  },
+  "input / pawl_H": {
+    "sample_count": 138,
+    "peak_force_N": 0.020621145615931993,
+    "peak_penetration_mm": 0.000795543154060499
+  },
+  "h_idler_0 / h_idler_1": {
+    "sample_count": 11052,
+    "peak_force_N": 0.5726439716969559,
+    "peak_penetration_mm": 0.00446786584592086
+  },
+  "FM_09 / FM_10": {
+    "sample_count": 9346,
+    "peak_force_N": 1.7387644149477823,
+    "peak_penetration_mm": 0.0833929987896344
+  },
+  "FM_27 / FM_28": {
+    "sample_count": 12792,
+    "peak_force_N": 0.017574167164676375,
+    "peak_penetration_mm": 0.0011162364239666097
+  },
+  "FH_09 / FH_10": {
+    "sample_count": 12842,
+    "peak_force_N": 0.013053875370299228,
+    "peak_penetration_mm": 0.00021495701094861633
+  },
+  "idler / ring_M": {
+    "sample_count": 11745,
+    "peak_force_N": 0.7396844138566493,
+    "peak_penetration_mm": 0.003743798046452281
+  },
+  "drum_M / idler": {
+    "sample_count": 11406,
+    "peak_force_N": 0.7368999417269291,
+    "peak_penetration_mm": 0.004290245625512872
+  },
+  "FM_26 / FM_27": {
+    "sample_count": 12798,
+    "peak_force_N": 0.01725064037978298,
+    "peak_penetration_mm": 4.3183518332381814e-05
+  },
+  "FH_04 / FH_05": {
+    "sample_count": 12842,
+    "peak_force_N": 0.012029705954370905,
+    "peak_penetration_mm": 0.0002326081130457634
+  },
+  "FH_11 / FH_12": {
+    "sample_count": 12818,
+    "peak_force_N": 0.010229090623884515,
+    "peak_penetration_mm": 0.0011007956929999347
+  },
+  "FM_01 / FM_02": {
+    "sample_count": 3638,
+    "peak_force_N": 0.43103320804350426,
+    "peak_penetration_mm": 0.02701524371175447
+  },
+  "FM_08 / FM_09": {
+    "sample_count": 8480,
+    "peak_force_N": 0.17545021210449574,
+    "peak_penetration_mm": 0.019005036072334548
+  },
+  "FH_00 / FH_01": {
+    "sample_count": 12842,
+    "peak_force_N": 0.009173229302983772,
+    "peak_penetration_mm": 0.00035498665613129844
+  },
+  "FM_33 / FM_34": {
+    "sample_count": 12152,
+    "peak_force_N": 0.01667104861047172,
+    "peak_penetration_mm": 0.0007796208537967558
+  },
+  "FM_29 / FM_30": {
+    "sample_count": 12806,
+    "peak_force_N": 0.017768627569415663,
+    "peak_penetration_mm": 5.749390038685501e-05
+  },
+  "FM_30 / FM_31": {
+    "sample_count": 12796,
+    "peak_force_N": 0.017629020782043002,
+    "peak_penetration_mm": 5.436018901762287e-05
+  },
+  "FH_03 / FH_04": {
+    "sample_count": 12836,
+    "peak_force_N": 0.5448506977982405,
+    "peak_penetration_mm": 0.00533465656630726
+  },
+  "FM_34 / FM_35": {
+    "sample_count": 11236,
+    "peak_force_N": 0.01607131142786937,
+    "peak_penetration_mm": 0.002195410461383525
+  },
+  "FM_35 / FM_36": {
+    "sample_count": 10484,
+    "peak_force_N": 0.01541915541565741,
+    "peak_penetration_mm": 0.00048439541217487657
+  },
+  "FH_12 / FH_13": {
+    "sample_count": 12684,
+    "peak_force_N": 0.018288121648484746,
+    "peak_penetration_mm": 0.00012926784506547473
+  },
+  "FH_13 / FH_14": {
+    "sample_count": 4,
+    "peak_force_N": 0.02252144131891558,
+    "peak_penetration_mm": 0.00756185978298056
+  },
+  "FH_14 / FH_15": {
+    "sample_count": 6,
+    "peak_force_N": 0.011985077408565142,
+    "peak_penetration_mm": 0.00666823200297297
+  },
+  "drum_H / h_idler_1": {
+    "sample_count": 12804,
+    "peak_force_N": 0.8301414806978379,
+    "peak_penetration_mm": 0.0037037389520968864
+  },
+  "FM_02 / FM_03": {
+    "sample_count": 4390,
+    "peak_force_N": 0.3055405048690244,
+    "peak_penetration_mm": 0.010499562279609777
+  },
+  "FM_07 / FM_08": {
+    "sample_count": 7542,
+    "peak_force_N": 0.20758398864013752,
+    "peak_penetration_mm": 0.014383920760090759
+  },
+  "FM_53 / FM_54": {
+    "sample_count": 6,
+    "peak_force_N": 0.09413354440577427,
+    "peak_penetration_mm": 0.012683847004294138
+  },
+  "FM_54 / FM_55": {
+    "sample_count": 4,
+    "peak_force_N": 0.0033970707194234443,
+    "peak_penetration_mm": 0.019141505871736738
+  },
+  "FM_55 / FM_56": {
+    "sample_count": 4,
+    "peak_force_N": 0.08638494429791678,
+    "peak_penetration_mm": 0.015709172583714938
+  },
+  "FH_15 / FH_16": {
+    "sample_count": 4,
+    "peak_force_N": 0.006988910875464018,
+    "peak_penetration_mm": 0.006821594412239869
+  },
+  "FH_16 / FH_17": {
+    "sample_count": 4,
+    "peak_force_N": 0.002393071540278867,
+    "peak_penetration_mm": 0.006970493336469572
+  },
+  "FM_32 / FM_33": {
+    "sample_count": 12642,
+    "peak_force_N": 0.017098985100965414,
+    "peak_penetration_mm": 0.00022022477684326063
+  },
+  "FM_58 / FM_59": {
+    "sample_count": 1946,
+    "peak_force_N": 0.15444942659271974,
+    "peak_penetration_mm": 0.02219281858447884
+  },
+  "FH_17 / FH_18": {
+    "sample_count": 2,
+    "peak_force_N": 0.0,
+    "peak_penetration_mm": 0.0083702929864044
+  },
+  "FH_20 / FH_21": {
+    "sample_count": 2,
+    "peak_force_N": 0.0663079443745719,
+    "peak_penetration_mm": 0.013514509355527914
+  },
+  "FM_49 / FM_50": {
+    "sample_count": 4,
+    "peak_force_N": 1.2312455291999915,
+    "peak_penetration_mm": 0.016112863772984765
+  },
+  "FH_18 / FH_19": {
+    "sample_count": 2,
+    "peak_force_N": 0.03158279216902253,
+    "peak_penetration_mm": 0.010374119594974392
+  },
+  "FH_19 / FH_20": {
+    "sample_count": 4,
+    "peak_force_N": 0.019369653725118566,
+    "peak_penetration_mm": 0.04642560925433346
+  },
+  "FM_36 / FM_37": {
+    "sample_count": 9644,
+    "peak_force_N": 0.015382727689620738,
+    "peak_penetration_mm": 0.0015445816869886402
+  },
+  "FM_03 / FM_04": {
+    "sample_count": 5070,
+    "peak_force_N": 0.2717054133839843,
+    "peak_penetration_mm": 0.027198153468810358
+  },
+  "FH_01 / FH_02": {
+    "sample_count": 12814,
+    "peak_force_N": 0.004602477698568446,
+    "peak_penetration_mm": 0.047306782084216396
+  },
+  "FH_22 / FH_23": {
+    "sample_count": 12270,
+    "peak_force_N": 0.04211620170811607,
+    "peak_penetration_mm": 0.014434740429644155
+  },
+  "FM_45 / FM_46": {
+    "sample_count": 2114,
+    "peak_force_N": 0.008758737996847078,
+    "peak_penetration_mm": 0.005208619343344007
+  },
+  "FM_04 / FM_05": {
+    "sample_count": 6010,
+    "peak_force_N": 0.02765265883532205,
+    "peak_penetration_mm": 0.020541485392253523
+  },
+  "FM_57 / FM_58": {
+    "sample_count": 1236,
+    "peak_force_N": 0.05069332359490794,
+    "peak_penetration_mm": 0.010961460713288896
+  },
+  "FM_56 / FM_57": {
+    "sample_count": 358,
+    "peak_force_N": 0.009007469232249404,
+    "peak_penetration_mm": 0.0014369963585056334
+  },
+  "FH_21 / FH_22": {
+    "sample_count": 6,
+    "peak_force_N": 0.008928393695884699,
+    "peak_penetration_mm": 0.030157773672583085
+  },
+  "FM_51 / FM_52": {
+    "sample_count": 2,
+    "peak_force_N": 0.011392127136335074,
+    "peak_penetration_mm": 0.01332622701688828
+  },
+  "FM_05 / FM_06": {
+    "sample_count": 6692,
+    "peak_force_N": 0.046162607411608936,
+    "peak_penetration_mm": 0.014441752620085414
+  },
+  "FM_46 / FM_47": {
+    "sample_count": 1284,
+    "peak_force_N": 0.004746844849460164,
+    "peak_penetration_mm": 0.0026933094531107152
+  },
+  "FM_01 / world": {
+    "sample_count": 844,
+    "peak_force_N": 0.5032691903578891,
+    "peak_penetration_mm": 0.023785324737560048
+  },
+  "FM_00 / FM_59": {
+    "sample_count": 2188,
+    "peak_force_N": 0.1582460943489864,
+    "peak_penetration_mm": 0.01792796760218128
+  },
+  "FM_02 / world": {
+    "sample_count": 689,
+    "peak_force_N": 0.09540239388511984,
+    "peak_penetration_mm": 0.00028181591278056596
+  },
+  "FM_03 / world": {
+    "sample_count": 775,
+    "peak_force_N": 0.09969214252144461,
+    "peak_penetration_mm": 0.007992385072647015
+  },
+  "FM_04 / world": {
+    "sample_count": 864,
+    "peak_force_N": 0.0605749817778736,
+    "peak_penetration_mm": 0.0020336967491885807
+  },
+  "FM_06 / FM_07": {
+    "sample_count": 4616,
+    "peak_force_N": 0.03273467643757093,
+    "peak_penetration_mm": 0.006728770576015222
+  },
+  "FM_37 / FM_38": {
+    "sample_count": 8722,
+    "peak_force_N": 0.019435661945194766,
+    "peak_penetration_mm": 0.00043035070441943806
+  },
+  "FM_05 / world": {
+    "sample_count": 659,
+    "peak_force_N": 0.061772227656256416,
+    "peak_penetration_mm": 0.000239230513816497
+  },
+  "FM_38 / FM_39": {
+    "sample_count": 7996,
+    "peak_force_N": 0.013825853183355639,
+    "peak_penetration_mm": 0.0010512602361674615
+  },
+  "FM_06 / world": {
+    "sample_count": 825,
+    "peak_force_N": 0.03465523927278759,
+    "peak_penetration_mm": 0.0024356987193074058
+  },
+  "FM_39 / FM_40": {
+    "sample_count": 7096,
+    "peak_force_N": 0.01271480188651592,
+    "peak_penetration_mm": 3.204905312247549e-05
+  },
+  "FM_07 / world": {
+    "sample_count": 698,
+    "peak_force_N": 0.23180238110100224,
+    "peak_penetration_mm": 0.0001989767310369751
+  },
+  "FM_40 / FM_41": {
+    "sample_count": 6310,
+    "peak_force_N": 0.010684649202428523,
+    "peak_penetration_mm": 4.216242727414694e-05
+  },
+  "FM_08 / world": {
+    "sample_count": 788,
+    "peak_force_N": 0.08164464875077011,
+    "peak_penetration_mm": 0.00031466408588101436
+  },
+  "FM_41 / FM_42": {
+    "sample_count": 5450,
+    "peak_force_N": 0.010336143419921912,
+    "peak_penetration_mm": 0.00024267473775632542
+  },
+  "FM_09 / world": {
+    "sample_count": 849,
+    "peak_force_N": 0.0957084406329075,
+    "peak_penetration_mm": 0.013423923420458408
+  },
+  "FM_42 / FM_43": {
+    "sample_count": 4524,
+    "peak_force_N": 0.009308388151212871,
+    "peak_penetration_mm": 0.001513685591288958
+  },
+  "FM_10 / world": {
+    "sample_count": 669,
+    "peak_force_N": 0.09705079800286831,
+    "peak_penetration_mm": 0.004786585880978367
+  },
+  "FM_43 / FM_44": {
+    "sample_count": 3790,
+    "peak_force_N": 0.008843064240396353,
+    "peak_penetration_mm": 0.0005157351655416068
+  },
+  "FM_11 / world": {
+    "sample_count": 820,
+    "peak_force_N": 0.026456383980386678,
+    "peak_penetration_mm": 0.0002701636654321905
+  },
+  "FM_44 / FM_45": {
+    "sample_count": 2890,
+    "peak_force_N": 0.006921148635980645,
+    "peak_penetration_mm": 0.00031289964705810133
+  },
+  "FM_12 / world": {
+    "sample_count": 720,
+    "peak_force_N": 0.037047786784224115,
+    "peak_penetration_mm": 0.000178171994825552
+  },
+  "FM_13 / world": {
+    "sample_count": 777,
+    "peak_force_N": 0.4382455231980848,
+    "peak_penetration_mm": 0.0007098244268103878
+  },
+  "FM_14 / world": {
+    "sample_count": 877,
+    "peak_force_N": 0.06549937709396789,
+    "peak_penetration_mm": 0.009856077260669581
+  },
+  "FM_47 / FM_48": {
+    "sample_count": 376,
+    "peak_force_N": 0.06219779412851997,
+    "peak_penetration_mm": 8.557057309934323e-05
+  },
+  "FM_15 / world": {
+    "sample_count": 396,
+    "peak_force_N": 0.028516989449218495,
+    "peak_penetration_mm": 0.00017862180071222407
+  },
+  "FM_48 / FM_49": {
+    "sample_count": 2,
+    "peak_force_N": 0.00041204308826638293,
+    "peak_penetration_mm": 0.0012038951292745784
+  }
+}

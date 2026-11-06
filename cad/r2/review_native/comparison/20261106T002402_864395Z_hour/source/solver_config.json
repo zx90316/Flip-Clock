@@ -1,0 +1,20 @@
+{
+  "status": "numerical_trial_not_material_calibration",
+  "collision_pipeline": "native",
+  "contact": {
+    "time_constant_s": 0.0006,
+    "impedance_min": 0.9,
+    "impedance_max": 0.95,
+    "width_m": 0.0001,
+    "cone": "pyramidal"
+  },
+  "joint_friction": {
+    "time_constant_s": 0.0002,
+    "impedance": 0.999
+  },
+  "notes": [
+    "Keep contact parameters, geometry, motor and physical drag targets unchanged.",
+    "Isolate DOF-friction regularization; default friction allows static creep.",
+    "Not a measured material constitutive law or hardware validation."
+  ]
+}

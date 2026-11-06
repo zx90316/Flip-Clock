@@ -1,0 +1,54 @@
+{
+  "case": "drive",
+  "duration": 22.0,
+  "dt": 5e-05,
+  "gravity": 9.81,
+  "friction": 0.25,
+  "spring_scale": 1,
+  "speed": 0.22,
+  "release_deg": 0.2,
+  "settle": 0.6,
+  "coast": 1,
+  "drive_timeout": 4.5,
+  "minute_steps": 1,
+  "hour_steps": 1,
+  "checkpoint": null,
+  "initial_flap_bias_deg": 2,
+  "torque_limit": 0.05,
+  "velocity_kp": 0.02,
+  "velocity_ki": 0.15,
+  "trial_plate_thickness": null,
+  "model_dir": null,
+  "cycles": 2,
+  "output_drag": 0.005,
+  "hour_output_drag": 0.02,
+  "drag_config": "cad\\r2\\config\\drag_candidate.json",
+  "solver_config": "cad\\r2\\config\\native_friction_trial.json",
+  "solver_parameters": {
+    "status": "numerical_trial_not_material_calibration",
+    "collision_pipeline": "native",
+    "contact": {
+      "time_constant_s": 0.0006,
+      "impedance_min": 0.9,
+      "impedance_max": 0.95,
+      "width_m": 0.0001,
+      "cone": "pyramidal"
+    },
+    "joint_friction": {
+      "time_constant_s": 0.0002,
+      "impedance": 0.999
+    },
+    "notes": [
+      "Keep contact parameters, geometry, motor and physical drag targets unchanged.",
+      "Isolate DOF-friction regularization; default friction allows static creep.",
+      "Not a measured material constitutive law or hardware validation."
+    ]
+  },
+  "solver_config_sha256": "c8e1a1dcd2c26a545c0344b785418218d51d80f334566fcacad105462aa21a16",
+  "drag_config_sha256": "af881752b13ba7183d70182693e02e5c11389cf1ddf1b2f841e6de7e17276b0f",
+  "source_sha256": "9904dab7e4e8063815652ca54e2570941c89785969b13566a8494be98c0195c4",
+  "runtime_sha256": "166ceff7c0478524e16986b084e7ef4d7956fb111b0410b4f3d5d3712e54d495",
+  "model_sha256": "40e3771d48873bab323105051e09d03f771204227706542ea521aec79f543e4d",
+  "controller_source": "source/calibrate.py",
+  "units": "SI"
+}

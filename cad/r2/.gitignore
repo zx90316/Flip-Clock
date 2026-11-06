@@ -6,7 +6,7 @@
 __pycache__/
 *.pyc
 *.mjb
-/review/model/compiled.json
+compiled.json
 MUJOCO_LOG.TXT
 /reports/*_build.log
 /reports/*_check.log

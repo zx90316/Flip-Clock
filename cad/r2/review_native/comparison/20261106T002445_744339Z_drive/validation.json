@@ -1,0 +1,126 @@
+{
+  "status": "PASS_NOMINAL_SIMULATION",
+  "run_id": "20261106T002445_744339Z_drive",
+  "criteria": {
+    "M_error_deg": 0.25,
+    "H_error_deg": 0.4,
+    "inactive_peak_excursion_deg": 0.25,
+    "settling_window_s": 0.25,
+    "settling_range_deg": 0.1,
+    "settling_mean_abs_velocity_deg_s": 1.0,
+    "initial_penetration_mm": 0.001,
+    "peak_penetration_mm": 0.2,
+    "net_positive_axle_friction_work_J": 1e-06
+  },
+  "case": "drive",
+  "requested_commands": 4,
+  "all_commanded_cycles_included": true,
+  "steps": [
+    {
+      "branch": "M",
+      "cycle": 1,
+      "target_deg": -6.000000000000001,
+      "final_deg": -6.006129900664518,
+      "travel_deg": -5.998483298337644,
+      "step_error_deg": 0.0015167016623562901,
+      "error_deg": -0.006129900664516858,
+      "inactive_drift_deg": 0.0006821854614001456,
+      "inactive_reference_deg": 0.0,
+      "inactive_peak_excursion_deg": 0.0017689584341008084,
+      "coast_seconds": 1,
+      "drive_end_reason": "capture_basin",
+      "status": "PASS",
+      "settling_range_deg": {
+        "M": 5.2400406578279046e-05,
+        "H": 8.631443074573258e-05
+      },
+      "settling_mean_abs_velocity_deg_s": {
+        "M": 0.00021388925975397645,
+        "H": 0.0003523312489957018
+      },
+      "window_samples": 50
+    },
+    {
+      "branch": "H",
+      "cycle": 1,
+      "target_deg": -14.999999999999998,
+      "final_deg": -14.814627011542798,
+      "travel_deg": -14.813540238570097,
+      "step_error_deg": 0.18645976142990328,
+      "error_deg": 0.1853729884572012,
+      "inactive_drift_deg": -0.001102724698390659,
+      "inactive_reference_deg": -6.000000000000001,
+      "inactive_peak_excursion_deg": 0.007292117850154987,
+      "coast_seconds": 1,
+      "drive_end_reason": "capture_basin",
+      "status": "PASS",
+      "settling_range_deg": {
+        "M": 1.2315403716378626e-05,
+        "H": 6.562627199890869e-05
+      },
+      "settling_mean_abs_velocity_deg_s": {
+        "M": 5.02595874636633e-05,
+        "H": 0.0002678793851290912
+      },
+      "window_samples": 50
+    },
+    {
+      "branch": "M",
+      "cycle": 2,
+      "target_deg": -12.000000000000002,
+      "final_deg": -12.007139989559716,
+      "travel_deg": -5.999907364196809,
+      "step_error_deg": 9.263580319096576e-05,
+      "error_deg": -0.007139989559715739,
+      "inactive_drift_deg": -0.044522198724917306,
+      "inactive_reference_deg": -14.999999999999998,
+      "inactive_peak_excursion_deg": 0.18537296175582127,
+      "coast_seconds": 1,
+      "drive_end_reason": "capture_basin",
+      "status": "PASS",
+      "settling_range_deg": {
+        "M": 1.8986850069069305e-05,
+        "H": 1.200496200226553e-07
+      },
+      "settling_mean_abs_velocity_deg_s": {
+        "M": 7.750815931411552e-05,
+        "H": 4.994059778938287e-07
+      },
+      "window_samples": 50
+    },
+    {
+      "branch": "H",
+      "cycle": 2,
+      "target_deg": -29.999999999999996,
+      "final_deg": -29.80439125991958,
+      "travel_deg": -14.945242049651863,
+      "step_error_deg": 0.054757950348136575,
+      "error_deg": 0.19560874008041917,
+      "inactive_drift_deg": 0.0032467188361723813,
+      "inactive_reference_deg": -12.000000000000002,
+      "inactive_peak_excursion_deg": 0.019978270577640365,
+      "coast_seconds": 1,
+      "drive_end_reason": "capture_basin",
+      "status": "PASS",
+      "settling_range_deg": {
+        "M": 7.453518599476183e-05,
+        "H": 2.4732150315287527e-05
+      },
+      "settling_mean_abs_velocity_deg_s": {
+        "M": 0.00030422525139351937,
+        "H": 0.00010081115077204042
+      },
+      "window_samples": 50
+    }
+  ],
+  "peak_penetration_mm": 0.19618280188749715,
+  "initial_penetration_mm": 0.0,
+  "axle_friction_work_J": {
+    "M": -0.0011327447214118586,
+    "H": -0.010409380997089046
+  },
+  "source_sha256": "7563e8f0f659107c69c772a8f2694f3dee26755fb9c377464dd6a797b8cc7d61",
+  "scope": "Recorded 200-Hz output traces and all-step penetration maximum. No hardware, lifetime, material or display-readability validation.",
+  "hardware_verified": false,
+  "physics_predictive_validation": false
+}

@@ -1,0 +1,390 @@
+{
+  "status": "NOT_PASSED",
+  "run_id": "20261106T001941_374643Z_minute",
+  "criteria": {
+    "M_error_deg": 0.25,
+    "H_error_deg": 0.4,
+    "inactive_peak_excursion_deg": 0.25,
+    "settling_window_s": 0.25,
+    "settling_range_deg": 0.1,
+    "settling_mean_abs_velocity_deg_s": 1.0,
+    "initial_penetration_mm": 0.001,
+    "peak_penetration_mm": 0.2,
+    "net_positive_axle_friction_work_J": 1e-06
+  },
+  "case": "minute",
+  "requested_commands": 15,
+  "all_commanded_cycles_included": true,
+  "steps": [
+    {
+      "branch": "M",
+      "cycle": 1,
+      "target_deg": -6.000000000000001,
+      "final_deg": -6.006849148275289,
+      "travel_deg": -5.999845720692818,
+      "step_error_deg": 0.00015427930718203697,
+      "error_deg": -0.0068491482752886575,
+      "inactive_drift_deg": 0.11038406160172964,
+      "inactive_reference_deg": 0.0,
+      "inactive_peak_excursion_deg": 0.12009667935296434,
+      "coast_seconds": 1,
+      "drive_end_reason": "capture_basin",
+      "status": "PASS",
+      "settling_range_deg": {
+        "M": 4.155575320208271e-05,
+        "H": 0.002819891114287071
+      },
+      "settling_mean_abs_velocity_deg_s": {
+        "M": 0.00040659985216707725,
+        "H": 0.011489529004095089
+      },
+      "window_samples": 50
+    },
+    {
+      "branch": "M",
+      "cycle": 2,
+      "target_deg": -12.000000000000002,
+      "final_deg": -12.007009189840577,
+      "travel_deg": -6.000160041565287,
+      "step_error_deg": -0.00016004156528737212,
+      "error_deg": -0.007009189840575549,
+      "inactive_drift_deg": -0.11016277526695362,
+      "inactive_reference_deg": 0.0,
+      "inactive_peak_excursion_deg": 0.41466910100606535,
+      "coast_seconds": 1,
+      "drive_end_reason": "capture_basin",
+      "status": "FAIL",
+      "settling_range_deg": {
+        "M": 2.7489443549910675e-05,
+        "H": 1.2830371511117142e-05
+      },
+      "settling_mean_abs_velocity_deg_s": {
+        "M": 0.00027308637605215504,
+        "H": 0.0001089357281245408
+      },
+      "window_samples": 50
+    },
+    {
+      "branch": "M",
+      "cycle": 3,
+      "target_deg": -18.0,
+      "final_deg": -18.0069833118785,
+      "travel_deg": -5.999974122037924,
+      "step_error_deg": 2.5877962076314986e-05,
+      "error_deg": -0.006983311878500587,
+      "inactive_drift_deg": 0.0038413533612053725,
+      "inactive_reference_deg": 0.0,
+      "inactive_peak_excursion_deg": 0.17078228100752296,
+      "coast_seconds": 1,
+      "drive_end_reason": "capture_basin",
+      "status": "PASS",
+      "settling_range_deg": {
+        "M": 2.739464192202945e-05,
+        "H": 3.639419523448692e-06
+      },
+      "settling_mean_abs_velocity_deg_s": {
+        "M": 0.0002663210446423653,
+        "H": 5.897196325463642e-05
+      },
+      "window_samples": 50
+    },
+    {
+      "branch": "M",
+      "cycle": 4,
+      "target_deg": -24.000000000000004,
+      "final_deg": -24.00690104134789,
+      "travel_deg": -5.999917729469391,
+      "step_error_deg": 8.227053060938516e-05,
+      "error_deg": -0.006901041347888916,
+      "inactive_drift_deg": 0.2970272682529377,
+      "inactive_reference_deg": 0.0,
+      "inactive_peak_excursion_deg": 0.30955318477699895,
+      "coast_seconds": 1,
+      "drive_end_reason": "capture_basin",
+      "status": "FAIL",
+      "settling_range_deg": {
+        "M": 2.117872893592221e-05,
+        "H": 0.019080538542982695
+      },
+      "settling_mean_abs_velocity_deg_s": {
+        "M": 0.00021084792025216054,
+        "H": 0.0778849213121101
+      },
+      "window_samples": 50
+    },
+    {
+      "branch": "M",
+      "cycle": 5,
+      "target_deg": -30.000000000000004,
+      "final_deg": -30.007363949669095,
+      "travel_deg": -6.0004629083212055,
+      "step_error_deg": -0.00046290832120554626,
+      "error_deg": -0.0073639496690922875,
+      "inactive_drift_deg": -0.3185151478157708,
+      "inactive_reference_deg": 0.0,
+      "inactive_peak_excursion_deg": 0.40594644686593806,
+      "coast_seconds": 1,
+      "drive_end_reason": "capture_basin",
+      "status": "FAIL",
+      "settling_range_deg": {
+        "M": 2.890879823169712e-05,
+        "H": 1.5899496727447143e-06
+      },
+      "settling_mean_abs_velocity_deg_s": {
+        "M": 0.0027842048769452475,
+        "H": 0.0005426376815384159
+      },
+      "window_samples": 50
+    },
+    {
+      "branch": "M",
+      "cycle": 6,
+      "target_deg": -36.00000000000001,
+      "final_deg": -36.00692969923712,
+      "travel_deg": -5.99956574956802,
+      "step_error_deg": 0.00043425043198030977,
+      "error_deg": -0.006929699237109824,
+      "inactive_drift_deg": 0.1837273717142901,
+      "inactive_reference_deg": 0.0,
+      "inactive_peak_excursion_deg": 0.2359426606502764,
+      "coast_seconds": 1,
+      "drive_end_reason": "capture_basin",
+      "status": "PASS",
+      "settling_range_deg": {
+        "M": 2.0757066032217608e-05,
+        "H": 0.009079967895306296
+      },
+      "settling_mean_abs_velocity_deg_s": {
+        "M": 0.0002029046614669413,
+        "H": 0.03705528717149495
+      },
+      "window_samples": 50
+    },
+    {
+      "branch": "M",
+      "cycle": 7,
+      "target_deg": -42.00000000000001,
+      "final_deg": -42.00704600514832,
+      "travel_deg": -6.000116305911203,
+      "step_error_deg": -0.00011630591120326272,
+      "error_deg": -0.007046005148311223,
+      "inactive_drift_deg": -0.1660174012573248,
+      "inactive_reference_deg": 0.0,
+      "inactive_peak_excursion_deg": 0.4171851812275032,
+      "coast_seconds": 1,
+      "drive_end_reason": "capture_basin",
+      "status": "FAIL",
+      "settling_range_deg": {
+        "M": 2.5498752819430592e-05,
+        "H": 4.721555616088793e-06
+      },
+      "settling_mean_abs_velocity_deg_s": {
+        "M": 0.0002479403462067099,
+        "H": 7.734245804943237e-05
+      },
+      "window_samples": 50
+    },
+    {
+      "branch": "M",
+      "cycle": 8,
+      "target_deg": -48.00000000000001,
+      "final_deg": -48.00697849153184,
+      "travel_deg": -5.9999324863835195,
+      "step_error_deg": 6.751361648049681e-05,
+      "error_deg": -0.006978491531828931,
+      "inactive_drift_deg": 0.003650034367430941,
+      "inactive_reference_deg": 0.0,
+      "inactive_peak_excursion_deg": 0.17784999916353061,
+      "coast_seconds": 1,
+      "drive_end_reason": "capture_basin",
+      "status": "PASS",
+      "settling_range_deg": {
+        "M": 2.225810447242793e-05,
+        "H": 2.7482509995183785e-06
+      },
+      "settling_mean_abs_velocity_deg_s": {
+        "M": 0.00021936841283757498,
+        "H": 6.558658698894578e-05
+      },
+      "window_samples": 50
+    },
+    {
+      "branch": "M",
+      "cycle": 9,
+      "target_deg": -54.000000000000014,
+      "final_deg": -54.00688999578829,
+      "travel_deg": -5.999911504256455,
+      "step_error_deg": 8.849574354474754e-05,
+      "error_deg": -0.006889995788282499,
+      "inactive_drift_deg": 0.2919536171753774,
+      "inactive_reference_deg": 0.0,
+      "inactive_peak_excursion_deg": 0.3043516589610018,
+      "coast_seconds": 1,
+      "drive_end_reason": "capture_basin",
+      "status": "FAIL",
+      "settling_range_deg": {
+        "M": 2.794232011638087e-05,
+        "H": 0.017542905309596124
+      },
+      "settling_mean_abs_velocity_deg_s": {
+        "M": 0.00027023567567951496,
+        "H": 0.07160782193928579
+      },
+      "window_samples": 50
+    },
+    {
+      "branch": "M",
+      "cycle": 10,
+      "target_deg": -60.00000000000001,
+      "final_deg": -60.00715378286136,
+      "travel_deg": -6.000263787073062,
+      "step_error_deg": -0.00026378707306218274,
+      "error_deg": -0.007153782861349123,
+      "inactive_drift_deg": -0.30160588985545506,
+      "inactive_reference_deg": 0.0,
+      "inactive_peak_excursion_deg": 0.40999878113826393,
+      "coast_seconds": 1,
+      "drive_end_reason": "capture_basin",
+      "status": "FAIL",
+      "settling_range_deg": {
+        "M": 2.392503742498775e-05,
+        "H": 2.4101115943440075e-06
+      },
+      "settling_mean_abs_velocity_deg_s": {
+        "M": 0.0002352283777069241,
+        "H": 5.1615641584234856e-05
+      },
+      "window_samples": 50
+    },
+    {
+      "branch": "M",
+      "cycle": 11,
+      "target_deg": -66.0,
+      "final_deg": -66.00692466299041,
+      "travel_deg": -5.99977088012906,
+      "step_error_deg": 0.00022911987093987563,
+      "error_deg": -0.006924662990413877,
+      "inactive_drift_deg": 0.15252700832615648,
+      "inactive_reference_deg": 0.0,
+      "inactive_peak_excursion_deg": 0.2128295642567244,
+      "coast_seconds": 1,
+      "drive_end_reason": "capture_basin",
+      "status": "PASS",
+      "settling_range_deg": {
+        "M": 2.0979278502863963e-05,
+        "H": 0.008080412665303738
+      },
+      "settling_mean_abs_velocity_deg_s": {
+        "M": 0.00020656374473851665,
+        "H": 0.0329375536772373
+      },
+      "window_samples": 50
+    },
+    {
+      "branch": "M",
+      "cycle": 12,
+      "target_deg": -72.0,
+      "final_deg": -72.00703765710375,
+      "travel_deg": -6.000112994113338,
+      "step_error_deg": -0.00011299411333798304,
+      "error_deg": -0.007037657103755742,
+      "inactive_drift_deg": -0.14642846313589064,
+      "inactive_reference_deg": 0.0,
+      "inactive_peak_excursion_deg": 0.39844975648606307,
+      "coast_seconds": 1,
+      "drive_end_reason": "capture_basin",
+      "status": "FAIL",
+      "settling_range_deg": {
+        "M": 3.370229534027658e-05,
+        "H": 4.300983590761406e-06
+      },
+      "settling_mean_abs_velocity_deg_s": {
+        "M": 0.00032899551554018823,
+        "H": 0.00011664118314454983
+      },
+      "window_samples": 50
+    },
+    {
+      "branch": "M",
+      "cycle": 13,
+      "target_deg": -78.0,
+      "final_deg": -78.00697749366682,
+      "travel_deg": -5.999939836563064,
+      "step_error_deg": 6.0163436936377934e-05,
+      "error_deg": -0.006977493666823195,
+      "inactive_drift_deg": 0.003483930510048232,
+      "inactive_reference_deg": 0.0,
+      "inactive_peak_excursion_deg": 0.16613873104439394,
+      "coast_seconds": 1,
+      "drive_end_reason": "capture_basin",
+      "status": "PASS",
+      "settling_range_deg": {
+        "M": 2.27804223129624e-05,
+        "H": 4.741883077230211e-06
+      },
+      "settling_mean_abs_velocity_deg_s": {
+        "M": 0.00022744643728477815,
+        "H": 7.654040505784444e-05
+      },
+      "window_samples": 50
+    },
+    {
+      "branch": "M",
+      "cycle": 14,
+      "target_deg": -83.99999999999999,
+      "final_deg": -84.00689011608434,
+      "travel_deg": -5.99991262241752,
+      "step_error_deg": 8.73775824796752e-05,
+      "error_deg": -0.006890116084347577,
+      "inactive_drift_deg": 0.2875203367397444,
+      "inactive_reference_deg": 0.0,
+      "inactive_peak_excursion_deg": 0.29984858154560523,
+      "coast_seconds": 1,
+      "drive_end_reason": "capture_basin",
+      "status": "FAIL",
+      "settling_range_deg": {
+        "M": 2.4664275287022974e-05,
+        "H": 0.016630422171473258
+      },
+      "settling_mean_abs_velocity_deg_s": {
+        "M": 0.0002423261265098734,
+        "H": 0.06788352101243314
+      },
+      "window_samples": 50
+    },
+    {
+      "branch": "M",
+      "cycle": 15,
+      "target_deg": -89.99999999999999,
+      "final_deg": -90.00712612163392,
+      "travel_deg": -6.000236005549572,
+      "step_error_deg": -0.00023600554957159403,
+      "error_deg": -0.007126121633923752,
+      "inactive_drift_deg": -0.29585583917948505,
+      "inactive_reference_deg": 0.0,
+      "inactive_peak_excursion_deg": 0.40880049399738877,
+      "coast_seconds": 1,
+      "drive_end_reason": "capture_basin",
+      "status": "FAIL",
+      "settling_range_deg": {
+        "M": 2.7296992811898235e-05,
+        "H": 2.5967122719650418e-06
+      },
+      "settling_mean_abs_velocity_deg_s": {
+        "M": 0.0002691446585137372,
+        "H": 5.685389621333244e-05
+      },
+      "window_samples": 50
+    }
+  ],
+  "peak_penetration_mm": 0.19366194400122197,
+  "initial_penetration_mm": 0.0,
+  "axle_friction_work_J": {
+    "M": -0.007821639461951614,
+    "H": -5.9965369605553546e-05
+  },
+  "source_sha256": "7563e8f0f659107c69c772a8f2694f3dee26755fb9c377464dd6a797b8cc7d61",
+  "scope": "Recorded 200-Hz output traces and all-step penetration maximum. No hardware, lifetime, material or display-readability validation.",
+  "hardware_verified": false,
+  "physics_predictive_validation": false
+}

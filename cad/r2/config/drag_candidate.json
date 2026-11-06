@@ -7,7 +7,7 @@
   "proposed_free_thickness_mm": 1.5,
   "x_abs_mm": 73.05,
   "friction_coefficient_assumed": 0.2,
-  "target_drag_Nm": {"M": 0.005, "H": 0.015},
+  "target_drag_Nm": {"M": 0.005, "H": 0.020},
   "torque_limit_Nm": 0.05,
   "release_deg": 0.2,
   "coast_s": 1,

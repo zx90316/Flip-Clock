@@ -1,0 +1,352 @@
+{
+  "status": "PASS_STATIC_ONLY",
+  "rows": [
+    {
+      "branch": "M",
+      "status": "PASS",
+      "freewheel_sweep": [
+        {
+          "angle_deg": 0.0,
+          "overlap_mm3": 0.0
+        },
+        {
+          "angle_deg": 2.5,
+          "overlap_mm3": 0.0
+        },
+        {
+          "angle_deg": 5.0,
+          "overlap_mm3": 0.0
+        },
+        {
+          "angle_deg": 7.5,
+          "overlap_mm3": 0.0
+        },
+        {
+          "angle_deg": 10.0,
+          "overlap_mm3": 0.0
+        },
+        {
+          "angle_deg": 12.5,
+          "overlap_mm3": 0.0
+        },
+        {
+          "angle_deg": 15.0,
+          "overlap_mm3": 0.0
+        },
+        {
+          "angle_deg": 17.5,
+          "overlap_mm3": 0.0
+        },
+        {
+          "angle_deg": 20.0,
+          "overlap_mm3": 0.0
+        },
+        {
+          "angle_deg": 22.5,
+          "overlap_mm3": 0.0
+        },
+        {
+          "angle_deg": 25.0,
+          "overlap_mm3": 0.0
+        },
+        {
+          "angle_deg": 27.5,
+          "overlap_mm3": 0.0
+        },
+        {
+          "angle_deg": 30.0,
+          "overlap_mm3": 0.0
+        },
+        {
+          "angle_deg": 32.5,
+          "overlap_mm3": 0.0
+        },
+        {
+          "angle_deg": 35.0,
+          "overlap_mm3": 0.0
+        }
+      ],
+      "engagement_sweep": [
+        {
+          "angle_deg": 0.0,
+          "overlap_mm3": 0.0
+        },
+        {
+          "angle_deg": 0.25,
+          "overlap_mm3": 0.0
+        },
+        {
+          "angle_deg": 0.5,
+          "overlap_mm3": 0.0
+        },
+        {
+          "angle_deg": 0.75,
+          "overlap_mm3": 0.0
+        },
+        {
+          "angle_deg": 1.0,
+          "overlap_mm3": 0.0
+        },
+        {
+          "angle_deg": 1.25,
+          "overlap_mm3": 0.0
+        },
+        {
+          "angle_deg": 1.5,
+          "overlap_mm3": 0.0
+        },
+        {
+          "angle_deg": 1.75,
+          "overlap_mm3": 0.0
+        },
+        {
+          "angle_deg": 2.0,
+          "overlap_mm3": 0.0
+        },
+        {
+          "angle_deg": 2.25,
+          "overlap_mm3": 0.0
+        },
+        {
+          "angle_deg": 2.5,
+          "overlap_mm3": 0.0
+        },
+        {
+          "angle_deg": 2.75,
+          "overlap_mm3": 0.0
+        },
+        {
+          "angle_deg": 3.0,
+          "overlap_mm3": 0.0
+        },
+        {
+          "angle_deg": 3.25,
+          "overlap_mm3": 0.0
+        },
+        {
+          "angle_deg": 3.5,
+          "overlap_mm3": 0.004123518267347172
+        },
+        {
+          "angle_deg": 3.75,
+          "overlap_mm3": 0.019781105900892576
+        },
+        {
+          "angle_deg": 4.0,
+          "overlap_mm3": 0.044577992433149694
+        },
+        {
+          "angle_deg": 4.25,
+          "overlap_mm3": 0.07684207800567144
+        },
+        {
+          "angle_deg": 4.5,
+          "overlap_mm3": 0.11533699051750965
+        },
+        {
+          "angle_deg": 4.75,
+          "overlap_mm3": 0.15910201809990587
+        },
+        {
+          "angle_deg": 5.0,
+          "overlap_mm3": 0.2073420097025364
+        },
+        {
+          "angle_deg": 5.25,
+          "overlap_mm3": 0.2575340117665563
+        },
+        {
+          "angle_deg": 5.5,
+          "overlap_mm3": 0.3083157963537736
+        },
+        {
+          "angle_deg": 5.75,
+          "overlap_mm3": 0.3596183026842871
+        },
+        {
+          "angle_deg": 6.0,
+          "overlap_mm3": 0.41137725043051127
+        }
+      ],
+      "first_engagement_interference_deg": 3.5,
+      "legacy_stop_max_overlap_in_first_8deg_mm3": 0.0,
+      "native_carrier_solids": 1,
+      "native_pawl_solids": 1
+    },
+    {
+      "branch": "H",
+      "status": "PASS",
+      "freewheel_sweep": [
+        {
+          "angle_deg": 0.0,
+          "overlap_mm3": 0.0
+        },
+        {
+          "angle_deg": 2.5,
+          "overlap_mm3": 0.0
+        },
+        {
+          "angle_deg": 5.0,
+          "overlap_mm3": 0.0
+        },
+        {
+          "angle_deg": 7.5,
+          "overlap_mm3": 0.0
+        },
+        {
+          "angle_deg": 10.0,
+          "overlap_mm3": 0.0
+        },
+        {
+          "angle_deg": 12.5,
+          "overlap_mm3": 0.0
+        },
+        {
+          "angle_deg": 15.0,
+          "overlap_mm3": 0.0
+        },
+        {
+          "angle_deg": 17.5,
+          "overlap_mm3": 0.0
+        },
+        {
+          "angle_deg": 20.0,
+          "overlap_mm3": 0.0
+        },
+        {
+          "angle_deg": 22.5,
+          "overlap_mm3": 0.0
+        },
+        {
+          "angle_deg": 25.0,
+          "overlap_mm3": 0.0
+        },
+        {
+          "angle_deg": 27.5,
+          "overlap_mm3": 0.0
+        },
+        {
+          "angle_deg": 30.0,
+          "overlap_mm3": 0.0
+        },
+        {
+          "angle_deg": 32.5,
+          "overlap_mm3": 0.0
+        },
+        {
+          "angle_deg": 35.0,
+          "overlap_mm3": 0.0
+        }
+      ],
+      "engagement_sweep": [
+        {
+          "angle_deg": -0.0,
+          "overlap_mm3": 0.0
+        },
+        {
+          "angle_deg": -0.25,
+          "overlap_mm3": 0.0
+        },
+        {
+          "angle_deg": -0.5,
+          "overlap_mm3": 0.0
+        },
+        {
+          "angle_deg": -0.75,
+          "overlap_mm3": 0.0
+        },
+        {
+          "angle_deg": -1.0,
+          "overlap_mm3": 0.0
+        },
+        {
+          "angle_deg": -1.25,
+          "overlap_mm3": 0.0
+        },
+        {
+          "angle_deg": -1.5,
+          "overlap_mm3": 0.0
+        },
+        {
+          "angle_deg": -1.75,
+          "overlap_mm3": 0.0
+        },
+        {
+          "angle_deg": -2.0,
+          "overlap_mm3": 0.0
+        },
+        {
+          "angle_deg": -2.25,
+          "overlap_mm3": 0.0
+        },
+        {
+          "angle_deg": -2.5,
+          "overlap_mm3": 0.0
+        },
+        {
+          "angle_deg": -2.75,
+          "overlap_mm3": 0.0
+        },
+        {
+          "angle_deg": -3.0,
+          "overlap_mm3": 0.0
+        },
+        {
+          "angle_deg": -3.25,
+          "overlap_mm3": 0.0
+        },
+        {
+          "angle_deg": -3.5,
+          "overlap_mm3": 0.004123525533715726
+        },
+        {
+          "angle_deg": -3.75,
+          "overlap_mm3": 0.019781118306493574
+        },
+        {
+          "angle_deg": -4.0,
+          "overlap_mm3": 0.044578008885942356
+        },
+        {
+          "angle_deg": -4.25,
+          "overlap_mm3": 0.07684209784112057
+        },
+        {
+          "angle_deg": -4.5,
+          "overlap_mm3": 0.11533701324371246
+        },
+        {
+          "angle_deg": -4.75,
+          "overlap_mm3": 0.15910204332361677
+        },
+        {
+          "angle_deg": -5.0,
+          "overlap_mm3": 0.20734204514095908
+        },
+        {
+          "angle_deg": -5.25,
+          "overlap_mm3": 0.2575340476948544
+        },
+        {
+          "angle_deg": -5.5,
+          "overlap_mm3": 0.30831583265134155
+        },
+        {
+          "angle_deg": -5.75,
+          "overlap_mm3": 0.35961833924052206
+        },
+        {
+          "angle_deg": -6.0,
+          "overlap_mm3": 0.4113772871415673
+        }
+      ],
+      "first_engagement_interference_deg": -3.5,
+      "legacy_stop_max_overlap_in_first_8deg_mm3": 0.0,
+      "native_carrier_solids": 1,
+      "native_pawl_solids": 1
+    }
+  ],
+  "source_sha256": "c7bc83e1792bd3ea5d2559140e01332f12c298ee4cdfc60c56e12df88d41305d",
+  "scope": "Native carrier/pawl only; zero-pose clearance, freewheel fold through 35 degrees, physical engagement by 4.5 degrees. Not a dynamic or strength test.",
+  "hardware_verified": false
+}

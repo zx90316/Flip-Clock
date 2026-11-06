@@ -1,21 +1,24 @@
 {
   "status": "PASS",
   "scope": "Rebuilt complete candidate from extracted archive source and shared helpers in preserved folder layout, then read back both STEP files",
-  "package_sha256_tested": "8f7f14a786bb1abf39942fcd392e29ae90e3510a9c5d485eeb3db0dfc1179eab",
+  "package_sha256_tested": "57e67649548babee8c2bb73403df4af00735fedbf8245fe7f8c1d9733bb1b170",
   "native_leaf_count": 1056,
   "volume_difference_mm3": 0.0,
   "final_archive_note": "Final archive will additionally contain later reports; all model/helper/config bytes must retain these hashes.",
   "sources_sha256": {
     "cad/config/parameters.yaml": "7de88da684c9f6b088e95a86f57cad7e94ceb50f976422ad67a8ccdd969a20b0",
-    "cad/r2/parameters.json": "87b0469d8f721f0191b15e61547394dc7546c0927ab97c9fdf865a32f20b0a67",
+    "cad/r2/parameters.json": "3a03c6ed9d44a17b7855991ad4bb335a6a136b549dc0a689b121ff554c02afc9",
     "cad/src/geometry.py": "c7313b4cf7fe83ea2a6d4b95aee62e662b4aadc56e2fdd181d4e64013c05af02",
     "cad/src/settings.py": "50f0e1583ba89d0503816255eacc3985bba09dd973a9579d7316591ec23b21f8",
-    "cad/r2/config/drag_candidate.json": "d339ad3bf9646ad9d6c8dcb85b72a7749b1285dc3bb0a453aa8f2dcefb700ec2",
+    "cad/r2/config/drag_candidate.json": "af881752b13ba7183d70182693e02e5c11389cf1ddf1b2f841e6de7e17276b0f",
+    "cad/r2/config/native_collision_trial.json": "3f14f99f17219f977a703a5857a13755c271fc430d4dc95db9150780217632c4",
+    "cad/r2/config/native_friction_trial.json": "c8e1a1dcd2c26a545c0344b785418218d51d80f334566fcacad105462aa21a16",
+    "cad/r2/config/solver_candidate.json": "7b215b227ed509707950b36b49a72e43decabd7a79f5e01556b51a4bbda3b5b0",
     "cad/r2/src/assembly.py": "a69a412ee870e0d3af187aa15c5b504dc925944d4012f195d08c72014c66efb1",
     "cad/r2/src/assembly_with_drag.py": "971ce1f714cd74fc27a084d81f59df86656b2d8a82c61da836a93728b29d8072",
     "cad/r2/src/coupons.py": "a718dd24c4cf93743a4f94f266c351ae056356d8d6ab16726fbe52d97128898d",
     "cad/r2/src/drag_rings.py": "1b61732febc97b8d8d68370792a4240ebfcf6c889aa90e8cf9c214583bef1c09",
     "cad/r2/src/mechanism.py": "bb2e116fe71fc1b6f93dabb515b46cd28b6db9ced6851f5098afb940d26ef10e",
-    "cad/r2/src/r2_geometry.py": "9ee7a924f7061cc14f0302d3b7cc3810cf812ed4c673b1f937fa7701f134ddec"
+    "cad/r2/src/r2_geometry.py": "c7bc83e1792bd3ea5d2559140e01332f12c298ee4cdfc60c56e12df88d41305d"
   }
 }

@@ -73,5 +73,12 @@
   "physics_replay_snapshots_reviewed": [
     "review/front.png",
     "runs/20261105T034108_831686Z_drive/cutaway.png"
-  ]
+  ],
+  "heel_stop_revision_review": [
+    "CM_carrier",
+    "CM_pawl",
+    "CH_carrier",
+    "CH_pawl"
+  ],
+  "heel_stop_source_sha256": "c7bc83e1792bd3ea5d2559140e01332f12c298ee4cdfc60c56e12df88d41305d"
 }

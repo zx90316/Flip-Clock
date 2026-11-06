@@ -30,13 +30,13 @@
         "bearing": 0.0,
         "knob": 0.0
       },
-      "target_drag_Nm": 0.015,
+      "target_drag_Nm": 0.02,
       "assumed_uniform_pressure_mean_radius_m": 0.009083241252302027,
-      "normal_force_proposal_N": 8.256964437776244,
-      "tangential_force_at_knob_13mm_N": 1.153846153846154
+      "normal_force_proposal_N": 11.009285917034992,
+      "tangential_force_at_knob_13mm_N": 1.5384615384615385
     }
   ],
-  "candidate_step_sha256": "adf2ef36ecf7c1349eb1a24099088cf2f1b87dfb7c7ef1876f79d36c66617d46",
+  "candidate_step_sha256": "f2dff4d7382643ac57f2057e7b8aeebde116e0ef362952df4df300c3c9359645",
   "scope": "Saved STEP envelopes; no felt constitutive law, preload measurement, bearing-load or material validation",
   "hardware_verified": false
 }

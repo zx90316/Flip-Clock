@@ -1,8 +1,8 @@
 {
   "file": "FC-R2-desktop-prototype.zip",
-  "sha256": "da065d29bcc153a328b26e39abcff1e5636f2bc13a10fd31cb346ffa134b9f2a",
-  "bytes": 32186303,
-  "payload_files": 438,
+  "sha256": "1f7150edac214148fe9258b0945fe9e052f3ac7b5ef409730dd3e5b38c7c3a98",
+  "bytes": 32264409,
+  "payload_files": 457,
   "parts": 141,
   "prototype_only": true,
   "model_sources_match_rebuild_test": true,

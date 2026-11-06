@@ -25,10 +25,14 @@ def main(coarse, fine):
                      "final_position_difference_deg": results[1]["final_deg"] - results[0]["final_deg"],
                      "both_meet_position_criteria": all(abs(r["error_deg"]) <= (.25 if branch == "M" else .4)
                                                         and abs(r["inactive_drift_deg"]) <= .25 and r["drive_end_reason"] != "timeout" for r in results)})
-    report = {"status": "NOT_DEMONSTRATED", "controlled_same_candidate": controlled, "changed_config_fields": changed,
+    validations = [json.loads((p / "validation.json").read_text()) if (p / "validation.json").is_file() else None for p in dirs]
+    consistent = controlled and all(v and v["status"] == "PASS_NOMINAL_SIMULATION" for v in validations) and all(abs(r["final_position_difference_deg"]) <= .05 for r in rows)
+    report = {"status": "PASS_TWO_TIMESTEP_CHECK" if consistent else "NOT_DEMONSTRATED", "timestep_consistency_passed": consistent,
+              "final_position_difference_limit_deg": .05, "controlled_same_candidate": controlled, "changed_config_fields": changed,
               "run_ids": [s["run_id"] for s in summaries], "dt_s": [c["dt"] for c in configs],
               "peak_penetration_mm": [s["peak_penetration_mm"] for s in summaries], "second_cycle": rows,
-              "reason": "Two step sizes alone do not establish predictive validation. Failed positioning, timeout or penetration remains a failed criterion.",
+              "run_validation_statuses": [v["status"] if v else "NOT_EVALUATED" for v in validations],
+              "reason": "Both runs must pass every commanded step, idle excursion, settling and penetration; second-cycle position difference must be <=0.05 deg. Two sizes do not establish hardware prediction.",
               "physics_predictive_validation": False, "hardware_verified": False}
     if not controlled: report["reason"] = "Other configuration differences prevent a controlled time-step comparison."
     (ROOT / "reports/timestep_comparison.json").write_text(json.dumps(report, indent=2), encoding="utf-8")

@@ -1,0 +1,18 @@
+{
+  "status": "numerical_resolution_trial_not_measured_material_properties",
+  "contact": {
+    "time_constant_s": 0.0002,
+    "impedance_min": 0.99,
+    "impedance_max": 0.999,
+    "width_m": 0.00005,
+    "cone": "elliptic"
+  },
+  "joint_friction": {
+    "time_constant_s": 0.0002,
+    "impedance": 0.999
+  },
+  "notes": [
+    "Tighten rigid-contact and dry-friction numerical enforcement; preserve physical friction coefficients and torque budgets.",
+    "Compare at 0.00005 s and 0.000025 s. These are numerical assumptions, not measured PETG stiffness or felt laws."
+  ]
+}

@@ -1,5 +1,5 @@
 {
-  "source_sha256": "ec0d7a9e4a157a168a438d842924a64c1c5f9304a83f0ba01d714045f94919e2",
+  "source_sha256": "3de9af24cf1c3cef9a2a949e50b40881c5d934a6cea6f45ead57b47a8a0f4aaa",
   "parts": [
     {
       "id": "A00_single_base",
@@ -260,7 +260,7 @@
       "id": "CM_carrier",
       "stl": "STL/parts/CM_carrier.stl",
       "step": "STEP/parts/CM_carrier.step",
-      "stl_sha256": "cafd1757f8fe0d6cb4070700ee22dedb9c1fb71d951a352ec2e9df0cb9b2e896",
+      "stl_sha256": "4263f452b0f7b3d323d1d510649ec85d761df165ee63e7cb0fdf7ebabc231158",
       "size_mm": [
         25.2,
         25.2,
@@ -275,10 +275,10 @@
       "id": "CM_pawl",
       "stl": "STL/parts/CM_pawl.stl",
       "step": "STEP/parts/CM_pawl.step",
-      "stl_sha256": "ce5df51a6b0a40228075826ee6de2bbc912ebcee77223866e4737477d335e606",
+      "stl_sha256": "93eb8e93ead0247276510f32bf0e2712bef95528d16da183888172623eb17d11",
       "size_mm": [
-        7.65,
-        6.582844610672,
+        8.75,
+        7.182844643534,
         2.8
       ],
       "fits_256_bed": true,
@@ -395,7 +395,7 @@
       "id": "CH_carrier",
       "stl": "STL/parts/CH_carrier.stl",
       "step": "STEP/parts/CH_carrier.step",
-      "stl_sha256": "8432a4eb133714e583b00d7464e42a6446d14e9ad74d361db3269f6499145290",
+      "stl_sha256": "31509b6636d7e7b93ef65ad2aaa79845df119916598dda8fb08fe6d255ce8b84",
       "size_mm": [
         25.2,
         25.2,
@@ -410,10 +410,10 @@
       "id": "CH_pawl",
       "stl": "STL/parts/CH_pawl.stl",
       "step": "STEP/parts/CH_pawl.step",
-      "stl_sha256": "ca54a4e31a38c1bf1ff34542828539aa451686f4fa955a4ca88cfabaa24ebd36",
+      "stl_sha256": "f426175877c33e1041c8791bb5a58a8725b2064fb313aa427ea02c5f76db2fa4",
       "size_mm": [
-        7.65,
-        6.582844610672,
+        8.75,
+        7.182844655739,
         2.8
       ],
       "fits_256_bed": true,
